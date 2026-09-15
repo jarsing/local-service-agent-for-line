@@ -7,6 +7,8 @@
 **系列：LOCAL：30 天打造 LINE × Google AI 地方服務 Agent**  
 **作者：陳佳新（佳新哥）｜GitHub：jarsing**
 
+![LOCAL 專案總覽：五個設計面向，公開開發中的 Day 1 設計概念](LOCAL_GitHub_1x1.png)
+
 ## 目前狀態：Day 1 設計版本
 
 目前提供專案文件與合成驗收規格，尚未有可操作 Agent、雲端部署或效能評測成果。

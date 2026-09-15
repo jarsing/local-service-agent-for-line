@@ -1,0 +1,18 @@
+{
+  "case_id": "handoff-timeout-001",
+  "kind": "synthetic_acceptance_spec",
+  "given": {
+    "user_confirmed": true,
+    "idempotency_key": "demo-request-001",
+    "tool_result": {
+      "status": "timeout"
+    },
+    "stored_request": "unknown"
+  },
+  "expected": {
+    "reply_state": "pending_verification",
+    "claim_completed": false,
+    "next_step": "reconcile_by_idempotency_key",
+    "retry_policy": "reuse_same_idempotency_key"
+  }
+}

@@ -7,6 +7,8 @@
 **Author:** Jia-Sin Chen（陳佳新／佳新哥） · GitHub: `jarsing`  
 **Series:** LOCAL：30 天打造 LINE × Google AI 地方服務 Agent
 
+![LOCAL project overview: five design dimensions — Day 1 concept for a project being developed in public](LOCAL_GitHub_1x1.png)
+
 ## Status: Day 1 design checkpoint
 
 This repository begins with documentation and a synthetic acceptance specification. A working agent, cloud deployment, and measured evaluation results are not available in this checkpoint.

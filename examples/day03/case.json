@@ -1,0 +1,14 @@
+{
+  "case_id": "day03-pending-reply-001",
+  "kind": "synthetic_model_input",
+  "service_name": "彰化社區走讀活動（合成示範）",
+  "user_question": "剛剛請你幫忙確認無障礙參與需求，現在安排好了嗎？",
+  "known": {
+    "user_confirmed": true,
+    "operation_state": "pending_verification",
+    "tool_result": "timeout",
+    "stored_request": "unknown"
+  },
+  "unknown": ["請求是否已保存", "真人是否已受理", "現場是否能提供需要的協助"],
+  "next_step": "由具權限的後端流程使用原操作識別碼核對；此文字實驗不執行該動作。"
+}

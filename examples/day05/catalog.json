@@ -1,0 +1,52 @@
+{
+  "kind": "synthetic_teaching_data",
+  "version": "2026-09-19.events-v1",
+  "events": [
+    {
+      "id": "walk-001",
+      "name": "彰化社區走讀（示範）",
+      "date": "2026-09-26",
+      "area": "彰化市",
+      "time": "09:30",
+      "meeting_point": "示範社區活動中心入口",
+      "source": "DEMO-WALK-001",
+      "updated_at": "2026-09-19T08:00:00+08:00"
+    },
+    {
+      "id": "walk-002",
+      "name": "鹿港老街走讀（示範）",
+      "date": "2026-09-26",
+      "area": "鹿港鎮",
+      "time": "14:00",
+      "meeting_point": "示範旅遊服務站前廣場",
+      "accessibility": false,
+      "accessibility_note": "路線包含階梯，需另洽主辦單位安排替代路線。",
+      "source": "DEMO-WALK-002",
+      "updated_at": "2026-09-19T08:00:00+08:00"
+    },
+    {
+      "id": "craft-003",
+      "name": "彰化親子手作（示範）",
+      "date": "2026-09-27",
+      "area": "彰化市",
+      "time": "10:00",
+      "meeting_point": "示範社區教室",
+      "accessibility": true,
+      "accessibility_note": "範例設定為同層活動空間及無障礙入口。",
+      "source": "DEMO-CRAFT-003",
+      "updated_at": "2026-09-19T08:00:00+08:00"
+    },
+    {
+      "id": "market-004",
+      "name": "員林小農市集（示範）",
+      "date": "2026-09-26",
+      "area": "員林市",
+      "time": "09:00",
+      "meeting_point": "示範市集入口服務桌",
+      "accessibility": true,
+      "accessibility_note": "範例設定為平面場地。",
+      "source": "DEMO-MARKET-004",
+      "updated_at": "2026-09-19T08:00:00+08:00"
+    }
+  ]
+}

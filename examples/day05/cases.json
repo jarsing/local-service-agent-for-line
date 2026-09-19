@@ -1,0 +1,59 @@
+{
+  "kind": "development_examples",
+  "cases": [
+    {
+      "id": "meeting",
+      "question": "請查 2026-09-26 彰化市的社區走讀：幾點集合、在哪裡碰面？請附資料來源。",
+      "query": {
+        "date": "2026-09-26",
+        "area": "彰化市",
+        "keyword": "社區走讀"
+      },
+      "expected_ids": [
+        "walk-001"
+      ],
+      "expected_unknown": [
+        "walk-001.accessibility"
+      ]
+    },
+    {
+      "id": "accessibility",
+      "question": "2026-09-26 彰化市的社區走讀，輪椅可以走完全程嗎？也請告訴我集合時間與地點，並附資料來源。",
+      "query": {
+        "date": "2026-09-26",
+        "area": "彰化市",
+        "keyword": "社區走讀"
+      },
+      "expected_ids": [
+        "walk-001"
+      ],
+      "expected_unknown": [
+        "walk-001.accessibility"
+      ]
+    },
+    {
+      "id": "lukang",
+      "question": "請查 2026-09-26 鹿港鎮的老街走讀：幾點集合、地點在哪裡，路線是否方便輪椅通行？請附資料來源。",
+      "query": {
+        "date": "2026-09-26",
+        "area": "鹿港鎮",
+        "keyword": "老街走讀"
+      },
+      "expected_ids": [
+        "walk-002"
+      ],
+      "expected_unknown": []
+    },
+    {
+      "id": "not_found",
+      "question": "這份活動目錄裡，2026-10-03 彰化市有夜間走讀嗎？請幫我查查。",
+      "query": {
+        "date": "2026-10-03",
+        "area": "彰化市",
+        "keyword": "夜間走讀"
+      },
+      "expected_ids": [],
+      "expected_unknown": []
+    }
+  ]
+}

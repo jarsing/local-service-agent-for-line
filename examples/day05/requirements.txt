@@ -1,0 +1,4 @@
+# Day 5 獨立虛擬環境；模型與相依版本沿用系列基準。
+google-adk==2.9.1
+google-genai==2.23.0
+httpx==0.28.1

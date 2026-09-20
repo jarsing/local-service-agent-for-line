@@ -1,5 +1,7 @@
 # LOCAL Day 6｜從活動海報到服務資料
 
+正式文章：[Day 6｜從活動海報到服務資料](https://ithelp.ithome.com.tw/articles/10414133)
+
 一張本機海報 → Gemini 圖片理解與結構化欄位 → 人工核對 → Day 5 搜尋工具。
 
 本篇把 `time`／`venue`（活動資訊）與 `meeting_time`／`meeting_point`（集合資訊）分開保存，並用 `value`、`quote`、`status` 記錄模型整理的欄位。`source` 與來源更新時間由程式取得操作者提供的資料，與擷取時間分開。
@@ -43,9 +45,9 @@ examples/day05/.venv/bin/python examples/day06/run.py --live \
   --origin author_local
 ```
 
-預設兩次呼叫：`baseline`（一般提示）、`guided`（欄位提示）。兩組使用同一張圖片、同一模型與 schema，只有提示文字不同。每次上限 8,192 output tokens、HTTP 60 秒、SDK attempts=1；API 錯誤停止批次，原始結果保留。單組重跑用 `--condition baseline` 或 `--condition guided`，會另建 run；文章比較要列清楚真正採用的兩次紀錄。
+預設兩次呼叫：`baseline`（一般提示）、`guided`（欄位提示）。兩組使用同一張圖片、同一模型與 schema，只有提示文字不同。每次上限 8,192 output tokens（這是本次實驗的 `max_output_tokens` 設定，思考與回覆 token 均計入其中）、HTTP 60 秒、SDK attempts=1；API 錯誤停止批次，原始結果保留。單組重跑用 `--condition baseline` 或 `--condition guided`，會另建 run；文章比較要列清楚真正採用的兩次紀錄。
 
-SDK 參數採 v2.23.0 README 的 `response_mime_type`＋`response_json_schema`，API 維持 GenerateContent。`--model` 可指定其他已確認相容模型，變更要記錄新的條件；預設沿用系列的 `gemini-3.8-flash` 與 `LOW`。
+SDK 參數採 v2.23.0 README 的 `response_mime_type`＋`response_json_schema`，API 維持 GenerateContent。`--model` 可指定其他已確認相容模型，變更要記錄新的條件；預設沿用系列的 `gemini-3.8-flash` 與 `LOW` 思考等級。場次數量上限由本機 Pydantic validator 檢查，不在 JSON Schema 送出 `maxItems`。
 
 輸出預設為 `output/day06/run-.../`，可用 `--output` 改位置：
 
@@ -91,11 +93,12 @@ Day 5 的 `load_catalog` 限定合成教學資料，所以本篇採 `reviewed_po
 | 狀況 | 先檢查 |
 |---|---|
 | `SDK BLOCKED` | 目前直譯器能否匯入 google.genai、Pydantic 版本及 SDK 組態錯誤 |
-| `SCHEMA_ERROR` | 報告的欄位位置、原始文字；不把解析錯誤修掉後冒稱模型原文 |
+| `HTTP 400 (API_ERROR)` | 請求參數或 schema 遭 API 拒絕；本例將數量限制留在本機 validator，避免向 API 送出不相容的 `maxItems` |
+| `SCHEMA_ERROR` | 已取得回覆文字，但在本機欄位檢查未通過；檢查具體欄位錯誤（如日期未含年份），原始文字仍完整保存於紀錄 |
 | `RESPONSE_INCOMPLETE` | 結束原因、圖片清晰度、場次數與輸出上限 |
 | 來源或紀錄雜湊不符 | 核對頁與 review.json 是否來自同一份 run |
 | 查不到活動 | 查詢條件與已核對的日期／地區；未知日期先按活動名稱查 |
-| 顯示 `null` | 檢查 status 和原圖，分清圖片沒寫與看不清楚 |
+| 顯示 `null` | 檢查 status 和原圖，分清圖片沒寫與看不清楚；缺少年份先保留 null，Day 7 補來源 |
 
 ## 參考
 

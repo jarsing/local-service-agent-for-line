@@ -23,7 +23,7 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 | Make a first Gemini call | [Day 3: model experiment](examples/day03/README.md) | Fixed input, original model text, configuration, and usage metadata |
 | Begin with a Python-only experiment | [Day 2: SQLite and timeouts](examples/day02/README.md) | A timeout after a committed write, reconciliation, and same-key retries |
 
-This index tracks available code; follow the [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) for published articles. Examples use synthetic data, and the articles describe their actual service calls and observed results. Most chapter documentation is currently in Traditional Chinese; the commands below provide an English starting point.
+This index tracks available code; follow the [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) for published articles. Day 2–5 use synthetic sample data; Day 6 experiments with operator-provided and attributed event posters. Most chapter documentation is currently in Traditional Chinese; the commands below provide an English starting point.
 
 ## Quickstart: ask for a meeting time and place
 
@@ -86,7 +86,7 @@ The articles are written in Traditional Chinese. English topic labels below summ
 | 3 | [From AI Studio to a reproducible Gemini API experiment](https://ithelp.ithome.com.tw/articles/10412603) | [examples/day03](examples/day03/) | [docs/day03](docs/day03/README.md) |
 | 4 | [Bring Gemini into LINE: verify, then reply](https://ithelp.ithome.com.tw/articles/10413146) | [examples/day04](examples/day04/) | [docs/day04](docs/day04/README.md) |
 | 5 | [ADK, controlled lookup, and the first agent orchestration](https://ithelp.ithome.com.tw/articles/10413779) | [examples/day05](examples/day05/) | [docs/day05](docs/day05/README.md) |
-| 6 | [From event posters to service data (iThome series)](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) | [examples/day06](examples/day06/) | [docs/day06](docs/day06/README.md) |
+| 6 | [Turn an event poster into searchable service data](https://ithelp.ithome.com.tw/articles/10414133) | [examples/day06](examples/day06/) | [docs/day06](docs/day06/README.md) |
 
 Find Day 7 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 

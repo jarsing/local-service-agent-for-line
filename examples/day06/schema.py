@@ -72,6 +72,9 @@ class Extraction(BaseModel):
     events: list[PosterEvent] = Field(description="按圖片閱讀順序列出活動／場次，最多十筆。")
     notes: list[str] = Field(max_length=8, description="圖片辨識上的疑點，例如年份未顯示或多個地點。")
 
+    # events 的十筆上限由收到回覆後的 event_limit 檢查。
+    # 此欄位未透過 Field(max_length=...) 輸出 maxItems；
+    # description 提供模型說明，不代表 API 的通用場次上限。
     @field_validator("events")
     @classmethod
     def event_limit(cls, v: list[PosterEvent]) -> list[PosterEvent]:

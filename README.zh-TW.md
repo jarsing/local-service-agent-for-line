@@ -23,7 +23,7 @@
 | 先完成一次 Gemini 呼叫 | [Day 3：模型實驗](examples/day03/README.md) | 固定輸入、模型原文、設定與用量 |
 | 先做一個只需要 Python 的實驗 | [Day 2：SQLite 與逾時](examples/day02/README.md) | 同樣遇到逾時，後端卻可能已保存資料；重送時如何查回同一筆 |
 
-程式是否已公開、文章是否已發表，分別由這份導覽與 [iThome 系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 查看。範例使用合成資料；真實服務呼叫與執行結果會在各篇文章中交代。
+程式是否已公開、文章是否已發表，分別由這份導覽與 [iThome 系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 查看。Day 2～5 的指定案例採合成資料；Day 6 以操作者提供並註明來源的海報進行實驗。真實服務呼叫與執行結果會在各篇文章中交代。
 
 ## 快速開始：先讓 Agent 查到集合資訊
 
@@ -84,7 +84,7 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 3 | [從 AI Studio 到 Gemini API：建立 LOCAL 的第一個可重現模型實驗](https://ithelp.ithome.com.tw/articles/10412603) | [examples/day03](examples/day03/) | [docs/day03](docs/day03/README.md) |
 | Day 4 | [讓 Gemini 走進 LINE：先驗簽，再回覆，不把收到當完成](https://ithelp.ithome.com.tw/articles/10413146) | [examples/day04](examples/day04/) | [docs/day04](docs/day04/README.md) |
 | Day 5 | [ADK＋受控查詢：第一個 Agent 與 Orchestration](https://ithelp.ithome.com.tw/articles/10413779) | [examples/day05](examples/day05/) | [docs/day05](docs/day05/README.md) |
-| Day 6 | [從活動海報到服務資料（連載系列頁）](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) | [examples/day06](examples/day06/) | [docs/day06](docs/day06/README.md) |
+| Day 6 | [從活動海報到服務資料](https://ithelp.ithome.com.tw/articles/10414133) | [examples/day06](examples/day06/) | [docs/day06](docs/day06/README.md) |
 
 Day 7 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 

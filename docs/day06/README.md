@@ -1,8 +1,8 @@
 # Day 6｜從活動海報到服務資料
 
-操作與程式見 [examples/day06](../../examples/day06/README.md)。
+正式文章：[Day 6｜從活動海報到服務資料](https://ithelp.ithome.com.tw/articles/10414133) · 操作與程式見 [examples/day06](../../examples/day06/README.md)。
 
-本篇新增的能力：用 Gemini 從圖片整理活動資料，保留欄位原文，經人工核對後交給 Day 5 的搜尋工具。
+本篇新增的能力：用 Gemini 從圖片整理活動資料，保留欄位原文，經人工核對後交給 Day 5 的搜尋工具。圖片若僅標示月日而缺少年份，本篇先保留 null 缺口，年份與外部來源補全留待 Day 7 接續。
 
 ## 讀者可以觀察的三段結果
 

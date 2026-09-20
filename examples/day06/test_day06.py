@@ -66,6 +66,17 @@ class SchemaTests(unittest.TestCase):
     def test_ten_event_limit(self):
         d=fixture();d['events']*=11
         with self.assertRaises(ValidationError): Extraction.model_validate(d)
+    def test_eight_events_are_accepted(self):
+        d=fixture(); event=d["events"][0]
+        d["events"]=[deepcopy(event) for _ in range(8)]
+        self.assertEqual(len(Extraction.model_validate(d).events), 8)
+    def test_ten_events_are_accepted(self):
+        d=fixture(); event=d["events"][0]
+        d["events"]=[deepcopy(event) for _ in range(10)]
+        self.assertEqual(len(Extraction.model_validate(d).events), 10)
+    def test_event_limit_is_checked_locally(self):
+        schema=Extraction.model_json_schema()
+        self.assertNotIn("maxItems", schema["properties"]["events"])
     def test_schema_valid_wrong_time_counterexample(self):
         r=demonstrate();self.assertTrue(r['schema_valid']);self.assertFalse(r['matches_expected'])
 

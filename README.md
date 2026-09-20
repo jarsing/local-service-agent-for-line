@@ -2,7 +2,7 @@
 
 > Ask through LINE. Let Gemini use tools to find local-service information and explain the result.
 
-[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 5 setup guide](examples/day05/README.md)
+[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 6 setup guide](examples/day06/README.md)
 
 **Author:** Jia-Sin Chen（陳佳新／佳新哥）, ChiBuApp（奇步應用） · GitHub: `jarsing`  
 **Series:** LOCAL：30 天打造 LINE × Google AI 地方服務 Agent
@@ -13,10 +13,11 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 5, September 19, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–5 examples. The latest example adds **ADK event search and a four-question comparison with and without a tool**. Reference code snapshot: [`59265ab`](https://github.com/jarsing/local-service-agent-for-line/tree/59265ab4212512f72260700c7cda931e837025e6).
+**Code index updated through Day 6, September 20, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–6 examples. The latest example adds **poster field extraction with Gemini image understanding, structured outputs, human review, and Day 5 event search integration**. Reference code snapshot: [examples/day06/](examples/day06/).
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
+| Extract event data from a poster | [Day 6: poster extraction](examples/day06/README.md) | Structured fields, quotation verification, human review export, and Day 5 search tool reuse |
 | See an agent look up local events | [Day 5: ADK event search](examples/day05/README.md) | Four sample events, four questions, two conditions, and observable tool-call traces |
 | Connect Gemini replies to LINE | [Day 4: LINE webhook](examples/day04/README.md) | A fixed `LOCAL ping` reply, followed by `LOCAL 測試` for a model-generated explanation |
 | Make a first Gemini call | [Day 3: model experiment](examples/day03/README.md) | Fixed input, original model text, configuration, and usage metadata |
@@ -85,10 +86,11 @@ The articles are written in Traditional Chinese. English topic labels below summ
 | 3 | [From AI Studio to a reproducible Gemini API experiment](https://ithelp.ithome.com.tw/articles/10412603) | [examples/day03](examples/day03/) | [docs/day03](docs/day03/README.md) |
 | 4 | [Bring Gemini into LINE: verify, then reply](https://ithelp.ithome.com.tw/articles/10413146) | [examples/day04](examples/day04/) | [docs/day04](docs/day04/README.md) |
 | 5 | [ADK, controlled lookup, and the first agent orchestration](https://ithelp.ithome.com.tw/articles/10413779) | [examples/day05](examples/day05/) | [docs/day05](docs/day05/README.md) |
+| 6 | [From event posters to service data (iThome series)](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) | [examples/day06](examples/day06/) | [docs/day06](docs/day06/README.md) |
 
-Find Day 6 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
+Find Day 7 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 
-LOCAL grows as one project, with chapter folders preserving each lesson's focus. Upcoming work will extract event data from posters, add service requests and conversational state, and explore evaluation and cloud deployment. This index will expand as the examples are published.
+LOCAL grows as one project, with chapter folders preserving each lesson's focus. Upcoming work will add service requests and conversational state, and explore evaluation and cloud deployment. This index will expand as the examples are published.
 
 ## How LINE, Gemini, and ADK work together
 

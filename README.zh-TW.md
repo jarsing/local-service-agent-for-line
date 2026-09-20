@@ -2,7 +2,7 @@
 
 > 在 LINE 裡問問題，讓 Gemini 搭配工具查資料，再把結果說清楚。
 
-[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 5 操作指南](examples/day05/README.md)
+[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 6 操作指南](examples/day06/README.md)
 
 **系列：LOCAL：30 天打造 LINE × Google AI 地方服務 Agent**  
 **作者：陳佳新（佳新哥）｜奇步應用｜GitHub：jarsing**
@@ -13,10 +13,11 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 5（2026/09/19）。** Day 1 的驗收規格與 Day 2～5 的範例已在 Repo；目前最新的實作是 **ADK 活動搜尋與四題有工具／無工具比較**。本次導覽依據：[程式版本 `59265ab`](https://github.com/jarsing/local-service-agent-for-line/tree/59265ab4212512f72260700c7cda931e837025e6)。
+**程式導覽更新至 Day 6（2026/09/20）。** Day 1 的驗收規格與 Day 2～6 的範例已在 Repo；目前最新的實作是 **Gemini 海報欄位擷取、人工核對與 Day 5 工具查詢介接**。本次導覽依據：[Day 6 程式範例](examples/day06/)。
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
+| 從海報整理活動資料 | [Day 6：海報資料管線](examples/day06/README.md) | 結構化欄位、原圖引句核對、人工審閱目錄匯出，並接回 Day 5 搜尋工具 |
 | 看 Agent 怎麼查活動 | [Day 5：ADK 活動搜尋](examples/day05/README.md) | 四筆活動、四個問題、兩組回答，以及工具的執行軌跡 |
 | 把 Gemini 回答接進 LINE | [Day 4：LINE Webhook](examples/day04/README.md) | 先用 `LOCAL ping` 確認往返，再用 `LOCAL 測試` 取得模型說明 |
 | 先完成一次 Gemini 呼叫 | [Day 3：模型實驗](examples/day03/README.md) | 固定輸入、模型原文、設定與用量 |
@@ -83,10 +84,11 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 3 | [從 AI Studio 到 Gemini API：建立 LOCAL 的第一個可重現模型實驗](https://ithelp.ithome.com.tw/articles/10412603) | [examples/day03](examples/day03/) | [docs/day03](docs/day03/README.md) |
 | Day 4 | [讓 Gemini 走進 LINE：先驗簽，再回覆，不把收到當完成](https://ithelp.ithome.com.tw/articles/10413146) | [examples/day04](examples/day04/) | [docs/day04](docs/day04/README.md) |
 | Day 5 | [ADK＋受控查詢：第一個 Agent 與 Orchestration](https://ithelp.ithome.com.tw/articles/10413779) | [examples/day05](examples/day05/) | [docs/day05](docs/day05/README.md) |
+| Day 6 | [從活動海報到服務資料（連載系列頁）](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) | [examples/day06](examples/day06/) | [docs/day06](docs/day06/README.md) |
 
-Day 6 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
+Day 7 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 
-這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。後續將從活動海報整理資料，接著加入服務請求、對話狀態、評測與雲端部署；新範例公開後，會持續更新這份導覽。
+這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。後續將加入服務請求、對話狀態、評測與雲端部署；新範例公開後，會持續更新這份導覽。
 
 ## LINE、Gemini 與 ADK 各做什麼？
 

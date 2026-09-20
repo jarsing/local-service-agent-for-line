@@ -1,0 +1,4 @@
+# 沿用 Day 5 的 google-genai；本篇擷取與本機查詢不需另載入 ADK。
+google-genai==2.23.0
+pydantic>=2.12,<3
+httpx==0.28.1

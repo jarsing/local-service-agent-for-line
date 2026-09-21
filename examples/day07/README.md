@@ -65,7 +65,7 @@ $PY examples/day07/run.py notice-template --session "$SESSION"
 $PY examples/day07/run.py enrich --session "$SESSION" --notice /實際路徑/notice.json
 ```
 
-程式檢查引句在保存的公告原文裡、年月日相符。這是人工提供來源後的機械檢查；「公告屬於同一個活動」仍須人確認。原圖片三元組保留，例如日期仍是 `null/09.19/unclear`；查詢用的完整日期放在 `enrichments.date`，附自己的來源。
+程式檢查原文在保存的公告裡、年月日相符，並核對步道或活動名稱。這是人工提供來源後的機械檢查；「公告屬於同一個活動」仍須人確認。原圖片三元組保留，例如日期仍是 `null/09.19/unclear`；查詢用的完整日期放在 `enrichments.date`，附自己的來源。
 
 需要日期比較的場次至少補一場；有來源支持八場時才補八場。公告未寫發布時間就保留 `published_at: null`，另記 `retrieved_at`。已有完整日期時略過這一步。
 
@@ -113,7 +113,7 @@ $PY examples/day07/run.py query --session "$SESSION" --phase before --keyword "$
 $PY examples/day07/run.py query --session "$SESSION" --phase pending --keyword "$KEYWORD"
 ```
 
-待核時，變動或連動的重要欄位以 `pending_review` 表示，不把舊時間顯示成最新答案；其餘活動仍可查詢。篩選會同時考慮舊、新候選值，避免日期改了就把待核活動藏起來。圖片的疑點文字改變時，這版會擴大到相關場次的重要欄位，請由人看回原圖。
+待核時，變動或連動的重要欄位以 `pending_review` 表示，不把舊時間顯示成最新答案；其餘活動仍可查詢。篩選會同時考慮舊、新候選值，避免日期改了就把待核活動藏起來。模型的疑點文字會並列供人查看；待核欄位依實際三元組差異及連動規則建立。採用前仍要對照原圖，確認日期、地點與其他醒目異動。
 
 在 `REVIEW.html` 勾選已核對項目，必要時修改三元組並說明原因，填心得，最後下載 `decision.json`。
 

@@ -2,7 +2,7 @@
 
 > Ask through LINE. Let Gemini use tools to find local-service information and explain the result.
 
-[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 6 setup guide](examples/day06/README.md)
+[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 7 setup guide](examples/day07/README.md)
 
 **Author:** Jia-Sin Chen（陳佳新／佳新哥）, ChiBuApp（奇步應用） · GitHub: `jarsing`  
 **Series:** LOCAL：30 天打造 LINE × Google AI 地方服務 Agent
@@ -13,10 +13,11 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 6, September 20, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–6 examples. The latest example adds **poster field extraction with Gemini image understanding, structured outputs, human review, and Day 5 event search integration**. Reference code snapshot: [examples/day06/](examples/day06/).
+**Code index updated through Day 7, September 21, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–7 examples. The latest example adds **version-aware poster review, stable event matching, triplet diffs, and query state transitions**. Reference code snapshot: [examples/day07/](examples/day07/).
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
+| Handle poster updates and field review | [Day 7: poster versioning](examples/day07/README.md) | Stable event matching, triplet diffs, human review, and three-phase query states |
 | Extract event data from a poster | [Day 6: poster extraction](examples/day06/README.md) | Structured fields, quotation verification, human review export, and Day 5 search tool reuse |
 | See an agent look up local events | [Day 5: ADK event search](examples/day05/README.md) | Four sample events, four questions, two conditions, and observable tool-call traces |
 | Connect Gemini replies to LINE | [Day 4: LINE webhook](examples/day04/README.md) | A fixed `LOCAL ping` reply, followed by `LOCAL 測試` for a model-generated explanation |

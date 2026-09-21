@@ -2,7 +2,7 @@
 
 > 在 LINE 裡問問題，讓 Gemini 搭配工具查資料，再把結果說清楚。
 
-[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 6 操作指南](examples/day06/README.md)
+[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 7 操作指南](examples/day07/README.md)
 
 **系列：LOCAL：30 天打造 LINE × Google AI 地方服務 Agent**  
 **作者：陳佳新（佳新哥）｜奇步應用｜GitHub：jarsing**
@@ -13,10 +13,11 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 6（2026/09/20）。** Day 1 的驗收規格與 Day 2～6 的範例已在 Repo；目前最新的實作是 **Gemini 海報欄位擷取、人工核對與 Day 5 工具查詢介接**。本次導覽依據：[Day 6 程式範例](examples/day06/)。
+**程式導覽更新至 Day 7（2026/09/21）。** Day 1 的驗收規格與 Day 2～7 的範例已在 Repo；目前最新的實作是 **海報來源更新、跨版本場次配對、欄位三元組比對與三階段查詢狀態轉換**。本次導覽依據：[Day 7 程式範例](examples/day07/)。
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
+| 處理海報異動與欄位複核 | [Day 7：海報更新與複核](examples/day07/README.md) | 跨版本活動配對、欄位三元組差分、人工複核與三階段查詢介接 |
 | 從海報整理活動資料 | [Day 6：海報資料管線](examples/day06/README.md) | 結構化欄位、原圖引句核對、人工審閱目錄匯出，並接回 Day 5 搜尋工具 |
 | 看 Agent 怎麼查活動 | [Day 5：ADK 活動搜尋](examples/day05/README.md) | 四筆活動、四個問題、兩組回答，以及工具的執行軌跡 |
 | 把 Gemini 回答接進 LINE | [Day 4：LINE Webhook](examples/day04/README.md) | 先用 `LOCAL ping` 確認往返，再用 `LOCAL 測試` 取得模型說明 |

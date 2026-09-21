@@ -1,0 +1,4 @@
+# 沿用 Day 6 已驗證環境；本篇模型由 Day 6 入口執行。
+google-genai==2.23.0
+pydantic>=2.12,<3
+httpx==0.28.1

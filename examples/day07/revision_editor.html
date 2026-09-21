@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LOCAL｜建立教學修訂副本</title>
+<style>body{font:17px/1.6 system-ui;max-width:1150px;margin:28px auto;padding:0 18px;background:#f3f6f7}canvas{max-width:100%;border:1px solid #777;cursor:crosshair;background:white}input,button{font:inherit;margin:5px;padding:6px}#log{white-space:pre-wrap}.note{padding:12px;background:#fff1c9}</style>
+<h1>只改一個活動時間，觀察 LOCAL 能不能找到。</h1><p class="note">這個頁面在你的瀏覽器處理圖片。輸出的副本自動附上「教學用修訂版／非主辦公告」，原圖保留。</p>
+<p>1. 選 Day 6 送出的原圖 <input type="file" id="file" accept="image/png,image/jpeg,image/webp"></p>
+<p>2. 在圖片上拖曳框住一個時段（保留活動名稱與其他資訊）。</p>
+<p>3. 新時段 <input id="text" value="08:00~11:00"> <button id="render">套用修訂</button> <button id="reset">重選區域</button> <button id="download">下載 revision.png 與 edit.json</button></p>
+<canvas id="canvas"></canvas><p id="log"></p>
+<script>
+const C=document.getElementById('canvas'),ctx=C.getContext('2d');let img=null,box=null,start=null,rawHash=null,applied=false;
+function message(t){document.getElementById('log').textContent=t}
+async function sha(buf){return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',buf))).map(x=>x.toString(16).padStart(2,'0')).join('')}
+function base(){if(!img)return;C.width=img.naturalWidth;C.height=img.naturalHeight+Math.max(60,Math.round(img.naturalWidth/18));ctx.fillStyle='white';ctx.fillRect(0,0,C.width,C.height);ctx.drawImage(img,0,0);ctx.fillStyle='#20262d';ctx.fillRect(0,img.naturalHeight,C.width,C.height-img.naturalHeight);ctx.fillStyle='white';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`bold ${Math.max(15,Math.round(C.width/38))}px system-ui`;ctx.fillText('教學用修訂版／非主辦公告',C.width/2,(img.naturalHeight+C.height)/2)}
+document.getElementById('file').onchange=async e=>{try{const f=e.target.files[0];if(!f)return;rawHash=await sha(await f.arrayBuffer());const url=URL.createObjectURL(f);img=new Image();img.onload=()=>{base();URL.revokeObjectURL(url);message('請框選要替換的原活動時段。');box=null;applied=false};img.src=url}catch(e){message(e.message)}};
+function pos(e){const r=C.getBoundingClientRect();return {x:(e.clientX-r.left)*C.width/r.width,y:(e.clientY-r.top)*C.height/r.height}}
+C.onpointerdown=e=>{if(!img)return;start=pos(e);C.setPointerCapture(e.pointerId)};
+C.onpointermove=e=>{if(!start)return;const p=pos(e);base();ctx.strokeStyle='#d82030';ctx.lineWidth=3;ctx.strokeRect(start.x,start.y,p.x-start.x,p.y-start.y)};
+C.onpointerup=e=>{if(!start)return;const p=pos(e);box={x:Math.round(Math.min(start.x,p.x)),y:Math.round(Math.min(start.y,p.y)),w:Math.round(Math.abs(p.x-start.x)),h:Math.round(Math.abs(p.y-start.y))};start=null;applied=false;message(JSON.stringify(box)+'；確認只涵蓋要改的時段。')};
+document.getElementById('render').onclick=()=>{if(!img||!box||box.w<20||box.h<10||box.y+box.h>img.naturalHeight){message('先框選原圖內的一個時段。');return}const text=document.getElementById('text').value.trim();if(!text){message('請填新的時段。');return}base();ctx.fillStyle='white';ctx.fillRect(box.x,box.y,box.w,box.h);ctx.fillStyle='#111';ctx.textBaseline='middle';ctx.textAlign='center';let size=Math.min(box.h*.65,80);ctx.font=`bold ${size}px system-ui`;while(ctx.measureText(text).width>box.w*.95&&size>8){size--;ctx.font=`bold ${size}px system-ui`}ctx.fillText(text,box.x+box.w/2,box.y+box.h/2);applied=true;message('檢查新時段清楚、其他欄位完整，再下載。')};
+document.getElementById('reset').onclick=()=>{box=null;applied=false;base()};
+function download(blob,name){const a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),3000)}
+document.getElementById('download').onclick=()=>{if(!applied){message('請先套用修訂。');return}C.toBlob(async blob=>{download(blob,'revision.png');const m={kind:'teaching_revision_edit',original_sha256:rawHash,revision_sha256:await sha(await blob.arrayBuffer()),box,replacement:document.getElementById('text').value.trim(),label:'教學用修訂版／非主辦公告',created_at:new Date().toISOString()};download(new Blob([JSON.stringify(m,null,2)+'\n'],{type:'application/json'}),'edit.json')},'image/png')};
+</script></html>

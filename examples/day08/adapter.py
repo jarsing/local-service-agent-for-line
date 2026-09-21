@@ -3,6 +3,10 @@
 讀取 Day 7 歸檔活動資料（卦山大縱走・花壇場次），
 提供 Day 8 演練狀態下的快照切換（更新前 v1 與採用後 v2）。
 不修改 Day 7 的 active.json 或原始 evidence。
+
+說明（方案 A）：此處 SNAPSHOT_V1 與 SNAPSHOT_V2 為依 Day 7 花壇活動內容
+整理的兩份內建教學快照。其 catalog_version（v-0337e2296139 與 v-62ccd0ef3ca44e6ca8b7ef2d3302ab28）
+為 Day 8 adapter 演練指定的版本標籤，不等同 Day 7 原始 catalog 的 version_id。
 """
 from __future__ import annotations
 
@@ -13,7 +17,7 @@ from typing import Any
 # 預設活動：花壇場次
 DEFAULT_EVENT_ID = "evt-60d76a55472c503faa4c"
 
-# 內建唯讀資料快照（源自 Day 7 真正發布與歸檔紀錄）
+# 內建唯讀資料快照（依 Day 7 活動內容整理之教學快照）
 SNAPSHOT_V1 = {
     "catalog_version": "v-0337e2296139",
     "status": "adopted",

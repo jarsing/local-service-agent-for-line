@@ -96,6 +96,7 @@ async def run_scenario_with_runner(
     service: ConfirmationService,
     user_prompt: str,
     tracker: ScenarioMetricsTracker,
+    expected_status: str = "confirmation_recorded",
     simulate_version_switch: bool = False,
     switch_to_version: str = "v2",
 ) -> dict[str, Any]:
@@ -170,8 +171,28 @@ async def run_scenario_with_runner(
         })
 
     duration = time.perf_counter() - start_time
+
+    # 嚴格成功判定（M05）：
+    # 1. 收到工具結果
+    # 2. 狀態符合預期（如 confirmation_recorded 或 version_changed）
+    # 3. execution_allowed 保持 False（本篇只記錄內容確認，不授予執行權限）
+    # 4. 模型呼叫次數未超出情境上限
+    is_success = False
+    error_msg = None
+    if not tool_result:
+        error_msg = "未收到 prepare_handoff_draft 工具之回傳結果"
+    elif tool_result.get("status") != expected_status:
+        error_msg = f"工具回傳狀態（{tool_result.get('status')}）與預期（{expected_status}）不符"
+    elif tool_result.get("execution_allowed") is not False:
+        error_msg = f"execution_allowed 必須為 False，實測為 {tool_result.get('execution_allowed')}"
+    elif tracker.call_count > tracker.max_calls:
+        error_msg = f"模型呼叫次數（{tracker.call_count}）超出上限（{tracker.max_calls}）"
+    else:
+        is_success = True
+
     return {
-        "success": True,
+        "success": is_success,
+        "error": error_msg,
         "tool_result": tool_result,
         "model_reply": "\n".join(model_final_text),
         "call_count": tracker.call_count,
@@ -259,6 +280,7 @@ async def main_async(args: argparse.Namespace) -> int:
         service=service_1,
         user_prompt=user_prompt,
         tracker=tracker_1,
+        expected_status="confirmation_recorded",
         simulate_version_switch=False,
     )
     print(f"情境 1 結果狀態: {res_1.get('tool_result', {}).get('status')}")
@@ -298,6 +320,7 @@ async def main_async(args: argparse.Namespace) -> int:
         service=service_2,
         user_prompt=user_prompt,
         tracker=tracker_2,
+        expected_status="version_changed",
         simulate_version_switch=True,
         switch_to_version="v2",
     )
@@ -320,11 +343,14 @@ async def main_async(args: argparse.Namespace) -> int:
     display_offer = service_1.last_offer or service_2.last_offer
     if display_offer:
         html_dest = output_dir / "CONFIRM.html"
+        mode_label = "真實 GEMINI 實測（Live Experiment）" if is_live else "離線替身（Offline Mock）"
         build_html_report(
             offer=display_offer,
             normal_result=res_1.get("tool_result", {}),
             conflict_result=res_2.get("tool_result", {}),
             output_path=html_dest,
+            mode_label=mode_label,
+            source_label="內建教學快照（演練標籤：v-0337e2296139）",
         )
         # 複製到 local_mirror
         build_html_report(
@@ -332,6 +358,8 @@ async def main_async(args: argparse.Namespace) -> int:
             normal_result=res_1.get("tool_result", {}),
             conflict_result=res_2.get("tool_result", {}),
             output_path=local_mirror_dir / "CONFIRM.html",
+            mode_label=mode_label,
+            source_label="內建教學快照（演練標籤：v-0337e2296139）",
         )
         print(f"已產出人機確認介面：{html_dest.resolve()}")
 
@@ -347,7 +375,8 @@ async def main_async(args: argparse.Namespace) -> int:
             "total_calls": total_calls,
             "max_allowed_calls": MAX_TOTAL_CALLS,
             "total_tokens": total_tokens,
-            "author_observation": "當伺服器目錄版本在等待中更新時，系統在確認階段精確攔截版本不一致（version_changed），execution_allowed 始終保持 False，阻斷過期內容執行。",
+            "expected_behavior": "當伺服器目錄版本在等待中更新時，系統在確認階段精確攔截版本不一致（version_changed），execution_allowed 始終保持 False，阻斷過期內容執行。",
+            "author_observation": None,
         },
         "scenario_1_normal": res_1,
         "scenario_2_version_changed": res_2,
@@ -362,6 +391,15 @@ async def main_async(args: argparse.Namespace) -> int:
         json.dump(report_data, f, ensure_ascii=False, indent=2)
 
     print(f"已儲存執行記錄：{report_file.resolve()}")
+
+    if not res_1.get("success") or not res_2.get("success"):
+        print("❌ 警告：情境執行判定未全數成功！")
+        if not res_1.get("success"):
+            print(f"   - 情境 1 失敗: {res_1.get('error')}")
+        if not res_2.get("success"):
+            print(f"   - 情境 2 失敗: {res_2.get('error')}")
+        return 1
+
     return 0
 
 

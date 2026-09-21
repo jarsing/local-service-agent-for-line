@@ -37,8 +37,13 @@
 ```bash
 python3 examples/day08/test_confirmation.py
 python3 examples/day08/demo.py
+
+# ADK 工具確認離線整合測試與全流程驗證（需已安裝 ADK 的環境）
+PY=examples/day05/.venv/bin/python
+$PY examples/day08/test_adk_offline.py
+$PY examples/day08/verify.py
 ```
 
-`demo.py` 是明確標示的合成離線資料，不呼叫模型。ADK 真實的確認事件、介面回覆、工具接續與模型文字，要由 Day 8 整合案例另外驗證；不能用這些單元測試代替。
+`demo.py` 是明確標示的合成離線資料，不呼叫模型。ADK 真實的確認事件、介面回覆、工具接續與模型文字，由 Day 8 離線整合案例與實測另外驗證；不能用純核心單元測試代替。
 
 目前實作是記憶體 store 與本行程的 Lock；重啟後資料不保留，也沒有跨行程交易。這是 Day 11 後續持久化的接點，不在這篇另建資料平台。

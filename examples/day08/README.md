@@ -14,7 +14,7 @@
 # 沿用 Day 5 既有虛擬環境
 PY=examples/day05/.venv/bin/python
 
-# 執行 30 項離線測試（25 項核心單元測試 + 5 項 ADK 工具確認整合測試）
+# 執行 34 項離線測試（25 項核心單元測試 + 9 項 ADK 工具確認整合與介接回歸測試）
 $PY examples/day08/verify.py
 
 # 執行合成資料離線示範（0 模型呼叫）
@@ -42,12 +42,12 @@ python3 examples/day08/demo.py
 
 - `confirmation.py`：單行程記憶體確認核心（`ConfirmationStore`、`Identity`、`Operation`、`operation_fingerprint`）。
 - `test_confirmation.py`：25 項核心單元測試（涵蓋正常接受、版本換版、內容異動、不同使用者、期限邊界、重複確認等）。
-- `adapter.py`：Day 7 資料匯入與 Day 8 獨立演練狀態切換器（提供 v1 07:30~11:00 與 v2 08:00~11:00 快照）。
+- `adapter.py`：提供兩份花壇場次內建教學快照（演練標籤 `v-0337e2296139` 與 `v-62ccd0ef3ca44e6ca8b7ef2d3302ab28`，不等同 Day 7 原始歸檔 `version_id`）與狀態切換器。
 - `adk_bridge.py`：ADK 工具確認介接層，將 `ToolContext.request_confirmation` 與 `ConfirmationStore` 串接。
-- `test_adk_offline.py`：5 項使用 `ScriptedMockLlm` 的離線 ADK 流程整合測試。
-- `ui.py`：人機協同介面生成器，產出 `CONFIRM.html`。
-- `verify.py`：全域離線驗證入口（30 測試全數通過）。
-- `run.py`：統一執行腳本，支援 `--offline`（預設）與 `--live`（需 GEMINI_API_KEY）。
+- `test_adk_offline.py`：9 項使用 `ScriptedMockLlm` 的離線 ADK 流程整合與介接邊界測試。
+- `ui.py`：人機協同介面生成器，產出靜態實測報告 `CONFIRM.html`。
+- `verify.py`：全域離線驗證入口（34 測試全數通過）。
+- `run.py`：統一執行腳本，省略 `--live` 時使用離線替身（預設），加上 `--live` 時執行真實 Gemini 呼叫（需 `GEMINI_API_KEY`）。
 - `CONTRACT.md`：核心小規格與驗收條件。
 
 ## 4. 真實 Gemini 模型實測（需 API Key）

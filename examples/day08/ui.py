@@ -19,6 +19,8 @@ def build_html_report(
     normal_result: dict[str, Any],
     conflict_result: dict[str, Any],
     output_path: Path | str | None = None,
+    mode_label: str = "離線示範（Offline Demo）",
+    source_label: str = "內建教學快照（演練標籤：v-0337e2296139）",
 ) -> Path:
     if output_path is None:
         output_path = Path(__file__).parent / "CONFIRM.html"
@@ -56,24 +58,25 @@ def build_html_report(
   .badge-awaiting {{ background: #fef3c7; color: #92400e; }}
   .badge-success {{ background: #dcfce7; color: #166534; }}
   .badge-warning {{ background: #ffedd5; color: #9a3412; }}
+  .badge-static {{ background: #e0e7ff; color: #3730a3; }}
 
-  .card {{ background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }}
-  .card-title {{ font-size: 1.15rem; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }}
+  .card {{ background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); min-width: 0; }}
+  .card-title {{ font-size: 1.15rem; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }}
 
   .field-grid {{ display: grid; grid-template-columns: 140px 1fr; gap: 12px; font-size: 0.95rem; margin-bottom: 16px; }}
   .field-label {{ color: var(--text-muted); font-weight: 500; }}
-  .field-value {{ color: var(--text-main); font-weight: 500; }}
+  .field-value {{ color: var(--text-main); font-weight: 500; word-break: break-word; }}
   .highlight {{ background: #eff6ff; padding: 2px 6px; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--primary); }}
 
-  .btn-group {{ display: flex; gap: 12px; margin-top: 16px; border-top: 1px solid var(--border); padding-top: 16px; }}
-  .btn {{ padding: 10px 18px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: all 0.15s ease; }}
+  .btn-group {{ display: flex; flex-direction: column; gap: 8px; margin-top: 16px; border-top: 1px solid var(--border); padding-top: 16px; }}
+  .btn-row {{ display: flex; gap: 12px; flex-wrap: wrap; }}
+  .btn {{ padding: 10px 18px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; border: 1px solid transparent; transition: all 0.15s ease; }}
   .btn-primary {{ background: var(--primary); color: #fff; }}
-  .btn-primary:hover {{ background: var(--primary-hover); }}
   .btn-outline {{ background: #fff; border-color: var(--border); color: var(--text-main); }}
-  .btn-outline:hover {{ background: #f8fafc; }}
   .btn-danger {{ background: #fee2e2; color: var(--danger); border-color: #fecaca; }}
+  .btn-disabled {{ opacity: 0.65; cursor: not-allowed; }}
 
-  .code-block {{ background: var(--code-bg); padding: 12px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85rem; overflow-x: auto; margin-top: 12px; }}
+  .code-block {{ background: var(--code-bg); padding: 12px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85rem; overflow-x: auto; margin-top: 12px; white-space: pre-wrap; word-break: break-word; }}
 
   .grid-two {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }}
   @media (max-width: 768px) {{ .grid-two {{ grid-template-columns: 1fr; }} }}
@@ -82,9 +85,9 @@ def build_html_report(
 <body>
 <div class="container">
   <header>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
       <h1>LOCAL Day 8｜人機協同內容確認展示</h1>
-      <span class="badge badge-awaiting">AWAITING_CONFIRMATION</span>
+      <span class="badge badge-static">靜態實測報告（非互動網頁）</span>
     </div>
     <div class="subtitle">Google ADK Tool Confirmation × 應用端版本與操作指紋重新核對</div>
   </header>
@@ -92,10 +95,13 @@ def build_html_report(
   <!-- 待確認卡片 -->
   <section class="card">
     <div class="card-title">
-      <span>1. 出示確認請求（由 Gemini + ADK 發起）</span>
+      <span>1. 待確認單（由程式組成，Gemini 提出工具呼叫）</span>
       <span class="badge badge-awaiting">待核對 Offer</span>
     </div>
     <div class="field-grid">
+      <div class="field-label">模式與來源</div>
+      <div class="field-value"><strong>{html.escape(mode_label)}</strong>・{html.escape(source_label)}</div>
+
       <div class="field-label">目標活動</div>
       <div class="field-value"><strong>{html.escape(ev.get("name", ""))}</strong>（{html.escape(ev.get("area", ""))}・{html.escape(ev.get("venue", ""))}）</div>
 
@@ -119,9 +125,14 @@ def build_html_report(
     </div>
 
     <div class="btn-group">
-      <button class="btn btn-primary" type="button">✔ 確認內容（送出同意）</button>
-      <button class="btn btn-outline" type="button">⚡ 模擬等待中切換新版 (08:00~11:00)</button>
-      <button class="btn btn-danger" type="button">✖ 取消</button>
+      <div class="btn-row">
+        <button class="btn btn-primary btn-disabled" type="button" disabled>✔ 確認內容（測試程式代送）</button>
+        <button class="btn btn-outline btn-disabled" type="button" disabled>⚡ 模擬等待中切換新版 (08:00~11:00)</button>
+        <button class="btn btn-danger btn-disabled" type="button" disabled>✖ 取消</button>
+      </div>
+      <div style="font-size:0.8rem; color:var(--text-muted);">
+        ※ 說明：本報告為測試產出之靜態畫面，按鈕為示意展示，未連接後端伺服器；確認輸入由測試程式代送。
+      </div>
     </div>
   </section>
 
@@ -133,7 +144,7 @@ def build_html_report(
         <span class="badge badge-success">RECORDED</span>
       </div>
       <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:12px;">
-        使用者看過 07:30~11:00，按下確認時伺服器目錄版本仍為 <code>{html.escape(op.get("catalog_version", ""))}</code>。
+        使用者看過 07:30~11:00，送出確認時伺服器目錄版本仍為 <code>{html.escape(op.get("catalog_version", ""))}</code>。
       </p>
       <div class="field-grid" style="grid-template-columns: 100px 1fr; font-size:0.85rem;">
         <div class="field-label">判定狀態</div>
@@ -152,7 +163,7 @@ def build_html_report(
         <span class="badge badge-warning">VERSION_CHANGED</span>
       </div>
       <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:12px;">
-        使用者看過 07:30~11:00，但在按下前系統已採用 08:00~11:00（版本更新），按鈕送出的舊確認被拒絕。
+        使用者看過 07:30~11:00，但在按下前系統已採用 08:00~11:00（版本更新），送出的舊確認被拒絕。
       </p>
       <div class="field-grid" style="grid-template-columns: 100px 1fr; font-size:0.85rem;">
         <div class="field-label">判定狀態</div>

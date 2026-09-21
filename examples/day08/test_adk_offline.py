@@ -262,6 +262,127 @@ class AdkConfirmationTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(res.get("status"), "wrong_actor")
         self.assertFalse(res.get("execution_allowed"))
 
+    async def test_m03_unmatched_id_does_not_confirm_latest_draft(self):
+        """M03 回歸：提供無效或缺少確認 ID 時，絕不回退確認最新的待確認單。"""
+        # 開立草稿 A
+        op_a = self.service.get_or_create_operation("draft-A", DEFAULT_EVENT_ID, "問題A", self.identity)
+        offer_a = self.service.issue_offer(self.identity, op_a)
+
+        # 同一人在同一 session 開立草稿 B
+        op_b = self.service.get_or_create_operation("draft-B", DEFAULT_EVENT_ID, "問題B", self.identity)
+        offer_b = self.service.issue_offer(self.identity, op_b)
+
+        # 試圖以不存在或錯誤的 confirmation_id 確認
+        res = self.service.validate_and_record(
+            confirmation_id="fake-invalid-id",
+            actor=self.identity,
+            draft_id="draft-A",
+            approved=True,
+        )
+        self.assertEqual(res.get("status"), "not_found")
+        self.assertFalse(res.get("execution_allowed"))
+
+        # 確認草稿 B 依然處於 awaiting_confirmation，未被誤確認
+        record_b = self.service.store._records[offer_b["confirmation_id"]]
+        self.assertEqual(record_b["status"], "awaiting_confirmation")
+
+    async def test_m04_modified_draft_content_rejected_as_content_changed(self):
+        """M04 回歸：在等待確認期間若草稿內容被修改，舊確認單因操作指紋不符回傳 content_changed。"""
+        # 建立草稿 001 原問題
+        op1 = self.service.get_or_create_operation("draft-001", DEFAULT_EVENT_ID, "請問集合地點在哪裡？", self.identity)
+        offer1 = self.service.issue_offer(self.identity, op1)
+
+        # 使用者修改草稿問題為停車資訊（目錄版本未變）
+        self.service.get_or_create_operation("draft-001", DEFAULT_EVENT_ID, "請問附近是否有收費停車場？", self.identity)
+
+        # 以舊確認單按下確認
+        res = self.service.validate_and_record(
+            confirmation_id=offer1["confirmation_id"],
+            actor=self.identity,
+            draft_id="draft-001",
+            approved=True,
+        )
+        self.assertEqual(res.get("status"), "content_changed")
+        self.assertFalse(res.get("execution_allowed"))
+
+    async def test_m04_draft_isolation_across_different_users(self):
+        """M04 回歸：不同使用者使用相同 draft_id 時，草稿內容互不污染。"""
+        user_a = Identity("user-A", "session-A")
+        user_b = Identity("user-B", "session-B")
+
+        op_a = self.service.get_or_create_operation("draft-shared", DEFAULT_EVENT_ID, "使用者A的問題", user_a)
+        offer_a = self.service.issue_offer(user_a, op_a)
+
+        op_b = self.service.get_or_create_operation("draft-shared", DEFAULT_EVENT_ID, "使用者B的問題", user_b)
+        offer_b = self.service.issue_offer(user_b, op_b)
+
+        # 使用者 A 正常確認自己未變動的草稿
+        res_a = self.service.validate_and_record(
+            confirmation_id=offer_a["confirmation_id"],
+            actor=user_a,
+            draft_id="draft-shared",
+            approved=True,
+        )
+        self.assertEqual(res_a.get("status"), "confirmation_recorded")
+
+        # 使用者 B 正常確認自己未變動的草稿
+        res_b = self.service.validate_and_record(
+            confirmation_id=offer_b["confirmation_id"],
+            actor=user_b,
+            draft_id="draft-shared",
+            approved=True,
+        )
+        self.assertEqual(res_b.get("status"), "confirmation_recorded")
+
+    async def test_m05_runner_handles_abnormal_cases(self):
+        """M05 回歸：測試 runner 正確判定無確認事件或非預期狀態之情境。"""
+        from run import run_scenario_with_runner, ScenarioMetricsTracker
+
+        class NoConfirmMockLlm(BaseLlm):
+            """模擬模型未發出確認工具呼叫，僅回傳一般文字。"""
+            def __init__(self) -> None:
+                super().__init__(model="mock-no-confirm")
+
+            async def generate_content_async(self, req: LlmRequest, stream: bool = False):
+                yield LlmResponse(
+                    content=types.Content(
+                        role="model",
+                        parts=[types.Part(text="我是普通文字回答，未發起工具確認。")],
+                    )
+                )
+
+        # 案例 1：無確認事件，run_scenario_with_runner 應回傳 success=False 與相符 error
+        runner1, session1 = await self._setup_flow(NoConfirmMockLlm())
+        tracker1 = ScenarioMetricsTracker("異常測試1", max_calls=4)
+        res1 = await run_scenario_with_runner(
+            runner=runner1,
+            session_id=session1.id,
+            user_id=self.identity.user_id,
+            service=self.service,
+            user_prompt="請幫我詢問活動",
+            tracker=tracker1,
+            expected_status="confirmation_recorded",
+        )
+        self.assertFalse(res1["success"])
+        self.assertIn("No adk_request_confirmation", res1.get("error", ""))
+
+        # 案例 2：工具回傳狀態與預期不符時，判定為失敗（重置 session_service 避免重名）
+        self.session_service = InMemorySessionService()
+        mock_llm2 = ScriptedMockLlm()
+        runner2, session2 = await self._setup_flow(mock_llm2)
+        tracker2 = ScenarioMetricsTracker("異常測試2", max_calls=4)
+        res2 = await run_scenario_with_runner(
+            runner=runner2,
+            session_id=session2.id,
+            user_id=self.identity.user_id,
+            service=self.service,
+            user_prompt="請幫我整理集合地點詢問",
+            tracker=tracker2,
+            expected_status="version_changed",
+        )
+        self.assertFalse(res2["success"])
+        self.assertIn("與預期（version_changed）不符", res2.get("error", ""))
+
 
 if __name__ == "__main__":
     unittest.main()

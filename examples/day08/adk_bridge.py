@@ -33,7 +33,7 @@ class ConfirmationService:
         self.catalog_state = catalog_state or CatalogCatalogState("v1")
         self.store = ConfirmationStore()
         self.time_provider = time_provider or (lambda: datetime.now(timezone.utc))
-        self._current_operations: dict[str, Operation] = {}
+        self._current_operations: dict[Any, Operation] = {}
         self.last_offer: dict[str, Any] | None = None
 
     def get_or_create_operation(
@@ -41,6 +41,7 @@ class ConfirmationService:
         draft_id: str,
         event_id: str,
         request_text: str,
+        owner: Identity | None = None,
     ) -> Operation:
         event = self.catalog_state.get_event(event_id)
         displayed = {
@@ -58,6 +59,8 @@ class ConfirmationService:
             request_text=request_text,
             displayed_event=displayed,
         )
+        if owner:
+            self._current_operations[(owner.user_id, owner.session_id, draft_id)] = op
         self._current_operations[draft_id] = op
         return op
 
@@ -87,7 +90,7 @@ class ConfirmationService:
         approved: bool,
     ) -> dict[str, Any]:
         now = self.time_provider()
-        # 取得最新應用端狀態與最新操作內容
+        # 取得伺服器端保存之確認紀錄
         record = self.store._records.get(confirmation_id)
         if not record:
             return {
@@ -96,7 +99,7 @@ class ConfirmationService:
                 "execution_allowed": False,
             }
 
-        # 取得最新伺服器版本下的 event
+        # 取得最新伺服器版本下的活動資料
         event_id = record["snapshot"]["event_id"]
         try:
             current_event = self.catalog_state.get_event(event_id)
@@ -110,12 +113,24 @@ class ConfirmationService:
         except KeyError:
             current_displayed = record["snapshot"]["displayed_event"]
 
+        # M04: 核對時讀取現行草稿內容，以 (actor.user_id, actor.session_id, draft_id) 優先
+        active_op = self._current_operations.get((actor.user_id, actor.session_id, draft_id))
+        if active_op is None:
+            active_op = self._current_operations.get(draft_id)
+
+        if active_op is not None:
+            current_request_text = active_op.request_text
+            current_revision = active_op.revision
+        else:
+            current_request_text = record["snapshot"]["request_text"]
+            current_revision = record["snapshot"]["revision"]
+
         current_op = Operation(
             draft_id=draft_id,
-            revision=record["snapshot"]["revision"],
+            revision=current_revision,
             event_id=event_id,
             catalog_version=self.catalog_state.catalog_version,
-            request_text=record["snapshot"]["request_text"],
+            request_text=current_request_text,
             displayed_event=current_displayed,
         )
 
@@ -155,11 +170,12 @@ def make_prepare_handoff_draft_tool(
         confirmation = tool_context.tool_confirmation
 
         if confirmation is None:
-            # 階段一：建立草稿與確認 Offer，向使用者出示確認請求
+            # 階段一：建立草稿與待確認單（offer），向使用者出示確認請求
             operation = service.get_or_create_operation(
                 draft_id=draft_id,
                 event_id=event_id,
                 request_text=request_text,
+                owner=identity,
             )
             offer = service.issue_offer(owner=identity, operation=operation)
             ev = operation.displayed_event
@@ -189,20 +205,35 @@ def make_prepare_handoff_draft_tool(
             }
 
         # 階段二：使用者已按下按鈕回覆，重新核對伺服器最新狀態
-        # 優先從 tool_confirmation.payload 取得 confirmation_id
-        # 若 payload 為 None，從 tool_context 的 session 或 service 尋找
+        # M03: 依已安裝 ADK 的實際事件，保留原工具／確認事件與 confirmation_id 的可靠對應
         confirmation_id = None
         if confirmation.payload and isinstance(confirmation.payload, dict):
             confirmation_id = confirmation.payload.get("confirmation_id")
-        if not confirmation_id:
-            # 從 service 記錄的最新 offer 找回
-            scope = (identity.user_id, identity.session_id, draft_id)
-            confirmation_id = service.store._latest.get(scope)
 
+        # 若 payload 未附帶，從 session 事件中尋找綁定此 tool call 的原 adk_request_confirmation 事件
+        if not confirmation_id and tool_context:
+            fc_id = getattr(tool_context, "function_call_id", None)
+            inv_ctx = getattr(tool_context, "_invocation_context", None)
+            session = getattr(inv_ctx, "session", None) if inv_ctx else None
+            if fc_id and session and getattr(session, "events", None):
+                for ev in session.events:
+                    for fc in ev.get_function_calls():
+                        if fc.name == "adk_request_confirmation":
+                            orig = fc.args.get("originalFunctionCall", {}) if fc.args else {}
+                            if orig.get("id") == fc_id:
+                                tc = fc.args.get("toolConfirmation", {})
+                                p = tc.get("payload", {}) if isinstance(tc, dict) else {}
+                                if isinstance(p, dict):
+                                    confirmation_id = p.get("confirmation_id")
+                                break
+                    if confirmation_id:
+                        break
+
+        # 若仍無 confirmation_id，明確拒絕，絕不回退至 store._latest
         if not confirmation_id:
             return {
                 "status": "not_found",
-                "error": "Cannot find confirmation_id to validate.",
+                "error": "Cannot find valid confirmation_id bound to original tool confirmation event.",
                 "execution_allowed": False,
             }
 

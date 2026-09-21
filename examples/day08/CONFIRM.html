@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOCAL Day 8｜人機協同內容確認展示</title>
+<style>
+  :root {
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --success: #16a34a;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --code-bg: #f1f5f9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: var(--bg); color: var(--text-main); line-height: 1.6; padding: 24px 16px; }
+  .container { max-width: 900px; margin: 0 auto; }
+  header { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+  .subtitle { color: var(--text-muted); font-size: 0.95rem; }
+  .badge { display: inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
+  .badge-awaiting { background: #fef3c7; color: #92400e; }
+  .badge-success { background: #dcfce7; color: #166534; }
+  .badge-warning { background: #ffedd5; color: #9a3412; }
+
+  .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .card-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
+
+  .field-grid { display: grid; grid-template-columns: 140px 1fr; gap: 12px; font-size: 0.95rem; margin-bottom: 16px; }
+  .field-label { color: var(--text-muted); font-weight: 500; }
+  .field-value { color: var(--text-main); font-weight: 500; }
+  .highlight { background: #eff6ff; padding: 2px 6px; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--primary); }
+
+  .btn-group { display: flex; gap: 12px; margin-top: 16px; border-top: 1px solid var(--border); padding-top: 16px; }
+  .btn { padding: 10px 18px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: all 0.15s ease; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover { background: var(--primary-hover); }
+  .btn-outline { background: #fff; border-color: var(--border); color: var(--text-main); }
+  .btn-outline:hover { background: #f8fafc; }
+  .btn-danger { background: #fee2e2; color: var(--danger); border-color: #fecaca; }
+
+  .code-block { background: var(--code-bg); padding: 12px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85rem; overflow-x: auto; margin-top: 12px; }
+
+  .grid-two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 768px) { .grid-two { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+      <h1>LOCAL Day 8｜人機協同內容確認展示</h1>
+      <span class="badge badge-awaiting">AWAITING_CONFIRMATION</span>
+    </div>
+    <div class="subtitle">Google ADK Tool Confirmation × 應用端版本與操作指紋重新核對</div>
+  </header>
+
+  <!-- 待確認卡片 -->
+  <section class="card">
+    <div class="card-title">
+      <span>1. 出示確認請求（由 Gemini + ADK 發起）</span>
+      <span class="badge badge-awaiting">待核對 Offer</span>
+    </div>
+    <div class="field-grid">
+      <div class="field-label">目標活動</div>
+      <div class="field-value"><strong>卦山大縱走 彰化兜兜圈</strong>（花壇・大嶺巷步道）</div>
+
+      <div class="field-label">活動日期</div>
+      <div class="field-value">2026-09-19</div>
+
+      <div class="field-label">出示活動時段</div>
+      <div class="field-value"><span class="highlight">07:30~11:00</span></div>
+
+      <div class="field-label">詢問草稿文字</div>
+      <div class="field-value">「請問這場活動的集合地點在哪裡？」</div>
+
+      <div class="field-label">接收窗口</div>
+      <div class="field-value">local_demo_service_desk</div>
+
+      <div class="field-label">綁定目錄版本</div>
+      <div class="field-value"><code>v-0337e2296139</code></div>
+
+      <div class="field-label">操作指紋 (SHA-256)</div>
+      <div class="field-value"><code style="font-size:0.8rem;">ba251286102dcc021b5d6e46...</code></div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-primary" type="button">✔ 確認內容（送出同意）</button>
+      <button class="btn btn-outline" type="button">⚡ 模擬等待中切換新版 (08:00~11:00)</button>
+      <button class="btn btn-danger" type="button">✖ 取消</button>
+    </div>
+  </section>
+
+  <!-- 兩情境對照卡片 -->
+  <div class="grid-two">
+    <section class="card" style="border-top: 4px solid var(--success);">
+      <div class="card-title">
+        <span>情境 A：資料未變，正常接受</span>
+        <span class="badge badge-success">RECORDED</span>
+      </div>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:12px;">
+        使用者看過 07:30~11:00，按下確認時伺服器目錄版本仍為 <code>v-0337e2296139</code>。
+      </p>
+      <div class="field-grid" style="grid-template-columns: 100px 1fr; font-size:0.85rem;">
+        <div class="field-label">判定狀態</div>
+        <div class="field-value"><strong>confirmation_recorded</strong></div>
+        <div class="field-label">執行權限</div>
+        <div class="field-value"><code>execution_allowed: false</code></div>
+        <div class="field-label">收據版本</div>
+        <div class="field-value"><code>v-0337e2296139</code></div>
+      </div>
+      <div class="code-block">{
+  "status": "confirmation_recorded",
+  "confirmation_id": "q9IP1z49V3QbOYWgkaMzoKp9vCYvBJOC",
+  "execution_allowed": false,
+  "receipt": {
+    "confirmation_id": "q9IP1z49V3QbOYWgkaMzoKp9vCYvBJOC",
+    "operation_fingerprint": "ba251286102dcc021b5d6e46a36f962ab864beaf56b47649e09661eceeb98868",
+    "catalog_version": "v-0337e2296139",
+    "recorded_at": "2026-09-22T01:00:00+00:00"
+  }
+}</div>
+    </section>
+
+    <section class="card" style="border-top: 4px solid var(--warning);">
+      <div class="card-title">
+        <span>情境 B：等待中換版，拒絕舊版</span>
+        <span class="badge badge-warning">VERSION_CHANGED</span>
+      </div>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:12px;">
+        使用者看過 07:30~11:00，但在按下前系統已採用 08:00~11:00（版本更新），按鈕送出的舊確認被拒絕。
+      </p>
+      <div class="field-grid" style="grid-template-columns: 100px 1fr; font-size:0.85rem;">
+        <div class="field-label">判定狀態</div>
+        <div class="field-value"><strong>version_changed</strong></div>
+        <div class="field-label">執行權限</div>
+        <div class="field-value"><code>execution_allowed: false</code></div>
+        <div class="field-label">處理方式</div>
+        <div class="field-value">出示新版時段，提示重新核對</div>
+      </div>
+      <div class="code-block">{
+  "status": "version_changed",
+  "confirmation_id": "_uO-TAvj5hYds_ZNzOwd8UozraQFrcum",
+  "execution_allowed": false
+}</div>
+    </section>
+  </div>
+</div>
+</body>
+</html>

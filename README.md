@@ -13,10 +13,11 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 7, September 21, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–7 examples. The latest example adds **version-aware poster review, stable event matching, triplet diffs, and query state transitions**. Reference code snapshot: [examples/day07/](examples/day07/).
+**Code index updated through Day 8, September 22, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–8 examples. The latest example adds **Google ADK tool confirmation, application-layer identity and version defense, and version-changed protection during user decision**. Reference code snapshot: [examples/day08/](examples/day08/).
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
+| Bind user confirmation to operations & versions | [Day 8: operation confirmation](examples/day08/README.md) | Google ADK Tool Confirmation, operation fingerprints, version-change interception, and confirmation receipts |
 | Handle poster updates and field review | [Day 7: poster versioning](examples/day07/README.md) | Stable event matching, triplet diffs, human review, and three-phase query states |
 | Extract event data from a poster | [Day 6: poster extraction](examples/day06/README.md) | Structured fields, quotation verification, human review export, and Day 5 search tool reuse |
 | See an agent look up local events | [Day 5: ADK event search](examples/day05/README.md) | Four sample events, four questions, two conditions, and observable tool-call traces |
@@ -89,8 +90,9 @@ The articles are written in Traditional Chinese. English topic labels below summ
 | 5 | [ADK, controlled lookup, and the first agent orchestration](https://ithelp.ithome.com.tw/articles/10413779) | [examples/day05](examples/day05/) | [docs/day05](docs/day05/README.md) |
 | 6 | [Turn an event poster into searchable service data](https://ithelp.ithome.com.tw/articles/10414133) | [examples/day06](examples/day06/) | [docs/day06](docs/day06/README.md) |
 | 7 | [Readable does not mean reliable: sources, versions, and the unknown](https://ithelp.ithome.com.tw/articles/10414804) | [examples/day07](examples/day07/) | [docs/day07](docs/day07/README.md) |
+| 8 | A conversational “yes” is not enough: bind confirmation to a specific operation | [examples/day08](examples/day08/) | [docs/day08](docs/day08/README.md) |
 
-Find Day 8 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
+Find Day 9 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 
 LOCAL grows as one project, with chapter folders preserving each lesson's focus. Upcoming work will add service requests and conversational state, and explore evaluation and cloud deployment. This index will expand as the examples are published.
 

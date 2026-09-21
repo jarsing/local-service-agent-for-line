@@ -1,5 +1,7 @@
 # Day 7｜來源更新與欄位複核
 
+正式文章：[Day 7｜看懂不等於可信：來源、版本與不知道](https://ithelp.ithome.com.tw/articles/10414804)
+
 操作入口：[examples/day07/README.md](../../examples/day07/README.md)。
 
 本篇延續 Day 6 的讀者提問：主辦更換海報，應按圖片雜湊建版，還是按欄位差異複核？本例把兩者分工，再加上容易漏掉的**穩定場次配對**。

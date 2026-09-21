@@ -115,7 +115,7 @@ $PY examples/day07/run.py query --session "$SESSION" --phase pending --keyword "
 
 待核時，變動或連動的重要欄位以 `pending_review` 表示，不把舊時間顯示成最新答案；其餘活動仍可查詢。篩選會同時考慮舊、新候選值，避免日期改了就把待核活動藏起來。模型的疑點文字會並列供人查看；待核欄位依實際三元組差異及連動規則建立。採用前仍要對照原圖，確認日期、地點與其他醒目異動。
 
-在 `REVIEW.html` 勾選已核對項目，必要時修改三元組並說明原因，填心得，最後下載 `decision.json`。
+在 `REVIEW.html` 勾選已核對項目，必要時修改三元組並說明原因，填心得，最後下載 `decision.json`。若人工額外修改屬於連動群組的欄位，`REVIEW.html` 會提示並要求同群組欄位一起核對，後端 `apply` 也會再次驗證；例如修改 `time` 時，需要一併核對 `date` / `time` / `meeting_time`。
 
 ```bash
 $PY examples/day07/run.py apply --session "$SESSION" --decision /實際下載位置/decision.json

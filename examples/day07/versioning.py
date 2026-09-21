@@ -282,6 +282,12 @@ def apply_review(base: dict, candidate: dict, plan: dict, decision: dict, *, act
         eid, key = patch['event_id'], patch['field']
         require(eid in entries and key in FIELDS and (eid, key) not in override_keys, '修訂欄位需唯一且存在。')
         require(eid + ':' + key in checked, '手動修改的欄位也需要核對。')
+        linked = set()
+        for group in GROUPS:
+            if key in group:
+                linked |= group
+        missing = {eid + ':' + f for f in linked} - checked
+        require(not missing, f'手動修改欄位「{key}」需連同群組欄位一起核對，缺少：{", ".join(sorted(missing))}')
         override_keys.add((eid, key))
         require(bool(patch.get('reason', '').strip()), '修訂需要原因。')
         entries[eid]['fields'][key] = deepcopy(patch['triple'])

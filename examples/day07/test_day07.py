@@ -143,6 +143,19 @@ class AdoptionTests(unittest.TestCase):
     def test_override_without_reason_rejected(self):
         e=self.b['events'][0]['id'];self.d['overrides']=[{'event_id':e,'field':'time','triple':field('08:15'),'reason':''}]
         with self.assertRaises(ValueError):apply_review(self.b,self.c,self.p,self.d,active_version=self.b['version_id'])
+    def test_override_linked_field_unchecked_rejected(self):
+        b,c,m=setup(change=False);p=make_plan(b,c,m);d=approved(p)
+        e=b['events'][0]['id']
+        d['overrides']=[{'event_id':e,'field':'time','triple':field('08:15~11:00'),'reason':'離線核對修訂'}]
+        d['checked_keys']=[e+':time']
+        with self.assertRaises(ValueError):
+            apply_review(b,c,p,d,active_version=b['version_id'])
+        d['checked_keys']=[e+':time',e+':date']
+        with self.assertRaises(ValueError):
+            apply_review(b,c,p,d,active_version=b['version_id'])
+        d['checked_keys'].append(e+':meeting_time')
+        a,_=apply_review(b,c,p,d,active_version=b['version_id'])
+        self.assertEqual(next(x for x in a['events'] if x['id']==e)['fields']['time']['value'],'08:15~11:00')
     def test_missing_reviewer_rejected(self):
         self.d['reviewer']=''
         with self.assertRaises(ValueError):apply_review(self.b,self.c,self.p,self.d,active_version=self.b['version_id'])

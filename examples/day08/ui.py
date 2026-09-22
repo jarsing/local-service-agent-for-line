@@ -171,7 +171,7 @@ def build_html_report(
         <div class="field-label">執行權限</div>
         <div class="field-value"><code>execution_allowed: {str(conflict_result.get("execution_allowed")).lower()}</code></div>
         <div class="field-label">處理方式</div>
-        <div class="field-value">出示新版時段，提示重新核對</div>
+        <div class="field-value">舊確認不接受；新版內容需重新出示與核對。</div>
       </div>
       <div class="code-block">{json.dumps(conflict_result, ensure_ascii=False, indent=2)}</div>
     </section>

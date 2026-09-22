@@ -375,7 +375,7 @@ async def main_async(args: argparse.Namespace) -> int:
             "total_calls": total_calls,
             "max_allowed_calls": MAX_TOTAL_CALLS,
             "total_tokens": total_tokens,
-            "expected_behavior": "當伺服器目錄版本在等待中更新時，系統在確認階段精確攔截版本不一致（version_changed），execution_allowed 始終保持 False，阻斷過期內容執行。",
+            "expected_behavior": "當伺服器目錄版本在等待中更新時，系統在確認階段判定版本不一致（version_changed），execution_allowed 保持 False，阻斷過期內容執行。",
             "author_observation": None,
         },
         "scenario_1_normal": res_1,

@@ -146,6 +146,42 @@ class ConfirmationService:
         )
 
 
+def lookup_confirmation_id_from_session(
+    tool_context: ToolContext | None,
+) -> str | None:
+    """從目前 Session 的確認事件找回此工具呼叫綁定的 confirmation_id。"""
+    if tool_context is None:
+        return None
+
+    fc_id = getattr(tool_context, "function_call_id", None)
+    inv_ctx = getattr(tool_context, "_invocation_context", None)
+    session = getattr(inv_ctx, "session", None) if inv_ctx else None
+
+    if not fc_id or not session or not getattr(session, "events", None):
+        return None
+
+    for event in session.events:
+        for function_call in event.get_function_calls():
+            if function_call.name != "adk_request_confirmation":
+                continue
+
+            args = function_call.args or {}
+            original = args.get("originalFunctionCall", {})
+            if original.get("id") != fc_id:
+                continue
+
+            tool_confirmation = args.get("toolConfirmation", {})
+            payload = (
+                tool_confirmation.get("payload", {})
+                if isinstance(tool_confirmation, dict)
+                else {}
+            )
+            if isinstance(payload, dict):
+                return payload.get("confirmation_id")
+
+    return None
+
+
 def make_prepare_handoff_draft_tool(
     service: ConfirmationService,
     get_current_identity: Callable[[ToolContext], Identity],
@@ -210,26 +246,10 @@ def make_prepare_handoff_draft_tool(
         if confirmation.payload and isinstance(confirmation.payload, dict):
             confirmation_id = confirmation.payload.get("confirmation_id")
 
-        # 若 payload 未附帶，從 session 事件中尋找綁定此 tool call 的原 adk_request_confirmation 事件
-        if not confirmation_id and tool_context:
-            fc_id = getattr(tool_context, "function_call_id", None)
-            inv_ctx = getattr(tool_context, "_invocation_context", None)
-            session = getattr(inv_ctx, "session", None) if inv_ctx else None
-            if fc_id and session and getattr(session, "events", None):
-                for ev in session.events:
-                    for fc in ev.get_function_calls():
-                        if fc.name == "adk_request_confirmation":
-                            orig = fc.args.get("originalFunctionCall", {}) if fc.args else {}
-                            if orig.get("id") == fc_id:
-                                tc = fc.args.get("toolConfirmation", {})
-                                p = tc.get("payload", {}) if isinstance(tc, dict) else {}
-                                if isinstance(p, dict):
-                                    confirmation_id = p.get("confirmation_id")
-                                break
-                    if confirmation_id:
-                        break
+        if not confirmation_id:
+            confirmation_id = lookup_confirmation_id_from_session(tool_context)
 
-        # 若仍無 confirmation_id，明確拒絕，絕不回退至 store._latest
+        # 找不到原確認請求時就拒絕，不回退（不改用最新待確認單）
         if not confirmation_id:
             return {
                 "status": "not_found",

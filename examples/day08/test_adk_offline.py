@@ -263,8 +263,55 @@ class AdkConfirmationTests(unittest.IsolatedAsyncioTestCase):
         self.assertFalse(res.get("execution_allowed"))
 
     async def test_m03_unmatched_id_does_not_confirm_latest_draft(self):
-        """M03 回歸：提供無效或缺少確認 ID 時，絕不回退確認最新的待確認單。"""
-        # 開立草稿 A
+        """M03 回歸：提供無效或缺少確認 ID 時，絕不回退確認最新的待確認單；涵蓋 session helper。"""
+        from adk_bridge import lookup_confirmation_id_from_session
+        from google.adk.events import Event
+
+        # 1. 驗證 lookup_confirmation_id_from_session 邊界條件
+        self.assertIsNone(lookup_confirmation_id_from_session(None))
+
+        # 建立具備 session events 的模擬 context 測試 helper 正向與反向配對
+        class DummyInvocationContext:
+            def __init__(self, session):
+                self.session = session
+
+        class DummyToolContext:
+            def __init__(self, fc_id, session):
+                self.function_call_id = fc_id
+                self._invocation_context = DummyInvocationContext(session)
+
+        mock_fc = types.FunctionCall(
+            name="adk_request_confirmation",
+            id="conf_call_999",
+            args={
+                "originalFunctionCall": {"id": "fc_match_123"},
+                "toolConfirmation": {
+                    "payload": {"confirmation_id": "cid-session-matched-789"}
+                },
+            },
+        )
+        mock_event = Event(
+            author="local_day08_agent",
+            content=types.Content(role="model", parts=[types.Part(function_call=mock_fc)]),
+        )
+
+        test_sess = await self.session_service.create_session(
+            app_name="local_day08", user_id="user_m03_helper", session_id="sess_m03_helper"
+        )
+        test_sess.events.append(mock_event)
+
+        # 正向：matching function_call_id 能找到正確 confirmation_id
+        matching_ctx = DummyToolContext("fc_match_123", test_sess)
+        self.assertEqual(
+            lookup_confirmation_id_from_session(matching_ctx),
+            "cid-session-matched-789",
+        )
+
+        # 反向：無 matching event 回傳 None
+        unmatched_ctx = DummyToolContext("fc_different_456", test_sess)
+        self.assertIsNone(lookup_confirmation_id_from_session(unmatched_ctx))
+
+        # 2. 業務端驗證：開立草稿 A 與草稿 B，無效 ID 絕不回退確認最新待確認單
         op_a = self.service.get_or_create_operation("draft-A", DEFAULT_EVENT_ID, "問題A", self.identity)
         offer_a = self.service.issue_offer(self.identity, op_a)
 

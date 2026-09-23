@@ -2,7 +2,7 @@
 
 > 在 LINE 裡問問題，讓 Gemini 搭配工具查資料，再把結果說清楚。
 
-[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 9 操作指南](examples/day09/README.md)
+[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 10 操作指南](examples/day10/README.md)
 
 **系列：LOCAL：30 天打造 LINE × Google AI 地方服務 Agent**  
 **作者：陳佳新（佳新哥）｜奇步應用｜GitHub：jarsing**
@@ -13,10 +13,11 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 9（2026/09/23）。** Day 1 的驗收規格與 Day 2～9 的範例已在 Repo；目前最新的實作是 **Google ADK 受控建單、SQLite 交易查重與同鍵重送冪等處理**。本次導覽依據：[Day 9 程式範例](examples/day09/)。
+**程式導覽更新至 Day 10（2026/09/24）。** Day 1 的驗收規格與 Day 2～10 的範例已在 Repo；目前最新的實作是 **逾時查回對帳、合成傳輸故障注入、受控復原控制器與 GitHub Actions 離線 CI 工作流程**。本次導覽依據：[Day 10 程式範例](examples/day10/)。
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
+| 逾時查回對帳與離線 CI | [Day 10：查回對帳與離線 CI](examples/day10/README.md) | 唯讀 SQLite 查回對帳、合成傳輸故障注入、受控復原控制器，以及 GitHub Actions 離線 CI 工作流程 |
 | 受控建單與防重複 | [Day 9：受控建單與冪等](examples/day09/README.md) | Google ADK `create_handoff_request`、SQLite 交易查重、同鍵同內容取原單與同鍵異內容衝突 |
 | 人機協同確認與版本防線 | [Day 8：確認綁定具體操作](examples/day08/README.md) | Google ADK Tool Confirmation、操作指紋核對、等待中換版阻斷與確認收據 |
 | 處理海報異動與欄位複核 | [Day 7：海報更新與複核](examples/day07/README.md) | 跨版本活動配對、欄位三元組差分、人工複核與三階段查詢介接 |

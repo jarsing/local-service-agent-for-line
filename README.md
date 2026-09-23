@@ -2,7 +2,7 @@
 
 > Ask through LINE. Let Gemini use tools to find local-service information and explain the result.
 
-[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 9 setup guide](examples/day09/README.md)
+[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 10 setup guide](examples/day10/README.md)
 
 **Author:** Jia-Sin Chen（陳佳新／佳新哥）, ChiBuApp（奇步應用） · GitHub: `jarsing`  
 **Series:** LOCAL：30 天打造 LINE × Google AI 地方服務 Agent
@@ -13,11 +13,12 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 9, September 23, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–9 examples. The latest example adds **Google ADK controlled request creation, SQLite transactional deduplication, and idempotent same-key retries**. Reference code snapshot: [examples/day09/](examples/day09/).
+**Code index updated through Day 10, September 24, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–10 examples. The latest example adds **timeout reconciliation, synthetic fault injection, bounded ADK recovery, and an offline CI workflow**. Reference code snapshot: [examples/day10/](examples/day10/).
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
-| Build idempotent service requests | [Day 9: request creation and idempotency](examples/day09/README.md) | Google ADK `create_handoff_request`, SQLite transactional deduplication, returning the original request for retries, and rejecting conflicting reuse |
+| Reconcile timeouts & offline CI | [Day 10: reconciliation & CI](examples/day10/README.md) | Read-only SQLite lookup, synthetic transport timeouts, bounded recovery controller, and GitHub Actions offline CI |
+| Build idempotent service requests | [Day 9: request creation & idempotency](examples/day09/README.md) | Google ADK `create_handoff_request`, SQLite transactional deduplication, returning the original request for retries, and rejecting conflicting reuse |
 | Bind user confirmation to operations & versions | [Day 8: operation confirmation](examples/day08/README.md) | Google ADK Tool Confirmation, operation fingerprints, version-change interception, and confirmation receipts |
 | Handle poster updates and field review | [Day 7: poster versioning](examples/day07/README.md) | Stable event matching, triplet diffs, human review, and three-phase query states |
 | Extract event data from a poster | [Day 6: poster extraction](examples/day06/README.md) | Structured fields, quotation verification, human review export, and Day 5 search tool reuse |

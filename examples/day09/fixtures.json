@@ -1,0 +1,32 @@
+{
+  "source_commit": "b479f9fe321769c2e9525d82d3a175b8ba23d49b",
+  "source_path": "examples/day08/adapter.py",
+  "source_kind": "Day 8 內建教學快照的欄位摘錄；版本標籤沿用 Day 8，非 Day 7 原始 version_id",
+  "default_label": "v2",
+  "snapshots": {
+    "v1": {
+      "catalog_version": "v-0337e2296139",
+      "data_status": "adopted",
+      "event": {
+        "id": "evt-60d76a55472c503faa4c",
+        "name": "卦山大縱走 彰化兜兜圈",
+        "area": "花壇",
+        "venue": "大嶺巷步道",
+        "date": "2026-09-19",
+        "time": "07:30~11:00"
+      }
+    },
+    "v2": {
+      "catalog_version": "v-62ccd0ef3ca44e6ca8b7ef2d3302ab28",
+      "data_status": "adopted",
+      "event": {
+        "id": "evt-60d76a55472c503faa4c",
+        "name": "卦山大縱走 彰化兜兜圈",
+        "area": "花壇",
+        "venue": "大嶺巷步道",
+        "date": "2026-09-19",
+        "time": "08:00~11:00"
+      }
+    }
+  }
+}

@@ -17,7 +17,7 @@
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
-| 受控建單與 SQLite 冪等處理 | [Day 9：按兩次送出，會不會多一筆？受控建單與冪等](examples/day09/README.md) | Google ADK `create_handoff_request`、SQLite 交易查重、同鍵同內容取原單與同鍵異內容衝突 |
+| 受控建單與防重複 | [Day 9：受控建單與冪等](examples/day09/README.md) | Google ADK `create_handoff_request`、SQLite 交易查重、同鍵同內容取原單與同鍵異內容衝突 |
 | 人機協同確認與版本防線 | [Day 8：確認綁定具體操作](examples/day08/README.md) | Google ADK Tool Confirmation、操作指紋核對、等待中換版阻斷與確認收據 |
 | 處理海報異動與欄位複核 | [Day 7：海報更新與複核](examples/day07/README.md) | 跨版本活動配對、欄位三元組差分、人工複核與三階段查詢介接 |
 | 從海報整理活動資料 | [Day 6：海報資料管線](examples/day06/README.md) | 結構化欄位、原圖原文核對、人工審閱目錄匯出，並接回 Day 5 搜尋工具 |

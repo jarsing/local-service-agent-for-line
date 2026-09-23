@@ -138,4 +138,5 @@ Start with one example and note where the instructions or behavior are unclear. 
 
 Use synthetic or explicitly authorized data. Never publish client code, real LINE user IDs, credentials, or private operational data.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+The source code is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+

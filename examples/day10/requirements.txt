@@ -1,0 +1,5 @@
+# 核心 demo.py / verify.py 不需第三方套件；以下供真正 ADK 替身與核准後的 Gemini。
+# 沿用作者 Day 9 的直接相依版本；不是宣稱最新版本，也不是完整遞移相依鎖。
+google-adk==2.9.1
+google-genai==2.23.0
+httpx==0.28.1

@@ -1,0 +1,82 @@
+name: LOCAL offline CI
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# 無路徑篩選：先避免前篇核心或 workflow 改動時漏跑；不要求 PR。
+jobs:
+  core:
+    name: Day 1 specification and Day 2-8-9-10 core
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      OTEL_SDK_DISABLED: 'true'
+    steps:
+      - name: Read the triggering commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Prepare Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13.5'
+      - name: Verify the frozen specification and core contracts
+        run: python examples/day10/verify.py --group core --out ci-output/core
+      - name: Run the SQLite fault experiment
+        run: python examples/day10/demo.py --out ci-output/core
+      - name: Preserve allowlisted synthetic records
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: core-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ci-output/core/**/*.json
+            ci-output/core/**/*.jsonl
+            ci-output/core/**/*.txt
+            ci-output/core/**/*.sqlite3
+            ci-output/core/**/REPORT.html
+          retention-days: 30
+          if-no-files-found: warn
+
+  sdk:
+    name: Day 9 and Day 10 real ADK with scripted models
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      OTEL_SDK_DISABLED: 'true'
+    steps:
+      - name: Read the triggering commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Prepare Python and package cache
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13.5'
+          cache: pip
+          cache-dependency-path: examples/day10/requirements.txt
+      - name: Install the explicit ADK dependencies
+        run: |
+          python -m pip install -r examples/day10/requirements.txt
+          python -m pip check
+          mkdir -p ci-output/sdk
+          python -m pip list --format=json > ci-output/sdk/installed-packages.json
+      - name: Verify actual ADK tool calls without business APIs
+        run: python examples/day10/verify.py --group sdk --out ci-output/sdk
+      - name: Preserve allowlisted SDK test records
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: sdk-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ci-output/sdk/**/*.json
+            ci-output/sdk/**/*.txt
+          retention-days: 30
+          if-no-files-found: warn

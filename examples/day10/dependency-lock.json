@@ -1,0 +1,12 @@
+{
+  "basis": "User handoff plus unchanged dependency files from CLAUDE_DAY09(2).zip",
+  "reference_commit": "d3c99b6bd33edf0b9dffe6c631cde8cdc929dd31",
+  "files": {
+    "docs/day01/handoff-timeout-001.json": "9a4768046189e6ba0d42637953b8d73e41566f7c573ea0a76b32079b1a762218",
+    "examples/day08/confirmation.py": "5559faaf4d1f1dd4d426d3b518a6e5c0e4287bd9d2a274a6074a9e6e27de1a4d",
+    "examples/day09/handoff.py": "376b48df02fc0bcd7f92290d5465eba0a6b60ab625dd8eeb81aaee9bc9f77b2e",
+    "examples/day09/day08_gateway.py": "b926981a7e73a0de688f348c590586a90c11b22ec330f4f3bb56a4de5c9efc95",
+    "examples/day09/dependencies.py": "1041eef247c183109312492ddb5e84ce4bbbd93a1b8d88bcbc00e89e345dad50",
+    "examples/day09/fixtures.json": "537f174c81a44c272bcb5c85358c2a6441a6cc332270c2aa86732756f08677a8"
+  }
+}

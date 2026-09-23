@@ -1,6 +1,6 @@
 # Day 10｜逾時後到底有沒有送出？
 
-正式文章：尚未取得 Day 10 發布網址。前篇：[Day 9](https://ithelp.ithome.com.tw/articles/10415923)。
+正式文章：[Day 10｜逾時後到底有沒有送出？](https://ithelp.ithome.com.tw/articles/10416095)。前篇：[Day 9](https://ithelp.ithome.com.tw/articles/10415923)。
 
 本例用合成傳輸故障包裝既有 Day 9 建單服務，使用真正 SQLite 比較「提交後回條遺失」和「寫入前中斷」。模型提出工具呼叫，可信應用端掌握查回與一次重送的順序。
 

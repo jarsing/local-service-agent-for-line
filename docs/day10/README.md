@@ -1,6 +1,6 @@
 # Day 10｜逾時後到底有沒有送出？
 
-正式文章：尚未取得 Day 10 發布網址，發布後補上。前篇：[Day 9](https://ithelp.ithome.com.tw/articles/10415923)。
+正式文章：[Day 10｜逾時後到底有沒有送出？](https://ithelp.ithome.com.tw/articles/10416095)。前篇：[Day 9](https://ithelp.ithome.com.tw/articles/10415923)。
 
 操作：[examples/day10/README.md](../../examples/day10/README.md)；契約：[CONTRACT.md](../../examples/day10/CONTRACT.md)。
 

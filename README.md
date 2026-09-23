@@ -1,5 +1,7 @@
 # LOCAL Agent Kit for LINE
 
+[![LOCAL offline CI](https://github.com/jarsing/local-service-agent-for-line/actions/workflows/ci.yml/badge.svg)](https://github.com/jarsing/local-service-agent-for-line/actions/workflows/ci.yml)
+
 > Ask through LINE. Let Gemini use tools to find local-service information and explain the result.
 
 [繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 10 setup guide](examples/day10/README.md)
@@ -13,7 +15,8 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 10, September 24, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–10 examples. The latest example adds **timeout reconciliation, synthetic fault injection, bounded ADK recovery, and an offline CI workflow**. Reference code snapshot: [examples/day10/](examples/day10/).
+**Code index updated through Day 10, September 24, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–10 examples. The latest example adds **timeout reconciliation with the original operation key, bounded same-key retries, and the first GitHub Actions offline CI workflow**. Reference code snapshot: [examples/day10/](examples/day10/).
+
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
@@ -98,7 +101,8 @@ The articles are written in Traditional Chinese. English topic labels below summ
 
 Find Day 11 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 
-LOCAL grows as one project, with chapter folders preserving each lesson's focus. Upcoming work will add service requests and conversational state, and explore evaluation and cloud deployment. This index will expand as the examples are published.
+LOCAL grows as one project, with chapter folders preserving each lesson's focus. Local service requests, idempotent retries, and timeout reconciliation are complete through Day 10; upcoming work will add persisted state, evaluation, and cloud deployment. This index will expand as the examples are published.
+
 
 ## How LINE, Gemini, and ADK work together
 

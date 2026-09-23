@@ -1,5 +1,7 @@
 # LOCAL Agent Kit for LINE
 
+[![LOCAL offline CI](https://github.com/jarsing/local-service-agent-for-line/actions/workflows/ci.yml/badge.svg)](https://github.com/jarsing/local-service-agent-for-line/actions/workflows/ci.yml)
+
 > 在 LINE 裡問問題，讓 Gemini 搭配工具查資料，再把結果說清楚。
 
 [English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 10 操作指南](examples/day10/README.md)
@@ -13,7 +15,8 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 10（2026/09/24）。** Day 1 的驗收規格與 Day 2～10 的範例已在 Repo；目前最新的實作是 **逾時查回對帳、合成傳輸故障注入、受控復原控制器與 GitHub Actions 離線 CI 工作流程**。本次導覽依據：[Day 10 程式範例](examples/day10/)。
+**程式導覽更新至 Day 10（2026/09/24）。** Day 1 的驗收規格與 Day 2～10 的範例已在 Repo；目前最新的實作是 **逾時後原送出鍵查回、有限同鍵重送與第一條 GitHub Actions 離線 CI 工作流程**。本次導覽依據：[Day 10 程式範例](examples/day10/)。
+
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
@@ -96,7 +99,8 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 
 Day 11 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 
-這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。後續將加入服務請求、對話狀態、評測與雲端部署；新範例公開後，會持續更新這份導覽。
+這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。本機服務請求、冪等重送與逾時查回已完成至 Day 10；後續會加入持久化狀態、評測與雲端部署。新範例公開後，會持續更新這份導覽。
+
 
 ## LINE、Gemini 與 ADK 各做什麼？
 

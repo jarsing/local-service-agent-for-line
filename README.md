@@ -134,4 +134,4 @@ Start with one example and note where the instructions or behavior are unclear. 
 
 Use synthetic or explicitly authorized data. Never publish client code, real LINE user IDs, credentials, or private operational data.
 
-An open-source release is planned. No license has yet been selected for this design snapshot; public visibility alone is not an open-source license. Code, articles, illustrations, and data will have their licensing scope clarified before reuse is offered.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

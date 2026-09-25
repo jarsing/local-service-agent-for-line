@@ -20,6 +20,7 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
+| Persist state & survive restarts | [Day 11: Firestore persistence](examples/day11/README.md) | Dual-backend storage adapter (SQLite/Firestore), cross-process restart recovery, lease-based job coordination, and offline test suite |
 | Reconcile timeouts & offline CI | [Day 10: reconciliation & CI](examples/day10/README.md) | Read-only SQLite lookup, synthetic transport timeouts, bounded recovery controller, and GitHub Actions offline CI |
 | Build idempotent service requests | [Day 9: request creation & idempotency](examples/day09/README.md) | Google ADK `create_handoff_request`, SQLite transactional deduplication, returning the original request for retries, and rejecting conflicting reuse |
 | Bind user confirmation to operations & versions | [Day 8: operation confirmation](examples/day08/README.md) | Google ADK Tool Confirmation, operation fingerprints, version-change interception, and confirmation receipts |
@@ -98,10 +99,11 @@ The articles are written in Traditional Chinese. English topic labels below summ
 | 8 | [A conversational “yes” is not enough: bind confirmation to a specific operation](https://ithelp.ithome.com.tw/articles/10415219) | [examples/day08](examples/day08/) | [docs/day08](docs/day08/README.md) |
 | 9 | [Will a second submission create an extra record? Controlled request creation and idempotency](https://ithelp.ithome.com.tw/articles/10415923) | [examples/day09](examples/day09/) | [docs/day09](docs/day09/README.md) |
 | 10 | [Did it go through after a timeout? Reconciliation and offline CI](https://ithelp.ithome.com.tw/articles/10416095) | [examples/day10](examples/day10/) | [docs/day10](docs/day10/README.md) |
+| 11 | [Resends, background jobs, and restart recovery](https://ithelp.ithome.com.tw/articles/10416397) | [examples/day11](examples/day11/) | [docs/day11](docs/day11/README.md) |
 
-Find Day 11 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
+Find Day 12 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 
-LOCAL grows as one project, with chapter folders preserving each lesson's focus. Local service requests, idempotent retries, and timeout reconciliation are complete through Day 10; upcoming work will add persisted state, evaluation, and cloud deployment. This index will expand as the examples are published.
+LOCAL grows as one project, with chapter folders preserving each lesson's focus. Local service requests, idempotent retries, timeout reconciliation, and process restart recovery are complete through Day 11; upcoming work will add persisted state, evaluation, and cloud deployment. This index will expand as the examples are published.
 
 
 ## How LINE, Gemini, and ADK work together

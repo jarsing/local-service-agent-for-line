@@ -1,0 +1,7 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} { allow read, write: if false; }
+  }
+}
+// 這是客戶端規則；Python 伺服器 SDK 走 IAM，不藉此宣稱已驗證雲端權限。

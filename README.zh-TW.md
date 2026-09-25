@@ -20,6 +20,7 @@
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
+| 雲端持久化與重啟恢復 | [Day 11：Firestore 持久化](examples/day11/README.md) | 雙後端儲存配接器（SQLite／Firestore）、跨行程重啟恢復、租約式工作協調，以及離線測試套件 |
 | 逾時查回對帳與離線 CI | [Day 10：查回對帳與離線 CI](examples/day10/README.md) | 唯讀 SQLite 查回對帳、合成傳輸故障注入、受控復原控制器，以及 GitHub Actions 離線 CI 工作流程 |
 | 受控建單與防重複 | [Day 9：受控建單與冪等](examples/day09/README.md) | Google ADK `create_handoff_request`、SQLite 交易查重、同鍵同內容取原單與同鍵異內容衝突 |
 | 人機協同確認與版本防線 | [Day 8：確認綁定具體操作](examples/day08/README.md) | Google ADK Tool Confirmation、操作指紋核對、等待中換版阻斷與確認收據 |
@@ -96,10 +97,11 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 8 | [一句「好」不夠：確認綁定具體操作](https://ithelp.ithome.com.tw/articles/10415219) | [examples/day08](examples/day08/) | [docs/day08](docs/day08/README.md) |
 | Day 9 | [按兩次送出，會不會多一筆？受控建單與冪等](https://ithelp.ithome.com.tw/articles/10415923) | [examples/day09](examples/day09/) | [docs/day09](docs/day09/README.md) |
 | Day 10 | [逾時後到底有沒有送出？](https://ithelp.ithome.com.tw/articles/10416095) | [examples/day10](examples/day10/) | [docs/day10](docs/day10/README.md) |
+| Day 11 | [重送、背景工作與重啟恢復](https://ithelp.ithome.com.tw/articles/10416397) | [examples/day11](examples/day11/) | [docs/day11](docs/day11/README.md) |
 
-Day 11 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
+Day 12 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 
-這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。本機服務請求、冪等重送與逾時查回已完成至 Day 10；後續會加入持久化狀態、評測與雲端部署。新範例公開後，會持續更新這份導覽。
+這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。本機服務請求、冪等重送、逾時查回與程序重啟恢復已完成至 Day 11；後續會加入持久化狀態、評測與雲端部署。新範例公開後，會持續更新這份導覽。
 
 
 ## LINE、Gemini 與 ADK 各做什麼？

@@ -1,0 +1,85 @@
+name: LOCAL Day 11 offline extension
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# 原 ci.yml 保持不變。本檔只執行 Day 11 新增群組，避免把重跑前篇算成新案例。
+jobs:
+  core:
+    name: Day 11 document-contract and cross-process tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      OTEL_SDK_DISABLED: 'true'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # 延用 Day 10 鎖定版本
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.13.5'
+      - name: Run Day 11 standard-library tests
+        run: python examples/day11/test_driver.py --module test_core --out ci-output/day11-core
+      - name: Produce the SQLite adapter cross-process records
+        run: python examples/day11/demo.py --backend sqlite-test --out ci-output/day11-demo
+      - name: Compare fresh processes with memory and SQLite storage
+        run: python examples/day11/demo.py --compare-memory --backend sqlite-test --out ci-output/day11-comparison
+      - name: Preserve synthetic verification records
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: day11-core-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ci-output/day11-core/**/*.json
+            ci-output/day11-core/**/*.txt
+            ci-output/day11-demo/**/*.json
+            ci-output/day11-demo/**/*.jsonl
+            ci-output/day11-demo/**/*.sqlite3
+            ci-output/day11-demo/**/REPORT.html
+            ci-output/day11-comparison/**/*.json
+            ci-output/day11-comparison/**/*.jsonl
+            ci-output/day11-comparison/**/*.sqlite3
+            ci-output/day11-comparison/**/REPORT.html
+          retention-days: 30
+          if-no-files-found: warn
+
+  sdk:
+    name: Day 11 real ADK and scripted-model tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      OTEL_SDK_DISABLED: 'true'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.13.5'
+          cache: pip
+          cache-dependency-path: examples/day11/requirements-sdk.txt
+      - name: Install only the ADK dependency set
+        run: |
+          python -m pip install -r examples/day11/requirements-sdk.txt
+          python -m pip check
+          mkdir -p ci-output/day11-sdk
+          python -m pip list --format=json > ci-output/day11-sdk/installed-packages.json
+      - name: Run the actual Runner without a real model API
+        run: python examples/day11/test_driver.py --module test_adk_offline --out ci-output/day11-sdk/tests
+      - name: Preserve the SDK verification records
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: day11-sdk-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ci-output/day11-sdk/**/*.json
+            ci-output/day11-sdk/**/*.txt
+          retention-days: 30
+          if-no-files-found: warn

@@ -1,0 +1,3 @@
+# 真正 Firestore adapter 的候選固定版本，2026/09/24 由 PyPI 官方頁核對。
+# 本交付環境未能下載安裝；版本存在不等於整合驗證通過。核心測試不需安裝。
+google-cloud-firestore==2.31.0

@@ -1,6 +1,6 @@
-# Day 11｜重送、背景工作與重啟恢復
+# Day 11｜服務重啟了，剛才交代的事還在嗎？重送、背景工作與重啟恢復
 
-本章 v2 工作稿與候選程式；尚未取得正式文章網址。本機整合後再以實際結果更新，不預猜文章 ID。
+正式文章：[Day 11｜服務重啟了，剛才交代的事還在嗎？重送、背景工作與重啟恢復](https://ithelp.ithome.com.tw/articles/10416397)。本章保存業務任務、原確認、回條與有限處理進度，示範跨行程接續。各層驗證範圍見下方結果表。
 
 讀者問題：**服務重啟，剛才的詢問還找得到嗎？**
 
@@ -25,7 +25,12 @@
 
 同一個示範只選一種後端；Firestore 路線不先寫 SQLite 再同步。測試 adapter 不是 Firestore 模擬器。模擬器也不是正式雲端：交易、限制及索引仍可能不同。[官方限制](https://firebase.google.com/docs/emulator-suite/connect_firestore#how_the_cloud_firestore_emulator_differs_from_production)
 
-本交付的助理檢查使用 Python 3.13.5；不是作者本機重跑結果。完整結果讀工作包 `REPRODUCTION.json`；套件版本與提供的入口不代表已實測。
+| 層次 | 可公開核對的紀錄 |
+|---|---|
+| Day 11 記憶體／SQLite 核心 | GitHub Actions Run 36083862231，core 97／97 全數通過 |
+| 真正 ADK＋固定腳本模型 | 同一 Actions Run，sdk 13／13 全數通過 |
+| 本機 Firestore 模擬器實測 | 作者本機啟動模擬器，verify emulator 59／59 通過，六場景及 after_commit (PID 48888→48890) 查回原單 |
+| 正式雲端 Firestore / Cloud Run | 留待 Day 12 接續驗證，不從本次本機模擬器推定 |
 
 ## 3. 先在沒有金鑰的環境看一次跨行程結果
 

@@ -4,7 +4,7 @@
 
 > Ask through LINE. Let Gemini use tools to find local-service information and explain the result.
 
-[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 10 setup guide](examples/day10/README.md)
+[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 11 setup guide](examples/day11/README.md)
 
 **Author:** Jia-Sin Chen（陳佳新／佳新哥）, ChiBuApp（奇步應用） · GitHub: `jarsing`  
 **Series:** LOCAL：30 天打造 LINE × Google AI 地方服務 Agent
@@ -15,12 +15,12 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 10, September 24, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–10 examples. The latest example adds **timeout reconciliation with the original operation key, bounded same-key retries, and the first GitHub Actions offline CI workflow**. Reference code snapshot: [examples/day10/](examples/day10/).
+**Code index updated through Day 11, September 25, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–11 examples. The latest example adds **task state persistence, cross-process restart recovery, and lease-based bounded recovery jobs (verified with SQLite test adapter and local Firestore emulator)**. Reference code snapshot: [examples/day11/](examples/day11/).
 
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
-| Persist state & survive restarts | [Day 11: Firestore persistence](examples/day11/README.md) | Dual-backend storage adapter (SQLite/Firestore), cross-process restart recovery, lease-based job coordination, and offline test suite |
+| Persist state & survive restarts | [Day 11: Firestore persistence](examples/day11/README.md) | Dual-backend storage adapter (SQLite/Firestore emulator verified), cross-process restart recovery, lease-based job coordination, and offline test suite |
 | Reconcile timeouts & offline CI | [Day 10: reconciliation & CI](examples/day10/README.md) | Read-only SQLite lookup, synthetic transport timeouts, bounded recovery controller, and GitHub Actions offline CI |
 | Build idempotent service requests | [Day 9: request creation & idempotency](examples/day09/README.md) | Google ADK `create_handoff_request`, SQLite transactional deduplication, returning the original request for retries, and rejecting conflicting reuse |
 | Bind user confirmation to operations & versions | [Day 8: operation confirmation](examples/day08/README.md) | Google ADK Tool Confirmation, operation fingerprints, version-change interception, and confirmation receipts |

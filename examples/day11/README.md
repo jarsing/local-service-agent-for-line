@@ -27,8 +27,9 @@
 
 | 層次 | 可公開核對的紀錄 |
 |---|---|
-| Day 11 記憶體／SQLite 核心 | GitHub Actions Run 36083862231，core 97／97 全數通過（含前篇核心累計 241／241） |
-| 真正 ADK＋固定腳本模型 | 同一 Actions Run，sdk 13／13 全數通過（含前篇 ADK 累計 32／32；`--sdk` 總計 273／273） |
+| Day 11 離線 CI（本篇新增） | GitHub Actions [Run 36092678725](https://github.com/jarsing/local-service-agent-for-line/actions/runs/36092678725)（`day11.yml`）：core 97／97 全數通過、sdk 13／13 全數通過 |
+| 前篇離線 CI（前篇回歸） | GitHub Actions [Run 36092678551](https://github.com/jarsing/local-service-agent-for-line/actions/runs/36092678551)（`ci.yml`）：core 144／144 全數通過、sdk 19／19 全數通過 |
+| 本機完整回歸（核心＋ADK） | 作者本機執行 `verify.py --sdk`，核心 241＋ADK 32 合計 273／273 全數通過 |
 | 本機 Firestore 模擬器實測 | 作者本機啟動模擬器，verify emulator 59／59 項執行通過，六場景及 after_commit (PID 48888→48890) 查回原單；三大群組累計 332 項通過 |
 | 正式雲端 Firestore / Cloud Run | 留待 Day 12 接續驗證，不從本次本機模擬器推定 |
 

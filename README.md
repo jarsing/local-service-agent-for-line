@@ -103,7 +103,7 @@ The articles are written in Traditional Chinese. English topic labels below summ
 
 Find Day 12 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 
-LOCAL grows as one project, with chapter folders preserving each lesson's focus. Local service requests, idempotent retries, timeout reconciliation, and process restart recovery are complete through Day 11; upcoming work will add persisted state, evaluation, and cloud deployment. This index will expand as the examples are published.
+LOCAL grows as one project, with chapter folders preserving each lesson's focus. Local service requests, idempotent retries, timeout reconciliation, and task state persistence / process restart recovery are complete through Day 11; upcoming work will add production cloud deployment, evaluation, and subsequent state management. This index will expand as the examples are published.
 
 
 ## How LINE, Gemini, and ADK work together

@@ -1,4 +1,4 @@
-# Day 12｜換了雲端行程，剛才交代的事還在嗎？第一個 Cloud Run 版本
+# Day 12｜換了雲端容器，剛才交代的事還在嗎？第一個 Cloud Run 版本
 
 本文已於 iThome 鐵人賽正式發布：[Day 12 文章連結](https://ithelp.ithome.com.tw/articles/10417489)
 

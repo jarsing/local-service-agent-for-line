@@ -6,7 +6,7 @@
 
 ## 先讀哪份？
 
-[架構與資料流](ARCHITECTURE.md)｜[驗收與證據](ACCEPTANCE.md)｜[Cloud Run 部署與新修訂版演練](DEPLOY.md)
+[架構與資料流](ARCHITECTURE.md)
 
 ## 範圍與真實資料
 

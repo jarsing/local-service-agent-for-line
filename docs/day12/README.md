@@ -6,7 +6,5 @@ LINE 原句查詢、內容確認、Firestore 保存，以及新 Cloud Run 修訂
 
 - [最小操作與執行模式](../../examples/day12/README.md)
 - [架構與資料流](../../examples/day12/ARCHITECTURE.md)
-- [部署與重啟驗收](../../examples/day12/DEPLOY.md)
-- [驗收與證據](../../examples/day12/ACCEPTANCE.md)
 
-本包的離線結果不是已上線的證明；發布時補作者真實 LINE／ADK/Gemini／Firestore／Cloud Run 與指定版本結果。
+本篇之雲端實測經驗、IAM 權限配置原則與離線驗證請參閱對應程式範例與連載文章。

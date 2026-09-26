@@ -75,9 +75,7 @@ lease 過期後其他 worker 可以接走；finish 以目前 token 核對，舊 
 不以測試總數代替模型語意、不用原Day10的163替新Day11背書、不要求為保持總數而刪測試。
 
 
-## v2 交接與欄位對照
-
-本輪以最新 DAY11_CHATGPT_PROMPT／SUMMARY 為需求，但兩份摘要所列函式名仍有差異，詳見工作包 SOURCE_ALIGNMENT.md。原碼介面不修改。
+## 欄位與狀態規格說明
 
 - scope：程式使用 actor.tenant_id＋actor.user_id，Session 另核對。
 - timestamp／valid_until：分別保留原 created_at／receipt.recorded_at 與 expires_at，不另發或續期。

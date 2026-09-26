@@ -56,4 +56,4 @@ examples/day03/.venv/bin/python examples/day03/run.py --live \
 - https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.5
 - https://ai.google.dev/gemini-api/docs/billing
 
-本範例沒有自動 commit、push、建立分支、部署或投稿。
+本範例為獨立執行腳本，無外部自動化部署副作用。

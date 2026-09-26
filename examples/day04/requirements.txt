@@ -1,6 +1,5 @@
-# Day 4 Webhook 與 ASGI 測試版本；在本次助理離線測試環境通過。
+# Day 4 Webhook 與 ASGI 相依套件
 fastapi==0.128.2
 uvicorn==0.48.0
 httpx==0.28.1
-# 沿用作者 Day 3 回報的 SDK；本次助理未呼叫 Google 或 LINE 真實服務。
 google-genai==2.23.0

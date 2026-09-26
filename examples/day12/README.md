@@ -86,10 +86,6 @@ $PY -m uvicorn examples.day12.main:app --host 0.0.0.0 --port 8080 --workers 1 --
 
 使用者自己的 request_text 可能包含私人資訊；僅白名單合成測試，事前告知保存目的。原始 query trace 與reply plan存在該隔離 namespace，清理方式與保留期間由作者確認。
 
-## 6. 公開結果更新方式
+## 6. 測試與相依版本
 
-發布後把正式文章 URL、作者 cloud run/commit/image digest、真實模型／Firestore／LINE 結果補入，不把本工作包的 assistant_check 標成 author_local。
-
-CI optional 工作流只跑核心 ASGI 測試，不做部署；前篇 `.github/workflows/ci.yml` 與 day11.yml 不修改。
-
-程式來源固定在 [指定 Day 11 基準](https://github.com/jarsing/local-service-agent-for-line/tree/1f548cc133c9a170bfc97b5ad031e7a7d955e721)。作者本機若有更新，先核對差異，不覆蓋。
+CI 工作流執行核心 ASGI 測試（45 項）與 ADK 離線測試（3 項）；程式來源延續 Day 11 架構基準。

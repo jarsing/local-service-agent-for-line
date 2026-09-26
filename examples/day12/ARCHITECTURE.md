@@ -1,12 +1,10 @@
-# Day 12｜從 LINE 到同一張請求的最小架構
+# Day 12｜從 LINE 到同一張請求的架構設計
 
-狀態：可執行候選實作，非雲端上線證明。正式題名依作者決定為「Day 12｜第一個雲端可用版本」。
+本範例提供從 LINE Webhook 入口串接 Google ADK、Gemini 與 Google Cloud Firestore 的端到端架構實作。
 
-## 1. 來源、提案與驗證分開
+## 1. 架構特色
 
-來源為交接 ZIP、所指向的 `1f548cc133c9a170bfc97b5ad031e7a7d955e721` 特定檔案，以及官方 LINE／Google 文件。摘要的函式名稱與實際原始碼有落差，完整差異在工作包 `SOURCE_ALIGNMENT.md`。
-
-下列是 Day 12 新設計，不是來源已實作：FastAPI 統一入口、持久化的待確認 postback 接點、事件去重／回覆狀態、ADK 自然語言搜尋、雲端部署與跨 revision 驗收。
+包含 FastAPI Webhook 統一入口、持久化兩階段確認 postback 機制、事件去重與回覆防護、ADK 自然語言工具呼叫，以及跨 Cloud Run 修訂版（Revision）的狀態持久化。
 
 ## 2. 資料流
 

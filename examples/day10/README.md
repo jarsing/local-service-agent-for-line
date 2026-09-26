@@ -62,7 +62,7 @@ $PY examples/day10/run.py --live --approve-live \
   --model REPLACE_WITH_APPROVED_MODEL_ID --case before_write
 ```
 
-金鑰由環境中的 `GEMINI_API_KEY` 或明示 `--env-file /你自己的路徑/.env` 提供；程式不搜尋其他資料夾。請勿把私人路徑或金鑰貼進公開命令紀錄。直接相依版本延續前篇；本工作包沒有驗證帳號是否可用任何特定 Gemini 模型。
+金鑰由環境中的 `GEMINI_API_KEY` 或明示 `--env-file /你自己的路徑/.env` 提供；程式不搜尋其他資料夾。請勿把私人路徑或金鑰貼進公開命令紀錄。直接相依版本延續前篇；本範例尚未針對特定付費帳號進行連線驗證。
 
 每回合查核 `TOOL_REQUESTED` → `TOOL_EXECUTED` → `TOOL_RESPONSE` 的 call ID、名稱、四參數與回條，再核對 SQLite。自然語言需人工判讀：待查證是否說準、有沒有額外承諾真人會回覆。`technical_checks_passed` 不等於模型品質已過關。
 

@@ -4,7 +4,7 @@
 
 > 在 LINE 裡問問題，讓 Gemini 搭配工具查資料，再把結果說清楚。
 
-[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 11 操作指南](examples/day11/README.md)
+[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 12 操作指南](examples/day12/README.md)
 
 **系列：LOCAL：30 天打造 LINE × Google AI 地方服務 Agent**  
 **作者：陳佳新（佳新哥）｜奇步應用｜GitHub：jarsing**
@@ -15,11 +15,12 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 11（2026/09/25）。** Day 1 的驗收規格與 Day 2～11 的範例已在 Repo；目前最新的實作是 **任務狀態持久化、跨行程重啟接續與有限工作協調（支援 SQLite 測試配接器與 Firestore 模擬器實測）**。本次導覽依據：[Day 11 程式範例](examples/day11/)。
+**程式導覽更新至 Day 12（2026/09/26）。** Day 1 的驗收規格與 Day 2～12 的範例已在 Repo；目前最新的實作是 **第一個雲端可用版本：部署至 Google Cloud Run，搭配 Firestore 狀態持久化、Gemini 3.8 Flash 活動查詢、二階段確認與跨修訂版零失憶查回**。本次導覽依據：[Day 12 程式範例](examples/day12/)。
 
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
+| 雲端部署與跨修訂版接續 | [Day 12：Cloud Run 部署](examples/day12/README.md) | FastAPI Webhook 入口、Postback 二階段確認、Secret Manager 保險箱整合，以及跨修訂版讀回實測 |
 | 任務持久化與重啟接續 | [Day 11：Firestore 持久化](examples/day11/README.md) | 雙後端儲存配接器（SQLite／Firestore 模擬器實測）、跨行程重啟恢復、租約式工作協調，以及離線測試套件 |
 | 逾時查回對帳與離線 CI | [Day 10：查回對帳與離線 CI](examples/day10/README.md) | 唯讀 SQLite 查回對帳、合成傳輸故障注入、受控復原控制器，以及 GitHub Actions 離線 CI 工作流程 |
 | 受控建單與防重複 | [Day 9：受控建單與冪等](examples/day09/README.md) | Google ADK `create_handoff_request`、SQLite 交易查重、同鍵同內容取原單與同鍵異內容衝突 |
@@ -98,10 +99,11 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 9 | [按兩次送出，會不會多一筆？受控建單與冪等](https://ithelp.ithome.com.tw/articles/10415923) | [examples/day09](examples/day09/) | [docs/day09](docs/day09/README.md) |
 | Day 10 | [逾時後到底有沒有送出？](https://ithelp.ithome.com.tw/articles/10416095) | [examples/day10](examples/day10/) | [docs/day10](docs/day10/README.md) |
 | Day 11 | [服務重啟了，剛才交代的事還在嗎？重送、背景工作與重啟恢復](https://ithelp.ithome.com.tw/articles/10416397) | [examples/day11](examples/day11/) | [docs/day11](docs/day11/README.md) |
+| Day 12 | [第一個雲端版本：Cloud Run 實戰「卦山大縱走」重啟零失憶！](examples/day12/README.md) | [examples/day12](examples/day12/) | [docs/day12](docs/day12/README.md) |
 
-Day 12 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
+Day 13 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 
-這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。本機服務請求、冪等重送、逾時查回與任務持久化／程序重啟恢復已完成至 Day 11；後續會接入正式雲端部署、正常 LINE 服務、評測與後續狀態管理。新範例公開後，會持續更新這份導覽。
+這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復，以及首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本已收錄至 Day 12；後續會接入評測、多來源目錄整合與後續狀態管理。新範例公開後，會持續更新這份導覽。
 
 
 ## LINE、Gemini 與 ADK 各做什麼？

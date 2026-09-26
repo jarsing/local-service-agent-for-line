@@ -116,7 +116,7 @@ The Day 5 phone demonstration follows this path:
 
 LINE supplies the messaging interface. Gemini interprets the question and requests a tool call. ADK coordinates the model, tools, and events. The Python tool performs the actual lookup. Google AI Studio is the entry point for obtaining and managing Gemini API keys, while Google Antigravity supports the development workflow.
 
-Google Cloud deployment, consented long-term memory, and human-service handoff are future work in the series. The current messaging entry point, database experiment, and event search have their own examples; the broader capabilities will be integrated progressively.
+Day 12 adds the LINE teaching service on Cloud Run. Consented long-term memory and human-service handoff remain future work in the series. The current messaging entry point, database experiment, and event search have their own examples; the broader capabilities will be integrated progressively.
 
 ## The five LOCAL design dimensions
 

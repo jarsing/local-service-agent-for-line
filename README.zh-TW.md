@@ -114,7 +114,7 @@ Day 13 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/2012
 
 LINE 提供訊息入口；Gemini 理解問題並提出工具呼叫；ADK 串起模型、工具與事件。Python 工具負責實際讀取活動資料。Google AI Studio 是 Gemini API 金鑰的取得與管理入口；Google Antigravity 則用在本專案的開發協作。
 
-Google Cloud 部署、經同意的長期記憶與人工服務交接，是後續連載的發展方向。目前的入口、資料庫實驗與活動查詢各有對應範例，完整能力隨系列逐步整合。
+Day 12 已加入 Cloud Run 的 LINE 教學服務；經同意的長期記憶與真人服務交接留待後續。目前的入口、資料庫實驗與活動查詢各有對應範例，完整能力隨系列逐步整合。
 
 ## LOCAL 的五個設計面向
 

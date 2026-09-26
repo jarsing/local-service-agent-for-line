@@ -6,7 +6,6 @@
 
 - [最小操作與排錯](../../examples/day11/README.md)
 - [資料與責任契約](../../examples/day11/CONTRACT.md)
-- [驗收矩陣與證據讀法](../../examples/day11/ACCEPTANCE.md)
 
 程式包含 memory-control、SQLite 測試 adapter 與真正 Firestore SDK 路線。記憶體／SQLite 可用標準函式庫執行；作者於本機完成全套實測（Firestore 模擬器驗證 59/59 通過；verify.py --sdk 核心＋ADK 回歸合計 273/273 通過；公開 GitHub Actions 之 Day 11 新增 ADK 整合為 13/13 通過）。
 

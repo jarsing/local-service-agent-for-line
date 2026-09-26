@@ -88,4 +88,4 @@ $PY -m uvicorn examples.day12.main:app --host 0.0.0.0 --port 8080 --workers 1 --
 
 ## 6. 測試與相依版本
 
-CI 工作流執行核心 ASGI 測試（45 項）與 ADK 離線測試（3 項）；程式來源延續 Day 11 架構基準。
+Day 12 提供可在本機執行的核心 ASGI 測試（45 項）與 ADK 離線測試（3 項）；各組項目與結果以實際執行報告為準。目前公開 GitHub Actions 仍執行 `ci.yml` 與 `day11.yml` 的前篇回歸，尚未自動納入本篇 45／3 項。

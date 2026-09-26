@@ -1,0 +1,7 @@
+# 候選部署的直接相依；沿用作者 Day 11 SDK 系列，不是已驗證的完整遞移鎖。
+-r requirements-core.txt
+fastapi==0.141.1
+uvicorn==0.53.0
+google-adk==2.9.1
+google-genai==2.23.0
+google-cloud-firestore==2.31.0

@@ -1,0 +1,11 @@
+.git
+**/.git
+**/.env*
+**/.venv
+**/__pycache__
+**/*.pyc
+**/output
+**/evidence
+**/node_modules
+**/*credentials*
+**/*service-account*.json

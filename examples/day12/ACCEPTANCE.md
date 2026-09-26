@@ -13,6 +13,15 @@
 | 替換 | 使用同 image digest 部署新 revision 並切流量 | revision、boot_id 改變；舊／新參數及 namespace 不變 |
 | 查回 | 新訊息「剛才那單有成功嗎？」 | 從持久 sessions 取原 args，查回相同 operation ID、request ID，文件仍同一筆；不叫使用者重填 |
 
+### 本次雲端實測核對結果（2026-09-26 實測通過）
+
+| 核對項目 | 修訂版 A（建立請求） | 修訂版 B（查回請求） | 核對結果 |
+|---|---|---|---|
+| `K_REVISION` | `local-day12-agent-00003-2kh` | `local-day12-agent-00004-zz6` | 流量已 100% 切換至修訂版 B |
+| `boot_id` | 行程啟動識別 A | 行程啟動識別 B | 確認由不同行程實例處理 |
+| `request_id` | `req-20260926-85daad15417821ee` | `req-20260926-85daad15417821ee` | 完全一致，零失憶讀回 |
+| Firestore 文件數 | 1 筆 | 1 筆 | 查回未重複新增 |
+
 ## 2. 必要負向測試
 
 錯簽章與非白名單不進業務；不同 user／session／舊 confirmation 不寫入；原確認過期不新增；未確認不能寫；同事件重送不重新 issue 同意；同 confirmation 的不同事件仍指向同鍵；版本變更阻止首次新增；撤權後不回私人舊回條；Reply 失敗不能導致新的 request；`healthz` 不代表 Firestore 正常。

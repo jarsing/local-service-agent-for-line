@@ -1,6 +1,6 @@
-# Day 12｜第一個雲端可用版本
+# Day 12｜換了雲端行程，剛才交代的事還在嗎？第一個 Cloud Run 版本
 
-本目錄是 Day 12 候選實作。文章尚未提供正式 URL；不預猜文章 ID。雲端正常服務必須由作者實際完成後，才在發布版補成果。
+本文已於 iThome 鐵人賽正式發布：[Day 12 文章連結](https://ithelp.ithome.com.tw/articles/10417489)
 
 目標：使用者在 LINE 查詢 → 提出詢問 → 點原確認卡 → Firestore 保存 → 換 Cloud Run revision／新行程後查回同一單。不是預約或真人已受理的系統。
 

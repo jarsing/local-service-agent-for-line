@@ -1,6 +1,6 @@
-# Day 12｜第一個雲端可用版本
+# Day 12｜換了雲端行程，剛才交代的事還在嗎？第一個 Cloud Run 版本
 
-候選章節入口，正式文章 URL 待作者發布後填入。
+本文已於 iThome 鐵人賽正式發布：[Day 12 文章連結](https://ithelp.ithome.com.tw/articles/10417489)
 
 LINE 原句查詢、內容確認、Firestore 保存，以及新 Cloud Run 修訂版查回同一請求。
 

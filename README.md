@@ -15,7 +15,7 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 12, September 26, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–12 examples. The latest example adds **the first cloud-ready release deployed on Google Cloud Run with Firestore state persistence, Gemini 3.8 Flash activity lookup, two-phase confirmation, and cross-revision zero-amnesia request restoration**. Reference code snapshot: [examples/day12/](examples/day12/).
+**Code index updated through Day 12, September 26, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–12 examples. The latest example adds **the first cloud-ready release deployed on Google Cloud Run with Firestore state persistence, Gemini 3.8 Flash activity lookup, two-phase confirmation, and cross-revision request restoration across process changes**. Reference code snapshot: [examples/day12/](examples/day12/).
 
 
 | Start with a goal | Entry point | What to explore |
@@ -100,8 +100,7 @@ The articles are written in Traditional Chinese. English topic labels below summ
 | 8 | [A conversational “yes” is not enough: bind confirmation to a specific operation](https://ithelp.ithome.com.tw/articles/10415219) | [examples/day08](examples/day08/) | [docs/day08](docs/day08/README.md) |
 | 9 | [Will a second submission create an extra record? Controlled request creation and idempotency](https://ithelp.ithome.com.tw/articles/10415923) | [examples/day09](examples/day09/) | [docs/day09](docs/day09/README.md) |
 | 10 | [Did it go through after a timeout? Reconciliation and offline CI](https://ithelp.ithome.com.tw/articles/10416095) | [examples/day10](examples/day10/) | [docs/day10](docs/day10/README.md) |
-| 11 | [Service restarted — is what I asked for still there? Resends, background jobs, and restart recovery](https://ithelp.ithome.com.tw/articles/10416397) | [examples/day11](examples/day11/) | [docs/day11](docs/day11/README.md) |
-| 12 | [First cloud-ready release: Cloud Run in action with Baguashan Grand Hike](https://ithelp.ithome.com.tw/articles/10417489) | [examples/day12](examples/day12/) | [docs/day12](docs/day12/README.md) |
+| 12 | [When cloud processes change, is what I asked for still there? First Cloud Run release](https://ithelp.ithome.com.tw/articles/10417489) | [examples/day12](examples/day12/) | [docs/day12](docs/day12/README.md) |
 
 Find Day 13 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 

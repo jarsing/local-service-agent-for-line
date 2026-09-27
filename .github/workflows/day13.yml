@@ -1,0 +1,38 @@
+name: LOCAL Day 13 offline Flex & safety verification
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  flex:
+    name: Day 13 Flex templates and safety contract tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.13.5'
+      - name: Run Day 13 standard-library Flex template tests
+        run: python3 -m unittest examples.day13.test_flex -v
+      - name: Export synthetic Flex sample payloads
+        run: python3 -m examples.day13.export_samples --out ci-output/day13-samples
+      - name: Preserve Flex sample artifacts
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: day13-flex-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ci-output/day13-samples/**/*.json
+            ci-output/day13-samples/**/*.txt
+          retention-days: 30
+          if-no-files-found: warn

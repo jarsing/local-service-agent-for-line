@@ -20,7 +20,7 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
-| Present LINE Flex state & safe actions | [Day 13: LINE Flex](examples/day13/README.md) | Fixed Flex bubble templates, postback action binding, stale-card cancel defense, and plain-text accessibility fallback |
+| Is a visible button still a valid one? LINE Flex state and safe actions | [Day 13: LINE Flex](examples/day13/README.md) | Fixed Flex bubble templates, postback action binding, stale-card cancel defense, and plain-text accessibility fallback |
 | Deploy to Cloud Run & survive restarts | [Day 12: Cloud Run deployment](examples/day12/README.md) | FastAPI webhook, two-phase confirmation with postback action, Secret Manager integration, and cross-revision request recovery |
 | Persist state & survive restarts | [Day 11: Firestore persistence](examples/day11/README.md) | Dual-backend storage adapter (SQLite/Firestore emulator verified), cross-process restart recovery, lease-based job coordination, and offline test suite |
 | Reconcile timeouts & offline CI | [Day 10: reconciliation & CI](examples/day10/README.md) | Read-only SQLite lookup, synthetic transport timeouts, bounded recovery controller, and GitHub Actions offline CI |

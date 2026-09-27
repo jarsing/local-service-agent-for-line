@@ -1,8 +1,8 @@
-# Day 13｜LINE Flex 的狀態與安全操作
+# Day 13｜按鈕還在，就代表還能按嗎？LINE Flex 的狀態與安全操作
 
 將 Day 12 的待確認、已保存回條與狀態提示，換成固定 Flex 模板。模型不產生卡片結構；後端仍決定哪些操作可以執行。
 
-本目錄沿用 `examples/day12/` 與更早的確認／儲存服務。基準版本為 `297f1a99b2486c25e6628f8f6745daccd4e743e0`；整合時保留所有前篇，不以本目錄覆蓋 Day 12。本篇對應鐵人賽文章：[Day 13｜LINE Flex 的狀態與安全操作](https://ithelp.ithome.com.tw/articles/10417809)。
+本目錄沿用 `examples/day12/` 與更早的確認／儲存服務。基準版本為 `297f1a99b2486c25e6628f8f6745daccd4e743e0`；整合時保留所有前篇，不以本目錄覆蓋 Day 12。本篇對應鐵人賽文章：[Day 13｜按鈕還在，就代表還能按嗎？LINE Flex 的狀態與安全操作](https://ithelp.ithome.com.tw/articles/10417809)。
 
 ## 1. 最小開始
 
@@ -145,4 +145,4 @@ Day 12 的離線資料、手機圖與舊修訂版是歷史成果，保存不動�
 - [W3C：不要只靠顏色](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html)
 - [Cloud Run 流量切換](https://docs.cloud.google.com/run/docs/rollouts-rollbacks-traffic-migration)
 
-公開 GitHub Actions 是否包含本篇，需看實際 workflow 與 run；本目錄不自行新增自動部署，也不以本機測試結果宣稱 CI 已執行。
+公開 GitHub Actions 已具備本篇離線檢查工作流（[.github/workflows/day13.yml](../../.github/workflows/day13.yml)），在 Push 到 main 或手動觸發時執行 34 項標準函式庫模板測試並匯出合成樣本（參照 [Run 36317435217](https://github.com/jarsing/local-service-agent-for-line/actions/runs/36317435217)）；本目錄不自行新增自動部署，也不以本機 112/115 項測試宣稱全數進入 CI。

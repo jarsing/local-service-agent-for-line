@@ -20,5 +20,6 @@ node_modules/
 *.log
 logs/
 output/
+out/
 .DS_Store
 Thumbs.db

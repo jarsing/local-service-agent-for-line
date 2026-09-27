@@ -4,7 +4,7 @@
 
 > Ask through LINE. Let Gemini use tools to find local-service information and explain the result.
 
-[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 13 setup guide](examples/day13/README.md)
+[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 14 setup guide](examples/day14/README.md)
 
 **Author:** Jia-Sin Chen（陳佳新／佳新哥）, ChiBuApp（奇步應用） · GitHub: `jarsing`  
 **Series:** LOCAL：30 天打造 LINE × Google AI 地方服務 Agent
@@ -15,11 +15,12 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 13, September 27, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–13 examples. The latest example adds **LINE Flex Message layout, postback action binding, stateful request confirmation, stale-card cancel defense, and plain-text accessibility fallback**. Reference code snapshot: [examples/day13/](examples/day13/).
+**Code index updated through Day 14, September 28, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–14 examples. The latest example adds **the third tool `search_local_places`, Changhua Vegfest place data, consented dietary memory lifecycle (inspect, update, forget), and Gemini intent routing**. Reference code snapshot: [examples/day14/](examples/day14/).
 
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
+| Store consented memory & search local places | [Day 14: Consented memory](examples/day14/README.md) | Third tool `search_local_places`, Changhua Vegfest place data, consented memory lifecycle, and intent routing |
 | Present LINE Flex state & safe actions | [Day 13: LINE Flex](examples/day13/README.md) | Fixed Flex bubble templates, postback action binding, stale-card cancel defense, and plain-text accessibility fallback |
 | Deploy to Cloud Run & survive restarts | [Day 12: Cloud Run deployment](examples/day12/README.md) | FastAPI webhook, two-phase confirmation with postback action, Secret Manager integration, and cross-revision request recovery |
 | Persist state & survive restarts | [Day 11: Firestore persistence](examples/day11/README.md) | Dual-backend storage adapter (SQLite/Firestore emulator verified), cross-process restart recovery, lease-based job coordination, and offline test suite |

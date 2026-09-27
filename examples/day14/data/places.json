@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "catalog_version": "vegfest-selected-20260927-v1",
+  "selection": "selected_public_records_not_all_50",
+  "recorded_on": "2026-09-27",
+  "campaign": {
+    "id": "chcg-vegfest-2026-stamps",
+    "starts_at": "2026-08-01T00:00:00+08:00",
+    "ends_at": "2026-09-30T17:00:00+08:00",
+    "end_policy": "exclusive_at_announced_deadline",
+    "source_id": "festival_dates",
+    "carnival_date": "2026-10-03"
+  },
+  "sources": {
+    "festival_list": {
+      "url": "https://2026vechcg.chcg.gov.tw/store-map.png",
+      "kind": "official_poster",
+      "accessed_on": "2026-09-27",
+      "scope": "合作店家清單；人工選錄第 01 與 22 筆。未保存原圖位元組。"
+    },
+    "festival_dates": {
+      "url": "https://www.chcg.gov.tw/ch2/print_all.aspx?bull_id=435032",
+      "kind": "government_announcement",
+      "accessed_on": "2026-09-27",
+      "scope": "數位集章 8/1 至 9/30 17:00；嘉年華另為 10/3。"
+    },
+    "john_address": {
+      "url": "https://changhua-go.chcg.gov.tw/store.php?nid=1562",
+      "kind": "government_business_record",
+      "accessed_on": "2026-09-27",
+      "scope": "只補核名稱、地址與電話；不引入另一活動的優惠。"
+    },
+    "john_menu": {
+      "url": "https://www.foodpanda.com.tw/restaurant/z1do/johnshou-zuo-shu-shi",
+      "kind": "merchant_menu_on_platform",
+      "accessed_on": "2026-09-27",
+      "scope": "菜單宣告有全素、奶素、蛋奶素品項；不是全店飲食認證，不採平台非營業時間顯示判定現在營業。"
+    }
+  },
+  "places": [
+    {
+      "place_id": "vegfest26-01",
+      "name": "John手作蔬食",
+      "area": "彰化市",
+      "address": "彰化市華山路78號",
+      "phone": "04-7284398",
+      "dietary_options": [
+        "vegetarian",
+        "vegan",
+        "lacto",
+        "ovo_lacto"
+      ],
+      "dietary_evidence": {
+        "vegetarian": "festival_list",
+        "vegan": "john_menu",
+        "lacto": "john_menu",
+        "ovo_lacto": "john_menu"
+      },
+      "dietary_scope": "有對應類別品項；不是全店所有餐點皆符合",
+      "field_sources": {
+        "name": "festival_list",
+        "area": "festival_list",
+        "address": "john_address",
+        "phone": "john_address"
+      },
+      "business_status": "listed_not_live_verified",
+      "open_now": null,
+      "hours": null,
+      "coordinates": null,
+      "walking_distance_m": null,
+      "accessibility": null
+    },
+    {
+      "place_id": "vegfest26-22",
+      "name": "和米素食",
+      "area": "花壇鄉",
+      "address": "彰化縣花壇鄉彰員路三段117號",
+      "phone": "04-7864678",
+      "dietary_options": [
+        "vegetarian"
+      ],
+      "dietary_evidence": {
+        "vegetarian": "festival_list"
+      },
+      "dietary_scope": "名單中的蔬食選項；本快照未採用細分素別，嚴格素別請向店家確認",
+      "field_sources": {
+        "name": "festival_list",
+        "area": "festival_list",
+        "address": "festival_list",
+        "phone": "festival_list"
+      },
+      "business_status": "listed_not_live_verified",
+      "open_now": null,
+      "hours": null,
+      "coordinates": null,
+      "walking_distance_m": null,
+      "accessibility": null
+    }
+  ]
+}

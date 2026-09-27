@@ -1,0 +1,74 @@
+name: LOCAL Day 14 consented memory and places
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  core:
+    name: Places, consent, public context, trace contracts and build manifest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.13.5'
+      - name: Run standard-library contracts (not a Gemini evaluation)
+        run: python -m examples.day14.verify --group core --origin ci --out ci-output/day14-core
+      - name: Exercise separate processes using synthetic consent and SQLite
+        run: python -m examples.day14.demo --origin ci --out ci-output/day14-processes
+      - name: Preserve explicit synthetic outputs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: day14-core-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ci-output/day14-core/**
+            ci-output/day14-processes/**
+          retention-days: 30
+          if-no-files-found: warn
+
+  flow:
+    name: Signed webhook and previous local regressions
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      OTEL_SDK_DISABLED: 'true'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.13.5'
+      - name: Install the existing ASGI test dependencies
+        run: |
+          python -m pip install -r examples/day12/requirements-core.txt
+          python -m pip check
+          mkdir -p ci-output/day14-env
+          python -m pip list --format=json > ci-output/day14-env/packages.json
+      - name: Run Day 14 signed ASGI tests
+        run: python -m examples.day14.verify --group flow --origin ci --out ci-output/day14-flow
+      - name: Keep Day 12 and Day 13 local behavior covered
+        run: python -m examples.day14.verify --group previous --origin ci --out ci-output/day14-previous
+      - name: Preserve local test outputs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: day14-flow-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ci-output/day14-env/**
+            ci-output/day14-flow/**
+            ci-output/day14-previous/**
+          retention-days: 30
+          if-no-files-found: warn

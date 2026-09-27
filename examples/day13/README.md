@@ -12,12 +12,12 @@
 python3 -m unittest examples.day13.test_flex -v
 ```
 
-完整本機檢查沿用 Day 12 已可用的環境，不另外升級 SDK：
+完整本機檢查沿用 Day 12 已可用的環境，不另外升級 SDK（輸出目錄可自行指定，例如 `out/day13/`）：
 
 ```bash
 PY=examples/day12/.venv/bin/python
-$PY -m examples.day13.verify --group all --out /tmp/local-day13-check-01
-$PY -m examples.day13.demo --out /tmp/local-day13-scenarios-01
+$PY -m examples.day13.verify --group all --out out/day13/check-01
+$PY -m examples.day13.demo --out out/day13/scenarios-01
 ```
 
 若還沒有 Day 12 環境，先依 [Day 12 操作說明](../day12/README.md) 安裝。本篇沒有新的第三方相依套件。檔名以你的實際 Python 路徑為準，Windows 使用該環境的 `Scripts/python.exe`。
@@ -27,7 +27,7 @@ $PY -m examples.day13.demo --out /tmp/local-day13-scenarios-01
 原有真正 ADK 三項另外執行；缺相依即非零退出，不能略過後說前篇 48 項全部通過：
 
 ```bash
-$PY -m examples.day12.verify --group adk --origin author_local --out /tmp/local-day13-previous-adk-01
+$PY -m examples.day12.verify --group adk --origin author_local --out out/day13/previous-adk-01
 ```
 
 ## 2. 卡片與原狀態
@@ -42,6 +42,12 @@ $PY -m examples.day12.verify --group adk --origin author_local --out /tmp/local-
 
 `messages.py` 的來源必須是已通過應用端授權的後端結果。型別檢查本身不是授權。資料只進入固定文字欄位，extra layout／action／URL 不合併到模板。詢問原文完整保留並標記為使用者提供；本篇不宣稱擋住所有語意或社交工程攻擊。
 
+在 `messages.py` 中，卡片按鈕透過固定的 `Action(label, data, displayText)` 元件建構：
+- `label`：按鈕上呈現的文字標籤（例如「取消這次詢問」）。
+- `data`：回傳給 Webhook 的 postback 資料（例如 `cancel:<cid>`），用於後端狀態機對帳。
+- `displayText`：點擊按鈕後送入使用者聊天室的顯示氣泡（例如「取消這份詢問」）。
+這確保了畫面文字與後端操作識別碼清晰分工，按鈕標籤不等於執行授權。
+
 一份有效確認只有原來的期限。重畫卡片、切換文字版，不會更新 `expires_at`，也沒有客戶端即時倒數。
 
 確認前取消不寫 request。已建立後按舊取消，只讀回原單並提示「這個按鈕不會撤銷已建立的請求」。目前任務被新需求取代後，舊卡的確認／取消／綁定查詢均回 superseded，不把新任務冒充舊單。這是目前任務策略，不是歷史單據搜尋。
@@ -51,7 +57,7 @@ $PY -m examples.day12.verify --group adk --origin author_local --out /tmp/local-
 匯出明標為合成的 JSON：
 
 ```bash
-$PY -m examples.day13.export_samples --out /tmp/local-day13-samples-01
+$PY -m examples.day13.export_samples --out out/day13/samples-01
 ```
 
 `confirmation.json`、`receipt.json`、`pending.json` 等可供 LINE Flex Simulator 檢視；Simulator 中填入的是 message 的 `contents` 或按該介面的輸入格式貼入。`*.text.json` 是相同狀態的純文字回覆。`req-SYNTHETIC-001` 等代號明確是範例，沒有對應真正資料庫操作。不要拿這份範例按鈕測正式確認流程。
@@ -63,8 +69,8 @@ $PY -m examples.day13.export_samples --out /tmp/local-day13-samples-01
 ```bash
 # LINE_CHANNEL_ACCESS_TOKEN 由私人環境提供，不放在命令文字或 Repo。
 $PY -m examples.day13.validate_line \
-  --file /tmp/local-day13-samples-01/confirmation.json \
-  --out /tmp/local-day13-confirmation-validated.json \
+  --file out/day13/samples-01/confirmation.json \
+  --out out/day13/confirmation-validated.json \
   --approve-line-validation
 ```
 

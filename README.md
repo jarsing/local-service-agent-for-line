@@ -15,11 +15,12 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 12, September 26, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–12 examples. The latest example adds **the first cloud-ready release deployed on Google Cloud Run with Firestore state persistence, Gemini 3.8 Flash activity lookup, two-phase confirmation, and cross-revision request restoration across process changes**. Reference code snapshot: [examples/day12/](examples/day12/).
+**Code index updated through Day 13, September 27, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–13 examples. The latest example adds **LINE Flex Message layout, postback action binding, stateful request confirmation, stale-card cancel defense, and plain-text accessibility fallback**. Reference code snapshot: [examples/day13/](examples/day13/).
 
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
+| Present LINE Flex state & safe actions | [Day 13: LINE Flex](examples/day13/README.md) | Fixed Flex bubble templates, postback action binding, stale-card cancel defense, and plain-text accessibility fallback |
 | Deploy to Cloud Run & survive restarts | [Day 12: Cloud Run deployment](examples/day12/README.md) | FastAPI webhook, two-phase confirmation with postback action, Secret Manager integration, and cross-revision request recovery |
 | Persist state & survive restarts | [Day 11: Firestore persistence](examples/day11/README.md) | Dual-backend storage adapter (SQLite/Firestore emulator verified), cross-process restart recovery, lease-based job coordination, and offline test suite |
 | Reconcile timeouts & offline CI | [Day 10: reconciliation & CI](examples/day10/README.md) | Read-only SQLite lookup, synthetic transport timeouts, bounded recovery controller, and GitHub Actions offline CI |
@@ -102,10 +103,11 @@ The articles are written in Traditional Chinese. English topic labels below summ
 | 10 | [Did it go through after a timeout? Reconciliation and offline CI](https://ithelp.ithome.com.tw/articles/10416095) | [examples/day10](examples/day10/) | [docs/day10](docs/day10/README.md) |
 | 11 | [Service restarted — is what I asked for still there? Resends, background jobs, and restart recovery](https://ithelp.ithome.com.tw/articles/10416397) | [examples/day11](examples/day11/) | [docs/day11](docs/day11/README.md) |
 | 12 | [When cloud processes change, is what I asked for still there? First Cloud Run release](https://ithelp.ithome.com.tw/articles/10417489) | [examples/day12](examples/day12/) | [docs/day12](docs/day12/README.md) |
+| 13 | [LINE Flex message state display and safe operations](https://ithelp.ithome.com.tw/articles/10417809) | [examples/day13](examples/day13/) | [docs/day13](docs/day13/README.md) |
 
-Find Day 13 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
+Find Day 14 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 
-LOCAL grows as one project, with chapter folders preserving each lesson's focus. Local service requests, idempotent retries, timeout reconciliation, task state persistence / process restart recovery, and the first cloud-ready Cloud Run deployment with Firestore are complete through Day 12; upcoming work will add evaluation, multi-source catalog integration, and subsequent state management. This index will expand as the examples are published.
+LOCAL grows as one project, with chapter folders preserving each lesson's focus. Local service requests, idempotent retries, timeout reconciliation, task state persistence / process restart recovery, the first cloud-ready Cloud Run deployment with Firestore, and LINE Flex state presentation with defensive postbacks are complete through Day 13; upcoming work will add evaluation, multi-source catalog integration, and subsequent state management. This index will expand as the examples are published.
 
 
 ## How LINE, Gemini, and ADK work together

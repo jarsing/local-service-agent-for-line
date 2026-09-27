@@ -4,7 +4,7 @@
 
 > 在 LINE 裡問問題，讓 Gemini 搭配工具查資料，再把結果說清楚。
 
-[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 12 操作指南](examples/day12/README.md)
+[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 13 操作指南](examples/day13/README.md)
 
 **系列：LOCAL：30 天打造 LINE × Google AI 地方服務 Agent**  
 **作者：陳佳新（佳新哥）｜奇步應用｜GitHub：jarsing**
@@ -20,7 +20,7 @@
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
-| LINE Flex 卡片與狀態安全 | [按鈕還在，就代表還能按嗎？LINE Flex 的狀態與安全操作](examples/day13/README.md) | 固定 Flex 氣泡模板、Postback 動作綁定、舊卡取消防呆，以及純文字無障礙備援 |
+| LINE Flex 卡片與狀態安全 | [Day 13：LINE Flex 卡片](examples/day13/README.md) | 固定 Flex 氣泡模板、Postback 動作綁定、舊卡取消防呆，以及純文字無障礙備援 |
 | 雲端部署與跨修訂版接續 | [Day 12：Cloud Run 部署](examples/day12/README.md) | FastAPI Webhook 入口、Postback 二階段確認、Secret Manager 保險箱整合，以及跨修訂版讀回實測 |
 | 任務持久化與重啟接續 | [Day 11：Firestore 持久化](examples/day11/README.md) | 雙後端儲存配接器（SQLite／Firestore 模擬器實測）、跨行程重啟恢復、租約式工作協調，以及離線測試套件 |
 | 逾時查回對帳與離線 CI | [Day 10：查回對帳與離線 CI](examples/day10/README.md) | 唯讀 SQLite 查回對帳、合成傳輸故障注入、受控復原控制器，以及 GitHub Actions 離線 CI 工作流程 |
@@ -101,7 +101,7 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 10 | [逾時後到底有沒有送出？](https://ithelp.ithome.com.tw/articles/10416095) | [examples/day10](examples/day10/) | [docs/day10](docs/day10/README.md) |
 | Day 11 | [服務重啟了，剛才交代的事還在嗎？重送、背景工作與重啟恢復](https://ithelp.ithome.com.tw/articles/10416397) | [examples/day11](examples/day11/) | [docs/day11](docs/day11/README.md) |
 | Day 12 | [換了雲端容器，剛才交代的事還在嗎？第一個 Cloud Run 版本](https://ithelp.ithome.com.tw/articles/10417489) | [examples/day12](examples/day12/) | [docs/day12](docs/day12/README.md) |
-| Day 13 | [LINE Flex 的狀態與安全操作](https://ithelp.ithome.com.tw/articles/10417809) | [examples/day13](examples/day13/) | [docs/day13](docs/day13/README.md) |
+| Day 13 | [按鈕還在，就代表還能按嗎？LINE Flex 的狀態與安全操作](https://ithelp.ithome.com.tw/articles/10417809) | [examples/day13](examples/day13/) | [docs/day13](docs/day13/README.md) |
 
 Day 14 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 

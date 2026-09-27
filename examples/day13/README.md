@@ -42,10 +42,10 @@ $PY -m examples.day12.verify --group adk --origin author_local --out out/day13/p
 
 `messages.py` 的來源必須是已通過應用端授權的後端結果。型別檢查本身不是授權。資料只進入固定文字欄位，extra layout／action／URL 不合併到模板。詢問原文完整保留並標記為使用者提供；本篇不宣稱擋住所有語意或社交工程攻擊。
 
-在 `messages.py` 中，卡片按鈕透過固定的 `Action(label, data, displayText)` 元件建構：
+在 `messages.py` 中，卡片按鈕透過固定的 `Action(label, data, display)` 元件建構：
 - `label`：按鈕上呈現的文字標籤（例如「取消這次詢問」）。
 - `data`：回傳給 Webhook 的 postback 資料（例如 `cancel:<cid>`），用於後端狀態機對帳。
-- `displayText`：點擊按鈕後送入使用者聊天室的顯示氣泡（例如「取消這份詢問」）。
+- `display`：點擊按鈕後送入使用者聊天室的顯示氣泡（由 `as_dict()` 轉為 LINE API 的 `displayText` 欄位）。
 這確保了畫面文字與後端操作識別碼清晰分工，按鈕標籤不等於執行授權。
 
 一份有效確認只有原來的期限。重畫卡片、切換文字版，不會更新 `expires_at`，也沒有客戶端即時倒數。

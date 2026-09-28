@@ -46,7 +46,7 @@ $PY examples/day10/run.py --case lookup_unavailable
 
 安裝會連網。驗證及省略 `--live` 的 run 在行程內封鎖 Python socket／DNS，ADK 真正執行工具，模型則為 `ScriptedRecoveryModel`。它檢查介接、工具參數與回條，不評分 Gemini 的語意能力。
 
-缺少 ADK 時，`verify.py --sdk` 回非零結束代碼，SDK 測試列為未執行／相依不可用；核心通過不會把整份結果改成通過。Windows 請改用 `examples/day10/.venv/Scripts/python.exe` 的完整路徑，不照抄 shell 的 `PY=`。
+缺少 ADK 時，`verify.py --sdk` 回傳非零結束碼，SDK 測試列為未執行／相依不可用；核心通過不會把整份結果改成通過。Windows 請改用 `examples/day10/.venv/Scripts/python.exe` 的完整路徑，不照抄 shell 的 `PY=`。
 
 ## 3. 真實 Gemini：另核准，明確指定模型
 

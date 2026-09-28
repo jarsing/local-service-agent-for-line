@@ -35,7 +35,7 @@ SQLite 保存合成服務 ID 與請求文字，不只是內容雜湊。對外回
 
 ## 故障與預期
 
-寫入前逾時：0 筆；提交後回應遺失：1 筆。兩者都回 `pending_verification`，而不是讓送出端根據故障代碼猜後端事實。核對到請求時是 `request_created`＋`awaiting_acceptance`，不是真人已完成。
+寫入前逾時：0 筆；提交後回應遺失：1 筆。兩者都回 `pending_verification`，而不是讓送出端根據錯誤碼猜後端事實。核對到請求時是 `request_created`＋`awaiting_acceptance`，不是真人已完成。
 
 相同作用域／識別／內容回同一筆；相同識別、不同內容拒絕。核對暫時不可用或查不到時仍待核對，不換新鍵盲目重試。
 

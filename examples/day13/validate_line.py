@@ -20,7 +20,7 @@ def main():
     if not token:
         p.error('請在私人環境設定 LINE_CHANNEL_ACCESS_TOKEN，不寫在命令列。')
     if a.out.exists():
-        p.error('輸出檔已存在，請換新路徑，避免改写原結果。')
+        p.error('輸出檔已存在，請換新路徑，避免改寫原結果。')
     if a.file.stat().st_size > 65536:
         p.error('只接受小型本篇訊息範例。')
     message = json.loads(a.file.read_text(encoding='utf-8'))

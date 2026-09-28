@@ -11,7 +11,7 @@ import json
 import re
 from typing import Any, Mapping
 
-# 本篇刻意採保守的內部預算；不是宣称完整覆蓋 LINE API 的全部限制。
+# 本篇刻意採保守的內部預算；不是宣稱完整覆蓋 LINE API 的全部限制。
 ALT_BUDGET = 350                 # UTF-16 code units
 TEXT_BUDGET = 4500
 BUBBLE_BYTE_BUDGET = 24000

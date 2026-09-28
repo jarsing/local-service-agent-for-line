@@ -105,10 +105,11 @@ The articles are written in Traditional Chinese. English topic labels below summ
 | 11 | [Service restarted — is what I asked for still there? Resends, background jobs, and restart recovery](https://ithelp.ithome.com.tw/articles/10416397) | [examples/day11](examples/day11/) | [docs/day11](docs/day11/README.md) |
 | 12 | [When cloud processes change, is what I asked for still there? First Cloud Run release](https://ithelp.ithome.com.tw/articles/10417489) | [examples/day12](examples/day12/) | [docs/day12](docs/day12/README.md) |
 | 13 | [Is a visible button still a valid one? LINE Flex state and safe actions](https://ithelp.ithome.com.tw/articles/10417809) | [examples/day13](examples/day13/) | [docs/day13](docs/day13/README.md) |
+| 14 | [“I feel like eating vegetarian today” does not mean forever! Consented memory and place lookup](https://ithelp.ithome.com.tw/articles/10418240) | [examples/day14](examples/day14/) | [docs/day14](docs/day14/README.md) |
 
-Find Day 14 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
+Find Day 15 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 
-LOCAL grows as one project, with chapter folders preserving each lesson's focus. Local service requests, idempotent retries, timeout reconciliation, task state persistence / process restart recovery, the first cloud-ready Cloud Run deployment with Firestore, and LINE Flex state presentation with defensive postbacks are complete through Day 13; upcoming work will add evaluation, multi-source catalog integration, and subsequent state management. This index will expand as the examples are published.
+LOCAL grows as one project, with chapter folders preserving each lesson's focus. Local service requests, idempotent retries, timeout reconciliation, task state persistence / process restart recovery, the first cloud-ready Cloud Run deployment with Firestore, LINE Flex state presentation with defensive postbacks, and consented dietary memory lifecycle with local place lookup are complete through Day 14; upcoming work will add context budget management, evaluation, multi-source catalog integration, and subsequent state management. This index will expand as the examples are published.
 
 
 ## How LINE, Gemini, and ADK work together
@@ -119,7 +120,7 @@ The Day 5 phone demonstration follows this path:
 
 LINE supplies the messaging interface. Gemini interprets the question and requests a tool call. ADK coordinates the model, tools, and events. The Python tool performs the actual lookup. Google AI Studio is the entry point for obtaining and managing Gemini API keys, while Google Antigravity supports the development workflow.
 
-Day 12 adds the LINE teaching service on Cloud Run. Consented long-term memory and human-service handoff remain future work in the series. The current messaging entry point, database experiment, and event search have their own examples; the broader capabilities will be integrated progressively.
+Day 12 adds the LINE teaching service on Cloud Run; Day 14 lands consented dietary memory and place search. Human-service handoff remains future work in the series. The current messaging entry point, database experiment, and event search have their own examples; the broader capabilities will be integrated progressively.
 
 ## The five LOCAL design dimensions
 

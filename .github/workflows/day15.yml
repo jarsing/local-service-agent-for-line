@@ -1,0 +1,60 @@
+name: LOCAL Day 15 context budget contracts
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  core:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.13.5'
+      - name: Offline contracts and synthetic byte comparison
+        run: |
+          python -m examples.day15.verify --group core --origin ci --out ci-output/day15-core
+          python -m examples.day15.demo --origin ci --out ci-output/day15-demo
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        if: always()
+        with:
+          name: day15-core-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ci-output/day15-*/**
+          retention-days: 30
+
+  integration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      OTEL_SDK_DISABLED: 'true'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.13.5'
+      - run: |
+          python -m pip install -r examples/day12/requirements-core.txt
+          python -m pip check
+      - name: Mock HTTP, signed webhook, previous local regressions
+        run: |
+          python -m examples.day15.verify --group flow --origin ci --out ci-output/day15-flow
+          python -m examples.day15.verify --group previous --origin ci --out ci-output/day15-previous
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        if: always()
+        with:
+          name: day15-integration-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ci-output/day15-*/**
+          retention-days: 30

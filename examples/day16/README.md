@@ -151,7 +151,7 @@ $PY -m examples.day16.build_context --out "$BUILD_CONTEXT"
 ## CI and publication state
 
 `.github/workflows/day16.yml` 執行離線測試與 artifact 保存，沒有業務 API keys、live 模型或自動部署。
-Day 16 文章已正式刊登於 [iThome 鐵人賽](https://ithelp.ithome.com.tw/articles/10419112)；公開 CI 通過 core 37、flow 12、adk 8、previous 300 項測試。
+Day 16 文章已正式刊登於 [iThome 鐵人賽](https://ithelp.ithome.com.tw/articles/10419112)；公開 CI Run [36693971656](https://github.com/jarsing/local-service-agent-for-line/actions/runs/36693971656) 通過 core 37、flow 12、adk 8、previous 300 項測試。
 公開 Repo 不包含私人策略、交接、未去識別化紀錄與 assistant_check 內部檔案。
 
 ## References

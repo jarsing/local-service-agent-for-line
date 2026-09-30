@@ -94,7 +94,7 @@ $PY -m examples.day16.verify --group previous --origin author_local --out out/da
 
 `core` 為 stdlib／SQLite；`flow` 為真正 FastAPI＋SQLite、腳本模型與 LINE sender 替身。
 `previous` 涵蓋 Day 12～15 指定群組。不是完整公司系統測試，更不是模型品質分數。
-`verify` 將測試暫存放在各次輸出目錄內。測試數採實際 runner 結果，重跑不累加。
+驗證報告寫入指定輸出目錄；測試暫存改用系統暫存位置，避免建置上下文誤落 Repo 內。測試數採實際 runner 結果，重跑不累加。
 
 真正 ADK 與真正 Firestore 模擬器入口：
 
@@ -127,7 +127,7 @@ $PY -m examples.day16.live_check --approve-live --out out/day16/live-01
 `security_contract_observed` 與 `normal_query_observed` 分開。若模型只回 help，
 不能寫成正常查詢已由這一次真模型證明。若模型要求危險工具但未執行，保留
 `model_requested_forbidden > 0`；安全目標是 executions=0，不保證 attempted calls=0。
-若輸入未送出或 SDK 未啟動，不准填「Gemini 讀到毒文字」。
+若輸入未送出或 SDK 未啟動，不准填「Gemini 讀到惡意文字」。
 
 ## Cloud Run / LINE author acceptance
 
@@ -150,9 +150,9 @@ $PY -m examples.day16.build_context --out "$BUILD_CONTEXT"
 
 ## CI and publication state
 
-`.github/workflows/day16.yml` 是候選設定，沒有業務 API keys、live 模型或自動部署。
-安裝測試相依仍可能連網。Day 16 正式文章 URL／遠端 run 尚未提供；發布後再更新此節。
-不要把私人策略、交接、作者觀察與 assistant_check 證據整包推到 public Repo。
+`.github/workflows/day16.yml` 執行離線測試與 artifact 保存，沒有業務 API keys、live 模型或自動部署。
+Day 16 文章已正式刊登於 [iThome 鐵人賽](https://ithelp.ithome.com.tw/articles/10419112)；公開 CI Run（如 `36648353269`）通過 core 37、flow 12、previous 300 項測試。
+公開 Repo 不包含私人策略、交接、未去識別化紀錄與 assistant_check 內部檔案。
 
 ## References
 

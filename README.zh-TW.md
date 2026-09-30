@@ -20,7 +20,7 @@
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
-| 不可信文件防禦與唯讀權限白名單 | [Day 16：不可信文件與最小權限](examples/day16/README.md) | 唯讀工具白名單、ADK before_tool_callback 攔截、後端執行核對與離線四個零驗證 |
+| 不可信文件防禦與唯讀權限白名單 | [Day 16：傳單叫系統建單，它會照做嗎？不可信文件與最小權限](examples/day16/README.md) | 唯讀工具白名單、ADK before_tool_callback 攔截、後端執行核對與離線四個零驗證 |
 | 上下文預算工程與滑動視窗修剪 | [Day 15：上下文預算](examples/day15/README.md) | 五層上下文架構、滑動視窗修剪、結構化話題摘要、偏好撤回脈絡失效與 countTokens 預算閘門 |
 | 經同意偏好記憶與蔬食店家查詢 | [Day 14：經同意的記憶](examples/day14/README.md) | 第三項工具 `search_local_places`、彰化蔬食節店家資料、經同意偏好記憶生命週期與 Gemini 意圖分流 |
 | LINE Flex 卡片與狀態安全 | [Day 13：LINE Flex 卡片](examples/day13/README.md) | 固定 Flex 氣泡模板、Postback 動作綁定、舊卡取消防呆，以及純文字無障礙備援 |
@@ -107,7 +107,7 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 13 | [按鈕還在，就代表還能按嗎？LINE Flex 的狀態與安全操作](https://ithelp.ithome.com.tw/articles/10417809) | [examples/day13](examples/day13/) | [docs/day13](docs/day13/README.md) |
 | Day 14 | [「今天想吃素」不等於以後都要！經同意的記憶與地方店家查詢](https://ithelp.ithome.com.tw/articles/10418240) | [examples/day14](examples/day14/) | [docs/day14](docs/day14/README.md) |
 | Day 15 | [對話越來越長之後：Session、摘要與上下文預算](https://ithelp.ithome.com.tw/articles/10418768) | [examples/day15](examples/day15/) | [docs/day15](docs/day15/README.md) |
-| Day 16 | [不可信文件與最小權限](https://ithelp.ithome.com.tw/articles/10419112) | [examples/day16](examples/day16/) | [docs/day16](docs/day16/README.md) |
+| Day 16 | [傳單叫系統建單，它會照做嗎？不可信文件與最小權限](https://ithelp.ithome.com.tw/articles/10419112) | [examples/day16](examples/day16/) | [docs/day16](docs/day16/README.md) |
 
 Day 17 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 

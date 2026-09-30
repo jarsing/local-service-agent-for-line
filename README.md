@@ -20,7 +20,7 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
-| Defend against untrusted documents & least privilege | [Day 16: Will a flyer force a service ticket? Untrusted documents and least privilege](examples/day16/README.md) | Read-only tool allowlist, ADK before_tool_callback, independent backend gate, and offline four zeros |
+| Defend against untrusted documents & least privilege | [Day 16: Hidden instructions in a flyer: will the system obey? Untrusted documents and least privilege](examples/day16/README.md) | Read-only tool allowlist, ADK before_tool_callback, independent backend gate, and offline four zeros |
 | Control context budget & sliding window | [Day 15: Context budget](examples/day15/README.md) | 5-layer context engineering, sliding window trimming, structured summaries, and consent-revision invalidation |
 | Store consented memory & search local places | [Day 14: Consented memory](examples/day14/README.md) | Third tool `search_local_places`, Changhua Vegfest place data, consented memory lifecycle, and intent routing |
 | Present LINE Flex state & safe actions | [Day 13: LINE Flex](examples/day13/README.md) | Fixed Flex bubble templates, postback action binding, stale-card cancel defense, and plain-text accessibility fallback |
@@ -109,7 +109,7 @@ The articles are written in Traditional Chinese. English topic labels below summ
 | 13 | [Is a visible button still a valid one? LINE Flex state and safe actions](https://ithelp.ithome.com.tw/articles/10417809) | [examples/day13](examples/day13/) | [docs/day13](docs/day13/README.md) |
 | 14 | [“I feel like eating vegetarian today” does not mean forever! Consented memory and place lookup](https://ithelp.ithome.com.tw/articles/10418240) | [examples/day14](examples/day14/) | [docs/day14](docs/day14/README.md) |
 | 15 | [As conversations grow longer: Session, summary, and context budget](https://ithelp.ithome.com.tw/articles/10418768) | [examples/day15](examples/day15/) | [docs/day15](docs/day15/README.md) |
-| 16 | [Will a flyer force a service ticket? Untrusted document contracts and least privilege](https://ithelp.ithome.com.tw/articles/10419112) | [examples/day16](examples/day16/) | [docs/day16](docs/day16/README.md) |
+| 16 | [Hidden instructions in a flyer: will the system obey? Untrusted documents and least privilege](https://ithelp.ithome.com.tw/articles/10419112) | [examples/day16](examples/day16/) | [docs/day16](docs/day16/README.md) |
 
 Find Day 17 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 

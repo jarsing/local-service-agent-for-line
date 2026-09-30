@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 from examples.day15.build_context import export as export_day15
+from examples.day17.build_context import copy_runtime as copy_day17_runtime
 
 HERE = Path(__file__).resolve().parent
 RUNTIME = ("__init__.py", "documents.py", "policy.py", "read_tools.py", "adk_guard.py",
@@ -16,6 +17,7 @@ def export(out: Path):
         if not source.is_file() or source.is_symlink():
             raise ValueError("MISSING_OR_LINKED_SOURCE")
     report = export_day15(out)
+    copy_day17_runtime(out, report)
     for name in RUNTIME:
         target = out / "examples/day16" / name
         target.parent.mkdir(parents=True, exist_ok=True)

@@ -6,6 +6,7 @@ import hashlib
 import hmac
 import json
 import os
+import time
 from starlette.concurrency import run_in_threadpool
 from examples.day13.bridge import FlexApplication
 from examples.day12.main import create_app as original_create_app, open_store, STATUS_TEXT
@@ -17,6 +18,9 @@ from .memory import PreferenceMemory, PreferenceChanged, BadToken
 from .engine import TurnTools, ScriptedInterpreter
 from .places import PlacesCatalog
 from . import messages as msg
+from examples.day17 import messages as recovery_msg
+from examples.day17.legacy_adapter import legacy_result_plan, legacy_failure_plan
+from examples.day17.outcomes import CatalogChanged, ToolContractError
 
 HELP_TEXT={'我要預約','預約','幫我預約','我想預約','功能','你好','開始','使用說明'}
 INSPECT_TEXT={'我的偏好','查看飲食偏好','我記住了什麼'}
@@ -65,6 +69,8 @@ class MemoryApplication(FlexApplication):
     async def _finalize(self,actor,event,result):
         rev=result.get('memory_revision')
         if rev is not None: await run_in_threadpool(self.memory.assert_revision,actor,rev)
+        recovery=legacy_result_plan(self,result,place_formatter=msg.format_places)
+        if recovery is not None: return recovery
         state=result['status']
         if state=='memory_proposal_requested':
             p=await run_in_threadpool(self.memory.propose,actor,result['dietary_type'],event['webhookEventId'],issued_at=self._issued_at(event))
@@ -107,6 +113,8 @@ class MemoryApplication(FlexApplication):
             return self._plan([msg.memory_card(result)],{'status':result['status']},result['revision'])
         if data=='m14:update':
             return self._plan([msg.text('請輸入「把我的偏好改成蛋奶素」等明確條件。按同意前仍使用原偏好。')],{'status':'memory_update_prompt'})
+        if event['type']=='message' and text==recovery_msg.RETRY_TEXT:
+            return self._plan([recovery_msg.retry_guide()],{'status':'retry_prompt'})
         if data=='d14:help' or text in HELP_TEXT:
             return self._plan([msg.help_card()],{'status':'help'})
         if data=='d14:places':
@@ -114,17 +122,24 @@ class MemoryApplication(FlexApplication):
         if data=='d14:enquiry':
             return self._plan([msg.text('請輸入「新需求：」加上希望窗口協助的事情。這會沿用花壇歷史教學詢問，先請你確認，並非預約或已通知窗口。')],{'status':'enquiry_guide'})
         if data=='d14:events' or data.startswith('d14:area:'):
-            tools=await run_in_threadpool(self.tools,actor)
-            if data=='d14:events':
-                if not await run_in_threadpool(self.tasks.catalog_is_current,actor):
-                    return self._plan([msg.help_card('query_unavailable')],{'status':'catalog_changed'})
-                result=await run_in_threadpool(tools.execute,'search_local_events',{'date':'','area':'花壇','keyword':''})
-            else:
-                area=data[len('d14:area:'):]
-                if area not in {p['area'] for p in self.places.data['places']}: raise ValueError('UNSUPPORTED_AREA_BUTTON')
-                result=await run_in_threadpool(tools.execute,'search_local_places',{'area':area,'dietary_type':'' if tools.snapshot['dietary_type'] else 'vegetarian','keyword':''})
-            if self.observer: self.observer({'mode':'DETERMINISTIC_BUTTON','tool_events':tools.calls})
-            return await self._finalize(actor,event,result)
+            started=time.monotonic()
+            try:
+                tools=await run_in_threadpool(self.tools,actor)
+                if data=='d14:events':
+                    if not await run_in_threadpool(self.tasks.catalog_is_current,actor):
+                        raise CatalogChanged()
+                    result=await run_in_threadpool(tools.execute,'search_local_events',{'date':'','area':'花壇','keyword':''})
+                else:
+                    area=data[len('d14:area:'):]
+                    if area not in {p['area'] for p in self.places.data['places']}: raise ValueError('UNSUPPORTED_AREA_BUTTON')
+                    result=await run_in_threadpool(tools.execute,'search_local_places',{'area':area,'dietary_type':'' if tools.snapshot['dietary_type'] else 'vegetarian','keyword':''})
+                if self.observer: self.observer({'mode':'DETERMINISTIC_BUTTON','tool_events':tools.calls})
+                return await self._finalize(actor,event,result)
+            except PreferenceChanged:
+                return self._plan([msg.text('偏好剛被修改或忘記，這次結果先不套用。請再查一次。')],{'status':'preference_changed'})
+            except PermissionError: raise
+            except Exception as exc:
+                return legacy_failure_plan(self,exc,started=started)
         # Reuse original typed confirmation/cancel/status/enquiry exactly. No new booking tool.
         if (data in ('status','text') or data.startswith(('confirm:','cancel:','status:','text:')) or
             text in STATUS_TEXT or text in ('文字版','目前任務文字版','好','確認','確認送出','需要手語志工支援') or
@@ -134,21 +149,23 @@ class MemoryApplication(FlexApplication):
             return self._plan([msg.help_card()],{'status':'unsupported_message'})
         if not await run_in_threadpool(self.ledger.model_budget,actor,self.settings.model_daily_limit):
             return self._plan([msg.text('今天的模型理解額度已用完。仍可用按鈕查資料、查看或忘記偏好。'),msg.help_card()],{'status':'model_budget_exhausted'})
-        tools=await run_in_threadpool(self.tools,actor)
+        started=time.monotonic();query_phase='initialization'
         try:
+            tools=await run_in_threadpool(self.tools,actor)
+            query_phase='model'
             report=await self.interpreter.ask(text,actor,eid,tools)
+            query_phase='result'
             # Trust the executed server tool result, not an interpreter's returned text/dict.
-            if tools.last is None or len(tools.calls)!=1: raise ValueError('NO_EXECUTED_TOOL')
+            if tools.last is None or len(tools.calls)!=1: raise ToolContractError('NO_EXECUTED_TOOL')
             if tools.last.get('status')=='events_result' and not await run_in_threadpool(self.tasks.catalog_is_current,actor):
-                raise ValueError('CATALOG_CHANGED')
+                raise CatalogChanged()
             if self.observer: self.observer(report)
             return await self._finalize(actor,event,tools.last)
         except PreferenceChanged:
             return self._plan([msg.text('偏好剛被修改或忘記，這次結果先不套用。請再查一次。')],{'status':'preference_changed'})
         except PermissionError: raise
         except Exception as exc:
-            self.emit('DAY14_QUERY_UNAVAILABLE',error_type=type(exc).__name__)
-            return self._plan([msg.help_card('query_unavailable')],{'status':'query_unavailable'})
+            return legacy_failure_plan(self,exc,started=started,model_stage=query_phase=='model')
 
     async def process(self,event):
         actor=make_actor(self.settings,event['source']['userId'])

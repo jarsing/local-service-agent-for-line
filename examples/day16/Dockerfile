@@ -17,6 +17,7 @@ COPY examples/day14/*.py /app/examples/day14/
 COPY examples/day15/*.py /app/examples/day15/
 COPY examples/day14/data/places.json /app/examples/day14/data/places.json
 COPY examples/day16/*.py /app/examples/day16/
+COPY examples/day17/*.py /app/examples/day17/
 COPY examples/day16/data/untrusted_flyer.txt /app/examples/day16/data/
 COPY SOURCE_MANIFEST.json /app/SOURCE_MANIFEST.json
 COPY LICENSE /app/LICENSE

@@ -111,7 +111,10 @@ class FlowTests(unittest.TestCase):
         class Fail:
             async def ask(self,*args): raise TimeoutError('private utterance must not be logged')
         self.app.interpreter=Fail();r=self.send('不明的非結構化需求')
-        self.assertIn('查詢暫時',json.dumps(r,ensure_ascii=False));self.assertEqual(action_data(r,'d14:places'),'d14:places')
+        self.assertIn('查詢暫時',json.dumps(r,ensure_ascii=False))
+        self.assertEqual(action_data(r,'status'),'status')
+        retry=r[0]['contents']['footer']['contents'][0]['action']
+        self.assertEqual(retry,{'type':'message','label':'稍後重新查詢','text':'重新輸入查詢條件'})
         self.assertNotIn('private utterance',json.dumps(self.logs))
     def test_model_fake_success_not_accepted(self):
         class Fake:

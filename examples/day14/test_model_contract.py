@@ -29,7 +29,7 @@ class ModelContractTests(unittest.TestCase):
     def test_negative_revision_rejected(self):
         with self.assertRaises(ValueError):self.context(revision=-1)
     def test_policy_is_named_and_hashed(self):
-        self.assertEqual(POLICY_VERSION,'day14-consent-routing-v2')
+        self.assertEqual(POLICY_VERSION,'day17-service-outcomes-v1')
         self.assertEqual(len(instruction_sha256()),64)
     def test_negation_and_reported_speech_rules_are_present(self):
         # Text-contract coverage only; no assertion about actual model understanding.

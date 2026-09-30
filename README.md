@@ -4,7 +4,7 @@
 
 > Ask through LINE. Let Gemini use tools to find local-service information and explain the result.
 
-[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 15 setup guide](examples/day15/README.md)
+[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 16 setup guide](examples/day16/README.md)
 
 **Author:** Jia-Sin Chen（陳佳新／佳新哥）, ChiBuApp（奇步應用） · GitHub: `jarsing`  
 **Series:** LOCAL：30 天打造 LINE × Google AI 地方服務 Agent
@@ -15,11 +15,12 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 15, September 29, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–15 examples. The latest example adds **5-layer context budget engineering, sliding window trimming, structured topic summaries, consent-revision invalidation, and input budget management**. Reference code snapshot: [examples/day15/](examples/day15/).
+**Code index updated through Day 16, September 30, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–16 examples. The latest example adds **untrusted document defense, read-only capability whitelists, ADK before_tool_callback interception, deterministic backend authorization, and offline four-zeros verification**. Reference code snapshot: [examples/day16/](examples/day16/).
 
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
+| Defend against untrusted documents & least privilege | [Day 16: Untrusted documents](examples/day16/README.md) | Read-only tool allowlist, ADK before_tool_callback, independent backend gate, and offline four zeros |
 | Control context budget & sliding window | [Day 15: Context budget](examples/day15/README.md) | 5-layer context engineering, sliding window trimming, structured summaries, and consent-revision invalidation |
 | Store consented memory & search local places | [Day 14: Consented memory](examples/day14/README.md) | Third tool `search_local_places`, Changhua Vegfest place data, consented memory lifecycle, and intent routing |
 | Present LINE Flex state & safe actions | [Day 13: LINE Flex](examples/day13/README.md) | Fixed Flex bubble templates, postback action binding, stale-card cancel defense, and plain-text accessibility fallback |

@@ -4,7 +4,7 @@
 
 > 在 LINE 裡問問題，讓 Gemini 搭配工具查資料，再把結果說清楚。
 
-[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 15 操作指南](examples/day15/README.md)
+[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 16 操作指南](examples/day16/README.md)
 
 **系列：LOCAL：30 天打造 LINE × Google AI 地方服務 Agent**  
 **作者：陳佳新（佳新哥）｜奇步應用｜GitHub：jarsing**
@@ -15,11 +15,12 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 15（2026/09/29）。** Day 1 的驗收規格與 Day 2～15 的範例已在 Repo；目前最新的實作是 **五層上下文預算工程、滑動視窗修剪、結構化話題摘要、偏好撤回脈絡失效與輸入預算管理**。本次導覽依據：[Day 15 程式範例](examples/day15/)。
+**程式導覽更新至 Day 16（2026/09/30）。** Day 1 的驗收規格與 Day 2～16 的範例已在 Repo；目前最新的實作是 **不可信文件防禦、唯讀工具白名單、ADK before_tool_callback 攔截、後端執行獨立核對與離線四個零驗證**。本次導覽依據：[Day 16 程式範例](examples/day16/)。
 
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
+| 不可信文件防禦與唯讀權限白名單 | [Day 16：不可信文件與最小權限](examples/day16/README.md) | 唯讀工具白名單、ADK before_tool_callback 攔截、後端執行核對與離線四個零驗證 |
 | 上下文預算工程與滑動視窗修剪 | [Day 15：上下文預算](examples/day15/README.md) | 五層上下文架構、滑動視窗修剪、結構化話題摘要、偏好撤回脈絡失效與 countTokens 預算閘門 |
 | 經同意偏好記憶與蔬食店家查詢 | [Day 14：經同意的記憶](examples/day14/README.md) | 第三項工具 `search_local_places`、彰化蔬食節店家資料、經同意偏好記憶生命週期與 Gemini 意圖分流 |
 | LINE Flex 卡片與狀態安全 | [Day 13：LINE Flex 卡片](examples/day13/README.md) | 固定 Flex 氣泡模板、Postback 動作綁定、舊卡取消防呆，以及純文字無障礙備援 |

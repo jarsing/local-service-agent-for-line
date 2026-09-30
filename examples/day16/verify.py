@@ -4,10 +4,8 @@ from datetime import datetime, timezone
 import importlib.metadata
 import io
 import json
-import os
 from pathlib import Path
 import platform
-import tempfile
 import unittest
 
 GROUPS = {
@@ -28,23 +26,16 @@ GROUPS = {
 
 def run(group, out, origin):
     out.mkdir(parents=True, exist_ok=False)
-    temp_root = out / "temporary-tests"
-    temp_root.mkdir()
-    old_temp = tempfile.tempdir
-    tempfile.tempdir = str(temp_root.resolve())
     results = []
-    try:
-        for name in ("core", "flow") if group == "all" else (group,):
-            stream = io.StringIO()
-            suite = unittest.defaultTestLoader.loadTestsFromNames(GROUPS[name])
-            result = unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
-            (out / f"{name}.log").write_text(stream.getvalue(), encoding="utf-8")
-            results.append({"group": name, "run": result.testsRun,
-                            "failures": len(result.failures), "errors": len(result.errors),
-                            "skipped": len(result.skipped),
-                            "passed": result.wasSuccessful() and len(result.skipped) == 0})
-    finally:
-        tempfile.tempdir = old_temp
+    for name in ("core", "flow") if group == "all" else (group,):
+        stream = io.StringIO()
+        suite = unittest.defaultTestLoader.loadTestsFromNames(GROUPS[name])
+        result = unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
+        (out / f"{name}.log").write_text(stream.getvalue(), encoding="utf-8")
+        results.append({"group": name, "run": result.testsRun,
+                        "failures": len(result.failures), "errors": len(result.errors),
+                        "skipped": len(result.skipped),
+                        "passed": result.wasSuccessful() and len(result.skipped) == 0})
     packages = {}
     for name in ("google-adk", "google-genai", "google-cloud-firestore", "fastapi", "httpx"):
         try:

@@ -12,6 +12,20 @@ TOOL_FIELDS = {
     'propose_dietary_memory': {'dietary_type', 'area', 'keyword'},
     'request_memory_management': {'action', 'dietary_type'},
 }
+TOOL_ARGUMENT_ENUMS = {
+    'search_local_places': {
+        'dietary_type': {'', 'any', 'vegetarian', 'vegan', 'ovo_lacto', 'lacto', 'allium', 'friendly',
+                         '蔬食', '素食', '全素', '純素', '蛋奶素', '奶素', '五辛素', '蔬食友善', '不限'},
+    },
+    'show_local_help': {
+        'reason': {'general', 'unsupported', 'out_of_scope', 'help', 'booking', 'conflict', 'needs_area', 'policy'},
+    },
+    'request_memory_management': {
+        'action': {'status', 'forget', 'confirm'},
+        'dietary_type': {'', 'any', 'vegetarian', 'vegan', 'ovo_lacto', 'lacto', 'allium', 'friendly',
+                         '蔬食', '素食', '全素', '純素', '蛋奶素', '奶素', '五辛素', '蔬食友善', '不限'},
+    },
+}
 
 
 def load_dataset(path: Path = DEFAULT_DATASET) -> dict:
@@ -40,6 +54,9 @@ def load_dataset(path: Path = DEFAULT_DATASET) -> dict:
         for field in ('statuses', 'required_text', 'actions'):
             if not isinstance(expected.get(field), list):
                 raise ValueError('EXPLICIT_UI_CONTRACT_REQUIRED')
+        if 'forbidden_text' in expected:
+            if not isinstance(expected['forbidden_text'], list) or any(not isinstance(s, str) for s in expected['forbidden_text']):
+                raise ValueError('FORBIDDEN_TEXT_LIST_REQUIRED')
         if not expected['statuses'] and not expected.get('exception'):
             raise ValueError('STATUS_OR_EXCEPTION_REQUIRED')
         args = expected.get('arguments', {})
@@ -47,6 +64,11 @@ def load_dataset(path: Path = DEFAULT_DATASET) -> dict:
             raise ValueError('INVALID_ARGUMENT_EXPECTATION')
         if tools and set(args) - TOOL_FIELDS[tools[0]]:
             raise ValueError('ARGUMENT_OUTSIDE_TOOL_SCHEMA')
+        tool_enums = TOOL_ARGUMENT_ENUMS.get(tools[0] if tools else '', {})
+        for arg_key, values in args.items():
+            if arg_key in tool_enums:
+                if any(v not in tool_enums[arg_key] for v in values):
+                    raise ValueError('ARGUMENT_VALUE_NOT_IN_ENUM')
         if any(not isinstance(values, list) or not values or
                any(not isinstance(v, str) for v in values) for values in args.values()):
             raise ValueError('ARGUMENT_EQUIVALENCE_MUST_BE_EXPLICIT')

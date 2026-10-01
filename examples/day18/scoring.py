@@ -1,7 +1,7 @@
 """Deterministic grading, not an LLM judge. Missing evidence never becomes zero."""
 from __future__ import annotations
 from typing import Any
-from .dataset import TOOL_FIELDS
+from .dataset import TOOL_FIELDS, TOOL_ARGUMENT_ENUMS
 
 
 def layer(problems: list[str]) -> dict:
@@ -66,6 +66,10 @@ def check_tools(expected: dict, observed: dict) -> dict:
                 errors.append(name + '_ARGUMENT_SCHEMA'); continue
             if set(args) - TOOL_FIELDS[tool] or any(not isinstance(v, str) for v in args.values()):
                 errors.append(name + '_ARGUMENT_SCHEMA')
+            enums = TOOL_ARGUMENT_ENUMS.get(tool, {})
+            for arg_k, arg_v in args.items():
+                if arg_k in enums and arg_v not in enums[arg_k]:
+                    errors.append(name + '_ARGUMENT_ENUM_' + arg_k)
             for key, allowed in expected.get('arguments', {}).items():
                 if args.get(key, '') not in allowed:
                     errors.append(name + '_ARGUMENT_' + key)
@@ -84,6 +88,8 @@ def check_tools(expected: dict, observed: dict) -> dict:
             else:
                 key = requested[0]['id']
                 tool = requested[0].get('name')
+                if [c.get('name') for c in executed] != [tool]:
+                    errors.append('TRACE_TOOL_EXECUTION_MISMATCH')
                 for kind in ('TOOL_EXECUTED', 'TOOL_RESPONSE'):
                     matches = [e for e in by_kind[kind] if e.get('id') == key and e.get('name') == tool]
                     if len(matches) != 1:
@@ -146,8 +152,11 @@ def check_presentation(expected: dict, observed: dict) -> dict:
             errors.append('RESULT_STATUS_MISMATCH')
     if 'reason' in expected and result.get('reason') != expected['reason']:
         errors.append('RESULT_REASON_MISMATCH')
-    if expected.get('no_messages') and plan['messages']:
-        errors.append('PRIVATE_MESSAGES_AFTER_PERMISSION_DENIAL')
+    if expected.get('no_messages'):
+        if plan['messages']:
+            errors.append('PRIVATE_MESSAGES_AFTER_PERMISSION_DENIAL')
+    elif not plan['messages']:
+        errors.append('USER_FACING_MESSAGES_REQUIRED')
     text = '\n'.join(message_texts(plan['messages']))
     for item in expected['required_text']:
         if item not in text:

@@ -61,6 +61,12 @@ class DatasetTests(unittest.TestCase):
     def test_payload_cannot_add_owner_argument(self):
         d=load_dataset();d['cases'][12]['expect']['arguments']['owner']=['x']
         with self.assertRaises(ValueError):load_dataset(self.modified_file(d))
+    def test_forbidden_text_must_be_list_of_strings(self):
+        d=load_dataset();d['cases'][0]['expect']['forbidden_text']='not-a-list'
+        with self.assertRaises(ValueError):load_dataset(self.modified_file(d))
+    def test_argument_enum_outside_schema_is_rejected(self):
+        d=load_dataset();d['cases'][12]['expect']['arguments']['dietary_type']=['NOT_A_DIET']
+        with self.assertRaises(ValueError):load_dataset(self.modified_file(d))
 
 
 class ScorerTests(unittest.TestCase):
@@ -141,6 +147,30 @@ class ScorerTests(unittest.TestCase):
     def test_fixed_route_boolean_call_count_is_not_zero(self):
         c,o=fixture();c['expect']['intent_applicable']=False;c['expect']['model_api_calls']=0;o['model_api_calls']=False
         self.assertEqual(score_case(c,o)['status'],'FAIL')
+    def test_empty_messages_in_user_facing_plan_fails(self):
+        c,o=fixture();o['plan']['messages']=[]
+        res=score_case(c,o)
+        self.assertEqual(res['status'],'FAIL')
+        self.assertIn('USER_FACING_MESSAGES_REQUIRED',res['layers']['ui']['issues'])
+    def test_forbidden_text_present_fails(self):
+        c,o=fixture();c['expect']['forbidden_text']=['保證可進']
+        o['plan']['messages'][0]['contents']['body']['contents'].append(
+            {'type':'text','text':'本店保證可進無障礙'})
+        res=score_case(c,o)
+        self.assertEqual(res['status'],'FAIL')
+        self.assertIn('FORBIDDEN_TEXT_PRESENT:保證可進',res['layers']['ui']['issues'])
+    def test_invalid_dietary_enum_argument_fails(self):
+        c,o=fixture();o['executed_calls'][0]['arguments']['dietary_type']='NOT_IN_DIETARY_ENUM'
+        res=score_case(c,o)
+        self.assertEqual(res['status'],'FAIL')
+        self.assertIn('EXECUTED_ARGUMENT_ENUM_dietary_type',res['layers']['intent']['issues'])
+    def test_live_trace_tool_mismatch_with_execution_fails(self):
+        c,o=fixture();o['mode']='live';o['model_api_calls']=1
+        o['trace_events']=[{'kind':k,'id':'synthetic-call-1','name':'show_local_help'}
+                           for k in ('TOOL_REQUESTED','TOOL_EXECUTED','TOOL_RESPONSE')]
+        res=score_case(c,o)
+        self.assertEqual(res['status'],'FAIL')
+        self.assertIn('TRACE_TOOL_EXECUTION_MISMATCH',res['layers']['intent']['issues'])
     def test_summary_keeps_denominator_twenty(self):
         rows=[{'grade':{'status':'PASS','layers':{}},'observation':{'mode':'offline'}}]*18+[
             {'grade':{'status':'BLOCKED','layers':{}},'observation':{'mode':'offline'}}]*2

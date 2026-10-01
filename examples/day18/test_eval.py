@@ -129,11 +129,17 @@ class ScorerTests(unittest.TestCase):
         self.assertEqual(score_case(c,o)['status'],'FAIL')
     def test_linked_live_trace_passes_contract_fixture(self):
         c,o=fixture();o['mode']='live';o['model_api_calls']=1
-        o['trace_events']=[{'kind':k,'id':'synthetic-call-1','name':'search_local_places'} for k in ('TOOL_REQUESTED','TOOL_EXECUTED','TOOL_RESPONSE')]
+        args=dict(o['executed_calls'][0]['arguments'])
+        o['trace_events']=[{'kind':'TOOL_REQUESTED','id':'synthetic-call-1','name':'search_local_places','arguments':args},
+                           {'kind':'TOOL_EXECUTED','id':'synthetic-call-1','name':'search_local_places'},
+                           {'kind':'TOOL_RESPONSE','id':'synthetic-call-1','name':'search_local_places'}]
         self.assertEqual(score_case(c,o)['status'],'PASS')
     def test_wrong_trace_id_fails(self):
         c,o=fixture();o['mode']='live';o['model_api_calls']=1
-        o['trace_events']=[{'kind':k,'id':'synthetic-call-1','name':'search_local_places'} for k in ('TOOL_REQUESTED','TOOL_EXECUTED','TOOL_RESPONSE')]
+        args=dict(o['executed_calls'][0]['arguments'])
+        o['trace_events']=[{'kind':'TOOL_REQUESTED','id':'synthetic-call-1','name':'search_local_places','arguments':args},
+                           {'kind':'TOOL_EXECUTED','id':'synthetic-call-1','name':'search_local_places'},
+                           {'kind':'TOOL_RESPONSE','id':'synthetic-call-1','name':'search_local_places'}]
         o['trace_events'][-1]['id']='different'
         self.assertEqual(score_case(c,o)['status'],'FAIL')
     def test_coverage_gap_does_not_relabel_safe_contract(self):
@@ -171,6 +177,65 @@ class ScorerTests(unittest.TestCase):
         res=score_case(c,o)
         self.assertEqual(res['status'],'FAIL')
         self.assertIn('TRACE_TOOL_EXECUTION_MISMATCH',res['layers']['intent']['issues'])
+    def test_empty_visible_text_in_presentation_fails(self):
+        c,o=fixture();o['plan']['messages']=[{'type':'text','text':'   '}]
+        res=score_case(c,o)
+        self.assertEqual(res['status'],'FAIL')
+        self.assertIn('USER_FACING_MESSAGES_REQUIRED',res['layers']['ui']['issues'])
+    def test_unverified_text_line_fails(self):
+        c,o=fixture()
+        c['expect']['allowed_lines']=['這份快照沒有符合資料','換個鄉鎮查詢','重新輸入條件']
+        o['plan']['messages'][0]['contents']['body']['contents'].append(
+            {'type':'text','text':'這間店可直接推輪椅入內，入口沒有障礙。'})
+        res=score_case(c,o)
+        self.assertEqual(res['status'],'FAIL')
+        self.assertIn('UNVERIFIED_TEXT_LINE:這間店可直接推輪椅入內，入口沒有障礙。',res['layers']['ui']['issues'])
+    def test_receipt_id_in_visible_text_missing_fails(self):
+        c,o=fixture()
+        c['expect']['receipt_matches_backend']=True
+        o['plan']['result']={'status':'already_created','request_id':'req-20261002-synthetic'}
+        res=score_case(c,o)
+        self.assertEqual(res['status'],'FAIL')
+        self.assertIn('RECEIPT_ID_NOT_IN_VISIBLE_PRESENTATION',res['layers']['ui']['issues'])
+    def test_receipt_id_in_visible_text_matches_passes(self):
+        c,o=fixture()
+        c['expect']['receipt_matches_backend']=True
+        o['plan']['result']={'status':'already_created','request_id':'req-20261002-synthetic'}
+        o['plan']['messages'][0]['contents']['body']['contents'].append(
+            {'type':'text','text':'單號：req-20261002-synthetic'})
+        res=score_case(c,o)
+        self.assertNotIn('RECEIPT_ID_NOT_IN_VISIBLE_PRESENTATION',res['layers']['ui']['issues'])
+    def test_help_reason_outside_enum_fails(self):
+        c,o=fixture();c['expect']['tools']=['show_local_help']
+        for name in ('proposed_calls','executed_calls'):
+            o[name]=[{'name':'show_local_help','arguments':{'reason':'general'}}]
+        res=score_case(c,o)
+        self.assertEqual(res['status'],'FAIL')
+        self.assertIn('PROPOSED_ARGUMENT_ENUM_reason',res['layers']['intent']['issues'])
+    def test_memory_action_outside_enum_fails(self):
+        c,o=fixture();c['expect']['tools']=['request_memory_management']
+        for name in ('proposed_calls','executed_calls'):
+            o[name]=[{'name':'request_memory_management','arguments':{'action':'confirm','dietary_type':''}}]
+        res=score_case(c,o)
+        self.assertEqual(res['status'],'FAIL')
+        self.assertIn('PROPOSED_ARGUMENT_ENUM_action',res['layers']['intent']['issues'])
+    def test_live_trace_arguments_mismatch_fails(self):
+        c,o=fixture();o['mode']='live';o['model_api_calls']=1
+        o['trace_events']=[{'kind':'TOOL_REQUESTED','id':'synthetic-call-1','name':'search_local_places','arguments':{'area':'臺北市'}},
+                           {'kind':'TOOL_EXECUTED','id':'synthetic-call-1','name':'search_local_places'},
+                           {'kind':'TOOL_RESPONSE','id':'synthetic-call-1','name':'search_local_places'}]
+        res=score_case(c,o)
+        self.assertEqual(res['status'],'FAIL')
+        self.assertIn('TRACE_ARGUMENTS_MISMATCH',res['layers']['intent']['issues'])
+    def test_extra_tool_execution_events_fails(self):
+        c,o=fixture();o['mode']='live';o['model_api_calls']=1
+        o['trace_events']=[{'kind':'TOOL_REQUESTED','id':'synthetic-call-1','name':'search_local_places'},
+                           {'kind':'TOOL_EXECUTED','id':'synthetic-call-1','name':'search_local_places'},
+                           {'kind':'TOOL_EXECUTED','id':'synthetic-call-2','name':'approve_memory'},
+                           {'kind':'TOOL_RESPONSE','id':'synthetic-call-1','name':'search_local_places'}]
+        res=score_case(c,o)
+        self.assertEqual(res['status'],'FAIL')
+        self.assertIn('EXTRA_TOOL_EXECUTION_EVENTS',res['layers']['intent']['issues'])
     def test_summary_keeps_denominator_twenty(self):
         rows=[{'grade':{'status':'PASS','layers':{}},'observation':{'mode':'offline'}}]*18+[
             {'grade':{'status':'BLOCKED','layers':{}},'observation':{'mode':'offline'}}]*2

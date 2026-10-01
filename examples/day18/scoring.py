@@ -15,6 +15,22 @@ def blocked_result(case: dict, observed: dict | None) -> dict:
             'layers': {}, 'coverage': {'status': 'NOT_EVALUATED'}}
 
 
+def find_request_id(value: Any) -> str | None:
+    if isinstance(value, dict):
+        if isinstance(value.get('request_id'), str):
+            return value['request_id']
+        for child in value.values():
+            found = find_request_id(child)
+            if found:
+                return found
+    elif isinstance(value, list):
+        for child in value:
+            found = find_request_id(child)
+            if found:
+                return found
+    return None
+
+
 def message_texts(value: Any) -> list[str]:
     """Only visible text nodes, not altText, action payloads or model prose."""
     result: list[str] = []
@@ -83,6 +99,12 @@ def check_tools(expected: dict, observed: dict) -> dict:
             by_kind = {k: [e for e in events if isinstance(e, dict) and e.get('kind') == k]
                        for k in ('TOOL_REQUESTED', 'TOOL_EXECUTED', 'TOOL_RESPONSE')}
             requested = by_kind['TOOL_REQUESTED']
+            executed_events = by_kind['TOOL_EXECUTED']
+            response_events = by_kind['TOOL_RESPONSE']
+            if len(executed_events) != len(executed):
+                errors.append('EXTRA_TOOL_EXECUTION_EVENTS')
+            if len(response_events) != len(executed):
+                errors.append('EXTRA_TOOL_RESPONSE_EVENTS')
             if len(requested) != 1 or not requested[0].get('id'):
                 errors.append('LIVE_REQUEST_LINK_REQUIRED')
             else:
@@ -94,6 +116,13 @@ def check_tools(expected: dict, observed: dict) -> dict:
                     matches = [e for e in by_kind[kind] if e.get('id') == key and e.get('name') == tool]
                     if len(matches) != 1:
                         errors.append(kind + '_LINK_MISMATCH')
+                req_args = requested[0].get('arguments') if 'arguments' in requested[0] else requested[0].get('args', {})
+                if executed and isinstance(executed[0].get('arguments'), dict) and executed[0]['arguments'] != req_args:
+                    errors.append('TRACE_ARGUMENTS_MISMATCH')
+                if proposed and proposed[0].get('id') and proposed[0].get('id') != key:
+                    errors.append('PROPOSED_CALL_ID_MISMATCH')
+                if executed and executed[0].get('id') and executed[0].get('id') != key:
+                    errors.append('EXECUTED_CALL_ID_MISMATCH')
     result = layer(errors)
     result['scope'] = 'actual_model_routing' if observed.get('mode') == 'live' else 'scripted_contract_not_model_accuracy'
     return result
@@ -152,13 +181,24 @@ def check_presentation(expected: dict, observed: dict) -> dict:
             errors.append('RESULT_STATUS_MISMATCH')
     if 'reason' in expected and result.get('reason') != expected['reason']:
         errors.append('RESULT_REASON_MISMATCH')
+    texts = [t.strip() for t in message_texts(plan['messages']) if t.strip()]
     if expected.get('no_messages'):
         if plan['messages']:
             errors.append('PRIVATE_MESSAGES_AFTER_PERMISSION_DENIAL')
-    elif not plan['messages']:
+    elif not texts:
         errors.append('USER_FACING_MESSAGES_REQUIRED')
     text = '\n'.join(message_texts(plan['messages']))
-    for item in expected['required_text']:
+    if expected.get('receipt_matches_backend'):
+        rid = find_request_id(plan.get('result'))
+        if not rid or rid not in text:
+            errors.append('RECEIPT_ID_NOT_IN_VISIBLE_PRESENTATION')
+    if 'allowed_lines' in expected:
+        allowed = set(expected['allowed_lines'])
+        for line in text.split('\n'):
+            line = line.strip()
+            if line and line not in allowed:
+                errors.append('UNVERIFIED_TEXT_LINE:' + line)
+    for item in expected.get('required_text', []):
         if item not in text:
             errors.append('REQUIRED_TEXT_MISSING:' + item)
     for item in expected.get('forbidden_text', []):

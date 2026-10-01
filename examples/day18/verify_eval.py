@@ -138,7 +138,7 @@ async def evaluate(data: dict, args, out: Path) -> int:
     dump(out / 'results.json', result)
     report = ['# LOCAL Day 18 評測報告','',f'模式：`{args.mode}`。完整題集分母固定為 20。',
               '離線不是 Gemini 成績；Live 不是雲端部署或 LINE 送達驗證。','',
-              '| 題號 | 結果 | 工具／意圖 | 後端 | 訊息計畫 | 需求完整度 |',
+              '| 題號 | 結果 | 工具／意圖（離線：腳本指定） | 後端 | 訊息計畫 | 需求完整度 |',
               '|---|---|---|---|---|---|']
     for row in rows:
         g=row['grade']; layers=g.get('layers',{})

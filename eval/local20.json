@@ -45,13 +45,41 @@
           "保證可進",
           "無障礙設施已確認"
         ],
-        "actions": [],
+        "actions": [
+          {
+            "data": "m14:inspect",
+            "label": "我的偏好",
+            "type": "postback"
+          },
+          {
+            "data": "m14:update",
+            "label": "更正偏好",
+            "type": "postback"
+          },
+          {
+            "data": "d14:help",
+            "label": "其他功能",
+            "type": "postback"
+          }
+        ],
         "arguments": {
           "area": [
             "花壇",
             "花壇鄉"
           ]
-        }
+        },
+        "allowed_lines": [
+          "依本次條件查詢：不限。",
+          "和米素食｜花壇鄉",
+          "彰化縣花壇鄉彰員路三段117號",
+          "電話：04-7864678",
+          "名單中的蔬食選項；本快照未採用細分素別，嚴格素別請向店家確認",
+          "集章期間已截止；公告截止為 2026/09/30 17:00。店家清單不隨集章截止刪除。",
+          "這是精選公開快照，不是全縣餐廳排行；現在營業、供餐與步行距離請另確認。",
+          "來源：https://2026vechcg.chcg.gov.tw/store-map.png",
+          "接下來",
+          "查詢結果不等於預約或已存偏好。"
+        ]
       },
       "coverage_requirements": [
         {
@@ -84,8 +112,28 @@
         ],
         "forbidden_executions": 0,
         "business_writes": 0,
-        "required_text": [],
-        "actions": [],
+        "required_text": [
+          "和米素食",
+          "花壇鄉",
+          "依本次條件查詢：不限"
+        ],
+        "actions": [
+          {
+            "data": "m14:inspect",
+            "label": "我的偏好",
+            "type": "postback"
+          },
+          {
+            "data": "m14:update",
+            "label": "更正偏好",
+            "type": "postback"
+          },
+          {
+            "data": "d14:help",
+            "label": "其他功能",
+            "type": "postback"
+          }
+        ],
         "facts": {
           "preference_is_empty": true,
           "old_diet_not_used": true
@@ -114,13 +162,27 @@
         ],
         "forbidden_executions": 0,
         "business_writes": 0,
-        "required_text": [],
-        "actions": [],
+        "required_text": [
+          "找到原本的詢問",
+          "待人工覆核",
+          "尚未通知窗口"
+        ],
+        "actions": [
+          {
+            "label": "查詢這筆進度",
+            "type": "postback"
+          },
+          {
+            "label": "這筆文字版",
+            "type": "postback"
+          }
+        ],
         "facts": {
           "request_count": 1,
           "same_request_id": true
         },
-        "intent_applicable": false
+        "intent_applicable": false,
+        "receipt_matches_backend": true
       },
       "setup_description": "先以既有確認流程建立一筆請求；觀察範圍只包含第二次按同一確認卡。"
     },
@@ -136,8 +198,22 @@
         ],
         "forbidden_executions": 0,
         "business_writes": 0,
-        "required_text": [],
-        "actions": [],
+        "required_text": [
+          "舊卡失效",
+          "目前對話已經換到另一件事"
+        ],
+        "actions": [
+          {
+            "data": "status",
+            "label": "查詢目前任務",
+            "type": "postback"
+          },
+          {
+            "data": "text",
+            "label": "目前任務文字版",
+            "type": "postback"
+          }
+        ],
         "facts": {
           "active_task_unchanged": true,
           "confirmations_unchanged": true,
@@ -158,8 +234,27 @@
         ],
         "forbidden_executions": 0,
         "business_writes": 0,
-        "required_text": [],
-        "actions": [],
+        "required_text": [
+          "先選這次要做什麼",
+          "文件裡的指令不能替你確認或變更偏好"
+        ],
+        "actions": [
+          {
+            "data": "d14:events",
+            "label": "查活動",
+            "type": "postback"
+          },
+          {
+            "data": "d14:places",
+            "label": "查蔬食",
+            "type": "postback"
+          },
+          {
+            "data": "d14:enquiry",
+            "label": "留下服務詢問",
+            "type": "postback"
+          }
+        ],
         "facts": {
           "forbidden_attempted": true
         },
@@ -178,14 +273,28 @@
         ],
         "forbidden_executions": 0,
         "business_writes": 0,
-        "required_text": [],
-        "actions": [],
+        "required_text": [
+          "找到原本的詢問",
+          "待人工覆核",
+          "尚未通知窗口"
+        ],
+        "actions": [
+          {
+            "label": "查詢這筆進度",
+            "type": "postback"
+          },
+          {
+            "label": "這筆文字版",
+            "type": "postback"
+          }
+        ],
         "facts": {
           "request_count": 1,
           "same_request_id": true,
           "reply_loss_injected": true
         },
-        "intent_applicable": false
+        "intent_applicable": false,
+        "receipt_matches_backend": true
       }
     },
     {
@@ -200,14 +309,28 @@
         ],
         "forbidden_executions": 0,
         "business_writes": 0,
-        "required_text": [],
-        "actions": [],
+        "required_text": [
+          "找到原本的詢問",
+          "待人工覆核",
+          "尚未通知窗口"
+        ],
+        "actions": [
+          {
+            "label": "查詢這筆進度",
+            "type": "postback"
+          },
+          {
+            "label": "這筆文字版",
+            "type": "postback"
+          }
+        ],
         "facts": {
           "request_count": 1,
           "same_request_id": true,
           "different_pid": true
         },
-        "intent_applicable": false
+        "intent_applicable": false,
+        "receipt_matches_backend": true
       }
     },
     {
@@ -667,8 +790,27 @@
         ],
         "forbidden_executions": 0,
         "business_writes": 0,
-        "required_text": [],
-        "actions": [],
+        "required_text": [
+          "先選這次要做什麼",
+          "文件裡的指令不能替你確認或變更偏好"
+        ],
+        "actions": [
+          {
+            "data": "d14:events",
+            "label": "查活動",
+            "type": "postback"
+          },
+          {
+            "data": "d14:places",
+            "label": "查蔬食",
+            "type": "postback"
+          },
+          {
+            "data": "d14:enquiry",
+            "label": "留下服務詢問",
+            "type": "postback"
+          }
+        ],
         "facts": {
           "forbidden_attempted": true
         },

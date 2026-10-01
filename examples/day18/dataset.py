@@ -18,10 +18,10 @@ TOOL_ARGUMENT_ENUMS = {
                          '蔬食', '素食', '全素', '純素', '蛋奶素', '奶素', '五辛素', '蔬食友善', '不限'},
     },
     'show_local_help': {
-        'reason': {'general', 'unsupported', 'out_of_scope', 'help', 'booking', 'conflict', 'needs_area', 'policy'},
+        'reason': {'', 'unsupported'},
     },
     'request_memory_management': {
-        'action': {'status', 'forget', 'confirm'},
+        'action': {'inspect', 'update', 'forget'},
         'dietary_type': {'', 'any', 'vegetarian', 'vegan', 'ovo_lacto', 'lacto', 'allium', 'friendly',
                          '蔬食', '素食', '全素', '純素', '蛋奶素', '奶素', '五辛素', '蔬食友善', '不限'},
     },
@@ -57,6 +57,9 @@ def load_dataset(path: Path = DEFAULT_DATASET) -> dict:
         if 'forbidden_text' in expected:
             if not isinstance(expected['forbidden_text'], list) or any(not isinstance(s, str) for s in expected['forbidden_text']):
                 raise ValueError('FORBIDDEN_TEXT_LIST_REQUIRED')
+        if 'allowed_lines' in expected:
+            if not isinstance(expected['allowed_lines'], list) or any(not isinstance(s, str) for s in expected['allowed_lines']):
+                raise ValueError('ALLOWED_LINES_LIST_REQUIRED')
         if not expected['statuses'] and not expected.get('exception'):
             raise ValueError('STATUS_OR_EXCEPTION_REQUIRED')
         args = expected.get('arguments', {})

@@ -4,7 +4,7 @@
 
 > 在 LINE 裡問問題，讓 Gemini 搭配工具查資料，再把結果說清楚。
 
-[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 17 操作指南](examples/day17/README.md)
+[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 18 操作指南](examples/day18/README.md)
 
 **系列：LOCAL：30 天打造 LINE × Google AI 地方服務 Agent**  
 **作者：陳佳新（佳新哥）｜奇步應用｜GitHub：jarsing**
@@ -15,11 +15,12 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 17（2026/10/01）。** Day 1 的驗收規格與 Day 2～17 的範例已在 Repo；目前最新的實作是 **有型別的結果（`no_data`、`query_unavailable`、`unsupported`）、非固定說法意圖分流、固定文案與按鈕引導，以及離線故障注入驗證**。本次導覽依據：[Day 17 程式範例](examples/day17/)。
+**程式導覽更新至 Day 18（2026/10/02）。** Day 1 的驗收規格與 Day 2～18 的範例已在 Repo；目前最新的實作是 **20 題地方契約評測基準（`eval/local20.json`）、三層確定性判分器（意圖白名單、零副作用探針、呈現防禦）、雙軌隔離評測 Harness 與請求節奏閘門**。本次導覽依據：[Day 18 程式範例](examples/day18/)。
 
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
+| 20 題地方契約評測與三層驗收 | [Day 18：20 題地方契約評測](examples/day18/README.md) | 20 題地方契約基準（`eval/local20.json`）、三層確定性判分器、雙軌隔離評測、請求節奏閘門與 28 項反例攔截 |
 | 查無資料分流與服務降級 | [Day 17：三種查不到與服務降級](examples/day17/README.md) | 有型別的結果（no_data／query_unavailable／unsupported）、非固定說法意圖分流、固定文案與按鈕引導，以及離線故障注入驗證 |
 | 不可信文件防禦與唯讀權限白名單 | [Day 16：不可信文件與最小權限](examples/day16/README.md) | 唯讀工具白名單、ADK before_tool_callback 攔截、後端執行核對與離線四個零驗證 |
 | 上下文預算工程與滑動視窗修剪 | [Day 15：上下文預算](examples/day15/README.md) | 五層上下文架構、滑動視窗修剪、結構化話題摘要、偏好撤回脈絡失效與 countTokens 預算閘門 |
@@ -110,10 +111,11 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 15 | [對話越來越長之後：Session、摘要與上下文預算](https://ithelp.ithome.com.tw/articles/10418768) | [examples/day15](examples/day15/) | [docs/day15](docs/day15/README.md) |
 | Day 16 | [傳單裡偷藏指令，系統真的會照做嗎？不可信文件與最小權限](https://ithelp.ithome.com.tw/articles/10419112) | [examples/day16](examples/day16/) | [docs/day16](docs/day16/README.md) |
 | Day 17 | [查不到，是真的沒有，還是系統當下查不了？三種查不到與服務降級](https://ithelp.ithome.com.tw/articles/10419526) | [examples/day17](examples/day17/) | [docs/day17](docs/day17/README.md) |
+| Day 18 | [20 題地方契約評測：從問句、工具到回覆，連失敗一起留下](https://ithelp.ithome.com.tw/articles/10419979) | [examples/day18](examples/day18/) | [eval/local20.json](eval/local20.json) |
 
-Day 18 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
+Day 19 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 
-這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單，以及有型別的結果與服務降級已收錄至 Day 17；後續會接入模型評測、多來源目錄整合與後續狀態管理。新範例公開後，會持續更新這份導覽。
+這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級，以及 20 題地方契約評測基準與三層確定性驗收已收錄至 Day 18；後續會接入志工真人通知與收件匣閉環、多來源目錄整合與後續狀態管理。新範例公開後，會持續更新這份導覽。
 
 
 ## LINE、Gemini 與 ADK 各做什麼？
@@ -124,7 +126,7 @@ Day 18 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/2012
 
 LINE 提供訊息入口；Gemini 理解問題並提出工具呼叫；ADK 串起模型、工具與事件。Python 工具負責實際讀取活動資料。Google AI Studio 是 Gemini API 金鑰的取得與管理入口；Google Antigravity 則用在本專案的開發協作。
 
-Day 12 已加入 Cloud Run 的 LINE 教學服務；Day 14 落地經同意的偏好記憶與店家查詢；Day 17 落地有型別的結果與服務降級。真人服務交接留待後續篇章。目前的入口、資料庫實驗與活動查詢各有對應範例，完整能力隨系列逐步整合。
+Day 12 已加入 Cloud Run 的 LINE 教學服務；Day 14 落地經同意的偏好記憶與店家查詢；Day 17 落地有型別的結果與服務降級；Day 18 建立 20 題地方契約評測與三層確定性驗收。真人服務交接留待後續篇章。目前的入口、資料庫實驗與活動查詢各有對應範例，完整能力隨系列逐步整合。
 
 ## LOCAL 的五個設計面向
 

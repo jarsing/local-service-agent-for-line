@@ -4,7 +4,7 @@
 
 > Ask through LINE. Let Gemini use tools to find local-service information and explain the result.
 
-[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 17 setup guide](examples/day17/README.md)
+[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 18 setup guide](examples/day18/README.md)
 
 **Author:** Jia-Sin Chen（陳佳新／佳新哥）, ChiBuApp（奇步應用） · GitHub: `jarsing`  
 **Series:** LOCAL：30 天打造 LINE × Google AI 地方服務 Agent
@@ -15,11 +15,12 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 17, October 1, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–17 examples. The latest example adds **typed outcomes (`no_data`, `query_unavailable`, `unsupported`), conversational intent routing, deterministic recovery messages and action buttons, and offline fault-injection testing**. Reference code snapshot: [examples/day17/](examples/day17/).
+**Code index updated through Day 18, October 2, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–18 examples. The latest example adds **the 20-case local contract evaluation benchmark (`eval/local20.json`), triple-layer deterministic scoring (intent allowlist, zero-side-effect probe, defensive presentation), dual-track execution harness, and request rate control**. Reference code snapshot: [examples/day18/](examples/day18/).
 
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
+| Evaluate 20 local contracts & triple-layer scoring | [Day 18: 20-case contract eval](examples/day18/README.md) | 20-case benchmark (`eval/local20.json`), 3-layer deterministic scoring, dual-track execution, request rate gate, and counterexample audit |
 | Handle empty lookups & service degradation | [Day 17: Typed outcomes & degradation](examples/day17/README.md) | Typed outcomes (no_data / query_unavailable / unsupported), intent routing, fixed recovery buttons, and offline fault injection |
 | Defend against untrusted documents & least privilege | [Day 16: Untrusted documents & least privilege](examples/day16/README.md) | Read-only tool allowlist, ADK before_tool_callback, independent backend gate, and offline four zeros |
 | Control context budget & sliding window | [Day 15: Context budget](examples/day15/README.md) | 5-layer context engineering, sliding window trimming, structured summaries, and consent-revision invalidation |
@@ -112,10 +113,11 @@ The articles are written in Traditional Chinese. English topic labels below summ
 | 15 | [As conversations grow longer: Session, summary, and context budget](https://ithelp.ithome.com.tw/articles/10418768) | [examples/day15](examples/day15/) | [docs/day15](docs/day15/README.md) |
 | 16 | [Hidden instructions in a flyer: will the system obey? Untrusted documents and least privilege](https://ithelp.ithome.com.tw/articles/10419112) | [examples/day16](examples/day16/) | [docs/day16](docs/day16/README.md) |
 | 17 | [Empty result or temporary failure? Typed outcomes and service degradation](https://ithelp.ithome.com.tw/articles/10419526) | [examples/day17](examples/day17/) | [docs/day17](docs/day17/README.md) |
+| 18 | [20 local contract evaluation benchmarks: From queries and tools to replies, preserving failures](https://ithelp.ithome.com.tw/articles/10419979) | [examples/day18](examples/day18/) | [eval/local20.json](eval/local20.json) |
 
-Find Day 18 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
+Find Day 19 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 
-LOCAL grows as one project, with chapter folders preserving each lesson's focus. Local service requests, idempotent retries, timeout reconciliation, task state persistence / process restart recovery, the first cloud-ready Cloud Run deployment with Firestore, LINE Flex state presentation with defensive postbacks, consented dietary memory lifecycle with local place lookup, multi-tier context engineering with session budgeting, untrusted document defense with read-only capability whitelists, and typed outcome service degradation with conversational intent routing are complete through Day 17; upcoming work will add evaluation, multi-source catalog integration, and subsequent state management. This index will expand as the examples are published.
+LOCAL grows as one project, with chapter folders preserving each lesson's focus. Local service requests, idempotent retries, timeout reconciliation, task state persistence / process restart recovery, the first cloud-ready Cloud Run deployment with Firestore, LINE Flex state presentation with defensive postbacks, consented dietary memory lifecycle with local place lookup, multi-tier context engineering with session budgeting, untrusted document defense with read-only capability whitelists, typed outcome service degradation with conversational intent routing, and 20-case local contract evaluation benchmarks with deterministic triple-layer scoring are complete through Day 18; upcoming work will add volunteer handoff notification inbox, multi-source catalog integration, and subsequent state management. This index will expand as the examples are published.
 
 
 ## How LINE, Gemini, and ADK work together
@@ -126,7 +128,7 @@ The Day 5 phone demonstration follows this path:
 
 LINE supplies the messaging interface. Gemini interprets the question and requests a tool call. ADK coordinates the model, tools, and events. The Python tool performs the actual lookup. Google AI Studio is the entry point for obtaining and managing Gemini API keys, while Google Antigravity supports the development workflow.
 
-Day 12 adds the LINE teaching service on Cloud Run; Day 14 lands consented dietary memory and place search; Day 17 introduces typed outcomes and service degradation. Human-service handoff remains future work in the series. The current messaging entry point, database experiment, and event search have their own examples; the broader capabilities will be integrated progressively.
+Day 12 adds the LINE teaching service on Cloud Run; Day 14 lands consented dietary memory and place search; Day 17 introduces typed outcomes and service degradation; Day 18 establishes the 20-case contract evaluation harness and triple-layer scoring benchmark. Human-service handoff remains future work in the series. The current messaging entry point, database experiment, and event search have their own examples; the broader capabilities will be integrated progressively.
 
 ## The five LOCAL design dimensions
 

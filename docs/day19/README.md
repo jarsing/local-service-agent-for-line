@@ -1,4 +1,4 @@
-# Day 19｜志工真的接到單：最小真人通知與收件匣閉環
+# Day 19｜志工真的接到單了嗎？最小真人通知與收件匣閉環
 
 建立志工收件匣與狀態推進契約（`request_created` → `notification_accepted` → `human_claimed` → `resolved`），落實通知去重與 CAS 樂觀鎖防搶單機制。
 

@@ -1,6 +1,6 @@
-# Day 19｜SQLite 收件匣契約補強範例
+# Day 19｜志工真的接到單了嗎？最小真人通知與收件匣閉環
 
-本目錄是新加入的隔離教學範例，不取代既有 `VolunteerInbox` 或 LINE handler。使用 Python 標準函式庫；沒有實際 LINE HTTP sender、Firestore adapter、背景排程或管理 UI。
+本目錄是新加入的隔離教學範例，尚未接入既有 LINE handler。使用 Python 標準函式庫；沒有實際 LINE HTTP sender、Firestore adapter、背景排程或管理 UI。
 
 ## 本機執行
 ```bash

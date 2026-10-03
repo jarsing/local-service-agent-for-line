@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
@@ -143,16 +144,48 @@ def generate_cases_template(dataset_path: Path) -> list[dict]:
     return rows
 
 
-def adapt_genai_usage(raw_usage: dict) -> dict:
-    """Adapt raw Google GenAI SDK UsageMetadata into cost ledger format."""
+def adapt_genai_usage(
+    raw_usage: dict,
+    *,
+    thinking_budget: int | None = None,
+    cache_used: bool | None = None,
+    grounding_used: bool | None = None
+) -> dict:
+    """Adapt raw Google GenAI SDK UsageMetadata into cost ledger format.
+    
+    Refuses to silently default missing tokens or unknown settings to zero.
+    """
     if not isinstance(raw_usage, dict):
         raise ValueError('RAW_USAGE_DICT_REQUIRED')
 
-    prompt = count(raw_usage.get('prompt_token_count', 0))
-    candidates = count(raw_usage.get('candidates_token_count', 0))
-    thoughts = count(raw_usage.get('thoughts_token_count', 0))
-    cached = count(raw_usage.get('cached_content_token_count', 0))
-    grounding = raw_usage.get('grounding_used', False)
+    if 'prompt_token_count' not in raw_usage or raw_usage['prompt_token_count'] is None:
+        raise ValueError('MISSING_PROMPT_TOKENS')
+    prompt = count(raw_usage['prompt_token_count'])
+
+    if 'candidates_token_count' not in raw_usage or raw_usage['candidates_token_count'] is None:
+        raise ValueError('MISSING_CANDIDATES_TOKENS')
+    candidates = count(raw_usage['candidates_token_count'])
+
+    if 'thoughts_token_count' in raw_usage and raw_usage['thoughts_token_count'] is not None:
+        thoughts = count(raw_usage['thoughts_token_count'])
+    elif thinking_budget == 0:
+        thoughts = 0
+    else:
+        raise ValueError('MISSING_THOUGHTS_TOKENS')
+
+    if 'cached_content_token_count' in raw_usage and raw_usage['cached_content_token_count'] is not None:
+        cached = count(raw_usage['cached_content_token_count'])
+    elif cache_used is False:
+        cached = 0
+    else:
+        raise ValueError('MISSING_CACHE_TOKENS')
+
+    if 'grounding_used' in raw_usage and raw_usage['grounding_used'] is not None:
+        grounding = bool(raw_usage['grounding_used'])
+    elif grounding_used is not None:
+        grounding = bool(grounding_used)
+    else:
+        raise ValueError('MISSING_GROUNDING_STATUS')
 
     # In GenAI SDK, if candidates_token_count includes thoughts, caller must separate them.
     semantics = raw_usage.get('output_semantics', 'candidates_excludes_thoughts')
@@ -169,15 +202,23 @@ def adapt_genai_usage(raw_usage: dict) -> dict:
     }
 
 
-def evaluate_latency_budget(latency_ms: int | None, budget_ms: int = 5000) -> dict:
-    """Evaluate whether latency fits inside a LINE webhook response window."""
+def evaluate_latency_budget(
+    latency_ms: int | None,
+    budget_ms: int = 2000,
+    warning_margin_ms: int = 500
+) -> dict:
+    """Evaluate whether latency fits inside a given budget (e.g. LINE webhook 2000ms SLA)."""
     if latency_ms is None:
         return {'status': 'NOT_MEASURED', 'latency_ms': None, 'budget_ms': budget_ms}
     if type(latency_ms) is not int or latency_ms < 0:
         raise ValueError('NONNEGATIVE_INTEGER_LATENCY_REQUIRED')
+    if type(budget_ms) is not int or budget_ms <= 0:
+        raise ValueError('POSITIVE_INTEGER_BUDGET_REQUIRED')
+    if type(warning_margin_ms) is not int or warning_margin_ms < 0:
+        raise ValueError('NONNEGATIVE_INTEGER_WARNING_MARGIN_REQUIRED')
 
     remaining = budget_ms - latency_ms
-    if remaining >= 1500:
+    if remaining >= warning_margin_ms:
         status = 'SAFE'
     elif remaining >= 0:
         status = 'WARNING'
@@ -247,8 +288,15 @@ def price_row(row: dict, rate: RateCard, fx: Decimal) -> dict:
         raise ValueError('EXPLICIT_OBSERVATION_ORIGIN_REQUIRED')
     if row.get('origin') == 'imported_capture':
         for key in (*IDENTITY_KEYS, 'raw_record_sha256', 'grade_record_sha256'):
-            if not isinstance(row.get(key), str) or not row[key]:
+            val = row.get(key)
+            if not isinstance(val, str) or not val:
                 raise ValueError('IMPORTED_EVIDENCE_REFERENCE_REQUIRED:' + key)
+            if key == 'code_sha':
+                if not re.fullmatch(r'[0-9a-fA-F]{7,40}', val):
+                    raise ValueError('INVALID_GIT_COMMIT_SHA:' + key)
+            elif key.endswith('_sha256'):
+                if not re.fullmatch(r'[0-9a-fA-F]{64}', val):
+                    raise ValueError('INVALID_SHA256_HEX:' + key)
         if row.get('latency_scope') not in ('model_only', 'agent_round'):
             raise ValueError('LATENCY_SCOPE_REQUIRED')
         if row.get('latency_ms') is not None:

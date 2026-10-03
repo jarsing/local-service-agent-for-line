@@ -9,6 +9,19 @@ from .cost_ledger import (
     evaluate_latency_budget, format_cost_summary, generate_cases_template
 )
 
+def find_dataset_path() -> Path:
+    candidates = [
+        Path(__file__).resolve().parents[2] / 'eval/local20.json',
+        Path(__file__).resolve().parent / 'eval/local20.json',
+        Path(__file__).resolve().parent.parent / 'eval/local20.json',
+        Path(__file__).resolve().parent / 'local20.json',
+    ]
+    for p in candidates:
+        if p.exists():
+            return p
+    return candidates[0]
+
+
 class LedgerContracts(unittest.TestCase):
     def setUp(self):
         self.rate = RateCard.read(Path(__file__).with_name('pricing.checked.json'))
@@ -95,7 +108,7 @@ class LedgerContracts(unittest.TestCase):
             validate_comparable(a, b)
 
     def test_original_case_mapping_is_preserved(self):
-        selected = select_cases(Path(__file__).resolve().parents[2] / 'eval/local20.json')
+        selected = select_cases(find_dataset_path())
         self.assertEqual([r['case_id'] for r in selected], ['local11', 'local12', 'local19'])
 
     def test_imported_capture_needs_provenance(self):
@@ -139,19 +152,52 @@ class LedgerContracts(unittest.TestCase):
         with self.assertRaises(ValueError):
             adapt_genai_usage(bad_raw)
 
+    def test_adapt_genai_usage_strict_missing_fields(self):
+        # Missing prompt tokens fails
+        with self.assertRaises(ValueError):
+            adapt_genai_usage({'candidates_token_count': 100, 'thoughts_token_count': 0})
+        # Missing candidates tokens fails
+        with self.assertRaises(ValueError):
+            adapt_genai_usage({'prompt_token_count': 100, 'thoughts_token_count': 0})
+        # Missing thoughts tokens fails if thinking_budget is not explicitly 0
+        raw_no_thoughts = {
+            'prompt_token_count': 100,
+            'candidates_token_count': 50,
+            'cached_content_token_count': 0,
+            'grounding_used': False
+        }
+        with self.assertRaises(ValueError):
+            adapt_genai_usage(raw_no_thoughts)
+        # When thinking_budget=0 is explicitly declared, thoughts count can be safely inferred as 0
+        adapted_zero = adapt_genai_usage(raw_no_thoughts, thinking_budget=0)
+        self.assertEqual(adapted_zero['thoughts_token_count'], 0)
+
     def test_evaluate_latency_budget(self):
-        # Within safe margin (>1500ms remaining of 5000ms budget)
-        safe = evaluate_latency_budget(2500, 5000)
+        # Default 2000ms SLA (LINE Webhook standard):
+        # 1200ms -> SAFE (remaining 800ms >= 500ms warning margin)
+        safe = evaluate_latency_budget(1200)
         self.assertEqual(safe['status'], 'SAFE')
         self.assertTrue(safe['within_budget'])
-        # Warning margin (<1500ms remaining)
-        warn = evaluate_latency_budget(4200, 5000)
+        self.assertEqual(safe['budget_ms'], 2000)
+
+        # 1700ms -> WARNING (remaining 300ms < 500ms margin)
+        warn = evaluate_latency_budget(1700)
         self.assertEqual(warn['status'], 'WARNING')
         self.assertTrue(warn['within_budget'])
-        # Timeout risk (exceeded 5000ms)
-        risk = evaluate_latency_budget(5500, 5000)
+
+        # 2100ms -> TIMEOUT_RISK (exceeded 2000ms)
+        risk = evaluate_latency_budget(2100)
         self.assertEqual(risk['status'], 'TIMEOUT_RISK')
         self.assertFalse(risk['within_budget'])
+
+        # Unmeasured latency
+        unmeasured = evaluate_latency_budget(None)
+        self.assertEqual(unmeasured['status'], 'NOT_MEASURED')
+        self.assertIsNone(unmeasured['latency_ms'])
+
+        # Custom budget (e.g. 5000ms agent round)
+        custom_safe = evaluate_latency_budget(2500, budget_ms=5000, warning_margin_ms=1000)
+        self.assertEqual(custom_safe['status'], 'SAFE')
 
     def test_format_cost_summary(self):
         priced = price_row(self.row, self.rate, Decimal('32'))
@@ -160,9 +206,51 @@ class LedgerContracts(unittest.TestCase):
         self.assertIn('1000 in', summary_str)
         self.assertIn('NT$', summary_str)
 
+    def test_imported_capture_strict_hash_validation(self):
+        valid_sha = 'a' * 64
+        valid_commit = '16c93739b7fc2e68d6a0c4548bdd565895b93322'
+        base_row = {
+            'origin': 'imported_capture',
+            'case_id': 'local11',
+            'input_sha256': valid_sha,
+            'model_id': 'gemini-2.5-flash',
+            'endpoint': 'generateContent',
+            'prompt_sha256': valid_sha,
+            'tools_sha256': valid_sha,
+            'catalog_sha256': valid_sha,
+            'scorer_sha256': valid_sha,
+            'code_sha': valid_commit,
+            'config_base_sha256': valid_sha,
+            'raw_record_sha256': valid_sha,
+            'grade_record_sha256': valid_sha,
+            'thinking_budget': 0,
+            'attempts': 1,
+            'contract_status': 'PASS',
+            'latency_scope': 'agent_round',
+            'latency_ms': 1200,
+            'usage': self.row['usage']
+        }
+        # Valid row prices successfully
+        priced = price_row(base_row, self.rate, Decimal(32))
+        self.assertEqual(priced['cost_status'], 'ESTIMATED_FROM_IMPORTED_USAGE')
+
+        # Placeholder string like '<待同次執行回填>' is strictly rejected
+        bad_placeholder = dict(base_row, raw_record_sha256='<待同次執行回填>')
+        with self.assertRaises(ValueError):
+            price_row(bad_placeholder, self.rate, Decimal(32))
+
+        # Malformed short SHA is rejected
+        bad_short = dict(base_row, prompt_sha256='abcdef')
+        with self.assertRaises(ValueError):
+            price_row(bad_short, self.rate, Decimal(32))
+
+        # Malformed commit SHA is rejected
+        bad_commit = dict(base_row, code_sha='not-a-git-sha!')
+        with self.assertRaises(ValueError):
+            price_row(bad_commit, self.rate, Decimal(32))
+
     def test_generate_cases_template(self):
-        dataset_path = Path(__file__).resolve().parents[2] / 'eval/local20.json'
-        templates = generate_cases_template(dataset_path)
+        templates = generate_cases_template(find_dataset_path())
         self.assertEqual(len(templates), 6)
         # Check that we have A and B for local11, local12, local19
         cases = [(r['case_id'], r['setting'], r['thinking_budget']) for r in templates]

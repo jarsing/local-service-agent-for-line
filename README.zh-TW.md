@@ -112,10 +112,11 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 16 | [傳單裡偷藏指令，系統真的會照做嗎？不可信文件與最小權限](https://ithelp.ithome.com.tw/articles/10419112) | [examples/day16](examples/day16/) | [docs/day16](docs/day16/README.md) |
 | Day 17 | [查不到，是真的沒有，還是系統當下查不了？三種查不到與服務降級](https://ithelp.ithome.com.tw/articles/10419526) | [examples/day17](examples/day17/) | [docs/day17](docs/day17/README.md) |
 | Day 18 | [20 題地方契約評測：從問句、工具到回覆，連失敗一起留下](https://ithelp.ithome.com.tw/articles/10419979) | [examples/day18](examples/day18/) | [eval/local20.json](eval/local20.json) |
+| Day 19 | [志工真的接到單：最小真人通知與收件匣閉環](docs/day19/README.md) | [examples/day19](examples/day19/) | [docs/day19](docs/day19/README.md) |
 
-Day 19 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
+Day 20 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 
-這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級，以及 20 題地方契約評測基準與三層確定性驗收已收錄至 Day 18；後續會接入志工真人通知與收件匣閉環、多來源目錄整合與後續狀態管理。新範例公開後，會持續更新這份導覽。
+這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收，以及志工真人通知與收件匣閉環搭配 CAS 樂觀鎖已收錄至 Day 19；後續會接入模型設定／延遲／成本分析與 Trace 可觀測性。新範例公開後，會持續更新這份導覽。
 
 
 ## LINE、Gemini 與 ADK 各做什麼？

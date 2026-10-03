@@ -1,0 +1,9 @@
+{
+  "model_id": "gemini-2.5-flash",
+  "scope": "standard_text_no_cache_no_grounding",
+  "input_usd_per_million": "0.30",
+  "output_usd_per_million": "2.50",
+  "source_url": "https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-flash",
+  "checked_date": "2026-10-03",
+  "note": "Supplementary official-source check, not a price from the supplied handoff. Recheck before live use. Excludes tax, LINE, cloud compute, cache, audio, grounding and credits."
+}

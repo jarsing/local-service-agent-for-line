@@ -6,7 +6,7 @@
 [收件匣合約與狀態機](../../examples/day19/inbox_contract.py)｜
 [合約自測套件](../../examples/day19/test_inbox_contract.py)
 
-前篇：[Day 18](https://ithelp.ithome.com.tw/articles/10419979)；本篇待作者發布後補上正式連結。
+前篇：[Day 18](https://ithelp.ithome.com.tw/articles/10419979)；本篇：[Day 19](https://ithelp.ithome.com.tw/articles/10420229)。
 
 離線測試、示範路徑、Cloud Run 部署與 LINE 實機對話分開驗證。
 English overview: Volunteer inbox closed-loop contract for LOCAL, implementing ticket projection, deduplicated notifications, and CAS optimistic locking for human handoff.

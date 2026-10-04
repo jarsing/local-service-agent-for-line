@@ -6,7 +6,7 @@
 [成本帳本計算器](../../examples/day20/cost_ledger.py)｜
 [帳本契約自測套件](../../examples/day20/test_cost_ledger.py)
 
-前篇：[Day 19](https://ithelp.ithome.com.tw/articles/10420229)；本篇待作者發布後補上正式連結。
+前篇：[Day 19](https://ithelp.ithome.com.tw/articles/10420229)；本篇：[Day 20](https://ithelp.ithome.com.tw/articles/10420729)。
 
 離線測試、牌價算術示範與 Live 模型調用分開驗證。
 English overview: Cost ledger contract for LOCAL, calculating token billing and latency across distinct task types with strict provenance and comparable identity verification.

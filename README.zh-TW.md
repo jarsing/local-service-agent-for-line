@@ -113,7 +113,7 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 17 | [查不到，是真的沒有，還是系統當下查不了？三種查不到與服務降級](https://ithelp.ithome.com.tw/articles/10419526) | [examples/day17](examples/day17/) | [docs/day17](docs/day17/README.md) |
 | Day 18 | [20 題地方契約評測：從問句、工具到回覆，連失敗一起留下](https://ithelp.ithome.com.tw/articles/10419979) | [examples/day18](examples/day18/) | [eval/local20.json](eval/local20.json) |
 | Day 19 | [志工真的接到單了嗎？最小真人通知與收件匣閉環](https://ithelp.ithome.com.tw/articles/10420229) | [examples/day19](examples/day19/) | [docs/day19](docs/day19/README.md) |
-| Day 20 | [模型設定、延遲與每項任務成本：品質先過關，再談快與省](docs/day20/README.md) | [examples/day20](examples/day20/) | [docs/day20](docs/day20/README.md) |
+| Day 20 | [模型設定、延遲與每項任務成本：品質先過關，再談快與省](https://ithelp.ithome.com.tw/articles/10420729) | [examples/day20](examples/day20/) | [docs/day20](docs/day20/README.md) |
 
 Day 21 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 

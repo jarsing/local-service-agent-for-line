@@ -207,7 +207,7 @@ def evaluate_latency_budget(
     budget_ms: int = 2000,
     warning_margin_ms: int = 500
 ) -> dict:
-    """Evaluate whether latency fits inside a given budget (e.g. LINE webhook 2000ms SLA)."""
+    """Evaluate whether latency fits inside a given budget (e.g. LINE webhook 2000ms response threshold)."""
     if latency_ms is None:
         return {'status': 'NOT_MEASURED', 'latency_ms': None, 'budget_ms': budget_ms}
     if type(latency_ms) is not int or latency_ms < 0:

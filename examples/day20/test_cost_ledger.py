@@ -173,7 +173,7 @@ class LedgerContracts(unittest.TestCase):
         self.assertEqual(adapted_zero['thoughts_token_count'], 0)
 
     def test_evaluate_latency_budget(self):
-        # Default 2000ms SLA (LINE Webhook standard):
+        # Default 2000ms response threshold (LINE Webhook standard):
         # 1200ms -> SAFE (remaining 800ms >= 500ms warning margin)
         safe = evaluate_latency_budget(1200)
         self.assertEqual(safe['status'], 'SAFE')

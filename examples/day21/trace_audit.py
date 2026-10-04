@@ -35,20 +35,41 @@ def inspect_trace(document: dict) -> dict:
     if missing:
         return {'status':'INCOMPLETE','missing':missing,'candidate_layer':None}
     issues = []
-    if document.get('origin') not in ('synthetic_fixture','imported_capture'):
+    origin = document.get('origin')
+    if origin not in ('synthetic_fixture','imported_capture'):
         issues.append('EXPLICIT_ORIGIN_REQUIRED')
+    if origin == 'imported_capture':
+        prov = document.get('provenance')
+        if not isinstance(prov, dict):
+            issues.append('PROVENANCE_REQUIRED_FOR_IMPORTED_CAPTURE')
+        else:
+            for pk in ('model_id', 'prompt_sha256', 'tools_sha256', 'code_sha', 'raw_record_sha256'):
+                val = prov.get(pk)
+                if not isinstance(val, str) or not val.strip():
+                    issues.append('PROVENANCE_FIELD_REQUIRED:' + pk)
+            for pk in ('prompt_sha256', 'tools_sha256', 'raw_record_sha256'):
+                if pk in prov and not hex_id(prov[pk], 64):
+                    issues.append('PROVENANCE_SHA_FORMAT:' + pk)
+            if 'code_sha' in prov and not bool(re.fullmatch(r'[0-9a-f]{7,40}', str(prov['code_sha']))):
+                issues.append('PROVENANCE_CODE_SHA_FORMAT')
     if document.get('case_id') != 'local19':
         issues.append('THIS_ANALYZER_IS_CASE19_ONLY')
+    # Uncreated requests must not fabricate a business request_id
+    if document.get('case_id') == 'local19' and document.get('request_id') is not None:
+        issues.append('REQUEST_ID_MUST_BE_NULL_FOR_UNCREATED_REQUEST')
     if not hex_id(document.get('trace_id'),32):
         issues.append('TRACE_ID_FORMAT')
-    if not document.get('correlation_id'):
+    corr = document.get('correlation_id')
+    if not corr:
         issues.append('CORRELATION_REQUIRED')
+    elif not isinstance(corr, str) or '@' in corr or not re.fullmatch(r'[a-zA-Z0-9_-]{8,64}', corr):
+        issues.append('CORRELATION_ID_OPAQUE_FORMAT')
     if any(len(grouped[k]) != 1 for k in REQUIRED):
         issues.append('EXPECTED_EVENT_COUNTS')
     if any(not isinstance(e,dict) or e.get('kind') not in ALLOWED for e in events):
         issues.append('UNKNOWN_EVENT')
     if issues:
-        return {'status':'FAIL','issues':issues,'candidate_layer':None}
+        return {'status':'FAIL','issues':sorted(set(issues)),'candidate_layer':None}
     spans = set()
     for event in events:
         if event.get('correlation_id') != document['correlation_id']:
@@ -59,15 +80,24 @@ def inspect_trace(document: dict) -> dict:
         spans.add(sid)
     requested,executed,response = [grouped[k][0] for k in CALL_KINDS]
     for event in (requested,executed,response):
-        if not event.get('call_id') or event['call_id'] != requested.get('call_id'):
+        cid = event.get('call_id')
+        if not cid or cid != requested.get('call_id'):
             issues.append('CALL_ID_MISMATCH')
         if event.get('tool_name') != 'show_local_help':
             issues.append('UNEXPECTED_TOOL')
     args = requested.get('arguments')
     if args != {'reason':'unsupported'} or executed.get('arguments') != args:
         issues.append('ARGUMENTS_MISMATCH')
-    if not isinstance(executed.get('result'),dict) or executed.get('result') != response.get('result'):
+    # Validate result link AND contract schema for show_local_help
+    exec_res = executed.get('result')
+    resp_res = response.get('result')
+    if not isinstance(exec_res,dict) or exec_res != resp_res:
         issues.append('RESULT_LINK_MISMATCH')
+    else:
+        if exec_res.get('status') != 'help':
+            issues.append('TOOL_RESULT_STATUS_MISMATCH')
+        if exec_res.get('reason') != 'unsupported':
+            issues.append('TOOL_RESULT_REASON_MISMATCH')
     audit = grouped['DB_AUDIT_VERIFIED'][0]
     if audit.get('source') != 'sqlite_trigger_and_snapshot':
         issues.append('AUDIT_SOURCE_REQUIRED')
@@ -114,10 +144,15 @@ def to_logging_entries(document: dict) -> list[dict]:
     if result['status'] != 'CONTRACT_CHECKED':
         raise ValueError('COMPLETE_VALID_TRACE_REQUIRED')
     project = document.get('project_id')
-    if not isinstance(project,str) or not re.fullmatch(r'[a-z][a-z0-9-]{4,61}[a-z0-9]',project):
+    # Google Cloud Project ID is 6-30 characters: lower letters, digits, hyphens.
+    if not isinstance(project,str) or not re.fullmatch(r'[a-z][a-z0-9-]{4,28}[a-z0-9]',project):
         raise ValueError('PROJECT_ID_REQUIRED')
     entries = []
     for event in document['events']:
+        # Ensure call_id does not carry raw PII like phone or email
+        call_id = event.get('call_id')
+        if call_id and ('@' in call_id or (call_id.isdigit() and len(call_id) >= 8)):
+            raise ValueError('CALL_ID_PII_RISK')
         # No user text, phone, token, arbitrary attributes or hidden reasoning.
         entries.append({
             'severity':'WARNING' if event['kind']=='PRESENTATION_RENDERED'
@@ -133,8 +168,8 @@ def to_logging_entries(document: dict) -> list[dict]:
 
 def synthetic_trace() -> dict:
     """Constructed fixture. UUIDs and event names do not turn it into live evidence."""
-    corr='synthetic-correlation-'+uuid.uuid4().hex
-    call='synthetic-call-'+uuid.uuid4().hex
+    corr='corr-'+uuid.uuid4().hex[:28]
+    call='call-'+uuid.uuid4().hex[:28]
     result={'status':'help','reason':'unsupported'}
     trace={'origin':'synthetic_fixture','case_id':'local19','model_accuracy':None,
            'project_id':'example-local-project','trace_id':uuid.uuid4().hex,

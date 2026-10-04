@@ -4,8 +4,11 @@ import unittest
 from .trace_audit import inspect_trace, synthetic_trace, to_logging_entries
 
 class TraceContracts(unittest.TestCase):
-    def setUp(self):self.t=synthetic_trace()
-    def event(self,kind):return next(x for x in self.t['events'] if x['kind']==kind)
+    def setUp(self):
+        self.t=synthetic_trace()
+
+    def event(self,kind):
+        return next(x for x in self.t['events'] if x['kind']==kind)
 
     def test_complete_fixture_remains_synthetic(self):
         r=inspect_trace(self.t)
@@ -35,7 +38,8 @@ class TraceContracts(unittest.TestCase):
     def test_backend_failure_not_overwritten_by_template_warning(self):
         self.event('DB_AUDIT_VERIFIED')['business_writes']=1
         r=inspect_trace(self.t)
-        self.assertEqual(r['status'],'FAIL');self.assertIsNone(r['candidate_layer'])
+        self.assertEqual(r['status'],'FAIL')
+        self.assertIsNone(r['candidate_layer'])
 
     def test_requested_executed_args_must_match(self):
         self.event('TOOL_EXECUTED')['arguments']={'reason':''}
@@ -85,4 +89,69 @@ class TraceContracts(unittest.TestCase):
         self.t['case_id']='local11'
         self.assertEqual(inspect_trace(self.t)['status'],'FAIL')
 
-if __name__=='__main__':unittest.main()
+    def test_uncreated_request_must_not_have_request_id(self):
+        self.t['request_id']='REQ-FAKE-123'
+        r=inspect_trace(self.t)
+        self.assertEqual(r['status'],'FAIL')
+        self.assertIn('REQUEST_ID_MUST_BE_NULL_FOR_UNCREATED_REQUEST',r['issues'])
+
+    def test_wrong_tool_result_status_not_presentation_candidate(self):
+        for k in ('TOOL_EXECUTED','TOOL_RESPONSE'):
+            self.event(k)['result']={'status':'success','reason':'unsupported'}
+        r=inspect_trace(self.t)
+        self.assertEqual(r['status'],'FAIL')
+        self.assertIsNone(r['candidate_layer'])
+        self.assertIn('TOOL_RESULT_STATUS_MISMATCH',r['issues'])
+
+    def test_wrong_tool_result_reason_not_presentation_candidate(self):
+        for k in ('TOOL_EXECUTED','TOOL_RESPONSE'):
+            self.event(k)['result']={'status':'help','reason':'general'}
+        r=inspect_trace(self.t)
+        self.assertEqual(r['status'],'FAIL')
+        self.assertIsNone(r['candidate_layer'])
+        self.assertIn('TOOL_RESULT_REASON_MISMATCH',r['issues'])
+
+    def test_imported_capture_requires_provenance(self):
+        self.t['origin']='imported_capture'
+        r=inspect_trace(self.t)
+        self.assertEqual(r['status'],'FAIL')
+        self.assertIn('PROVENANCE_REQUIRED_FOR_IMPORTED_CAPTURE',r['issues'])
+
+    def test_imported_capture_valid_provenance_passes(self):
+        self.t['origin']='imported_capture'
+        self.t['provenance']={
+            'model_id':'gemini-2.5-flash',
+            'prompt_sha256':'a'*64,
+            'tools_sha256':'b'*64,
+            'code_sha':'cc20b77',
+            'raw_record_sha256':'c'*64
+        }
+        r=inspect_trace(self.t)
+        self.assertEqual(r['status'],'CONTRACT_CHECKED')
+
+    def test_public_logging_rejects_pii_correlation_or_call_id(self):
+        self.t['correlation_id']='user@example.com'
+        for e in self.t['events']:
+            e['correlation_id']='user@example.com'
+        self.assertEqual(inspect_trace(self.t)['status'],'FAIL')
+        # Test call_id PII rejection in to_logging_entries
+        self.setUp()
+        for e in self.t['events']:
+            e['call_id'] = '0912345678'
+        with self.assertRaises(ValueError):
+            to_logging_entries(self.t)
+
+    def test_project_id_length_boundary(self):
+        # 5 chars is too short, 31 chars is too long
+        self.t['project_id']='a-b-c'
+        with self.assertRaises(ValueError):
+            to_logging_entries(self.t)
+        self.t['project_id']='a' * 31
+        with self.assertRaises(ValueError):
+            to_logging_entries(self.t)
+        self.t['project_id']='valid-project-id-2026'
+        entries=to_logging_entries(self.t)
+        self.assertTrue(len(entries) > 0)
+
+if __name__=='__main__':
+    unittest.main()

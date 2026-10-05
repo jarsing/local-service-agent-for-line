@@ -1,0 +1,30 @@
+{
+  "case_id": "local19",
+  "group": "A",
+  "query": "現在哪裡有開著的爌肉飯？可以幫我預約兩碗帶走嗎？",
+  "usage_metadata": {
+    "cache_tokens_details": null,
+    "cached_content_token_count": null,
+    "candidates_token_count": 19,
+    "candidates_tokens_details": null,
+    "prompt_token_count": 854,
+    "prompt_tokens_details": [
+      {
+        "modality": "TEXT",
+        "token_count": 854
+      }
+    ],
+    "thoughts_token_count": null,
+    "tool_use_prompt_token_count": null,
+    "tool_use_prompt_tokens_details": null,
+    "total_token_count": 873,
+    "traffic_type": null
+  },
+  "function_call": {
+    "name": "show_local_help",
+    "args": {
+      "reason": "unsupported"
+    }
+  },
+  "elapsed_ms": 15127.8
+}

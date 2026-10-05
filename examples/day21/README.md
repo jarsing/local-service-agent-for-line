@@ -8,7 +8,7 @@ python3 -m unittest examples.day21.test_trace_audit -v
 python3 -m examples.day21.trace_audit --demo --out out/day21/replay
 python3 -m examples.day21.trace_audit --input examples/day21/fixtures/live_trace_local19.json --out out/day21/live-replay
 ```
-`live_trace_local19.json` 為調用 Google 官方 Gemini 3.8 Flash API 針對 local19 題目實測取得之真實 Trace 紀錄（耗時 4,641.5 ms、96 tokens、Trace ID 6cd60330...），可直接回放驗收。回放輸出`observation.json`、`diagnosis.json`、`logging.example.jsonl`；新的輸出目錄不可已存在。
+`live_trace_local19.json` 為調用 Google 官方 Gemini 3.8 Flash API 針對 local19 題目實測取得之真實 Trace 紀錄（耗時 15,127.8 ms、873 tokens（854 in / 19 out）、Trace ID 6cd60330...），可直接回放驗收。原始回應存於 `fixtures/raw_response_local19.json`，對應 Day 20 A/B 評測原始資料存於 `fixtures/ab_benchmark_raw.json`。回放輸出`observation.json`、`diagnosis.json`、`logging.example.jsonl`；新的輸出目錄不可已存在。
 
 ## 判準
 - 必要事件：TOOL_REQUESTED、TOOL_EXECUTED、TOOL_RESPONSE、DB_AUDIT_VERIFIED、PRESENTATION_RENDERED。缺事件為INCOMPLETE。

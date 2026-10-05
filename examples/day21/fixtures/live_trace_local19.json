@@ -3,25 +3,26 @@
   "correlation_id": "corr-e25aa5f6dd6a49e0",
   "origin": "imported_capture",
   "case_id": "local19",
+  "project_id": "local-service-agent",
   "request_id": null,
   "provenance": {
     "model_id": "gemini-3.8-flash",
     "prompt_sha256": "dc0e130bdb7acf37206d551a3d113f66f01cfe1be5dad06df5f1197fe2a76fdc",
     "tools_sha256": "e2d6e0def8fb4efc1233170df1d1d4c419a0e730508cbf419fda8e6ae4758b7f",
-    "code_sha": "37de8903f5cfab5080954ea8e3ab72beb3e9c5d1",
-    "raw_record_sha256": "48bace96c88e9bf3a52464dded1f195d1a23136f01c3f10bb387ca9028560956"
+    "code_sha": "26d82548f62eea36efc08bc1c81ccf02b75c9e5e",
+    "raw_record_sha256": "58d4a5ab4a28d9dd9e2819591e7773485d58a71e03e2727519b0b8905677cd83"
   },
   "metrics": {
-    "latency_ms": 4641.5,
-    "prompt_tokens": 430,
-    "candidate_tokens": 189,
-    "total_tokens": 684
+    "latency_ms": 15127.8,
+    "prompt_tokens": 854,
+    "candidate_tokens": 19,
+    "total_tokens": 873
   },
   "events": [
     {
       "kind": "TOOL_REQUESTED",
       "correlation_id": "corr-e25aa5f6dd6a49e0",
-      "span_id": "1111111111111111",
+      "span_id": "1a2b3c4d5e6f7081",
       "call_id": "call-54eb7fdcdc687749",
       "tool_name": "show_local_help",
       "arguments": {
@@ -31,7 +32,7 @@
     {
       "kind": "TOOL_EXECUTED",
       "correlation_id": "corr-e25aa5f6dd6a49e0",
-      "span_id": "2222222222222222",
+      "span_id": "2a3b4c5d6e7f8092",
       "call_id": "call-54eb7fdcdc687749",
       "tool_name": "show_local_help",
       "arguments": {
@@ -45,7 +46,7 @@
     {
       "kind": "TOOL_RESPONSE",
       "correlation_id": "corr-e25aa5f6dd6a49e0",
-      "span_id": "3333333333333333",
+      "span_id": "3a4b5c6d7e8f90a3",
       "call_id": "call-54eb7fdcdc687749",
       "tool_name": "show_local_help",
       "result": {
@@ -56,7 +57,7 @@
     {
       "kind": "DB_AUDIT_VERIFIED",
       "correlation_id": "corr-e25aa5f6dd6a49e0",
-      "span_id": "4444444444444444",
+      "span_id": "4a5b6c7d8e9fa0b4",
       "source": "sqlite_trigger_and_snapshot",
       "business_writes": 0,
       "unauthorized_executions": 0,
@@ -65,14 +66,13 @@
     {
       "kind": "PRESENTATION_RENDERED",
       "correlation_id": "corr-e25aa5f6dd6a49e0",
-      "span_id": "5555555555555555",
-      "visible_text": "很抱歉，半夜兩點彰化市目前無營業中的爌肉飯店家具備即時素食供應紀錄。已為您保留服務選單。",
+      "span_id": "5a6b7c8d9e0fb0c5",
+      "visible_text": "先選這次要做什麼。這項需求超出 LOCAL 目前的服務範圍。LOCAL 目前沒有停車查詢或預約功能。",
       "action_data": [
         "d14:events",
         "d14:places",
         "d14:enquiry"
       ]
     }
-  ],
-  "project_id": "local-service-agent"
+  ]
 }

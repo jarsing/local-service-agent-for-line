@@ -4,7 +4,7 @@
 
 > 在 LINE 裡問問題，讓 Gemini 搭配工具查資料，再把結果說清楚。
 
-[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 18 操作指南](examples/day18/README.md)
+[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 21 操作指南](examples/day21/README.md)
 
 **系列：LOCAL：30 天打造 LINE × Google AI 地方服務 Agent**  
 **作者：陳佳新（佳新哥）｜奇步應用｜GitHub：jarsing**
@@ -15,11 +15,14 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 20（2026/10/04）。** Day 1 的驗收規格與 Day 2～20 的範例已在 Repo；目前最新的實作是 **模型設定、延遲與每項任務成本帳本（`examples/day20/cost_ledger.py`）、23 項本機自測、LINE Webhook 2 秒回應門檻核對、Gemini 2.5 Flash 牌價 Decimal 算術與思考用量獨立計價**。本次導覽依據：[Day 20 程式範例](examples/day20/)。
+**程式導覽更新至 Day 21（2026/10/05）。** Day 1 的驗收規格與 Day 2～21 的範例已在 Repo；目前最新的實作是 **結構化追蹤核對器（`examples/day21/trace_audit.py`）、單一請求跨 LINE Ingress、模型工具要求、本地執行、資料庫稽核與前端呈現的完整因果事件鏈，以及對齊 Google Cloud Logging 與 Cloud Trace 的結構化日誌映射**。本次導覽依據：[Day 21 程式範例](examples/day21/)。
 
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
+| 沿著 Trace 定位工具呼叫與後端缺陷 | [Day 21：一條 Trace 找到問題](examples/day21/README.md) | 結構化追蹤核對器（`trace_audit.py`）、Cloud Logging 結構化日誌映射、多層缺陷診斷體系與 PII 邊界防護 |
+| 模型設定、延遲與每項任務成本帳本 | [Day 20：成本帳本計算器](examples/day20/README.md) | 來源明確的成本帳本（`cost_ledger.py`）、Decimal 牌價算術、思考 Token 獨立計價與 2 秒回應門檻隔離 |
+| 志工真人通知與收件匣閉環 | [Day 19：志工收件匣閉環](examples/day19/README.md) | 最小真人通知、CAS 樂觀鎖原子認領、收件匣閉環與逾時查回對帳 |
 | 20 題地方契約評測與三層驗收 | [Day 18：20 題地方契約評測](examples/day18/README.md) | 20 題地方契約基準（`eval/local20.json`）、三層確定性判分器、雙軌隔離評測、請求節奏閘門與 28 項反例攔截 |
 | 查無資料分流與服務降級 | [Day 17：三種查不到與服務降級](examples/day17/README.md) | 有型別的結果（no_data／query_unavailable／unsupported）、非固定說法意圖分流、固定文案與按鈕引導，以及離線故障注入驗證 |
 | 不可信文件防禦與唯讀權限白名單 | [Day 16：不可信文件與最小權限](examples/day16/README.md) | 唯讀工具白名單、ADK before_tool_callback 攔截、後端執行核對與離線四個零驗證 |
@@ -114,10 +117,11 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 18 | [20 題地方契約評測：從問句、工具到回覆，連失敗一起留下](https://ithelp.ithome.com.tw/articles/10419979) | [examples/day18](examples/day18/) | [eval/local20.json](eval/local20.json) |
 | Day 19 | [志工真的接到單了嗎？最小真人通知與收件匣閉環](https://ithelp.ithome.com.tw/articles/10420229) | [examples/day19](examples/day19/) | [docs/day19](docs/day19/README.md) |
 | Day 20 | [模型設定、延遲與每項任務成本：品質先過關，再談快與省](https://ithelp.ithome.com.tw/articles/10420729) | [examples/day20](examples/day20/) | [docs/day20](docs/day20/README.md) |
+| Day 21 | [一條 Trace 找到問題：從模型工具呼叫一路追到後端結果](https://ithelp.ithome.com.tw/articles/10421328) | [examples/day21](examples/day21/) | [docs/day21](docs/day21/README.md) |
 
-Day 21 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
+Day 22 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 
-這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收、志工真人通知與收件匣閉環搭配 CAS 樂觀鎖，以及模型設定／延遲／成本帳本與比較條件核對已收錄至 Day 20；後續會接入 Trace 可觀測性。新範例公開後，會持續更新這份導覽。
+這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收、志工真人通知與收件匣閉環搭配 CAS 樂觀鎖、模型設定／延遲／成本帳本與比較條件核對，以及結構化追蹤核對與 Cloud Logging 結構化日誌映射已收錄至 Day 21；後續會探討權限模型與緊急停止開關。新範例公開後，會持續更新這份導覽。
 
 
 ## LINE、Gemini 與 ADK 各做什麼？
@@ -128,7 +132,7 @@ Day 21 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/2012
 
 LINE 提供訊息入口；Gemini 理解問題並提出工具呼叫；ADK 串起模型、工具與事件。Python 工具負責實際讀取活動資料。Google AI Studio 是 Gemini API 金鑰的取得與管理入口；Google Antigravity 則用在本專案的開發協作。
 
-Day 12 已加入 Cloud Run 的 LINE 教學服務；Day 14 落地經同意的偏好記憶與店家查詢；Day 17 落地有型別的結果與服務降級；Day 18 建立 20 題地方契約評測與三層確定性驗收。真人服務交接留待後續篇章。目前的入口、資料庫實驗與活動查詢各有對應範例，完整能力隨系列逐步整合。
+Day 12 已加入 Cloud Run 的 LINE 教學服務；Day 14 落地經同意的偏好記憶與店家查詢；Day 17 落地有型別的結果與服務降級；Day 18 建立 20 題地方契約評測與三層確定性驗收；Day 19 交付志工真人通知與收件匣閉環；Day 20 實現成本帳本計算；Day 21 落地結構化追蹤核對與 Cloud Logging 映射。目前的入口、資料庫實驗與活動查詢各有對應範例，完整能力隨系列逐步整合。
 
 ## LOCAL 的五個設計面向
 

@@ -4,7 +4,7 @@
 
 > Ask through LINE. Let Gemini use tools to find local-service information and explain the result.
 
-[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 18 setup guide](examples/day18/README.md)
+[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 21 setup guide](examples/day21/README.md)
 
 **Author:** Jia-Sin Chen（陳佳新／佳新哥）, ChiBuApp（奇步應用） · GitHub: `jarsing`  
 **Series:** LOCAL：30 天打造 LINE × Google AI 地方服務 Agent
@@ -15,11 +15,14 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 18, October 2, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–18 examples. The latest example adds **the 20-case local contract evaluation benchmark (`eval/local20.json`), triple-layer deterministic scoring (intent allowlist, zero-side-effect probe, defensive presentation), dual-track execution harness, and request rate control**. Reference code snapshot: [examples/day18/](examples/day18/).
+**Code index updated through Day 21, October 5, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–21 examples. The latest example adds **the structured trace audit validator (`examples/day21/trace_audit.py`), causality chain verification across LINE Webhook, Gemini model tool requests, local execution dispatch, database audit probes, and presentation rendering, along with structured logging mapping aligned with Google Cloud Logging and Cloud Trace**. Reference code snapshot: [examples/day21/](examples/day21/).
 
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
+| Trace defects across tool calls & backend results | [Day 21: Trace defect localization](examples/day21/README.md) | Inspectable causality chain (`trace_audit.py`), Google Cloud Logging / Cloud Trace structured event mapping, multi-tier defect diagnosis, and PII-safe ID validation |
+| Track model configuration, latency & per-task cost | [Day 20: Cost ledger](examples/day20/README.md) | Provenance cost ledger (`cost_ledger.py`), Decimal pricing arithmetic, thinking token billing, 2-second webhook timing gate, and comparable condition verification |
+| Dispatch minimal volunteer handoff notifications | [Day 19: Volunteer inbox](examples/day19/README.md) | Minimal human notification, CAS atomic claim, volunteer inbox loop, and timeout reconciliation |
 | Evaluate 20 local contracts & triple-layer scoring | [Day 18: 20-case contract eval](examples/day18/README.md) | 20-case benchmark (`eval/local20.json`), 3-layer deterministic scoring, dual-track execution, request rate gate, and counterexample audit |
 | Handle empty lookups & service degradation | [Day 17: Typed outcomes & degradation](examples/day17/README.md) | Typed outcomes (no_data / query_unavailable / unsupported), intent routing, fixed recovery buttons, and offline fault injection |
 | Defend against untrusted documents & least privilege | [Day 16: Untrusted documents & least privilege](examples/day16/README.md) | Read-only tool allowlist, ADK before_tool_callback, independent backend gate, and offline four zeros |
@@ -120,7 +123,7 @@ The articles are written in Traditional Chinese. English topic labels below summ
 
 Find Day 22 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 
-LOCAL grows as one project, with chapter folders preserving each lesson's focus. Local service requests, idempotent retries, timeout reconciliation, task state persistence / process restart recovery, the first cloud-ready Cloud Run deployment with Firestore, LINE Flex state presentation with defensive postbacks, consented dietary memory lifecycle with local place lookup, multi-tier context engineering with session budgeting, untrusted document defense with read-only capability whitelists, typed outcome service degradation with conversational intent routing, 20-case local contract evaluation benchmarks with deterministic triple-layer scoring, and volunteer handoff notification inbox with CAS optimistic locking are complete through Day 19; upcoming work will add model configuration / latency / cost analysis and trace observability. This index will expand as the examples are published.
+LOCAL grows as one project, with chapter folders preserving each lesson's focus. Local service requests, idempotent retries, timeout reconciliation, task state persistence / process restart recovery, the first cloud-ready Cloud Run deployment with Firestore, LINE Flex state presentation with defensive postbacks, consented dietary memory lifecycle with local place lookup, multi-tier context engineering with session budgeting, untrusted document defense with read-only capability whitelists, typed outcome service degradation with conversational intent routing, 20-case local contract evaluation benchmarks with deterministic triple-layer scoring, volunteer handoff notification inbox with CAS optimistic locking, model configuration / latency / cost analysis ledger, and structured trace defect audit with Cloud Logging mapping are complete through Day 21; upcoming work will explore permission models and emergency stop switches. This index will expand as the examples are published.
 
 
 ## How LINE, Gemini, and ADK work together
@@ -131,7 +134,7 @@ The Day 5 phone demonstration follows this path:
 
 LINE supplies the messaging interface. Gemini interprets the question and requests a tool call. ADK coordinates the model, tools, and events. The Python tool performs the actual lookup. Google AI Studio is the entry point for obtaining and managing Gemini API keys, while Google Antigravity supports the development workflow.
 
-Day 12 adds the LINE teaching service on Cloud Run; Day 14 lands consented dietary memory and place search; Day 17 introduces typed outcomes and service degradation; Day 18 establishes the 20-case contract evaluation harness and triple-layer scoring benchmark. Human-service handoff remains future work in the series. The current messaging entry point, database experiment, and event search have their own examples; the broader capabilities will be integrated progressively.
+Day 12 adds the LINE teaching service on Cloud Run; Day 14 lands consented dietary memory and place search; Day 17 introduces typed outcomes and service degradation; Day 18 establishes the 20-case contract evaluation harness; Day 19 delivers minimal volunteer handoff notification; Day 20 implements the provenance cost ledger; Day 21 introduces structured trace validation and Cloud Logging mapping. The current messaging entry point, database experiment, and event search have their own examples; the broader capabilities will be integrated progressively.
 
 ## The five LOCAL design dimensions
 

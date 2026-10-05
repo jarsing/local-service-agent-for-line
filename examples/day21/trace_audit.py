@@ -62,7 +62,7 @@ def inspect_trace(document: dict) -> dict:
     corr = document.get('correlation_id')
     if not corr:
         issues.append('CORRELATION_REQUIRED')
-    elif not isinstance(corr, str) or '@' in corr or not re.fullmatch(r'[a-zA-Z0-9_-]{8,64}', corr):
+    elif not isinstance(corr, str) or not re.fullmatch(r'corr-[0-9a-f]{16,32}', corr) or '@' in corr or re.search(r'09\d{8}', corr):
         issues.append('CORRELATION_ID_OPAQUE_FORMAT')
     if any(len(grouped[k]) != 1 for k in REQUIRED):
         issues.append('EXPECTED_EVENT_COUNTS')
@@ -83,6 +83,8 @@ def inspect_trace(document: dict) -> dict:
         cid = event.get('call_id')
         if not cid or cid != requested.get('call_id'):
             issues.append('CALL_ID_MISMATCH')
+        elif not isinstance(cid, str) or not re.fullmatch(r'call-[0-9a-f]{16,32}', cid) or '@' in cid or re.search(r'09\d{8}', cid):
+            issues.append('CALL_ID_OPAQUE_FORMAT')
         if event.get('tool_name') != 'show_local_help':
             issues.append('UNEXPECTED_TOOL')
     args = requested.get('arguments')
@@ -151,7 +153,7 @@ def to_logging_entries(document: dict) -> list[dict]:
     for event in document['events']:
         # Ensure call_id does not carry raw PII like phone or email
         call_id = event.get('call_id')
-        if call_id and ('@' in call_id or (call_id.isdigit() and len(call_id) >= 8)):
+        if call_id and ('@' in call_id or re.search(r'09\d{2}[-\s]?\d{3}[-\s]?\d{3}', call_id) or re.search(r'09\d{8}', call_id) or not re.fullmatch(r'call-[0-9a-f]{16,32}', call_id)):
             raise ValueError('CALL_ID_PII_RISK')
         # No user text, phone, token, arbitrary attributes or hidden reasoning.
         entries.append({
@@ -168,8 +170,8 @@ def to_logging_entries(document: dict) -> list[dict]:
 
 def synthetic_trace() -> dict:
     """Constructed fixture. UUIDs and event names do not turn it into live evidence."""
-    corr='corr-'+uuid.uuid4().hex[:28]
-    call='call-'+uuid.uuid4().hex[:28]
+    corr='corr-'+uuid.uuid4().hex[:28].replace('09', '7a')
+    call='call-'+uuid.uuid4().hex[:28].replace('09', '8b')
     result={'status':'help','reason':'unsupported'}
     trace={'origin':'synthetic_fixture','case_id':'local19','model_accuracy':None,
            'project_id':'example-local-project','trace_id':uuid.uuid4().hex,

@@ -130,16 +130,23 @@ class TraceContracts(unittest.TestCase):
         self.assertEqual(r['status'],'CONTRACT_CHECKED')
 
     def test_public_logging_rejects_pii_correlation_or_call_id(self):
-        self.t['correlation_id']='user@example.com'
-        for e in self.t['events']:
-            e['correlation_id']='user@example.com'
-        self.assertEqual(inspect_trace(self.t)['status'],'FAIL')
-        # Test call_id PII rejection in to_logging_entries
-        self.setUp()
-        for e in self.t['events']:
-            e['call_id'] = '0912345678'
-        with self.assertRaises(ValueError):
-            to_logging_entries(self.t)
+        # 1. PII in correlation_id (email or phone)
+        for bad_corr in ('user@example.com', '0912345678'):
+            self.setUp()
+            self.t['correlation_id'] = bad_corr
+            for e in self.t['events']:
+                e['correlation_id'] = bad_corr
+            r = inspect_trace(self.t)
+            self.assertEqual(r['status'], 'FAIL')
+            self.assertIn('CORRELATION_ID_OPAQUE_FORMAT', r['issues'])
+
+        # 2. PII in call_id (phone formats or non-hex)
+        for bad_call in ('0912345678', 'call-0912345678', '0912-345-678'):
+            self.setUp()
+            for e in self.t['events']:
+                e['call_id'] = bad_call
+            with self.assertRaises(ValueError):
+                to_logging_entries(self.t)
 
     def test_project_id_length_boundary(self):
         # 5 chars is too short, 31 chars is too long

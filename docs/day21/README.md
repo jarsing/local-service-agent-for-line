@@ -6,7 +6,7 @@
 [追蹤核對與日誌映射器](../../examples/day21/trace_audit.py)｜
 [追蹤契約自測套件](../../examples/day21/test_trace_audit.py)
 
-前篇：[Day 20](https://ithelp.ithome.com.tw/articles/10420729)；本篇待作者發布後補上正式連結。
+前篇：[Day 20](https://ithelp.ithome.com.tw/articles/10420729)；本篇：[Day 21](https://ithelp.ithome.com.tw/articles/10421328)。
 
 離線合成回放、結構化日誌映射與雲端 Trace 分開驗證。
 English overview: Trace audit contract for LOCAL, linking Gemini tool requests, execution dispatch, database probes, and presentation rendering into an inspectable causality chain aligned with Google Cloud Logging and Cloud Trace.

@@ -1,114 +1,126 @@
-[
-  {
-    "case_id": "local11",
-    "case_name": "花壇集合點",
-    "group": "A",
-    "budget": 0,
-    "elapsed_ms": 12280.3,
-    "prompt_tokens": 1023,
-    "candidate_tokens": 26,
-    "output_tokens": 26,
-    "total_tokens": 1049,
-    "thoughts_tokens": null,
-    "cost_usd": 0.000372,
-    "called_tool": "search_local_events",
-    "called_args": {
-      "keyword": "集合點",
-      "area": "花壇"
-    },
-    "match": true
+{
+  "manifest": {
+    "model_id": "gemini-3.8-flash",
+    "endpoint": "generateContent",
+    "attempts": 1,
+    "prompt_sha256": "dc0e130bdb7acf37206d551a3d113f66f01cfe1be5dad06df5f1197fe2a76fdc",
+    "tools_sha256": "e2d6e0def8fb4efc1233170df1d1d4c419a0e730508cbf419fda8e6ae4758b7f",
+    "rate_card": "examples/day20/pricing.checked.json",
+    "evidence_level": "preliminary_measurement_summary",
+    "note": "thoughts_tokens are null as usage_metadata did not return separate thoughtsTokenCount; totalTokenCount equals promptTokenCount + candidatesTokenCount, with no additional tool-use tokens billed."
   },
-  {
-    "case_id": "local11",
-    "case_name": "花壇集合點",
-    "group": "B",
-    "budget": 1024,
-    "elapsed_ms": 15449.6,
-    "prompt_tokens": 960,
-    "candidate_tokens": 26,
-    "output_tokens": 26,
-    "total_tokens": 986,
-    "thoughts_tokens": null,
-    "cost_usd": 0.000353,
-    "called_tool": "search_local_events",
-    "called_args": {
-      "keyword": "集合點",
-      "area": "花壇"
+  "rows": [
+    {
+      "case_id": "local11",
+      "case_name": "花壇集合點",
+      "group": "A",
+      "budget": 0,
+      "elapsed_ms": 12280.3,
+      "prompt_tokens": 1023,
+      "candidate_tokens": 26,
+      "output_tokens": 26,
+      "total_tokens": 1049,
+      "thoughts_tokens": null,
+      "cost_usd": 0.000372,
+      "called_tool": "search_local_events",
+      "called_args": {
+        "keyword": "集合點",
+        "area": "花壇"
+      },
+      "match": true
     },
-    "match": true
-  },
-  {
-    "case_id": "local12",
-    "case_name": "花壇素食店",
-    "group": "A",
-    "budget": 0,
-    "elapsed_ms": 13066.5,
-    "prompt_tokens": 985,
-    "candidate_tokens": 25,
-    "output_tokens": 25,
-    "total_tokens": 1010,
-    "thoughts_tokens": null,
-    "cost_usd": 0.000358,
-    "called_tool": "search_local_places",
-    "called_args": {
-      "keyword": "美食",
-      "area": "花壇"
+    {
+      "case_id": "local11",
+      "case_name": "花壇集合點",
+      "group": "B",
+      "budget": 1024,
+      "elapsed_ms": 15449.6,
+      "prompt_tokens": 960,
+      "candidate_tokens": 26,
+      "output_tokens": 26,
+      "total_tokens": 986,
+      "thoughts_tokens": null,
+      "cost_usd": 0.000353,
+      "called_tool": "search_local_events",
+      "called_args": {
+        "keyword": "集合點",
+        "area": "花壇"
+      },
+      "match": true
     },
-    "match": true
-  },
-  {
-    "case_id": "local12",
-    "case_name": "花壇素食店",
-    "group": "B",
-    "budget": 1024,
-    "elapsed_ms": 14892.4,
-    "prompt_tokens": 949,
-    "candidate_tokens": 26,
-    "output_tokens": 26,
-    "total_tokens": 975,
-    "thoughts_tokens": null,
-    "cost_usd": 0.00035,
-    "called_tool": "search_local_places",
-    "called_args": {
-      "keyword": "花壇",
-      "area": "花壇"
+    {
+      "case_id": "local12",
+      "case_name": "花壇素食店",
+      "group": "A",
+      "budget": 0,
+      "elapsed_ms": 13066.5,
+      "prompt_tokens": 985,
+      "candidate_tokens": 25,
+      "output_tokens": 25,
+      "total_tokens": 1010,
+      "thoughts_tokens": null,
+      "cost_usd": 0.000358,
+      "called_tool": "search_local_places",
+      "called_args": {
+        "keyword": "美食",
+        "area": "花壇"
+      },
+      "match": true
     },
-    "match": true
-  },
-  {
-    "case_id": "local19",
-    "case_name": "爌肉飯預約",
-    "group": "A",
-    "budget": 0,
-    "elapsed_ms": 15127.8,
-    "prompt_tokens": 854,
-    "candidate_tokens": 19,
-    "output_tokens": 19,
-    "total_tokens": 873,
-    "thoughts_tokens": null,
-    "cost_usd": 0.000304,
-    "called_tool": "show_local_help",
-    "called_args": {
-      "reason": "unsupported"
+    {
+      "case_id": "local12",
+      "case_name": "花壇素食店",
+      "group": "B",
+      "budget": 1024,
+      "elapsed_ms": 14892.4,
+      "prompt_tokens": 949,
+      "candidate_tokens": 26,
+      "output_tokens": 26,
+      "total_tokens": 975,
+      "thoughts_tokens": null,
+      "cost_usd": 0.00035,
+      "called_tool": "search_local_places",
+      "called_args": {
+        "keyword": "花壇",
+        "area": "花壇"
+      },
+      "match": true
     },
-    "match": true
-  },
-  {
-    "case_id": "local19",
-    "case_name": "爌肉飯預約",
-    "group": "B",
-    "budget": 1024,
-    "elapsed_ms": 16313.7,
-    "prompt_tokens": 836,
-    "candidate_tokens": 19,
-    "output_tokens": 19,
-    "total_tokens": 855,
-    "thoughts_tokens": null,
-    "cost_usd": 0.000298,
-    "called_tool": "show_local_help",
-    "called_args": {
-      "reason": "unsupported"
+    {
+      "case_id": "local19",
+      "case_name": "爌肉飯預約",
+      "group": "A",
+      "budget": 0,
+      "elapsed_ms": 15127.8,
+      "prompt_tokens": 854,
+      "candidate_tokens": 19,
+      "output_tokens": 19,
+      "total_tokens": 873,
+      "thoughts_tokens": null,
+      "cost_usd": 0.000304,
+      "called_tool": "show_local_help",
+      "called_args": {
+        "reason": "unsupported"
+      },
+      "match": true
     },
-    "match": true
-  }
-]
+    {
+      "case_id": "local19",
+      "case_name": "爌肉飯預約",
+      "group": "B",
+      "budget": 1024,
+      "elapsed_ms": 16313.7,
+      "prompt_tokens": 836,
+      "candidate_tokens": 19,
+      "output_tokens": 19,
+      "total_tokens": 855,
+      "thoughts_tokens": null,
+      "cost_usd": 0.000298,
+      "called_tool": "show_local_help",
+      "called_args": {
+        "reason": "unsupported"
+      },
+      "match": true
+    }
+  ]
+}

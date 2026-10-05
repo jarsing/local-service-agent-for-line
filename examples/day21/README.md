@@ -1,4 +1,4 @@
-# Day 21｜證據優先的 local19 Trace 核對器
+# Day 21｜一條 Trace 找到問題：從模型工具呼叫一路追到後端結果
 
 這是**新定義正規化事件schema**的本機驗證範例。不是原始ADK parser、不是Cloud Trace exporter、沒有外部請求。範圍限定local19及單工具政策，不能套用其他題目就說模型錯。
 

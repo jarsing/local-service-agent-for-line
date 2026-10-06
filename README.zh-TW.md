@@ -4,7 +4,7 @@
 
 > 在 LINE 裡問問題，讓 Gemini 搭配工具查資料，再把結果說清楚。
 
-[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 21 操作指南](examples/day21/README.md)
+[English](README.md) · [iThome 連載](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 23 操作指南](examples/day23/README.md)
 
 **系列：LOCAL：30 天打造 LINE × Google AI 地方服務 Agent**  
 **作者：陳佳新（佳新哥）｜奇步應用｜GitHub：jarsing**
@@ -15,11 +15,12 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 22（2026/10/06）。** Day 1 的驗收規格與 Day 2～22 的範例已在 Repo；目前最新的實作是 **獨立 SQLite 人工停止契約示例（`examples/day22/circuit_breaker.py`）：以受控停止閘門與 epoch 版本控制，阻斷維護期間的新單副作用，保留已確認的原單與授權查單，搭配三權分立目標架構規劃與專用 GitHub Actions 離線 CI**。本次導覽依據：[Day 22 程式範例](examples/day22/)。
+**程式導覽更新至 Day 23（2026/10/07）。** Day 1 的驗收規格與 Day 2～23 的範例已在 Repo；目前最新的實作是 **離線技術選型決策篩選器與本機行程探針（`examples/day23/stack_matrix.py`）：以明確的需求條件（社群、治理、報表）篩選候選設計，將 Antigravity 開發協作、ADK 執行編排、模型存取路徑與資料庫特性分開權衡，搭配專用 GitHub Actions 離線 CI**。本次導覽依據：[Day 23 程式範例](examples/day23/)。
 
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
+| 需求導向的 Google AI 技術選型決策 | [Day 23：選型判斷表](examples/day23/README.md) | 離線選型決策篩選器（`stack_matrix.py`）、四套架構設計宣告（AI Studio、Vertex AI、Cloud Run、Firestore）、本機行程探針、專用 CI 測試套件 |
 | 身分分工、秘密管理與受控停止開關 | [Day 22：權限、秘密與停止開關](examples/day22/README.md) | 獨立停止閘門（`circuit_breaker.py`）、epoch 准入失效控制、原子建單與 outbox 意圖、三權分立目標架構規劃、專用 CI 測試套件 |
 | 沿著 Trace 定位工具呼叫與後端缺陷 | [Day 21：一條 Trace 找到問題](examples/day21/README.md) | 結構化追蹤核對器（`trace_audit.py`）、Cloud Logging 結構化日誌映射、多層缺陷診斷體系與 PII 邊界防護 |
 | 模型設定、延遲與每項任務成本帳本 | [Day 20：成本帳本計算器](examples/day20/README.md) | 來源明確的成本帳本（`cost_ledger.py`）、Decimal 牌價算術、思考 Token 獨立計價與 2 秒回應門檻隔離 |

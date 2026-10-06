@@ -1,0 +1,9 @@
+{
+  "schema_version": "local-stack-matrix-v1",
+  "options": [
+    {"id":"run-zero","model_access":"developer_api","orchestrator":"adk","hosting":"cloud_run","database":"firestore","min_instances":0,"durable_state":true,"atomic_changes":true,"model_perimeter":false,"relational_joins":false},
+    {"id":"run-warm","model_access":"developer_api","orchestrator":"adk","hosting":"cloud_run","database":"firestore","min_instances":1,"durable_state":true,"atomic_changes":true,"model_perimeter":false,"relational_joins":false},
+    {"id":"vertex-run","model_access":"vertex_ai","orchestrator":"adk","hosting":"cloud_run","database":"firestore","min_instances":1,"durable_state":true,"atomic_changes":true,"model_perimeter":true,"relational_joins":false},
+    {"id":"sql-run","model_access":"developer_api","orchestrator":"adk","hosting":"cloud_run","database":"cloud_sql","min_instances":0,"durable_state":true,"atomic_changes":true,"model_perimeter":false,"relational_joins":true}
+  ]
+}

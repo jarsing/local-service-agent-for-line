@@ -4,7 +4,7 @@
 
 > Ask through LINE. Let Gemini use tools to find local-service information and explain the result.
 
-[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 21 setup guide](examples/day21/README.md)
+[繁體中文](README.zh-TW.md) · [iThome series](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) · [Day 23 setup guide](examples/day23/README.md)
 
 **Author:** Jia-Sin Chen（陳佳新／佳新哥）, ChiBuApp（奇步應用） · GitHub: `jarsing`  
 **Series:** LOCAL：30 天打造 LINE × Google AI 地方服務 Agent
@@ -15,11 +15,12 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 22, October 6, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–22 examples. The latest example adds **a standalone stop gate and security contract (`examples/day22/circuit_breaker.py`) featuring control epoch invalidation to reject work admitted before a pause, atomic request and outbox commit, CAS claim protection, and three-tier identity separation design with dedicated GitHub Actions offline CI**. Reference code: [Day 22 example](examples/day22/).
+**Code index updated through Day 23, October 7, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–23 examples. The latest example adds **an offline architecture decision evaluator and fresh-process import probe (`examples/day23/stack_matrix.py`) that filters candidate designs against explicit requirements (community, governed, reporting), separating Antigravity developer collaboration from ADK runtime orchestration, model access routes, and database properties, backed by dedicated GitHub Actions offline CI**. Reference code: [Day 23 example](examples/day23/).
 
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
+| Requirements-driven Google AI stack selection | [Day 23: Stack decision matrix](examples/day23/README.md) | Offline design evaluation (`stack_matrix.py`), four declared architectures (AI Studio, Vertex AI, Cloud Run, Firestore), fresh-process import probe, and dedicated CI suite |
 | Least privilege, secrets & circuit breaker | [Day 22: Permissions & stop gates](examples/day22/README.md) | Standalone stop gate (`circuit_breaker.py`), epoch invalidation control, atomic request and outbox commit, target three-tier identity architecture, and dedicated CI suite |
 | Trace defects across tool calls & backend results | [Day 21: Trace defect localization](examples/day21/README.md) | Inspectable causality chain (`trace_audit.py`), Google Cloud Logging / Cloud Trace structured event mapping, multi-tier defect diagnosis, and PII-safe ID validation |
 | Track model configuration, latency & per-task cost | [Day 20: Cost ledger](examples/day20/README.md) | Provenance cost ledger (`cost_ledger.py`), Decimal pricing arithmetic, thinking token billing, 2-second webhook timing gate, and comparable condition verification |

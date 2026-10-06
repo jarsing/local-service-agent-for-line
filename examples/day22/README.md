@@ -44,6 +44,6 @@ Cloud Run 多實例不能以實例私有 SQLite 檔案當成全體控制狀態�
 
 ## 實機仍待完成
 
-沒有 LINE sender、Webhook router、管理端點、Gemini Client、Firestore adapter、WIF 設定或雲端 IAM 政策匯出。真人雙視窗與停止／恢復仍是 Day 22 發布前的獨立驗收項目。
+沒有 LINE sender、Webhook router、管理端點、Gemini Client、Firestore adapter、WIF 設定或雲端 IAM 政策匯出。真人雙視窗與停止／恢復整合驗收移至 Day 26；本篇保留固定驗收契約，不把 Mockup 當實機證據。
 
 本次測試與格式結果集中保存在資料包 `evidence/verification.json`；不要以歷史 Day 19／21 的 Commit 或 CI 代替本篇結果。

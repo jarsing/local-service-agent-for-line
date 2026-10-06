@@ -1,6 +1,6 @@
 # Day 22｜權限、秘密與停止開關：最小特權與緊急制動
 
-這是本次新增的**獨立 SQLite 人工停止契約示例**。不是原有 LINE handler 的改版，不是 Cloud Run 部署成果，也不是 Google IAM 或真人接手驗收。
+這是本次新增的**獨立 SQLite 人工停止契約示例**。不是原有 LINE handler 的改版，不是 Cloud Run 部署成果，也不是 Google IAM 或真人接手驗收。本範例對應鐵人賽文章：[Day 22｜權限、秘密與停止開關：最小特權與緊急制動](https://ithelp.ithome.com.tw/articles/10421645)。
 
 ## 本機執行
 

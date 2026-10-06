@@ -8,7 +8,9 @@ python3 -m unittest examples.day21.test_trace_audit -v
 python3 -m examples.day21.trace_audit --demo --out out/day21/replay
 python3 -m examples.day21.trace_audit --input examples/day21/fixtures/live_trace_local19.json --out out/day21/live-replay
 ```
-`live_trace_local19.json` 為調用 Google 官方 Gemini 3.8 Flash API 針對 local19 題目實測取得之真實 Trace 紀錄（耗時 15,127.8 ms、873 tokens（854 in / 19 out）、Trace ID 6cd60330...），模型提出工具為直接 SDK 實測，後續工具分派、SQLite 稽核與卡片呈現為依契約重建，可直接回放驗收。完整原始回應存於 `fixtures/raw_response_local19.json`，對應 Day 20 A/B 試跑摘要與 manifest 存於 `fixtures/ab_benchmark_raw.json`。回放輸出`observation.json`、`diagnosis.json`、`logging.example.jsonl`；新的輸出目錄不可已存在。
+`live_trace_local19.json`：模型決策段來自一次直接 SDK 呼叫（`gemini-3.8-flash`；原始回應 `fixtures/raw_response_local19.json`，SHA-256 開頭 `58d4a5ab`；15,127.8 ms；854 輸入／19 輸出 Token）。這次呼叫未經 LINE 入口；工具執行、SQLite 稽核與卡片呈現事件依契約重建，span ID 為示意，未匯出至 Cloud Trace。回放輸出 `observation.json`、`diagnosis.json`、`logging.example.jsonl`；新的輸出目錄不可已存在。
+
+`ab_benchmark_raw.json`：初步量測摘要，不可比較、未計價（同題 A、B 輸入 Token 不同；B 組未記錄思考 Token；未保存每筆原始回應）。公平對照於 Day 24 以凍結設定重跑，並保存每一筆原始回應。
 
 ## 判準
 - 必要事件：TOOL_REQUESTED、TOOL_EXECUTED、TOOL_RESPONSE、DB_AUDIT_VERIFIED、PRESENTATION_RENDERED。缺事件為INCOMPLETE。

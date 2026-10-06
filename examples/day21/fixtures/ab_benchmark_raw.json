@@ -5,9 +5,17 @@
     "attempts": 1,
     "prompt_sha256": "dc0e130bdb7acf37206d551a3d113f66f01cfe1be5dad06df5f1197fe2a76fdc",
     "tools_sha256": "e2d6e0def8fb4efc1233170df1d1d4c419a0e730508cbf419fda8e6ae4758b7f",
-    "rate_card": "examples/day20/pricing.checked.json",
+    "comparable": false,
+    "pricing_status": "NOT_PRICED_MODEL_RATE_MISMATCH",
+    "superseded_by": "Day 24 frozen rerun with per-call raw responses",
     "evidence_level": "preliminary_measurement_summary",
-    "note": "thoughts_tokens are null as usage_metadata did not return separate thoughtsTokenCount; totalTokenCount equals promptTokenCount + candidatesTokenCount, with no additional tool-use tokens billed."
+    "non_comparable_reasons": [
+      "prompt token counts differ between A and B for the same case (e.g. local11: 1023 vs 960), so the requests were not identical",
+      "thoughts_token_count was not recorded for thinking_budget=1024",
+      "only a summary was kept; per-call raw responses and full generation configs were not saved",
+      "model gemini-3.8-flash does not match the gemini-2.5-flash rate card"
+    ],
+    "note": "thoughts_tokens are null as usage_metadata did not return separate thoughtsTokenCount; totalTokenCount equals promptTokenCount + candidatesTokenCount, with no additional tool-use tokens billed. Rate card was not applied due to model rate mismatch."
   },
   "rows": [
     {
@@ -21,7 +29,7 @@
       "output_tokens": 26,
       "total_tokens": 1049,
       "thoughts_tokens": null,
-      "cost_usd": 0.000372,
+      "cost_usd": null,
       "called_tool": "search_local_events",
       "called_args": {
         "keyword": "集合點",
@@ -40,7 +48,7 @@
       "output_tokens": 26,
       "total_tokens": 986,
       "thoughts_tokens": null,
-      "cost_usd": 0.000353,
+      "cost_usd": null,
       "called_tool": "search_local_events",
       "called_args": {
         "keyword": "集合點",
@@ -59,7 +67,7 @@
       "output_tokens": 25,
       "total_tokens": 1010,
       "thoughts_tokens": null,
-      "cost_usd": 0.000358,
+      "cost_usd": null,
       "called_tool": "search_local_places",
       "called_args": {
         "keyword": "美食",
@@ -78,7 +86,7 @@
       "output_tokens": 26,
       "total_tokens": 975,
       "thoughts_tokens": null,
-      "cost_usd": 0.00035,
+      "cost_usd": null,
       "called_tool": "search_local_places",
       "called_args": {
         "keyword": "花壇",
@@ -97,7 +105,7 @@
       "output_tokens": 19,
       "total_tokens": 873,
       "thoughts_tokens": null,
-      "cost_usd": 0.000304,
+      "cost_usd": null,
       "called_tool": "show_local_help",
       "called_args": {
         "reason": "unsupported"
@@ -115,7 +123,7 @@
       "output_tokens": 19,
       "total_tokens": 855,
       "thoughts_tokens": null,
-      "cost_usd": 0.000298,
+      "cost_usd": null,
       "called_tool": "show_local_help",
       "called_args": {
         "reason": "unsupported"

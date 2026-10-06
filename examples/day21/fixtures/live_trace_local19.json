@@ -12,6 +12,12 @@
     "code_sha": "26d82548f62eea36efc08bc1c81ccf02b75c9e5e",
     "raw_record_sha256": "58d4a5ab4a28d9dd9e2819591e7773485d58a71e03e2727519b0b8905677cd83"
   },
+  "evidence_scope": {
+    "model_decision": "imported_capture (raw_response_local19.json)",
+    "downstream_events": "reconstructed_per_contract",
+    "span_ids": "illustrative, not exported to Cloud Trace",
+    "line_ingress": "not_included"
+  },
   "metrics": {
     "latency_ms": 15127.8,
     "prompt_tokens": 854,

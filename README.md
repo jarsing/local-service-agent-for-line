@@ -9,6 +9,8 @@
 **Author:** Jia-Sin Chen（陳佳新／佳新哥）, ChiBuApp（奇步應用） · GitHub: `jarsing`  
 **Series:** LOCAL：30 天打造 LINE × Google AI 地方服務 Agent
 
+![LOCAL project overview: five design dimensions — Day 1 concept diagram](LOCAL_GitHub_1x1.png)
+
 Before joining a community walking tour, people ask practical questions: What time should we meet? Where? Can someone using a wheelchair follow the entire route? LOCAL starts with these questions and progressively connects LINE, Gemini, lookup tools, and backend workflows.
 
 This project is for developers with Web, HTTP API, or LINE Bot experience who want to build with Google AI. Each example combines something to try with a design choice to understand.
@@ -150,8 +152,6 @@ Day 12 adds the LINE teaching service on Cloud Run; Day 14 lands consented dieta
 | L | Launch & Learning Loop | How do we deploy, observe problems, and improve the next version? |
 
 These dimensions work together throughout the same evolving service.
-
-![LOCAL project overview: five design dimensions — Day 1 concept diagram](LOCAL_GitHub_1x1.png)
 
 ## Try an example and share what you find
 

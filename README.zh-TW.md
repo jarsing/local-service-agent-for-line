@@ -9,6 +9,8 @@
 **系列：LOCAL：30 天打造 LINE × Google AI 地方服務 Agent**  
 **作者：陳佳新（佳新哥）｜奇步應用｜GitHub：jarsing**
 
+![LOCAL 專案總覽：五個設計面向（Day 1 設計概念圖）](LOCAL_GitHub_1x1.png)
+
 準備參加社區走讀，最先想知道的大概是：「幾點集合？在哪裡碰面？」要是同行者使用輪椅，還得確認整條路線是否方便通行。LOCAL 就從這些地方服務的小問題出發，逐步把 LINE、Gemini、查詢工具與後端流程接起來。
 
 這份教材寫給已有 Web、HTTP API 或 LINE Bot 基礎，想開始使用 Google AI 的開發者。每個範例都有可以動手做的操作，以及值得一起拆解的設計選擇。
@@ -148,8 +150,6 @@ Day 12 已加入 Cloud Run 的 LINE 教學服務；Day 14 落地經同意的偏�
 | L | Launch & Learning Loop | 如何部署、觀察問題，再改善下一版？ |
 
 五個面向共同支持同一套服務，會隨實作彼此交織。
-
-![LOCAL 專案總覽：五個設計面向（Day 1 設計概念圖）](LOCAL_GitHub_1x1.png)
 
 ## 一起試試看
 

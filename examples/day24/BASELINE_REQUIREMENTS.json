@@ -1,0 +1,19 @@
+{
+  "schema_version": "local-day24-baseline-v1",
+  "read_only_reference_commit": "95fa11b968c4eb86b4c37c5ca62f1f94fd8d4d36",
+  "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+  "dataset_git_blob_sha": "7463a1e80521b6950138606c22e657c77971859e",
+  "required_application_directories": [
+    "examples/day12",
+    "examples/day13",
+    "examples/day14",
+    "examples/day15",
+    "examples/day16",
+    "examples/day17",
+    "examples/day18"
+  ],
+  "new_day24_remote_commit": null,
+  "new_day24_ci_run": null,
+  "dataset_source": "user_handoff_eval_local20.json_verified_against_fixed_repo",
+  "integration_status": "NOT_EXECUTED_WITH_FULL_BASELINE"
+}

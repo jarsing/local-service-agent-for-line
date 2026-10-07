@@ -17,11 +17,12 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 23（2026/10/07）。** Day 1 的驗收規格與 Day 2～23 的範例已在 Repo；目前最新的實作是 **離線技術選型決策篩選器與本機行程探針（`examples/day23/stack_matrix.py`）：以明確的需求條件（社群、治理、報表）篩選候選設計，將 Antigravity 開發協作、ADK 執行編排、模型存取路徑與資料庫特性分開權衡，搭配專用 GitHub Actions 離線 CI**。本次導覽依據：[Day 23 程式範例](examples/day23/)。
+**程式導覽更新至 Day 24（2026/10/07）。** Day 1 的驗收規格與 Day 2～24 的範例已在 Repo；目前最新的實作是 **三組分母評測牆、Gemini 路由擷取與 A/B 成本量測（`examples/day24/`）：將 9 題路由準確率、6 列 A/B 成本量測與 20 題地方契約回歸嚴格拆開，杜絕拿快換準與分母偷換，搭配專用 GitHub Actions 離線 CI 與 60 項核對器測試**。本次導覽依據：[Day 24 程式範例](examples/day24/)。
 
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
+| 三組分母實測評測牆與 A/B 成本量測 | [Day 24：實測評測牆](examples/day24/README.md) | 直接 SDK 路由擷取（`capture.py`）、證據核對器（`audit.py`）、20 題地方契約回歸執行器（`offline.py`）、離線重播驗證（`replay.py`）、專用 CI 測試套件 |
 | 需求導向的 Google AI 技術選型決策 | [Day 23：選型判斷表](examples/day23/README.md) | 離線選型決策篩選器（`stack_matrix.py`）、四套架構設計宣告（AI Studio、Vertex AI、Cloud Run、Firestore）、本機行程探針、專用 CI 測試套件 |
 | 身分分工、秘密管理與受控停止開關 | [Day 22：權限、秘密與停止開關](examples/day22/README.md) | 獨立停止閘門（`circuit_breaker.py`）、epoch 准入失效控制、原子建單與 outbox 意圖、三權分立目標架構規劃、專用 CI 測試套件 |
 | 沿著 Trace 定位工具呼叫與後端缺陷 | [Day 21：一條 Trace 找到問題](examples/day21/README.md) | 結構化追蹤核對器（`trace_audit.py`）、Cloud Logging 結構化日誌映射、多層缺陷診斷體系與 PII 邊界防護 |
@@ -124,10 +125,11 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 21 | [一條 Trace 找到問題：從模型工具呼叫一路追到後端結果](https://ithelp.ithome.com.tw/articles/10421328) | [examples/day21](examples/day21/) | [docs/day21](docs/day21/README.md) |
 | Day 22 | [權限、秘密與停止開關：最小特權與緊急制動](https://ithelp.ithome.com.tw/articles/10421645) | [examples/day22](examples/day22/) | [docs/day22](docs/day22/README.md) |
 | Day 23 | [選型判斷表：Google AI 工具箱在地方服務該怎麼選？](https://ithelp.ithome.com.tw/articles/10421985) | [examples/day23](examples/day23/) | [docs/day23](docs/day23/README.md) |
+| Day 24 | [改了一行，20 題還過嗎？Google AI 實測牆與 A/B 成本量測](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) | [examples/day24](examples/day24/) | [examples/day24](examples/day24/README.md) |
 
-Day 24 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
+Day 25 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 
-這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收、志工收件匣契約與 CAS 樂觀鎖（真人端驗收移至 Day 26）、模型設定／延遲／成本帳本與比較條件核對，以及結構化追蹤核對與 Cloud Logging 結構化日誌映射已收錄至 Day 21；Day 22 落地受控停止閘門（circuit breaker / stop gate）、epoch 准入失效控制與最小特權身分分工；Day 23 建立架構決策矩陣，權衡開發協作、執行編排、模型存取路徑與資料庫特性；後續會探討實測評測基準。新範例公開後，會持續更新這份導覽。
+這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收、志工收件匣契約與 CAS 樂觀鎖（真人端驗收移至 Day 26）、模型設定／延遲／成本帳本與比較條件核對，以及結構化追蹤核對與 Cloud Logging 結構化日誌映射已收錄至 Day 21；Day 22 落地受控停止閘門（circuit breaker / stop gate）、epoch 准入失效控制與最小特權身分分工；Day 23 建立架構決策矩陣，權衡開發協作、執行編排、模型存取路徑與資料庫特性；Day 24 建立三組分母評測牆、Gemini 路由擷取與 A/B 成本量測；後續會探討完整驗收。新範例公開後，會持續更新這份導覽。
 
 
 ## LINE、Gemini 與 ADK 各做什麼？
@@ -138,7 +140,7 @@ Day 24 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/2012
 
 LINE 提供訊息入口；Gemini 理解問題並提出工具呼叫；ADK 串起模型、工具與事件。Python 工具負責實際讀取活動資料。Google AI Studio 是 Gemini API 金鑰的取得與管理入口；Google Antigravity 則用在本專案的開發協作。
 
-Day 12 已加入 Cloud Run 的 LINE 教學服務；Day 14 落地經同意的偏好記憶與店家查詢；Day 17 落地有型別的結果與服務降級；Day 18 建立 20 題地方契約評測與三層確定性驗收；Day 19 建立志工收件匣契約（真人端驗收移至 Day 26）；Day 20 實現成本帳本計算；Day 21 落地結構化追蹤核對與 Cloud Logging 映射；Day 22 交付受控停止閘門與最小特權分工。目前的入口、資料庫實驗與活動查詢各有對應範例，完整能力隨系列逐步整合。
+Day 12 已加入 Cloud Run 的 LINE 教學服務；Day 14 落地經同意的偏好記憶與店家查詢；Day 17 落地有型別的結果與服務降級；Day 18 建立 20 題地方契約評測與三層確定性驗收；Day 19 建立志工收件匣契約（真人端驗收移至 Day 26）；Day 20 實現成本帳本計算；Day 21 落地結構化追蹤核對與 Cloud Logging 映射；Day 22 交付受控停止閘門與最小特權分工；Day 23 建立架構決策矩陣；Day 24 交付三組分母實測評測牆與核對器。目前的入口、資料庫實驗與活動查詢各有對應範例，完整能力隨系列逐步整合。
 
 ## LOCAL 的五個設計面向
 

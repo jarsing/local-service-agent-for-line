@@ -1,0 +1,73 @@
+name: LOCAL Day 24 evidence checker and original local20 regression
+on:
+  push:
+    paths:
+      - "examples/day12/**"
+      - "examples/day13/**"
+      - "examples/day14/**"
+      - "examples/day15/**"
+      - "examples/day16/**"
+      - "examples/day17/**"
+      - "examples/day18/**"
+      - "examples/day24/**"
+      - "eval/local20.json"
+      - ".github/workflows/day24.yml"
+  pull_request:
+    paths:
+      - "examples/day12/**"
+      - "examples/day13/**"
+      - "examples/day14/**"
+      - "examples/day15/**"
+      - "examples/day16/**"
+      - "examples/day17/**"
+      - "examples/day18/**"
+      - "examples/day24/**"
+      - "eval/local20.json"
+      - ".github/workflows/day24.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+      OTEL_SDK_DISABLED: "true"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.13.5"
+      - name: Synthetic checker tests, not model accuracy
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p ci-output
+          python -m unittest examples.day24.test_evidence -v 2>&1 | tee ci-output/checker-selftest.log
+          python -m examples.day24.capture --out ci-output/unexecuted-plan
+          python -m examples.day24.audit --run ci-output/unexecuted-plan --out ci-output/unexecuted-audit --allow-incomplete
+      - name: Existing application dependencies
+        run: |
+          python -m pip install -r examples/day12/requirements-core.txt
+          python -m pip check
+      - name: Execute original twenty application scenarios
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m examples.day24.offline --out ci-output/local20 2>&1 | tee ci-output/local20-wrapper.log
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        if: always()
+        with:
+          name: day24-offline-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ci-output/checker-selftest.log
+            ci-output/local20-wrapper.log
+            ci-output/local20/summary.json
+            ci-output/local20/manifest.json
+            ci-output/local20/selftest_application.log
+            ci-output/unexecuted-audit/
+          retention-days: 30
+          if-no-files-found: error

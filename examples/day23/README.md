@@ -48,4 +48,4 @@ Antigravity 是這個專案的開發協作工具；既有服務編排使用 ADK�
 
 平台主張與本案決策的對照見同目錄 `SOURCES.md`。每個報告記錄執行程式與方案設定的 SHA256；這可辨識內容版本，但不證明使用者填入的宣告已在雲端實現。
 
-本篇新增檔案未自動推送 GitHub。專用 CI 定義放在 `.github/workflows/day23.yml`，遠端執行結果須在實際進版後另驗。
+Day 23 工程基線為 `e59bc77`；專用 Actions Run `37537427197` 已完成 26 項離線契約測試與三種 profile／本機探針執行。探針原始量測存於 `evidence/probe_linux.json` 與 `evidence/probe_macos.json`。

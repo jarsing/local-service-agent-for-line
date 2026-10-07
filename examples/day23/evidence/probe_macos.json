@@ -1,0 +1,37 @@
+{
+  "schema_version": "local-stack-probe-v1",
+  "origin": "local_process_measurement",
+  "measurement_scope": "fresh_python_import_stack_matrix_including_spawn_and_exit",
+  "measured_at_utc": "2026-10-06T14:32:58.800861+00:00",
+  "system": "Darwin",
+  "python_version": "3.14.2",
+  "source_sha256": "f96a011b1c77e678100186fc6e1719dc32dd1b72d4a6e8c5755f14d6bb57977d",
+  "source_size_bytes": 9588,
+  "samples": [
+    {
+      "fresh_process_wall_ms": 162.671,
+      "process_peak_rss_mib": 31.890625
+    },
+    {
+      "fresh_process_wall_ms": 163.873,
+      "process_peak_rss_mib": 32.171875
+    },
+    {
+      "fresh_process_wall_ms": 155.85,
+      "process_peak_rss_mib": 31.984375
+    },
+    {
+      "fresh_process_wall_ms": 160.554,
+      "process_peak_rss_mib": 32.046875
+    },
+    {
+      "fresh_process_wall_ms": 163.819,
+      "process_peak_rss_mib": 32.125
+    }
+  ],
+  "median_fresh_process_wall_ms": 162.671,
+  "cloud_run_cold_start_p95_ms": null,
+  "model_latency_ms": null,
+  "network_calls": 0,
+  "warning": "Not a container startup, network, SDK inference, or four-stack benchmark."
+}

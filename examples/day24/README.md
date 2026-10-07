@@ -35,7 +35,7 @@ python3 -m examples.day24.audit --run out/day24/live --out out/day24/live-audit
 python3 -m examples.day24.replay --run out/day24/live --out out/day24/backend-replay
 ```
 
-先在自己的環境設定 `GEMINI_API_KEY`；不把真值放進本Repo。本實驗指定Developer API、`gemini-2.5-flash`、google-genai2.23.0、SDKattempts1。缺SDK／金鑰會記錄BLOCKED，沒有自動更換模型或端點。
+先在自己的環境設定 `GEMINI_API_KEY`；不把真值放進本Repo。本實驗指定Developer API、`gemini-3.8-flash`、google-genai2.23.0、SDKattempts1。缺SDK／金鑰會記錄BLOCKED，沒有自動更換模型或端點。
 
 `instruction.txt` 是新的直接SDK實驗提示，不是正式ADK Runtime的原封重跑。`replay` 也只是稍後用原本機應用執行已捕捉選擇，**不是原API呼叫當下的下游事件**。它只允許三種唯讀／說明工具，沒有LINE推播。
 

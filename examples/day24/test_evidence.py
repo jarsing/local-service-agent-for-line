@@ -12,7 +12,7 @@ RATE=load(Path(__file__).with_name('rate_card.json'))
 
 
 def response(tool='show_local_help', args=None, budget=0):
-    return {'modelVersion':'synthetic-gemini-2.5-flash-version',
+    return {'modelVersion':'synthetic-gemini-3.8-flash-version',
             'candidates':[{'finishReason':'STOP','content':{'parts':[{'functionCall':{
                 'name':tool,'args':args if args is not None else {'reason':'unsupported'}}}]}}],
             'usageMetadata':{'promptTokenCount':100,'candidatesTokenCount':20,
@@ -33,7 +33,7 @@ class EvidenceTests(unittest.TestCase):
     def test_case17_is_food_booking(self):self.assertEqual(self.c['local17']['input'],'可以幫我預約明天的爌肉飯嗎')
     def test_plan_fifteen(self):self.assertEqual(len(create_plan()['items']),15)
     def test_three_AB_pairs(self):self.assertEqual(sum(i['group']!='route' for i in create_plan()['items']),6)
-    def test_model_not_three_eight(self):self.assertEqual(create_plan()['model_id'],'gemini-2.5-flash')
+    def test_model_is_three_eight(self):self.assertEqual(create_plan()['model_id'],'gemini-3.8-flash')
     def test_no_answers_in_request(self):
         p=create_plan();r=request_for(p,p['items'][0]);self.assertNotIn('expect',r);self.assertNotIn('case_id',r)
     def test_budget_zero(self):
@@ -43,6 +43,16 @@ class EvidenceTests(unittest.TestCase):
         self.assertEqual(request_for(p,i)['config']['thinking_config']['thinking_budget'],1024)
     def test_automatic_tool_execution_disabled(self):
         p=create_plan();self.assertTrue(request_for(p,p['items'][0])['config']['automatic_function_calling']['disable'])
+    def test_no_empty_string_in_tool_enums(self):
+        p=create_plan()
+        for t in p['tools']:
+            for prop_name, prop in t.get('parameters',{}).get('properties',{}).items():
+                if 'enum' in prop:
+                    self.assertNotIn('', prop['enum'], f"Tool {t['name']}.{prop_name} has empty enum")
+    def test_validate_declarations_rejects_empty_enum(self):
+        from .capture import validate_declarations
+        bad=[{'name':'bad','description':'d','parameters':{'type':'OBJECT','properties':{'x':{'type':'STRING','enum':['']}}}}]
+        with self.assertRaises(ValueError):validate_declarations(bad)
     def test_usage_complete(self):self.assertEqual(usage(self.r,0)['cost_status'],'COMPLETE')
     def test_missing_usage_unknown(self):self.assertIsNone(usage({},0)['usd'])
     def test_missing_input_unknown(self):
@@ -60,7 +70,7 @@ class EvidenceTests(unittest.TestCase):
     def test_thoughts_charged_once(self):
         u=estimate(usage(response(budget=1024),1024),RATE,MODEL);self.assertEqual(Decimal(u['usd']),Decimal('0.0000925'))
     def test_rate_wrong_model_rejected(self):
-        with self.assertRaises(ValueError):estimate(usage(self.r,0),RATE,'gemini-3.8-flash')
+        with self.assertRaises(ValueError):estimate(usage(self.r,0),RATE,'gemini-1.5-flash')
     def test_total_mismatch(self):
         self.r['usageMetadata']['totalTokenCount']=999;self.assertEqual(usage(self.r,0)['cost_status'],'INVALID')
     def test_negative_tokens(self):

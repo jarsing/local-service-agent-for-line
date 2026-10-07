@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 DATASET = ROOT / 'eval/local20.json'
 LIVE_IDS = ('local01','local02','local09','local11','local12','local13','local17','local18','local19')
 AB_IDS = ('local11','local12','local19')
-MODEL = 'gemini-2.5-flash'
+MODEL = 'gemini-3.8-flash'
 TOOL_FIELDS = {
  'search_local_events': ('date','area','keyword'),
  'search_local_places': ('area','dietary_type','keyword'),
@@ -26,7 +26,7 @@ TOOL_FIELDS = {
 DIETS = ('','any','vegetarian','vegan','ovo_lacto','lacto','allium','friendly','蔬食','素食','全素','純素','蛋奶素','奶素','五辛素','蔬食友善','不限')
 ENUMS = {
  'search_local_places': {'dietary_type': DIETS},
- 'show_local_help': {'reason': ('','unsupported')},
+ 'show_local_help': {'reason': ('unsupported',)},
  'request_memory_management': {'action': ('inspect','update','forget'), 'dietary_type': DIETS},
 }
 COMPARE_FIELDS = ('case_id','input_sha256','dataset_sha256','model_id','endpoint',

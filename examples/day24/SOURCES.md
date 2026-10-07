@@ -10,7 +10,7 @@
 | Function Calling | https://ai.google.dev/gemini-api/docs/function-calling | 模型要求不等於Python已執行 |
 | ThinkingConfig／UsageMetadata | https://ai.google.dev/api/generate-content | budget與level分開，用量來源不缺欄補零 |
 | SDK | https://googleapis.github.io/python-genai/ | Client、GenerateContentConfig與SDK物件序列化；本次Live未驗 |
-| 價格 | https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-flash | 文字Standard輸入0.30／輸出含thinking2.50 USD每百萬 |
+| 價格 | https://ai.google.dev/gemini-api/docs/pricing#gemini-3.8-flash | 文字Standard輸入0.30／輸出含thinking2.50 USD每百萬 |
 | 配額 | https://ai.google.dev/gemini-api/docs/rate-limits | 序列呼叫也不保證符合專案其他流量的限制 |
 | 回滾 | https://docs.cloud.google.com/run/docs/rollouts-rollbacks-traffic-migration | Revision流量切換，不等於撤回資料副作用 |
 | 歷史A/B | https://github.com/jarsing/local-service-agent-for-line/blob/95fa11b968c4eb86b4c37c5ca62f1f94fd8d4d36/examples/day21/fixtures/ab_benchmark_raw.json | 明示不可比較，不拿摘要冒充本篇原回應 |

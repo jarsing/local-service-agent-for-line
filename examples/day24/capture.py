@@ -25,10 +25,19 @@ CONFIG = {'temperature':0,'candidate_count':1,'max_output_tokens':2048,
 DESCRIPTIONS = {
  'search_local_events':'查地方活動公開快照；沒有集合資訊時由後端說明未知。',
  'search_local_places':'查精選蔬食店家快照；缺鄉鎮由後端追問，不保證即時營業。',
- 'show_local_help':'不支援需求或不明需求的固定安全入口；reason 只能空字串或 unsupported。',
+ 'show_local_help':'不支援需求或超出服務範圍的固定安全入口；reason 為 unsupported。',
  'propose_dietary_memory':'提出飲食記憶確認；使用者未按同意前不得保存。',
  'request_memory_management':'要求查看、更正、忘記偏好的操作介面；不直接確認修改。',
 }
+
+
+def validate_declarations(tools: list[dict]) -> None:
+    for t in tools:
+        params = t.get('parameters', {})
+        for prop_name, prop in params.get('properties', {}).items():
+            if 'enum' in prop:
+                if any(v == '' for v in prop['enum']):
+                    raise ValueError(f"EMPTY_ENUM_FORBIDDEN:{t['name']}.{prop_name}")
 
 
 def tool_declarations() -> list[dict]:
@@ -36,9 +45,12 @@ def tool_declarations() -> list[dict]:
     for name, fields in TOOL_FIELDS.items():
         properties = {f:{'type':'STRING'} for f in fields}
         for k, values in ENUMS.get(name,{}).items():
-            properties[k]['enum'] = list(values)
+            # OpenAPI / Gemini API strictly forbids empty string in enum arrays.
+            if values and not any(v == '' for v in values):
+                properties[k]['enum'] = list(values)
         tools.append({'name':name,'description':DESCRIPTIONS[name],
              'parameters':{'type':'OBJECT','properties':properties,'required':list(fields)}})
+    validate_declarations(tools)
     return tools
 
 
@@ -130,9 +142,14 @@ def execute(plan: dict, out: Path, transport, *, interval: float = 2.0, sleeper=
         except Exception as exc:
             elapsed = (clock()-started)*1000
             code = getattr(exc,'code',None)
+            status_text = getattr(exc,'status',None)
+            msg = getattr(exc,'message',None)
+            safe_msg = str(msg).split('\n')[0][:500] if (msg and isinstance(msg,str)) else None
             # Never save str(exc): it can include credentials, headers, or private request text.
             record.update(status='ERROR',elapsed_ms=elapsed,error_type=type(exc).__name__,
-                          error_code=code if type(code) is int else None)
+                          error_code=code if type(code) is int else None,
+                          error_status=status_text if isinstance(status_text,str) else None,
+                          error_message=safe_msg)
         previous_end = clock()
         save(folder/'record.json',record)
     save(out/'capture_state.json',{'state':'ATTEMPTED_ALL_PLANNED_CALLS','planned_calls':len(plan['items']),

@@ -123,10 +123,11 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 20 | [模型設定、延遲與每項任務成本：品質先過關，再談快與省](https://ithelp.ithome.com.tw/articles/10420729) | [examples/day20](examples/day20/) | [docs/day20](docs/day20/README.md) |
 | Day 21 | [一條 Trace 找到問題：從模型工具呼叫一路追到後端結果](https://ithelp.ithome.com.tw/articles/10421328) | [examples/day21](examples/day21/) | [docs/day21](docs/day21/README.md) |
 | Day 22 | [權限、秘密與停止開關：最小特權與緊急制動](https://ithelp.ithome.com.tw/articles/10421645) | [examples/day22](examples/day22/) | [docs/day22](docs/day22/README.md) |
+| Day 23 | [選型判斷表：Google AI 工具箱在地方服務該怎麼選？](https://ithelp.ithome.com.tw/articles/10421985) | [examples/day23](examples/day23/) | [docs/day23](docs/day23/README.md) |
 
-Day 23 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
+Day 24 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 
-這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收、志工收件匣契約與 CAS 樂觀鎖（真人端驗收移至 Day 26）、模型設定／延遲／成本帳本與比較條件核對，以及結構化追蹤核對與 Cloud Logging 結構化日誌映射已收錄至 Day 21；Day 22 落地受控停止閘門（circuit breaker / stop gate）、epoch 准入失效控制與最小特權身分分工；後續會探討技術選型與架構評估。新範例公開後，會持續更新這份導覽。
+這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收、志工收件匣契約與 CAS 樂觀鎖（真人端驗收移至 Day 26）、模型設定／延遲／成本帳本與比較條件核對，以及結構化追蹤核對與 Cloud Logging 結構化日誌映射已收錄至 Day 21；Day 22 落地受控停止閘門（circuit breaker / stop gate）、epoch 准入失效控制與最小特權身分分工；Day 23 建立架構決策矩陣，權衡開發協作、執行編排、模型存取路徑與資料庫特性；後續會探討實測評測基準。新範例公開後，會持續更新這份導覽。
 
 
 ## LINE、Gemini 與 ADK 各做什麼？

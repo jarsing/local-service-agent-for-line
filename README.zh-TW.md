@@ -126,10 +126,11 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 22 | [權限、秘密與停止開關：最小特權與緊急制動](https://ithelp.ithome.com.tw/articles/10421645) | [examples/day22](examples/day22/) | [docs/day22](docs/day22/README.md) |
 | Day 23 | [選型判斷表：Google AI 工具箱在地方服務該怎麼選？](https://ithelp.ithome.com.tw/articles/10421985) | [examples/day23](examples/day23/) | [docs/day23](docs/day23/README.md) |
 | Day 24 | [改了一行，20 題還過嗎？Google AI 實測牆與 A/B 成本量測](https://ithelp.ithome.com.tw/articles/10422261) | [examples/day24](examples/day24/) | [docs/day24](docs/day24/README.md) |
+| Day 25 | [Gemini 結構化輸出抽取地方資料：從公開文字到服務資料庫](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) | [examples/day25](examples/day25/) | [examples/day25/README.md](examples/day25/README.md) |
 
-Day 25 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
+Day 26 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 
-這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收、志工收件匣契約與 CAS 樂觀鎖（真人端驗收移至 Day 26）、模型設定／延遲／成本帳本與比較條件核對，以及結構化追蹤核對與 Cloud Logging 結構化日誌映射已收錄至 Day 21；Day 22 落地受控停止閘門（circuit breaker / stop gate）、epoch 准入失效控制與最小特權身分分工；Day 23 建立架構決策矩陣，權衡開發協作、執行編排、模型存取路徑與資料庫特性；Day 24 建立三組分母評測牆、Gemini 路由擷取與 A/B 成本量測；後續會探討完整驗收。新範例公開後，會持續更新這份導覽。
+這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收、志工收件匣契約與 CAS 樂觀鎖（真人端驗收移至 Day 26）、模型設定／延遲／成本帳本與比較條件核對，以及結構化追蹤核對與 Cloud Logging 結構化日誌映射已收錄至 Day 21；Day 22 落地受控停止閘門（circuit breaker / stop gate）、epoch 准入失效控制與最小特權身分分工；Day 23 建立架構決策矩陣，權衡開發協作、執行編排、模型存取路徑與資料庫特性；Day 24 建立三組分母評測牆、Gemini 路由擷取與 A/B 成本量測；Day 25 建立公開文字到候選資料庫之結構化抽取管線、Pydantic 防偽契約與 SQLite 採用收據；後續會探討完整驗收。新範例公開後，會持續更新這份導覽。
 
 
 ## LINE、Gemini 與 ADK 各做什麼？
@@ -140,7 +141,7 @@ Day 25 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/2012
 
 LINE 提供訊息入口；Gemini 理解問題並提出工具呼叫；ADK 串起模型、工具與事件。Python 工具負責實際讀取活動資料。Google AI Studio 是 Gemini API 金鑰的取得與管理入口；Google Antigravity 則用在本專案的開發協作。
 
-Day 12 已加入 Cloud Run 的 LINE 教學服務；Day 14 落地經同意的偏好記憶與店家查詢；Day 17 落地有型別的結果與服務降級；Day 18 建立 20 題地方契約評測與三層確定性驗收；Day 19 建立志工收件匣契約（真人端驗收移至 Day 26）；Day 20 實現成本帳本計算；Day 21 落地結構化追蹤核對與 Cloud Logging 映射；Day 22 交付受控停止閘門與最小特權分工；Day 23 建立架構決策矩陣；Day 24 交付三組分母實測評測牆與核對器。目前的入口、資料庫實驗與活動查詢各有對應範例，完整能力隨系列逐步整合。
+Day 12 已加入 Cloud Run 的 LINE 教學服務；Day 14 落地經同意的偏好記憶與店家查詢；Day 17 落地有型別的結果與服務降級；Day 18 建立 20 題地方契約評測與三層確定性驗收；Day 19 建立志工收件匣契約（真人端驗收移至 Day 26）；Day 20 實現成本帳本計算；Day 21 落地結構化追蹤核對與 Cloud Logging 映射；Day 22 交付受控停止閘門與最小特權分工；Day 23 建立架構決策矩陣；Day 24 交付三組分母實測評測牆與核對器；Day 25 交付公開文字結構化抽取與 SQLite 審閱採用儲存。目前的入口、資料庫實驗與活動查詢各有對應範例，完整能力隨系列逐步整合。
 
 ## LOCAL 的五個設計面向
 

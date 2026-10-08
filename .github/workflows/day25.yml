@@ -1,0 +1,51 @@
+name: LOCAL Day 25 ingestion pipeline and offline contract tests
+on:
+  push:
+    paths:
+      - "examples/day25/**"
+      - ".github/workflows/day25.yml"
+  pull_request:
+    paths:
+      - "examples/day25/**"
+      - ".github/workflows/day25.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.13.5"
+      - name: Install core dependencies
+        run: |
+          python -m pip install -r examples/day25/requirements-core.txt
+          python -m pip check
+      - name: Run 38 ingestion unit tests
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p ci-output
+          python -m unittest examples.day25.test_ingestion -v 2>&1 | tee ci-output/unit-tests.log
+      - name: Run SQLite demo
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m examples.day25.demo --out ci-output/demo-01 2>&1 | tee ci-output/demo-console.log
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        if: always()
+        with:
+          name: day25-offline-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ci-output/unit-tests.log
+            ci-output/demo-console.log
+            ci-output/demo-01/
+          retention-days: 30
+          if-no-files-found: error

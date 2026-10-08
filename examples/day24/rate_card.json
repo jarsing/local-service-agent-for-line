@@ -3,10 +3,10 @@
   "model_id": "gemini-3.8-flash",
   "scope": "standard_text_no_cache_no_grounding",
   "currency": "USD",
-  "input_usd_per_million": "0.30",
-  "output_usd_per_million": "2.50",
+  "input_usd_per_million": "0.75",
+  "output_usd_per_million": "3.75",
   "output_includes_thoughts": true,
   "source_url": "https://ai.google.dev/gemini-api/docs/pricing#gemini-3.8-flash",
-  "checked_date": "2026-10-07",
+  "checked_date": "2026-10-08",
   "billing_claim": "list_price_estimate_not_invoice"
 }

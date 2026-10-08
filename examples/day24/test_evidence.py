@@ -68,7 +68,7 @@ class EvidenceTests(unittest.TestCase):
     def test_total_not_used_to_fill_thoughts(self):
         self.r['usageMetadata']['thoughtsTokenCount']=None;self.assertIsNone(usage(self.r,1024)['thoughts'])
     def test_thoughts_charged_once(self):
-        u=estimate(usage(response(budget=1024),1024),RATE,MODEL);self.assertEqual(Decimal(u['usd']),Decimal('0.0000925'))
+        u=estimate(usage(response(budget=1024),1024),RATE,MODEL);self.assertEqual(Decimal(u['usd']),Decimal('0.00016875'))
     def test_rate_wrong_model_rejected(self):
         with self.assertRaises(ValueError):estimate(usage(self.r,0),RATE,'gemini-1.5-flash')
     def test_total_mismatch(self):

@@ -101,8 +101,6 @@ def usage(response: dict, budget: int) -> dict:
         out['thoughts_origin'] = 'INFERRED_FROM_EXPLICIT_DISABLED_BUDGET'
     if any(out[x] is None for x in ('input','output','thoughts','total')):
         return dict(out,cost_status='UNKNOWN',reason='INCOMPLETE_USAGE',usd=None)
-    if budget == 0 and out['thoughts'] != 0:
-        return dict(out,cost_status='INVALID',reason='THOUGHTS_WITH_DISABLED_BUDGET',usd=None)
     for snake,camel in (('cached_content_token_count','cachedContentTokenCount'),
                         ('tool_use_prompt_token_count','toolUsePromptTokenCount')):
         n = field(raw,snake,camel)

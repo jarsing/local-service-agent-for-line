@@ -55,7 +55,7 @@ python3 -m examples.day24.replay --run out/day24/live --out out/day24/backend-re
 | `contracts/summary.json` | 原20題應用回歸結果；受阻不算通過 |
 | `backend-replay/summary.json` | 捕捉後的新本機執行，不宣稱liveADK |
 
-Budget1024不是實際用量1024；缺thoughts欄時保留未知。只在budget0允許明示來源的零推導。費率是文字Standard公開估計，不是帳單。其他模態、快取、額外工具使用量不可套這張費率表。
+Budget1024不是實際用量1024；缺thoughts欄時保留未知，不因thinking_budget=0補零；資料不完整時不產生完整成本。費率是文字Standard公開估計，不是帳單。其他模態、快取、額外工具使用量不可套這張費率表。
 
 A/B每設定每題只有一次觀察，不提供統計顯著性或泛化結論。`safe_to_deploy`固定false；仍須完成原應用、通道與部署驗收。
 

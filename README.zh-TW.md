@@ -17,7 +17,7 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 24（2026/10/07）。** Day 1 的驗收規格與 Day 2～24 的範例已在 Repo；目前最新的實作是 **三組分母評測牆、Gemini 路由擷取與 A/B 成本量測（`examples/day24/`）：將 9 題路由準確率、6 列 A/B 成本量測與 20 題地方契約回歸嚴格拆開，杜絕拿快換準與分母偷換，搭配專用 GitHub Actions 離線 CI 與 60 項核對器測試**。本次導覽依據：[Day 24 程式範例](examples/day24/)。
+**程式導覽更新至 Day 24（2026/10/08）。** Day 1 的驗收規格與 Day 2～24 的範例已在 Repo；目前最新的實作是 **三組分母評測牆、Gemini 路由擷取與 A/B 成本量測（`examples/day24/`）：將 9 題路由準確率、6 列 A/B 成本量測與 20 題地方契約回歸嚴格拆開，杜絕拿快換準與分母偷換，搭配專用 GitHub Actions 離線 CI 與 62 項核對器測試**。本次導覽依據：[Day 24 程式範例](examples/day24/)。
 
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
@@ -125,7 +125,7 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 21 | [一條 Trace 找到問題：從模型工具呼叫一路追到後端結果](https://ithelp.ithome.com.tw/articles/10421328) | [examples/day21](examples/day21/) | [docs/day21](docs/day21/README.md) |
 | Day 22 | [權限、秘密與停止開關：最小特權與緊急制動](https://ithelp.ithome.com.tw/articles/10421645) | [examples/day22](examples/day22/) | [docs/day22](docs/day22/README.md) |
 | Day 23 | [選型判斷表：Google AI 工具箱在地方服務該怎麼選？](https://ithelp.ithome.com.tw/articles/10421985) | [examples/day23](examples/day23/) | [docs/day23](docs/day23/README.md) |
-| Day 24 | [改了一行，20 題還過嗎？Google AI 實測牆與 A/B 成本量測](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) | [examples/day24](examples/day24/) | [examples/day24](examples/day24/README.md) |
+| Day 24 | [改了一行，20 題還過嗎？Google AI 實測牆與 A/B 成本量測](https://ithelp.ithome.com.tw/articles/10422261) | [examples/day24](examples/day24/) | [docs/day24](docs/day24/README.md) |
 
 Day 25 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 

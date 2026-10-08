@@ -17,7 +17,7 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 24, October 7, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–24 examples. The latest example adds **an evaluation wall, Gemini routing capture, and A/B cost auditor (`examples/day24/`) that strictly separates 9 route accuracy cases, 6 A/B cost rows, and 20 local contract regressions, backed by 60 unit tests and dedicated GitHub Actions offline CI**. Reference code: [Day 24 example](examples/day24/).
+**Code index updated through Day 24, October 8, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–24 examples. The latest example adds **an evaluation wall, Gemini routing capture, and A/B cost auditor (`examples/day24/`) that strictly separates 9 route accuracy cases, 6 A/B cost rows, and 20 local contract regressions, backed by 62 unit tests and dedicated GitHub Actions offline CI**. Reference code: [Day 24 example](examples/day24/).
 
 
 | Start with a goal | Entry point | What to explore |
@@ -127,7 +127,7 @@ The articles are written in Traditional Chinese. English topic labels below summ
 | 21 | [One trace to find the defect: Follow from model tool call to backend result](https://ithelp.ithome.com.tw/articles/10421328) | [examples/day21](examples/day21/) | [docs/day21](docs/day21/README.md) |
 | 22 | [Permissions, Secrets, and Stop Gates: Least Privilege and Circuit Breaking](https://ithelp.ithome.com.tw/articles/10421645) | [examples/day22](examples/day22/) | [docs/day22](docs/day22/README.md) |
 | 23 | [Stack decision matrix: Choosing Google AI tools for local service agents](https://ithelp.ithome.com.tw/articles/10421985) | [examples/day23](examples/day23/) | [docs/day23](docs/day23/README.md) |
-| 24 | [Did Changing One Line Break the 20 Cases? Evaluation Wall and A/B Cost Measurement](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) | [examples/day24](examples/day24/) | [examples/day24](examples/day24/README.md) |
+| 24 | [Did Changing One Line Break the 20 Cases? Evaluation Wall and A/B Cost Measurement](https://ithelp.ithome.com.tw/articles/10422261) | [examples/day24](examples/day24/) | [docs/day24](docs/day24/README.md) |
 
 Find Day 25 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 

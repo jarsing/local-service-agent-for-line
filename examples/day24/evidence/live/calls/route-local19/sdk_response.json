@@ -1,0 +1,89 @@
+{
+  "automaticFunctionCallingHistory": null,
+  "candidates": [
+    {
+      "avgLogprobs": null,
+      "citationMetadata": null,
+      "content": {
+        "parts": [
+          {
+            "audioTranscription": null,
+            "codeExecutionResult": null,
+            "executableCode": null,
+            "fileData": null,
+            "functionCall": {
+              "args": {
+                "reason": "unsupported"
+              },
+              "id": "call_10029",
+              "name": "show_local_help",
+              "partialArgs": null,
+              "willContinue": null
+            },
+            "functionResponse": null,
+            "inlineData": null,
+            "mediaProcessing": null,
+            "mediaResolution": null,
+            "partMetadata": null,
+            "text": null,
+            "thought": null,
+            "thoughtSignature": "EqMFCqAFAWkUfROKtjCWl5dGTO5dPYZNIMEXK-k5WNJvGQcIVYCKyTbPBgGFY47dBNeZHtZ0PZZotRluOcG5VafL7eaDd0JX_NoKmRNm-K7aOAO6DeRJRVKMNYttQvWckY2yRqKXv60yijFwslnGhvBodAs4BTFAVc8luuIDiBehCncmH_wBnWgFPTzXwP1nLhsVzd0KDDjaYMMbY-y3AEwR7XUSXhk9B6qSuNR95g0VLW-cO_EqoloEIxCj12kJ4cN7vJb36a1_8xRixZncMOJOew7A_G9xm_q9DiyIEIg_3r09NHQf8aQ4d2FV9ThLcRGVS1sfIB7_yFWb4hpYWmegUBsDOrfANfpwvfr9CCe7kubEuw0i9bybSu7iNRvXO19B3BQnH1VbAAWR83QLw0BKgcFoUh-ogelHpZ_nBocXehqvoukTXWoQY1q3XGZIy16fMxXQvVhfLCvPHZ1a3ZQO5x9i_U4-V5xN6yWdGZdfg_McQQBfDAf889ZzZyK6F_IcIYkzgUbKLgdfmuY26oDrLJiFZKPfeAU4zmaQdH0Tb_km-9bbgA0ofGmXHLoepL1-fpIHTAvw-o_7YgxlrKTBJ7fAfnvqFsuCC1YFdpziF866PJC2IlR0H8EGOo0RDruzm_kXnj3qK92tgYP4fLk3RosLqbEepCXq8qDIW7NVKNtiqktL_hqwovLEdCGcppxXRXKq64BGnTMwnxmkSEr6jlfdGKjTWCr25nuQgu7Fn4a7MrbQR2sh3S4y5UM4S01xgnvC1JBQz0TH499wNoRdPoaV2jJayvkQzvGWLZs6FT3_wO14mv-mTg_zEbnMF2BNDGywVqOGB0_pKl94YRKhDcEW-ZHRqNjVWQsFevpTY_xRLa77-GEcrFy_s1bqvWeiwbxr",
+            "toolCall": null,
+            "toolResponse": null,
+            "videoMetadata": null
+          }
+        ],
+        "role": "model"
+      },
+      "finishMessage": null,
+      "finishReason": "STOP",
+      "groundingMetadata": null,
+      "index": 0,
+      "logprobsResult": null,
+      "safetyRatings": null,
+      "tokenCount": null,
+      "urlContextMetadata": null
+    }
+  ],
+  "createTime": null,
+  "modelStatus": null,
+  "modelVersion": "gemini-3.8-flash",
+  "parsed": null,
+  "promptFeedback": null,
+  "responseId": "_nvGatCoLOTb1e8Pof636QE",
+  "sdkHttpResponse": {
+    "body": null,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 07 Oct 2026 17:06:10 GMT",
+      "server": "scaffolding on HTTPServer2",
+      "server-timing": "gfet4t7; dur=3504",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-gemini-service-tier": "standard",
+      "x-xss-protection": "0"
+    }
+  },
+  "usageMetadata": {
+    "cacheTokensDetails": null,
+    "cachedContentTokenCount": null,
+    "candidatesTokenCount": 19,
+    "candidatesTokensDetails": null,
+    "promptTokenCount": 781,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 781
+      }
+    ],
+    "thoughtsTokenCount": 151,
+    "toolUsePromptTokenCount": null,
+    "toolUsePromptTokensDetails": null,
+    "totalTokenCount": 951,
+    "trafficType": null
+  }
+}

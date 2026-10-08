@@ -1,0 +1,89 @@
+{
+  "automaticFunctionCallingHistory": null,
+  "candidates": [
+    {
+      "avgLogprobs": null,
+      "citationMetadata": null,
+      "content": {
+        "parts": [
+          {
+            "audioTranscription": null,
+            "codeExecutionResult": null,
+            "executableCode": null,
+            "fileData": null,
+            "functionCall": {
+              "args": {
+                "reason": "unsupported"
+              },
+              "id": "call_617358",
+              "name": "show_local_help",
+              "partialArgs": null,
+              "willContinue": null
+            },
+            "functionResponse": null,
+            "inlineData": null,
+            "mediaProcessing": null,
+            "mediaResolution": null,
+            "partMetadata": null,
+            "text": null,
+            "thought": null,
+            "thoughtSignature": "Et8CCtwCAWkUfRPLxFUwM5QqkjV2EQ_wTQrEMsrsBHC8Diu8QaEwwMdEi64Zt6rm4dDUivjALq43UYFpuTkMX98r-YYip74GIcnHFUBo4YY5WDnpgsGQ_XzsI5EKi9eyoc72n2HzDRRkfkqKTd1N52HdutcxBqfqv6cEMNjjZ7SaPptCt0Dlo5T0QpR4kJrzh5E8r26MgiCabsupVsXuXPppMg0LYMpkf8H6A5g0wUMSH3FggUcs3EilhBAE33c62-yhFAxqCCX1YZWlWE8eVy6ua22gumYCbwUy28R9w5Ap9CjvhIWgNJ6HcxmNwGQaf032i7RhXOBOU3L7DThSaZgT-tR624DVvQFe7ESCvgsRhkDGEOdEOtmybqRAA0h4nfc41GGWYPpT1N6YywST4paoVUIAIvzPtVcwmwqHRBjxvPnRNuAN5RIqSizpJiAqZ2rmOVofQiJTGP8KXNROF62u",
+            "toolCall": null,
+            "toolResponse": null,
+            "videoMetadata": null
+          }
+        ],
+        "role": "model"
+      },
+      "finishMessage": null,
+      "finishReason": "STOP",
+      "groundingMetadata": null,
+      "index": 0,
+      "logprobsResult": null,
+      "safetyRatings": null,
+      "tokenCount": null,
+      "urlContextMetadata": null
+    }
+  ],
+  "createTime": null,
+  "modelStatus": null,
+  "modelVersion": "gemini-3.8-flash",
+  "parsed": null,
+  "promptFeedback": null,
+  "responseId": "-XvGavneKuay1e8Pmo7j2A4",
+  "sdkHttpResponse": {
+    "body": null,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 07 Oct 2026 17:06:04 GMT",
+      "server": "scaffolding on HTTPServer2",
+      "server-timing": "gfet4t7; dur=2994",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-gemini-service-tier": "standard",
+      "x-xss-protection": "0"
+    }
+  },
+  "usageMetadata": {
+    "cacheTokensDetails": null,
+    "cachedContentTokenCount": null,
+    "candidatesTokenCount": 19,
+    "candidatesTokensDetails": null,
+    "promptTokenCount": 771,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 771
+      }
+    ],
+    "thoughtsTokenCount": 64,
+    "toolUsePromptTokenCount": null,
+    "toolUsePromptTokensDetails": null,
+    "totalTokenCount": 854,
+    "trafficType": null
+  }
+}

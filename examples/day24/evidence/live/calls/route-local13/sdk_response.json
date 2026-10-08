@@ -1,0 +1,91 @@
+{
+  "automaticFunctionCallingHistory": null,
+  "candidates": [
+    {
+      "avgLogprobs": null,
+      "citationMetadata": null,
+      "content": {
+        "parts": [
+          {
+            "audioTranscription": null,
+            "codeExecutionResult": null,
+            "executableCode": null,
+            "fileData": null,
+            "functionCall": {
+              "args": {
+                "area": "大村",
+                "dietary_type": "vegetarian",
+                "keyword": ""
+              },
+              "id": "call_28826",
+              "name": "search_local_places",
+              "partialArgs": null,
+              "willContinue": null
+            },
+            "functionResponse": null,
+            "inlineData": null,
+            "mediaProcessing": null,
+            "mediaResolution": null,
+            "partMetadata": null,
+            "text": null,
+            "thought": null,
+            "thoughtSignature": "EuoCCucCAWkUfRPIGykePTCgptk8FK05tL4n_Oobp6kPlBuw4Zwu7JJoB0HkaVm-FlwwQ2sQPzz1tXZA4qVuuyLophq4a_mzZt8fGG8a-eQ8C_-qxuW8rb84Y313jlV34cbItbDzQYgHWntXbmDgLgX3fxgt54YzBQceQdO3R_dzTV-gyv5b4du5HuNhG2MqFZ8cxbyaaABanprtTikKJ7USDcfxNVMqBBIn3pN5My5EYf0zU3EgCgqMAfEGwRH9lYDGPjCryrchKAcYSodYbfup8e4Z-rvUJklZEaWVzoMJ2p5MpnZfvNVpYu7JITY8xqX4Ly1pG-0PFbZyIVz8wgJ79Wa00aSvtkvMOmj5Y8dP3EE8VBKJC56_4feqTpFm7vhguEjt5l3YjSWqEbgIU0MY4FN5jR7KJRwcplKT1IgKtUzz7we5-YUdGr_EAbjOtsTQbNnW1FcX0yh-_9Ohiltc3DMBvGKhZPutka4=",
+            "toolCall": null,
+            "toolResponse": null,
+            "videoMetadata": null
+          }
+        ],
+        "role": "model"
+      },
+      "finishMessage": null,
+      "finishReason": "STOP",
+      "groundingMetadata": null,
+      "index": 0,
+      "logprobsResult": null,
+      "safetyRatings": null,
+      "tokenCount": null,
+      "urlContextMetadata": null
+    }
+  ],
+  "createTime": null,
+  "modelStatus": null,
+  "modelVersion": "gemini-3.8-flash",
+  "parsed": null,
+  "promptFeedback": null,
+  "responseId": "8XvGap7wCf-x1e8Pl4ewoQ0",
+  "sdkHttpResponse": {
+    "body": null,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 07 Oct 2026 17:05:55 GMT",
+      "server": "scaffolding on HTTPServer2",
+      "server-timing": "gfet4t7; dur=2515",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-gemini-service-tier": "standard",
+      "x-xss-protection": "0"
+    }
+  },
+  "usageMetadata": {
+    "cacheTokensDetails": null,
+    "cachedContentTokenCount": null,
+    "candidatesTokenCount": 33,
+    "candidatesTokensDetails": null,
+    "promptTokenCount": 764,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 764
+      }
+    ],
+    "thoughtsTokenCount": 78,
+    "toolUsePromptTokenCount": null,
+    "toolUsePromptTokensDetails": null,
+    "totalTokenCount": 875,
+    "trafficType": null
+  }
+}

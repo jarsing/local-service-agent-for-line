@@ -41,7 +41,7 @@ python3 -m examples.day24.replay --run out/day24/live --out out/day24/backend-re
 
 `instruction.txt` 是新的直接SDK實驗提示，不是正式ADK Runtime的原封重跑。`replay` 也只是稍後用原本機應用執行已捕捉選擇，**不是原API呼叫當下的下游事件**。它只允許三種唯讀／說明工具，沒有LINE推播。
 
-本次提供程式未完成真實SDK呼叫與完整Repo整合測試；保留這個邊界直到取得真實執行紀錄。
+本範例已附 15 筆真實 Gemini 3.8 Flash SDK 調用序列化紀錄與稽核結果（位於 `examples/day24/evidence/`）；後端重播與原 live 事件分開標記，在未完成真人與線上通道驗收前，`safe_to_deploy` 保持 false。
 
 ## 輸出檔案
 

@@ -1,0 +1,89 @@
+{
+  "automaticFunctionCallingHistory": null,
+  "candidates": [
+    {
+      "avgLogprobs": null,
+      "citationMetadata": null,
+      "content": {
+        "parts": [
+          {
+            "audioTranscription": null,
+            "codeExecutionResult": null,
+            "executableCode": null,
+            "fileData": null,
+            "functionCall": {
+              "args": {
+                "reason": "unsupported"
+              },
+              "id": "call_21352",
+              "name": "show_local_help",
+              "partialArgs": null,
+              "willContinue": null
+            },
+            "functionResponse": null,
+            "inlineData": null,
+            "mediaProcessing": null,
+            "mediaResolution": null,
+            "partMetadata": null,
+            "text": null,
+            "thought": null,
+            "thoughtSignature": "Eu4ECusEAWkUfRPiadOcaGLO0U1s5VyrdsX5wBHqHUuEDS0vRn35skLoaylBJ65sjQ8y2kwMQLPGCh_i1-96cSpwJ2GzfXPXsnFz8OoWdPe_ikBxU-vJnqCUEGggWVdxBTZNClZ9vT0ZzpAXnjzcF7XJetco2XzbXpuwD9OHGNRcAus-RgDmhPpg4yCMO0uXDGPBONLpc9z6WcybNsWbLgwfn1hfGpCyGdMpTPPG3xAXI_ODXsL5v8rVT0QnFh9lNB0iQnOpiR2nDsfJC5x39sgj76rlMXt5q4896c2YgrwoQluE5QXNgj3p4cMXK5CPhynyHcb2h1aNQ_MULJOIbK8vKvG3ifdIf4HAtJfolzJs-1IXOapHFJjnbW61ocWfjKhwjEi0xXdkOLSUuRl9gfQczMaOJ9pKppVl6iiCtEm5dC2CLrSSjar2CyyOMALnQCgup3LfjCpVjRAPEYq2p1_3tGxl9VWOr7PaG1u5grAKP32Pcnl8O9z7FZ8utnAc9G-gPjctNPmWAR61oj1ZzhFXRPmNdc5kdgECXSyWItOLrgxOGVGH-3CVN7eVyOa-UXqgBWnj6XQ0SG_0edThP0v9rh-kk_-U2ZZOGZ7eaIuNHArpea_egTORf1smV9RysJ6Y3cbN04H7-4xqNt6YpgO1aQ6M5YsU2kDL-QYD0OT71-mpU9mZ_OBSnMMS507Lvj2YpkWt8N0dYisgt0UbPEj6-HPbRwextCf27Ng2r_ZKC6uzf5zP56zYPYrQuKTAzHog2omnKrfaAGUk1fPRG-Q7wCwunYmRmkzYxCeXAoYh3_AFld_tylg4yA2HFHFCWw==",
+            "toolCall": null,
+            "toolResponse": null,
+            "videoMetadata": null
+          }
+        ],
+        "role": "model"
+      },
+      "finishMessage": null,
+      "finishReason": "STOP",
+      "groundingMetadata": null,
+      "index": 0,
+      "logprobsResult": null,
+      "safetyRatings": null,
+      "tokenCount": null,
+      "urlContextMetadata": null
+    }
+  ],
+  "createTime": null,
+  "modelStatus": null,
+  "modelVersion": "gemini-3.8-flash",
+  "parsed": null,
+  "promptFeedback": null,
+  "responseId": "HnzGaprCNqON1e8P_7vbmAw",
+  "sdkHttpResponse": {
+    "body": null,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 07 Oct 2026 17:06:42 GMT",
+      "server": "scaffolding on HTTPServer2",
+      "server-timing": "gfet4t7; dur=3330",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-gemini-service-tier": "standard",
+      "x-xss-protection": "0"
+    }
+  },
+  "usageMetadata": {
+    "cacheTokensDetails": null,
+    "cachedContentTokenCount": null,
+    "candidatesTokenCount": 19,
+    "candidatesTokensDetails": null,
+    "promptTokenCount": 781,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 781
+      }
+    ],
+    "thoughtsTokenCount": 144,
+    "toolUsePromptTokenCount": null,
+    "toolUsePromptTokensDetails": null,
+    "totalTokenCount": 944,
+    "trafficType": null
+  }
+}

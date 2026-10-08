@@ -1,0 +1,327 @@
+{
+  "config_base": {
+    "automatic_function_calling": {
+      "disable": true
+    },
+    "candidate_count": 1,
+    "max_output_tokens": 2048,
+    "temperature": 0,
+    "tool_config": {
+      "function_calling_config": {
+        "mode": "AUTO"
+      }
+    }
+  },
+  "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+  "created_at_utc": "2026-10-07T14:32:07.968783+00:00",
+  "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+  "endpoint": "generateContent:v1beta:DeveloperAPI",
+  "instruction": "你是 LOCAL 地方服務的單回合工具路由器。依使用者原問句選一個工具，只提出一次工具要求。\n服務只有查活動、查精選店家、提出飲食記憶確認、管理偏好與引導詢問，沒有預約。\n查活動、步道時間或集合資訊用 search_local_events；找蔬食店家用 search_local_places。\narea 只取問句的鄉鎮；只有「附近」時填附近，交給後端追問，不捏造定位。\n素食未細分時用 vegetarian；明示全素或純素用 vegan。未提飲食條件時 dietary_type 留空，後端從仍有效的同意偏好補空缺。不要猜舊偏好。\nkeyword 只放店名或明示搜尋字；推薦、少走路不是店名，留空。工具沒有即時營業、輪椅通行保證或距離排行。\n只有本人明確要求保存未來的飲食條件，才用 propose_dietary_memory；它只是等待確認的提案，不是已保存。\n查看、更正或忘記偏好可以用 request_memory_management；forget 只顯示確認，不直接刪除。\n預約、停車場、接駁公車等未支援需求用 show_local_help，reason=unsupported；需求不明時 reason 留空。\n工具參數不可含 owner、approved、任意 token、網址或卡片結構。不能用文字宣告已預約、已建單或已保存。\n本輪只觀察工具要求；真正工具執行、資料持久化與使用者介面另由後端驗收。\n",
+  "instruction_sha256": "c3a554dcdcb3034dfbefb707a1fd376fc473750dec76542f50462dfb5a8ff52c",
+  "items": [
+    {
+      "budget": 0,
+      "case_id": "local01",
+      "group": "route",
+      "input": "花壇的店現在有開嗎？輪椅能進去嗎？",
+      "input_sha256": "b7aec402be0579620cba4ffe0085efade005b88602f166b37e414f4c7f9af61d",
+      "key": "route-local01"
+    },
+    {
+      "budget": 0,
+      "case_id": "local02",
+      "group": "route",
+      "input": "花壇有什麼店？",
+      "input_sha256": "05147640e695f19bb33adf7ced77122fb167da037d25af29d82125ff72718bfd",
+      "key": "route-local02"
+    },
+    {
+      "budget": 0,
+      "case_id": "local09",
+      "group": "route",
+      "input": "附近有什麼蔬食店？",
+      "input_sha256": "676e2401760c2dff0b530b96aa8b6fcdfc012638e3f52d433a4cea70f81e392d",
+      "key": "route-local09"
+    },
+    {
+      "budget": 0,
+      "case_id": "local11",
+      "group": "route",
+      "input": "花壇場次的集合點在哪？",
+      "input_sha256": "f67369e37369d05e310b93123d450802c9a5da13b6b624e8d48fd2d4cb35f5ea",
+      "key": "route-local11"
+    },
+    {
+      "budget": 0,
+      "case_id": "local12",
+      "group": "route",
+      "input": "花壇有推薦的素食店嗎？",
+      "input_sha256": "f4e3cfe254af26c8b92862e24363338eca5825c1ddf0ff63b5e57dc004c4d3b4",
+      "key": "route-local12"
+    },
+    {
+      "budget": 0,
+      "case_id": "local13",
+      "group": "route",
+      "input": "查大村素食",
+      "input_sha256": "20b46ac1fe80731534cf79a9d69981456a3018f71439aa06d7b92655bef4f0d1",
+      "key": "route-local13"
+    },
+    {
+      "budget": 0,
+      "case_id": "local17",
+      "group": "route",
+      "input": "可以幫我預約明天的爌肉飯嗎",
+      "input_sha256": "51932bcb3dc070b85f89b4f5eece664dc277b7a202919baa834bed21bc24a61a",
+      "key": "route-local17"
+    },
+    {
+      "budget": 0,
+      "case_id": "local18",
+      "group": "route",
+      "input": "附近能停車嗎？有免費接駁車嗎？",
+      "input_sha256": "717d8650f7cfc2c7870c1ede0ddb9420a2bbcdfa6403b35e264b457b4ad7f61b",
+      "key": "route-local18"
+    },
+    {
+      "budget": 0,
+      "case_id": "local19",
+      "group": "route",
+      "input": "現在哪裡有開著的爌肉飯？可以幫我預約兩碗帶走嗎？",
+      "input_sha256": "288b9c041a4bec241ba3c5015ca90c7ddcd7b81a27f006c2a11f319865d32e2d",
+      "key": "route-local19"
+    },
+    {
+      "budget": 0,
+      "case_id": "local11",
+      "group": "A",
+      "input": "花壇場次的集合點在哪？",
+      "input_sha256": "f67369e37369d05e310b93123d450802c9a5da13b6b624e8d48fd2d4cb35f5ea",
+      "key": "local11-A"
+    },
+    {
+      "budget": 1024,
+      "case_id": "local11",
+      "group": "B",
+      "input": "花壇場次的集合點在哪？",
+      "input_sha256": "f67369e37369d05e310b93123d450802c9a5da13b6b624e8d48fd2d4cb35f5ea",
+      "key": "local11-B"
+    },
+    {
+      "budget": 1024,
+      "case_id": "local12",
+      "group": "B",
+      "input": "花壇有推薦的素食店嗎？",
+      "input_sha256": "f4e3cfe254af26c8b92862e24363338eca5825c1ddf0ff63b5e57dc004c4d3b4",
+      "key": "local12-B"
+    },
+    {
+      "budget": 0,
+      "case_id": "local12",
+      "group": "A",
+      "input": "花壇有推薦的素食店嗎？",
+      "input_sha256": "f4e3cfe254af26c8b92862e24363338eca5825c1ddf0ff63b5e57dc004c4d3b4",
+      "key": "local12-A"
+    },
+    {
+      "budget": 0,
+      "case_id": "local19",
+      "group": "A",
+      "input": "現在哪裡有開著的爌肉飯？可以幫我預約兩碗帶走嗎？",
+      "input_sha256": "288b9c041a4bec241ba3c5015ca90c7ddcd7b81a27f006c2a11f319865d32e2d",
+      "key": "local19-A"
+    },
+    {
+      "budget": 1024,
+      "case_id": "local19",
+      "group": "B",
+      "input": "現在哪裡有開著的爌肉飯？可以幫我預約兩碗帶走嗎？",
+      "input_sha256": "288b9c041a4bec241ba3c5015ca90c7ddcd7b81a27f006c2a11f319865d32e2d",
+      "key": "local19-B"
+    }
+  ],
+  "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+  "model_id": "gemini-2.5-flash",
+  "origin": "DIRECT_SDK_CAPTURE",
+  "rate_card_sha256": "a1dc37a82dec5ccd302e18573e55eb59f432784446bcbe7444fe48fcb7b2e71c",
+  "request_count_limit": 15,
+  "runtime": {
+    "python": "3.13.5",
+    "system": "Darwin"
+  },
+  "schema_version": "day24-direct-routing-v1",
+  "sdk_attempts": 1,
+  "sdk_version": "2.23.0",
+  "source_commit": "ff4c303f7f52e9c810f75a744bc4000733f0026a",
+  "source_files": {
+    "__init__.py": "6d6469e47169f1d76ae38530be9b24fff9eefc069bd00de1cc4c984f99e1d740",
+    "audit.py": "19f4416e206ca79c9a8ccc287e07a0e7fc25c2bdfb4dec6bff91f2cb425f6df2",
+    "capture.py": "e5c9ced6de4de6ed5f91bb6bb729e364e65e4d0e69643e49741ffebef6bb3f3d",
+    "evidence.py": "ffe4214b7bbce473d1d586b63295f9fdda84806a7d6274ed2a9b964523a437b2",
+    "offline.py": "dbb09beff91875e582a8fd19e00d8fa88a78c930c82e5c35dac9ef39da0759d1",
+    "replay.py": "63ee1f6e79c6a9f98422634bd80c013eaa5006bf65f168e7bdf5d648c54040a0",
+    "test_evidence.py": "77254715231c7bc552b3eeaa2a92e75802218087cccfe3592d0692bf84c0415d"
+  },
+  "source_tree_sha256": "4ddca20691465724d9c54f01082e656e73bd2f2bf60b465eff14ff04a121198b",
+  "state": "PLANNED_NOT_EXECUTED",
+  "tools": [
+    {
+      "description": "查地方活動公開快照；沒有集合資訊時由後端說明未知。",
+      "name": "search_local_events",
+      "parameters": {
+        "properties": {
+          "area": {
+            "type": "STRING"
+          },
+          "date": {
+            "type": "STRING"
+          },
+          "keyword": {
+            "type": "STRING"
+          }
+        },
+        "required": [
+          "date",
+          "area",
+          "keyword"
+        ],
+        "type": "OBJECT"
+      }
+    },
+    {
+      "description": "查精選蔬食店家快照；缺鄉鎮由後端追問，不保證即時營業。",
+      "name": "search_local_places",
+      "parameters": {
+        "properties": {
+          "area": {
+            "type": "STRING"
+          },
+          "dietary_type": {
+            "enum": [
+              "",
+              "any",
+              "vegetarian",
+              "vegan",
+              "ovo_lacto",
+              "lacto",
+              "allium",
+              "friendly",
+              "蔬食",
+              "素食",
+              "全素",
+              "純素",
+              "蛋奶素",
+              "奶素",
+              "五辛素",
+              "蔬食友善",
+              "不限"
+            ],
+            "type": "STRING"
+          },
+          "keyword": {
+            "type": "STRING"
+          }
+        },
+        "required": [
+          "area",
+          "dietary_type",
+          "keyword"
+        ],
+        "type": "OBJECT"
+      }
+    },
+    {
+      "description": "不支援需求或不明需求的固定安全入口；reason 只能空字串或 unsupported。",
+      "name": "show_local_help",
+      "parameters": {
+        "properties": {
+          "reason": {
+            "enum": [
+              "",
+              "unsupported"
+            ],
+            "type": "STRING"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "type": "OBJECT"
+      }
+    },
+    {
+      "description": "提出飲食記憶確認；使用者未按同意前不得保存。",
+      "name": "propose_dietary_memory",
+      "parameters": {
+        "properties": {
+          "area": {
+            "type": "STRING"
+          },
+          "dietary_type": {
+            "type": "STRING"
+          },
+          "keyword": {
+            "type": "STRING"
+          }
+        },
+        "required": [
+          "dietary_type",
+          "area",
+          "keyword"
+        ],
+        "type": "OBJECT"
+      }
+    },
+    {
+      "description": "要求查看、更正、忘記偏好的操作介面；不直接確認修改。",
+      "name": "request_memory_management",
+      "parameters": {
+        "properties": {
+          "action": {
+            "enum": [
+              "inspect",
+              "update",
+              "forget"
+            ],
+            "type": "STRING"
+          },
+          "dietary_type": {
+            "enum": [
+              "",
+              "any",
+              "vegetarian",
+              "vegan",
+              "ovo_lacto",
+              "lacto",
+              "allium",
+              "friendly",
+              "蔬食",
+              "素食",
+              "全素",
+              "純素",
+              "蛋奶素",
+              "奶素",
+              "五辛素",
+              "蔬食友善",
+              "不限"
+            ],
+            "type": "STRING"
+          }
+        },
+        "required": [
+          "action",
+          "dietary_type"
+        ],
+        "type": "OBJECT"
+      }
+    }
+  ],
+  "tools_sha256": "c05d564b008fbe41b22502bfbbd31a227e9a23d3ed5bdf21aedc2bc8d99ce8bb",
+  "transport_policy": {
+    "automatic_retries": 0,
+    "concurrency": 1,
+    "interval_seconds": 2.0,
+    "timeout_ms": 18000
+  },
+  "working_tree_dirty": false
+}

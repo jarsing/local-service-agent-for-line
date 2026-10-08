@@ -1,0 +1,91 @@
+{
+  "automaticFunctionCallingHistory": null,
+  "candidates": [
+    {
+      "avgLogprobs": null,
+      "citationMetadata": null,
+      "content": {
+        "parts": [
+          {
+            "audioTranscription": null,
+            "codeExecutionResult": null,
+            "executableCode": null,
+            "fileData": null,
+            "functionCall": {
+              "args": {
+                "area": "附近",
+                "dietary_type": "vegetarian",
+                "keyword": ""
+              },
+              "id": "call_7135",
+              "name": "search_local_places",
+              "partialArgs": null,
+              "willContinue": null
+            },
+            "functionResponse": null,
+            "inlineData": null,
+            "mediaProcessing": null,
+            "mediaResolution": null,
+            "partMetadata": null,
+            "text": null,
+            "thought": null,
+            "thoughtSignature": "EocDCoQDAWkUfRM0pRUgjr-uONg_YaSIq_IV46soEho6-yZJ-NLta86BugTjZSfrfdeu37okcqYX3mnXicGfRgc3a9zGC_GdyHlzO0jgvldcyDwlpp7z4Q6y_vqm-UPZ4-uLR8MXnyCfbM5PbFVHBqGWfF6s8lVNigshz6BGUKtAjfnMZotX6dhXtd0ocbpNAXVZ0qFPmw7wo0KDlZKtq8dzXVHdmh82qlZDpViuNzaALWAXK1y_kJJGbUORYQeeRk2cOsDjWm4qvEKradCz7XWFn6TrYNnhZ_PpoFJmKyQtrZ3CTKBL2F5Oo57BLPs_Iv_UjoD0kLoHItlTkL4F-QLcd2Sy_JgeA-wq9R8kop_TWViRsHruy6Cycrr0-tiTV1qdi5qdkm_IvLC274RapYsdmDjqGlaFPaDzg2SA57srYfsxJOYHcbPKxfdnzUqSajbUymDvQqRqh31KJqsZMSH3_6Kbdi870nReUAv6P0ch8V3dgY5GlUWSn6MNCs3qpfxf3rjztcZWQg==",
+            "toolCall": null,
+            "toolResponse": null,
+            "videoMetadata": null
+          }
+        ],
+        "role": "model"
+      },
+      "finishMessage": null,
+      "finishReason": "STOP",
+      "groundingMetadata": null,
+      "index": 0,
+      "logprobsResult": null,
+      "safetyRatings": null,
+      "tokenCount": null,
+      "urlContextMetadata": null
+    }
+  ],
+  "createTime": null,
+  "modelStatus": null,
+  "modelVersion": "gemini-3.8-flash",
+  "parsed": null,
+  "promptFeedback": null,
+  "responseId": "2HvGaoLCKP26vr0PuqmvyQE",
+  "sdkHttpResponse": {
+    "body": null,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 07 Oct 2026 17:05:32 GMT",
+      "server": "scaffolding on HTTPServer2",
+      "server-timing": "gfet4t7; dur=4165",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-gemini-service-tier": "standard",
+      "x-xss-protection": "0"
+    }
+  },
+  "usageMetadata": {
+    "cacheTokensDetails": null,
+    "cachedContentTokenCount": null,
+    "candidatesTokenCount": 32,
+    "candidatesTokensDetails": null,
+    "promptTokenCount": 766,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 766
+      }
+    ],
+    "thoughtsTokenCount": 82,
+    "toolUsePromptTokenCount": null,
+    "toolUsePromptTokensDetails": null,
+    "totalTokenCount": 880,
+    "trafficType": null
+  }
+}

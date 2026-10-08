@@ -1,0 +1,178 @@
+{
+  "config": {
+    "automatic_function_calling": {
+      "disable": true
+    },
+    "candidate_count": 1,
+    "max_output_tokens": 2048,
+    "system_instruction": "你是 LOCAL 地方服務的單回合工具路由器。依使用者原問句選一個工具，只提出一次工具要求。\n服務只有查活動、查精選店家、提出飲食記憶確認、管理偏好與引導詢問，沒有預約。\n查活動、步道時間或集合資訊用 search_local_events；找蔬食店家用 search_local_places。\narea 只取問句的鄉鎮；只有「附近」時填附近，交給後端追問，不捏造定位。\n素食未細分時用 vegetarian；明示全素或純素用 vegan。未提飲食條件時 dietary_type 留空，後端從仍有效的同意偏好補空缺。不要猜舊偏好。\nkeyword 只放店名或明示搜尋字；推薦、少走路不是店名，留空。工具沒有即時營業、輪椅通行保證或距離排行。\n只有本人明確要求保存未來的飲食條件，才用 propose_dietary_memory；它只是等待確認的提案，不是已保存。\n查看、更正或忘記偏好可以用 request_memory_management；forget 只顯示確認，不直接刪除。\n預約、停車場、接駁公車等未支援需求用 show_local_help，reason=unsupported；需求不明時 reason 留空。\n工具參數不可含 owner、approved、任意 token、網址或卡片結構。不能用文字宣告已預約、已建單或已保存。\n本輪只觀察工具要求；真正工具執行、資料持久化與使用者介面另由後端驗收。\n",
+    "temperature": 0,
+    "thinking_config": {
+      "include_thoughts": false,
+      "thinking_budget": 0
+    },
+    "tool_config": {
+      "function_calling_config": {
+        "mode": "AUTO"
+      }
+    },
+    "tools": [
+      {
+        "function_declarations": [
+          {
+            "description": "查地方活動公開快照；沒有集合資訊時由後端說明未知。",
+            "name": "search_local_events",
+            "parameters": {
+              "properties": {
+                "area": {
+                  "type": "STRING"
+                },
+                "date": {
+                  "type": "STRING"
+                },
+                "keyword": {
+                  "type": "STRING"
+                }
+              },
+              "required": [
+                "date",
+                "area",
+                "keyword"
+              ],
+              "type": "OBJECT"
+            }
+          },
+          {
+            "description": "查精選蔬食店家快照；缺鄉鎮由後端追問，不保證即時營業。",
+            "name": "search_local_places",
+            "parameters": {
+              "properties": {
+                "area": {
+                  "type": "STRING"
+                },
+                "dietary_type": {
+                  "enum": [
+                    "",
+                    "any",
+                    "vegetarian",
+                    "vegan",
+                    "ovo_lacto",
+                    "lacto",
+                    "allium",
+                    "friendly",
+                    "蔬食",
+                    "素食",
+                    "全素",
+                    "純素",
+                    "蛋奶素",
+                    "奶素",
+                    "五辛素",
+                    "蔬食友善",
+                    "不限"
+                  ],
+                  "type": "STRING"
+                },
+                "keyword": {
+                  "type": "STRING"
+                }
+              },
+              "required": [
+                "area",
+                "dietary_type",
+                "keyword"
+              ],
+              "type": "OBJECT"
+            }
+          },
+          {
+            "description": "不支援需求或不明需求的固定安全入口；reason 只能空字串或 unsupported。",
+            "name": "show_local_help",
+            "parameters": {
+              "properties": {
+                "reason": {
+                  "enum": [
+                    "",
+                    "unsupported"
+                  ],
+                  "type": "STRING"
+                }
+              },
+              "required": [
+                "reason"
+              ],
+              "type": "OBJECT"
+            }
+          },
+          {
+            "description": "提出飲食記憶確認；使用者未按同意前不得保存。",
+            "name": "propose_dietary_memory",
+            "parameters": {
+              "properties": {
+                "area": {
+                  "type": "STRING"
+                },
+                "dietary_type": {
+                  "type": "STRING"
+                },
+                "keyword": {
+                  "type": "STRING"
+                }
+              },
+              "required": [
+                "dietary_type",
+                "area",
+                "keyword"
+              ],
+              "type": "OBJECT"
+            }
+          },
+          {
+            "description": "要求查看、更正、忘記偏好的操作介面；不直接確認修改。",
+            "name": "request_memory_management",
+            "parameters": {
+              "properties": {
+                "action": {
+                  "enum": [
+                    "inspect",
+                    "update",
+                    "forget"
+                  ],
+                  "type": "STRING"
+                },
+                "dietary_type": {
+                  "enum": [
+                    "",
+                    "any",
+                    "vegetarian",
+                    "vegan",
+                    "ovo_lacto",
+                    "lacto",
+                    "allium",
+                    "friendly",
+                    "蔬食",
+                    "素食",
+                    "全素",
+                    "純素",
+                    "蛋奶素",
+                    "奶素",
+                    "五辛素",
+                    "蔬食友善",
+                    "不限"
+                  ],
+                  "type": "STRING"
+                }
+              },
+              "required": [
+                "action",
+                "dietary_type"
+              ],
+              "type": "OBJECT"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "contents": "花壇場次的集合點在哪？",
+  "model": "gemini-2.5-flash"
+}

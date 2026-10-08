@@ -1,0 +1,91 @@
+{
+  "automaticFunctionCallingHistory": null,
+  "candidates": [
+    {
+      "avgLogprobs": null,
+      "citationMetadata": null,
+      "content": {
+        "parts": [
+          {
+            "audioTranscription": null,
+            "codeExecutionResult": null,
+            "executableCode": null,
+            "fileData": null,
+            "functionCall": {
+              "args": {
+                "area": "花壇",
+                "date": "",
+                "keyword": ""
+              },
+              "id": "call_15595",
+              "name": "search_local_events",
+              "partialArgs": null,
+              "willContinue": null
+            },
+            "functionResponse": null,
+            "inlineData": null,
+            "mediaProcessing": null,
+            "mediaResolution": null,
+            "partMetadata": null,
+            "text": null,
+            "thought": null,
+            "thoughtSignature": "EqYFCqMFAWkUfRN7AZQDOLb8kTpeEIaMBfhKqT1NHeZS0cbbZk7hhimKxUIBRUMZ7A0Yy7OVpmP-eJnIeTvbjvXWu0d8oZPH-wLo6NzrBBfb4z9sGrwl-1m0fFyuuDbt_kC2it-v4-s4ffXiU0wczme3ruP6Y6fFjPbOw2Acyq1D38fkHvkZ4bh124z5C36V2RhST70lAOWhlKSW3Ih0hTAeUokLCi-4Ep6LBWwdB1_9SygmnSiGNc-bsv_0toeWZiQ8txcnZfC9vvzG_tfaUYIeBBCvdPB2k9rTEccKaCoVYZe5qoGpMlU2GKLveMdeFWuF6u4GZuY7oVoLaB0ZWtZ66-8WyHGhHQEHTuLXf8xF9_u0Rvz69rtTw1lQr4FdzL7ozSIMXN1go9iNyumb9b9HhMFa1JcHeN9Ndp6jJtydlbObPlhLYxLwP4NekVzI9esoAJtWLiqwmTI0OIMy0fIaTKiIobEyHmTeox0-unv8y-ghmrLekdT5u8VpbzRJjikYoK6OWJV6FxMOhlVIv5_pPxo6l1H4Hgr960eG3cLDFb9q7hyOj2o6w5ryb19cysmPR5YPxfjHw8i86IlFT93U7IOXEcvmsazCSrRqFpCgl2NNsCGpaj_cyEfeXmweVNxWppQ7WGABqQ7dHDJ_lbH1_YKnJFEHD-gutVm9TMyO1aSyAcUuZbYHM7vqsi2mVyKwPoyxgHXFJYJ_k5gzsLZVkkFvrZnnHkwJ7XYrgVb4mBqWb-jumuANJ8aCIdcRsrkUUbxXAGd4QSkSbwE3gOwWKsV3PgC6Zs3sG6kCXkzpptod4L79L9YaZWjwtQcKebeLMNLVrozMCiJTWOL5-f-oIIo8nMBZ4aLcUC-kjRZQEmEaxoCmmtkrcePVoodHPrdHoZ-zyl4j",
+            "toolCall": null,
+            "toolResponse": null,
+            "videoMetadata": null
+          }
+        ],
+        "role": "model"
+      },
+      "finishMessage": null,
+      "finishReason": "STOP",
+      "groundingMetadata": null,
+      "index": 0,
+      "logprobsResult": null,
+      "safetyRatings": null,
+      "tokenCount": null,
+      "urlContextMetadata": null
+    }
+  ],
+  "createTime": null,
+  "modelStatus": null,
+  "modelVersion": "gemini-3.8-flash",
+  "parsed": null,
+  "promptFeedback": null,
+  "responseId": "CXzGas-SFMSa1e8Pv-Gu6QQ",
+  "sdkHttpResponse": {
+    "body": null,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 07 Oct 2026 17:06:21 GMT",
+      "server": "scaffolding on HTTPServer2",
+      "server-timing": "gfet4t7; dur=4643",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-gemini-service-tier": "standard",
+      "x-xss-protection": "0"
+    }
+  },
+  "usageMetadata": {
+    "cacheTokensDetails": null,
+    "cachedContentTokenCount": null,
+    "candidatesTokenCount": 29,
+    "candidatesTokensDetails": null,
+    "promptTokenCount": 767,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 767
+      }
+    ],
+    "thoughtsTokenCount": 153,
+    "toolUsePromptTokenCount": null,
+    "toolUsePromptTokensDetails": null,
+    "totalTokenCount": 949,
+    "trafficType": null
+  }
+}

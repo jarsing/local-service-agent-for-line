@@ -1,0 +1,91 @@
+{
+  "automaticFunctionCallingHistory": null,
+  "candidates": [
+    {
+      "avgLogprobs": null,
+      "citationMetadata": null,
+      "content": {
+        "parts": [
+          {
+            "audioTranscription": null,
+            "codeExecutionResult": null,
+            "executableCode": null,
+            "fileData": null,
+            "functionCall": {
+              "args": {
+                "area": "花壇",
+                "dietary_type": "vegetarian",
+                "keyword": ""
+              },
+              "id": "call_50630",
+              "name": "search_local_places",
+              "partialArgs": null,
+              "willContinue": null
+            },
+            "functionResponse": null,
+            "inlineData": null,
+            "mediaProcessing": null,
+            "mediaResolution": null,
+            "partMetadata": null,
+            "text": null,
+            "thought": null,
+            "thoughtSignature": "EvkDCvYDAWkUfRNAR6ztD4uiFtOv72N7UqaNISyLG4IY4rtVT9f7PM_S0WJFCJ-vGFZHt3QSNpFWXVWBxboIuw7kFssnDRhHIhRp7YiNm9qDg7mDGtlhkw_kIefa9kqDAzgzcUBmJOZGBA8OPL7hQM_40ogg6utecqyJGR5j_tbr1AnwlCif2MVTwHU3BKI63oavCjgsAC5MVBWau1RjGz1VVIY8SxXa8CUREcHAZUhZecQCc5XVZZLbZF6GTjQXCfdevLpJvDjvosjFjHv5k56xs87-A51W6IjxPmpYu6KeGQSRf-NlbGbAuxb7-91dSRceNxbkPOmTp9KvUSu3CJvfC_cLH5PHTUe95w7CS9KABecdP9ntbXGnnRD9wVKewVjrQ2vbNN24qWeSFBvqprRfedh2LbXDbxguVj3yuaGnr77N0Gidh0CvXvtvlcDf9JfjVzsOb7hfXxmKuLFy2AXH9leeECGgpG39og6c71y9Zv8nNg2CuxqeBXeJnFLowZaDcB9b00LVe7mfLsb2ADh8G80MeOJcOIX_NY7NZuovo724KEF6si7BMsSKbNcWTpFNN8jPc2e9EGaW1U_bNa8KH1hI_dr7HvKWuJ7Eef7mE2JN6pjwO6YtnQDbMbaj28ja5ze6GfoP7fUexK82dHFN1sl1r7851YmcxA==",
+            "toolCall": null,
+            "toolResponse": null,
+            "videoMetadata": null
+          }
+        ],
+        "role": "model"
+      },
+      "finishMessage": null,
+      "finishReason": "STOP",
+      "groundingMetadata": null,
+      "index": 0,
+      "logprobsResult": null,
+      "safetyRatings": null,
+      "tokenCount": null,
+      "urlContextMetadata": null
+    }
+  ],
+  "createTime": null,
+  "modelStatus": null,
+  "modelVersion": "gemini-3.8-flash",
+  "parsed": null,
+  "promptFeedback": null,
+  "responseId": "EHzGaoWHBJaM1e8PsZK4mAM",
+  "sdkHttpResponse": {
+    "body": null,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 07 Oct 2026 17:06:27 GMT",
+      "server": "scaffolding on HTTPServer2",
+      "server-timing": "gfet4t7; dur=3279",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-gemini-service-tier": "standard",
+      "x-xss-protection": "0"
+    }
+  },
+  "usageMetadata": {
+    "cacheTokensDetails": null,
+    "cachedContentTokenCount": null,
+    "candidatesTokenCount": 33,
+    "candidatesTokensDetails": null,
+    "promptTokenCount": 769,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 769
+      }
+    ],
+    "thoughtsTokenCount": 116,
+    "toolUsePromptTokenCount": null,
+    "toolUsePromptTokensDetails": null,
+    "totalTokenCount": 918,
+    "trafficType": null
+  }
+}

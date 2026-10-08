@@ -1,0 +1,947 @@
+{
+  "pairs": [
+    {
+      "both_routes_pass": true,
+      "case_id": "local11",
+      "causal_conclusion": "NOT_ESTABLISHED_SINGLE_OBSERVATION_PER_SETTING",
+      "cost_complete": false,
+      "delta_cost_percent": null,
+      "delta_model_ms": 1569.1079578828067,
+      "delta_usd": null,
+      "issues": [],
+      "status": "COMPARABLE_REQUESTS"
+    },
+    {
+      "both_routes_pass": true,
+      "case_id": "local12",
+      "causal_conclusion": "NOT_ESTABLISHED_SINGLE_OBSERVATION_PER_SETTING",
+      "cost_complete": false,
+      "delta_cost_percent": null,
+      "delta_model_ms": 702.7209161315113,
+      "delta_usd": null,
+      "issues": [],
+      "status": "COMPARABLE_REQUESTS"
+    },
+    {
+      "both_routes_pass": true,
+      "case_id": "local19",
+      "causal_conclusion": "NOT_ESTABLISHED_SINGLE_OBSERVATION_PER_SETTING",
+      "cost_complete": false,
+      "delta_cost_percent": null,
+      "delta_model_ms": 467.6179578527808,
+      "delta_usd": null,
+      "issues": [],
+      "status": "COMPARABLE_REQUESTS"
+    }
+  ],
+  "rows": [
+    {
+      "budget": 0,
+      "calls": [
+        {
+          "arguments": {
+            "area": "花壇",
+            "dietary_type": "",
+            "keyword": ""
+          },
+          "name": "search_local_places"
+        }
+      ],
+      "case_id": "local01",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 3275.5468329414725,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "area": [
+          "花壇",
+          "花壇鄉"
+        ]
+      },
+      "expected_tools": [
+        "search_local_places"
+      ],
+      "group": "route",
+      "input": "花壇的店現在有開嗎？輪椅能進去嗎？",
+      "input_sha256": "b7aec402be0579620cba4ffe0085efade005b88602f166b37e414f4c7f9af61d",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "route-local01",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "INVALID",
+        "input": 775,
+        "output": 32,
+        "reason": "THOUGHTS_WITH_DISABLED_BUDGET",
+        "thoughts": 156,
+        "thoughts_origin": "OBSERVED",
+        "total": 963,
+        "usd": null
+      }
+    },
+    {
+      "budget": 0,
+      "calls": [
+        {
+          "arguments": {
+            "area": "花壇",
+            "dietary_type": "",
+            "keyword": ""
+          },
+          "name": "search_local_places"
+        }
+      ],
+      "case_id": "local02",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 2419.383749831468,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "area": [
+          "花壇",
+          "花壇鄉"
+        ],
+        "dietary_type": [
+          ""
+        ]
+      },
+      "expected_tools": [
+        "search_local_places"
+      ],
+      "group": "route",
+      "input": "花壇有什麼店？",
+      "input_sha256": "05147640e695f19bb33adf7ced77122fb167da037d25af29d82125ff72718bfd",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "route-local02",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "INVALID",
+        "input": 765,
+        "output": 32,
+        "reason": "THOUGHTS_WITH_DISABLED_BUDGET",
+        "thoughts": 57,
+        "thoughts_origin": "OBSERVED",
+        "total": 854,
+        "usd": null
+      }
+    },
+    {
+      "budget": 0,
+      "calls": [
+        {
+          "arguments": {
+            "area": "附近",
+            "dietary_type": "vegetarian",
+            "keyword": ""
+          },
+          "name": "search_local_places"
+        }
+      ],
+      "case_id": "local09",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 4192.878999980167,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "area": [
+          "",
+          "附近"
+        ],
+        "dietary_type": [
+          "vegetarian"
+        ]
+      },
+      "expected_tools": [
+        "search_local_places"
+      ],
+      "group": "route",
+      "input": "附近有什麼蔬食店？",
+      "input_sha256": "676e2401760c2dff0b530b96aa8b6fcdfc012638e3f52d433a4cea70f81e392d",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "route-local09",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "INVALID",
+        "input": 766,
+        "output": 32,
+        "reason": "THOUGHTS_WITH_DISABLED_BUDGET",
+        "thoughts": 82,
+        "thoughts_origin": "OBSERVED",
+        "total": 880,
+        "usd": null
+      }
+    },
+    {
+      "budget": 0,
+      "calls": [
+        {
+          "arguments": {
+            "area": "花壇",
+            "date": "",
+            "keyword": ""
+          },
+          "name": "search_local_events"
+        }
+      ],
+      "case_id": "local11",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 3772.7844160981476,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "area": [
+          "花壇",
+          "花壇鄉"
+        ]
+      },
+      "expected_tools": [
+        "search_local_events"
+      ],
+      "group": "route",
+      "input": "花壇場次的集合點在哪？",
+      "input_sha256": "f67369e37369d05e310b93123d450802c9a5da13b6b624e8d48fd2d4cb35f5ea",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "route-local11",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "INVALID",
+        "input": 767,
+        "output": 29,
+        "reason": "THOUGHTS_WITH_DISABLED_BUDGET",
+        "thoughts": 133,
+        "thoughts_origin": "OBSERVED",
+        "total": 929,
+        "usd": null
+      }
+    },
+    {
+      "budget": 0,
+      "calls": [
+        {
+          "arguments": {
+            "area": "花壇",
+            "dietary_type": "vegetarian",
+            "keyword": ""
+          },
+          "name": "search_local_places"
+        }
+      ],
+      "case_id": "local12",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 10520.54616692476,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "area": [
+          "花壇",
+          "花壇鄉"
+        ],
+        "dietary_type": [
+          "vegetarian"
+        ]
+      },
+      "expected_tools": [
+        "search_local_places"
+      ],
+      "group": "route",
+      "input": "花壇有推薦的素食店嗎？",
+      "input_sha256": "f4e3cfe254af26c8b92862e24363338eca5825c1ddf0ff63b5e57dc004c4d3b4",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "route-local12",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "INVALID",
+        "input": 769,
+        "output": 33,
+        "reason": "THOUGHTS_WITH_DISABLED_BUDGET",
+        "thoughts": 71,
+        "thoughts_origin": "OBSERVED",
+        "total": 873,
+        "usd": null
+      }
+    },
+    {
+      "budget": 0,
+      "calls": [
+        {
+          "arguments": {
+            "area": "大村",
+            "dietary_type": "vegetarian",
+            "keyword": ""
+          },
+          "name": "search_local_places"
+        }
+      ],
+      "case_id": "local13",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 2545.7521670032293,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "area": [
+          "大村",
+          "大村鄉"
+        ],
+        "dietary_type": [
+          "vegetarian"
+        ]
+      },
+      "expected_tools": [
+        "search_local_places"
+      ],
+      "group": "route",
+      "input": "查大村素食",
+      "input_sha256": "20b46ac1fe80731534cf79a9d69981456a3018f71439aa06d7b92655bef4f0d1",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "route-local13",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "INVALID",
+        "input": 764,
+        "output": 33,
+        "reason": "THOUGHTS_WITH_DISABLED_BUDGET",
+        "thoughts": 78,
+        "thoughts_origin": "OBSERVED",
+        "total": 875,
+        "usd": null
+      }
+    },
+    {
+      "budget": 0,
+      "calls": [
+        {
+          "arguments": {
+            "reason": "unsupported"
+          },
+          "name": "show_local_help"
+        }
+      ],
+      "case_id": "local17",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 1946.8877089675516,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "reason": [
+          "unsupported"
+        ]
+      },
+      "expected_tools": [
+        "show_local_help"
+      ],
+      "group": "route",
+      "input": "可以幫我預約明天的爌肉飯嗎",
+      "input_sha256": "51932bcb3dc070b85f89b4f5eece664dc277b7a202919baa834bed21bc24a61a",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "route-local17",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "INVALID",
+        "input": 770,
+        "output": 19,
+        "reason": "THOUGHTS_WITH_DISABLED_BUDGET",
+        "thoughts": 71,
+        "thoughts_origin": "OBSERVED",
+        "total": 860,
+        "usd": null
+      }
+    },
+    {
+      "budget": 0,
+      "calls": [
+        {
+          "arguments": {
+            "reason": "unsupported"
+          },
+          "name": "show_local_help"
+        }
+      ],
+      "case_id": "local18",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 3020.85958304815,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "reason": [
+          "unsupported"
+        ]
+      },
+      "expected_tools": [
+        "show_local_help"
+      ],
+      "group": "route",
+      "input": "附近能停車嗎？有免費接駁車嗎？",
+      "input_sha256": "717d8650f7cfc2c7870c1ede0ddb9420a2bbcdfa6403b35e264b457b4ad7f61b",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "route-local18",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "INVALID",
+        "input": 771,
+        "output": 19,
+        "reason": "THOUGHTS_WITH_DISABLED_BUDGET",
+        "thoughts": 64,
+        "thoughts_origin": "OBSERVED",
+        "total": 854,
+        "usd": null
+      }
+    },
+    {
+      "budget": 0,
+      "calls": [
+        {
+          "arguments": {
+            "reason": "unsupported"
+          },
+          "name": "show_local_help"
+        }
+      ],
+      "case_id": "local19",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 3529.4421250000596,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "reason": [
+          "unsupported"
+        ]
+      },
+      "expected_tools": [
+        "show_local_help"
+      ],
+      "group": "route",
+      "input": "現在哪裡有開著的爌肉飯？可以幫我預約兩碗帶走嗎？",
+      "input_sha256": "288b9c041a4bec241ba3c5015ca90c7ddcd7b81a27f006c2a11f319865d32e2d",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "route-local19",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "INVALID",
+        "input": 781,
+        "output": 19,
+        "reason": "THOUGHTS_WITH_DISABLED_BUDGET",
+        "thoughts": 151,
+        "thoughts_origin": "OBSERVED",
+        "total": 951,
+        "usd": null
+      }
+    },
+    {
+      "budget": 0,
+      "calls": [
+        {
+          "arguments": {
+            "area": "花壇",
+            "date": "",
+            "keyword": ""
+          },
+          "name": "search_local_events"
+        }
+      ],
+      "case_id": "local11",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 3097.762041958049,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "area": [
+          "花壇",
+          "花壇鄉"
+        ]
+      },
+      "expected_tools": [
+        "search_local_events"
+      ],
+      "group": "A",
+      "input": "花壇場次的集合點在哪？",
+      "input_sha256": "f67369e37369d05e310b93123d450802c9a5da13b6b624e8d48fd2d4cb35f5ea",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "local11-A",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "INVALID",
+        "input": 767,
+        "output": 29,
+        "reason": "THOUGHTS_WITH_DISABLED_BUDGET",
+        "thoughts": 114,
+        "thoughts_origin": "OBSERVED",
+        "total": 910,
+        "usd": null
+      }
+    },
+    {
+      "budget": 1024,
+      "calls": [
+        {
+          "arguments": {
+            "area": "花壇",
+            "date": "",
+            "keyword": ""
+          },
+          "name": "search_local_events"
+        }
+      ],
+      "case_id": "local11",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 4666.869999840856,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "area": [
+          "花壇",
+          "花壇鄉"
+        ]
+      },
+      "expected_tools": [
+        "search_local_events"
+      ],
+      "group": "B",
+      "input": "花壇場次的集合點在哪？",
+      "input_sha256": "f67369e37369d05e310b93123d450802c9a5da13b6b624e8d48fd2d4cb35f5ea",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "local11-B",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "COMPLETE",
+        "input": 767,
+        "output": 29,
+        "reason": null,
+        "thoughts": 153,
+        "thoughts_origin": "OBSERVED",
+        "total": 949,
+        "usd": "0.0006851"
+      }
+    },
+    {
+      "budget": 1024,
+      "calls": [
+        {
+          "arguments": {
+            "area": "花壇",
+            "dietary_type": "vegetarian",
+            "keyword": ""
+          },
+          "name": "search_local_places"
+        }
+      ],
+      "case_id": "local12",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 3305.0744580104947,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "area": [
+          "花壇",
+          "花壇鄉"
+        ],
+        "dietary_type": [
+          "vegetarian"
+        ]
+      },
+      "expected_tools": [
+        "search_local_places"
+      ],
+      "group": "B",
+      "input": "花壇有推薦的素食店嗎？",
+      "input_sha256": "f4e3cfe254af26c8b92862e24363338eca5825c1ddf0ff63b5e57dc004c4d3b4",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "local12-B",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "COMPLETE",
+        "input": 769,
+        "output": 33,
+        "reason": null,
+        "thoughts": 116,
+        "thoughts_origin": "OBSERVED",
+        "total": 918,
+        "usd": "0.0006032"
+      }
+    },
+    {
+      "budget": 0,
+      "calls": [
+        {
+          "arguments": {
+            "area": "花壇",
+            "dietary_type": "vegetarian",
+            "keyword": ""
+          },
+          "name": "search_local_places"
+        }
+      ],
+      "case_id": "local12",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 2602.3535418789834,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "area": [
+          "花壇",
+          "花壇鄉"
+        ],
+        "dietary_type": [
+          "vegetarian"
+        ]
+      },
+      "expected_tools": [
+        "search_local_places"
+      ],
+      "group": "A",
+      "input": "花壇有推薦的素食店嗎？",
+      "input_sha256": "f4e3cfe254af26c8b92862e24363338eca5825c1ddf0ff63b5e57dc004c4d3b4",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "local12-A",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "INVALID",
+        "input": 769,
+        "output": 33,
+        "reason": "THOUGHTS_WITH_DISABLED_BUDGET",
+        "thoughts": 79,
+        "thoughts_origin": "OBSERVED",
+        "total": 881,
+        "usd": null
+      }
+    },
+    {
+      "budget": 0,
+      "calls": [
+        {
+          "arguments": {
+            "reason": "unsupported"
+          },
+          "name": "show_local_help"
+        }
+      ],
+      "case_id": "local19",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 2899.3404591456056,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "reason": [
+          "unsupported"
+        ]
+      },
+      "expected_tools": [
+        "show_local_help"
+      ],
+      "group": "A",
+      "input": "現在哪裡有開著的爌肉飯？可以幫我預約兩碗帶走嗎？",
+      "input_sha256": "288b9c041a4bec241ba3c5015ca90c7ddcd7b81a27f006c2a11f319865d32e2d",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "local19-A",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "INVALID",
+        "input": 781,
+        "output": 19,
+        "reason": "THOUGHTS_WITH_DISABLED_BUDGET",
+        "thoughts": 101,
+        "thoughts_origin": "OBSERVED",
+        "total": 901,
+        "usd": null
+      }
+    },
+    {
+      "budget": 1024,
+      "calls": [
+        {
+          "arguments": {
+            "reason": "unsupported"
+          },
+          "name": "show_local_help"
+        }
+      ],
+      "case_id": "local19",
+      "config_base_sha256": "45fddf8c002be6f8a1ec048ad4fde3a4f31936c3f0dc6002a27b39113c243ae6",
+      "dataset_sha256": "cd7d3c3a6f1533bf455b4da83accf349d9918ef6ead97323e97133a45682fc21",
+      "elapsed_ms": 3366.9584169983864,
+      "endpoint": "generateContent:v1beta:DeveloperAPI",
+      "expected_arguments": {
+        "reason": [
+          "unsupported"
+        ]
+      },
+      "expected_tools": [
+        "show_local_help"
+      ],
+      "group": "B",
+      "input": "現在哪裡有開著的爌肉飯？可以幫我預約兩碗帶走嗎？",
+      "input_sha256": "288b9c041a4bec241ba3c5015ca90c7ddcd7b81a27f006c2a11f319865d32e2d",
+      "instruction_sha256": "5c7c42299ed6910867fc017e35a9523202221aacac52c250064d371c8b9f65e4",
+      "key": "local19-B",
+      "measurement_scope": "single_generate_content_call_no_queue_no_backend",
+      "model_id": "gemini-3.8-flash",
+      "origin": "DIRECT_SDK_CAPTURE",
+      "rate_card_sha256": "37b6a3f424bc6da9f5559b3a0f3adec5b2d6ba189a568ec885e6258587e411c8",
+      "route": {
+        "backend": "NOT_EVALUATED",
+        "issues": [],
+        "scope": "SDK_MODEL_TOOL_REQUEST_ONLY",
+        "status": "PASS",
+        "ui": "NOT_EVALUATED"
+      },
+      "sdk_attempts": 1,
+      "sdk_version": "2.23.0",
+      "served_model_version": "gemini-3.8-flash",
+      "source_tree_sha256": "95174b6ac4b706ddbf86c0348864e7bd77fb7863c6d87774a39b308643b6c06a",
+      "status": "CAPTURED",
+      "tools_sha256": "881db725021e204abfa64ca878b82b7d3e1b78a2f6d32acd86b9189d505b2f41",
+      "usage": {
+        "cost_status": "COMPLETE",
+        "input": 781,
+        "output": 19,
+        "reason": null,
+        "thoughts": 144,
+        "thoughts_origin": "OBSERVED",
+        "total": 944,
+        "usd": "0.0006418"
+      }
+    }
+  ],
+  "summary": {
+    "ab_captured": 6,
+    "ab_denominator": 6,
+    "backend_ui": "NOT_EVALUATED_BY_CAPTURE_AUDIT",
+    "comparable_pairs": 3,
+    "complete_cost_rows": 3,
+    "evidence_complete": false,
+    "mode": "OFFLINE_AUDIT_OF_CAPTURE_FILES",
+    "origin_authenticity": "DIGESTS_CHECK_IDENTITY_NOT_EXTERNAL_OCCURRENCE",
+    "production": "NOT_EXECUTED",
+    "route_attempted": 9,
+    "route_captured": 9,
+    "route_denominator": 9,
+    "route_errors": 0,
+    "route_full_denominator_rate": 1.0,
+    "route_not_run": 0,
+    "route_passed": 9,
+    "routing_contract_passed": true,
+    "safe_to_deploy": false
+  }
+}

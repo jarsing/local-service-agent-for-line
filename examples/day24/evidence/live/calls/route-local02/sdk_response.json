@@ -1,0 +1,91 @@
+{
+  "automaticFunctionCallingHistory": null,
+  "candidates": [
+    {
+      "avgLogprobs": null,
+      "citationMetadata": null,
+      "content": {
+        "parts": [
+          {
+            "audioTranscription": null,
+            "codeExecutionResult": null,
+            "executableCode": null,
+            "fileData": null,
+            "functionCall": {
+              "args": {
+                "area": "花壇",
+                "dietary_type": "",
+                "keyword": ""
+              },
+              "id": "call_666938",
+              "name": "search_local_places",
+              "partialArgs": null,
+              "willContinue": null
+            },
+            "functionResponse": null,
+            "inlineData": null,
+            "mediaProcessing": null,
+            "mediaResolution": null,
+            "partMetadata": null,
+            "text": null,
+            "thought": null,
+            "thoughtSignature": "ErwCCrkCAWkUfRPfX1QAQyw3cimgZv3TLbNIgsKAElOm_VsT98JqhTItx7bCdGfncTzVAuxNpzEFgPyQMcV1_uMnM7DAD8XJBWaf_Vdh0t1wlAbc5yGFwi9HxpD5H4u43uUFOLt-NtDYVgKwTFGy9SCvefvgv8pj6SZy4rkaPFYDbZJC3OXK10JMRZpG-8P8hIM9mmhRD9QSerWShLLoJGXLCnlR4FWeg6NsiaZk2EPUiTouI_NPNg2orzS3VRJE33BOAyP9uMA0aUF5ri5wCOr_6iGxkc2QUMgnE_orAvY4rqIylZEXhSGKR0y_Kg0RH4ij2hRbwpsCKwR7yOjALmOAwEXaE4BwoUKVX4goZiZyCRbT1YG8BBsV5NaG-ED19qwtkEyXhPmcYWMVAgs4KNnPZvRoL2WnkF9DaU1z7g==",
+            "toolCall": null,
+            "toolResponse": null,
+            "videoMetadata": null
+          }
+        ],
+        "role": "model"
+      },
+      "finishMessage": null,
+      "finishReason": "STOP",
+      "groundingMetadata": null,
+      "index": 0,
+      "logprobsResult": null,
+      "safetyRatings": null,
+      "tokenCount": null,
+      "urlContextMetadata": null
+    }
+  ],
+  "createTime": null,
+  "modelStatus": null,
+  "modelVersion": "gemini-3.8-flash",
+  "parsed": null,
+  "promptFeedback": null,
+  "responseId": "1HvGapb_D_SD1e8P0cuS2QU",
+  "sdkHttpResponse": {
+    "body": null,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 07 Oct 2026 17:05:26 GMT",
+      "server": "scaffolding on HTTPServer2",
+      "server-timing": "gfet4t7; dur=2390",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-gemini-service-tier": "standard",
+      "x-xss-protection": "0"
+    }
+  },
+  "usageMetadata": {
+    "cacheTokensDetails": null,
+    "cachedContentTokenCount": null,
+    "candidatesTokenCount": 32,
+    "candidatesTokensDetails": null,
+    "promptTokenCount": 765,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 765
+      }
+    ],
+    "thoughtsTokenCount": 57,
+    "toolUsePromptTokenCount": null,
+    "toolUsePromptTokensDetails": null,
+    "totalTokenCount": 854,
+    "trafficType": null
+  }
+}

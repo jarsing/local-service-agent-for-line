@@ -96,9 +96,6 @@ def usage(response: dict, budget: int) -> dict:
         n = field(raw,snake,camel)
         out[short] = nonnegative_int(n) if n is not None else None
     out['thoughts_origin'] = 'OBSERVED' if out['thoughts'] is not None else 'MISSING'
-    if out['thoughts'] is None and budget == 0:
-        out['thoughts'] = 0
-        out['thoughts_origin'] = 'INFERRED_FROM_EXPLICIT_DISABLED_BUDGET'
     if any(out[x] is None for x in ('input','output','thoughts','total')):
         return dict(out,cost_status='UNKNOWN',reason='INCOMPLETE_USAGE',usd=None)
     for snake,camel in (('cached_content_token_count','cachedContentTokenCount'),

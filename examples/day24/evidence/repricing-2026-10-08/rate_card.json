@@ -1,0 +1,9 @@
+{
+  "currency": "USD",
+  "effective_date": "2026-10-08",
+  "input_usd_per_million": "0.75",
+  "model_id": "gemini-3.8-flash",
+  "output_usd_per_million": "3.75",
+  "scope": "standard_text_no_cache_no_grounding",
+  "source_url": "https://ai.google.dev/gemini-api/docs/pricing#gemini-3.8-flash"
+}

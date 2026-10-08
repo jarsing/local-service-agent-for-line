@@ -62,7 +62,7 @@ class EvidenceTests(unittest.TestCase):
     def test_missing_total_unknown(self):
         del self.r['usageMetadata']['totalTokenCount'];self.assertEqual(usage(self.r,0)['cost_status'],'UNKNOWN')
     def test_disabled_thoughts_inference_label(self):
-        del self.r['usageMetadata']['thoughtsTokenCount'];self.assertEqual(usage(self.r,0)['thoughts_origin'],'INFERRED_FROM_EXPLICIT_DISABLED_BUDGET')
+        del self.r['usageMetadata']['thoughtsTokenCount'];self.assertEqual(usage(self.r,0)['cost_status'],'UNKNOWN')
     def test_enabled_missing_thoughts_not_inferred(self):
         del self.r['usageMetadata']['thoughtsTokenCount'];self.assertEqual(usage(self.r,1024)['cost_status'],'UNKNOWN')
     def test_total_not_used_to_fill_thoughts(self):

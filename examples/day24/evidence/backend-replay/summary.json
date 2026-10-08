@@ -1,0 +1,55 @@
+{
+  "denominator": 9,
+  "external_model_calls": 0,
+  "line_calls": 0,
+  "passed": 0,
+  "rows": [
+    {
+      "id": "local01",
+      "reason": "ModuleNotFoundError",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "local02",
+      "reason": "ModuleNotFoundError",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "local09",
+      "reason": "ModuleNotFoundError",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "local11",
+      "reason": "ModuleNotFoundError",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "local12",
+      "reason": "ModuleNotFoundError",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "local13",
+      "reason": "ModuleNotFoundError",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "local17",
+      "reason": "ModuleNotFoundError",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "local18",
+      "reason": "ModuleNotFoundError",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "local19",
+      "reason": "ModuleNotFoundError",
+      "status": "BLOCKED"
+    }
+  ],
+  "scope": "later_local_backend_execution_not_original_live_chain",
+  "status": "NOT_PASSED"
+}

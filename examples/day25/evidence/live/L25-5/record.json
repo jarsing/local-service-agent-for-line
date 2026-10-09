@@ -1,0 +1,31 @@
+{
+  "source_sha256": "b7ceb03b8ff47afbf7b0070500614eacc02fc8ea667b05a71ecb740a39df37f8",
+  "external_model_calls": 1,
+  "started_at_utc": "2026-10-09T03:38:25.548142+00:00",
+  "model": "gemini-3.8-flash",
+  "sdk_required": "2.23.0",
+  "database_writes": 0,
+  "schema_sha256": "d4ae46935b920f80f8f863b71f0047d2e961ea0ebe2c380b02fef5dcad85145f",
+  "elapsed_ms": 2198.547291001887,
+  "sdk_response_sha256": "1dc03fce1019f55d8102f9c93ff094f49bab953e6fc37a3b175817d93f9c40d8",
+  "served_model_version": "gemini-3.8-flash",
+  "usage_metadata": {
+    "cacheTokensDetails": null,
+    "cachedContentTokenCount": null,
+    "candidatesTokenCount": 80,
+    "candidatesTokensDetails": null,
+    "promptTokenCount": 143,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 143
+      }
+    ],
+    "thoughtsTokenCount": null,
+    "toolUsePromptTokenCount": null,
+    "toolUsePromptTokensDetails": null,
+    "totalTokenCount": 223,
+    "trafficType": null
+  },
+  "status": "PENDING_REVIEW"
+}

@@ -40,4 +40,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path, required=True)
     a = parser.parse_args()
-    print(json.dumps(run(a.out), ensure_ascii=False, indent=2))
+    res = run(a.out)
+    print(json.dumps(res, ensure_ascii=False, indent=2))
+    if res.get("status") == "ERROR":
+        import sys
+        sys.exit(1)

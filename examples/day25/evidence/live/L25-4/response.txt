@@ -1,0 +1,1 @@
+{"place_name":"測試店乙","specialty_dishes":["爌肉飯"],"dietary_tags":[],"hours_status":"unverified","opening_hours_text":null,"accessibility_notes":null,"source_quote":"測試店乙的爌肉飯陪伴街坊多年，清晨開鍋，賣完為止。請注意：店內不提供全素。"}

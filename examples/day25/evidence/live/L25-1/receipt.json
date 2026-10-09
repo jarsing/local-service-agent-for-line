@@ -1,0 +1,16 @@
+{
+  "source_sha256": "499065ea3dc03bd2d75fe11a8bf7d793bec543ec6a8392aac72b7b823901482c",
+  "candidate_sha256": "333b0867045074a0e0a7a10bca5dd4e40ab35a873c1f25169a0143f99a0dedbd",
+  "reviewer": "jarsing",
+  "approved": true,
+  "checked_fields": [
+    "dietary_tags",
+    "opening_hours_text",
+    "place_name",
+    "specialty_dishes"
+  ],
+  "decision": "APPROVE",
+  "note": "符合事實，時段與餐點皆有出處，完整合規，核准入庫",
+  "db_admitted": true,
+  "digest": "333b0867045074a0e0a7a10bca5dd4e40ab35a873c1f25169a0143f99a0dedbd"
+}

@@ -5,6 +5,7 @@ import hashlib
 import importlib.metadata
 import json
 import os
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -42,7 +43,11 @@ def main(argv=None) -> int:
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--capture", action="store_true")
     parser.add_argument("--approve-external", action="store_true")
+    parser.add_argument("--force", action="store_true", help="強制覆寫既有輸出目錄")
     args = parser.parse_args(argv)
+    if (args.out / "record.json").exists() and not args.force:
+        print(f"OUTPUT_DIR_EXISTS: 目錄 {args.out} 已存在紀錄，避免覆寫舊證據。請指定新目錄或加上 --force 重試。", file=sys.stderr)
+        return 2
     source = SourceDocument(source_id=args.source_id, source_ref=args.source_ref,
         text=args.source_file.read_text(encoding="utf-8"), area=args.area)
     args.out.mkdir(parents=True, exist_ok=True)

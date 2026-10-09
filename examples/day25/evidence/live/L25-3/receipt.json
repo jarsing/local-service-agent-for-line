@@ -1,0 +1,11 @@
+{
+  "source_sha256": "6a2ac514b7050994727fd45da5c4d8d0d7c0adfc77cb4a7d678a2348f92f7a4c",
+  "candidate_sha256": "c6e3d268236be2cc830e0a5682d6b045ebb7b1fcd01f200c8ed2b607ffbbd0e1",
+  "reviewer": "jarsing",
+  "approved": false,
+  "checked_fields": [],
+  "decision": "REJECT",
+  "note": "來源含有提示注入與外部促銷指令，依來源安全政策拒絕採用",
+  "db_admitted": false,
+  "digest": null
+}

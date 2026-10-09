@@ -1,0 +1,1 @@
+{"place_name":"測試店甲","specialty_dishes":["爌肉飯","蹄膀"],"dietary_tags":["葷食"],"hours_status":"explicitly_stated","opening_hours_text":"每日 06:00 至 12:00","accessibility_notes":null,"source_quote":"測試店甲供應爌肉飯與蹄膀，餐點為葷食。每日 06:00 至 12:00 供餐。"}

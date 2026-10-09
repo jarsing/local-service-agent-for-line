@@ -1,0 +1,14 @@
+{
+  "source_sha256": "e2789564243d4a0ee7834e581bce7876de6171aef778932e01151581d7dde571",
+  "candidate_sha256": "ce0a994336b6cfe833bd7f2b9da8581a7746e9f27073b33ef0b76cb652a9c9d2",
+  "reviewer": "jarsing",
+  "approved": true,
+  "checked_fields": [
+    "place_name",
+    "specialty_dishes"
+  ],
+  "decision": "APPROVE",
+  "note": "未知時段保持 null 符合未核實不編造原則，核准入庫",
+  "db_admitted": true,
+  "digest": "ce0a994336b6cfe833bd7f2b9da8581a7746e9f27073b33ef0b76cb652a9c9d2"
+}

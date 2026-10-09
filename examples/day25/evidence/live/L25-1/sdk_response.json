@@ -1,0 +1,94 @@
+{
+  "sdkHttpResponse": {
+    "headers": {
+      "x-gemini-service-tier": "standard",
+      "content-type": "application/json; charset=UTF-8",
+      "vary": "Origin, X-Origin, Referer",
+      "content-encoding": "gzip",
+      "date": "Fri, 09 Oct 2026 03:38:14 GMT",
+      "server": "scaffolding on HTTPServer2",
+      "x-xss-protection": "0",
+      "x-frame-options": "SAMEORIGIN",
+      "x-content-type-options": "nosniff",
+      "server-timing": "gfet4t7; dur=2705",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "transfer-encoding": "chunked"
+    },
+    "body": null
+  },
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "mediaResolution": null,
+            "codeExecutionResult": null,
+            "executableCode": null,
+            "fileData": null,
+            "functionCall": null,
+            "functionResponse": null,
+            "inlineData": null,
+            "text": "{\"place_name\":\"測試店甲\",\"specialty_dishes\":[\"爌肉飯\",\"蹄膀\"],\"dietary_tags\":[\"葷食\"],\"hours_status\":\"explicitly_stated\",\"opening_hours_text\":\"每日 06:00 至 12:00\",\"accessibility_notes\":null,\"source_quote\":\"測試店甲供應爌肉飯與蹄膀，餐點為葷食。每日 06:00 至 12:00 供餐。\"}",
+            "thought": null,
+            "thoughtSignature": "EmkKZwFpFH0T-kOd6OsdaY-PQLBPxSi9u0hVKkyfhpLky3SHKxp6EX33MRF8EPeau2vsnggMsCMdK7bqtCe0ZaAKZx9xK91FQ3ennMNPq4IaB7FHkesRa5M4UnYSeX_r-D98y4EVXrPqMgk=",
+            "videoMetadata": null,
+            "toolCall": null,
+            "toolResponse": null,
+            "partMetadata": null,
+            "audioTranscription": null,
+            "mediaProcessing": null
+          }
+        ],
+        "role": "model"
+      },
+      "citationMetadata": null,
+      "finishMessage": null,
+      "tokenCount": null,
+      "finishReason": "STOP",
+      "groundingMetadata": null,
+      "avgLogprobs": null,
+      "index": 0,
+      "logprobsResult": null,
+      "safetyRatings": null,
+      "urlContextMetadata": null
+    }
+  ],
+  "createTime": null,
+  "modelVersion": "gemini-3.8-flash",
+  "promptFeedback": null,
+  "responseId": "o2HIaqeuKt-Zvr0P6bC2mAI",
+  "usageMetadata": {
+    "cacheTokensDetails": null,
+    "cachedContentTokenCount": null,
+    "candidatesTokenCount": 106,
+    "candidatesTokensDetails": null,
+    "promptTokenCount": 151,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 151
+      }
+    ],
+    "thoughtsTokenCount": null,
+    "toolUsePromptTokenCount": null,
+    "toolUsePromptTokensDetails": null,
+    "totalTokenCount": 257,
+    "trafficType": null
+  },
+  "modelStatus": null,
+  "automaticFunctionCallingHistory": null,
+  "parsed": {
+    "place_name": "測試店甲",
+    "specialty_dishes": [
+      "爌肉飯",
+      "蹄膀"
+    ],
+    "dietary_tags": [
+      "葷食"
+    ],
+    "hours_status": "explicitly_stated",
+    "opening_hours_text": "每日 06:00 至 12:00",
+    "accessibility_notes": null,
+    "source_quote": "測試店甲供應爌肉飯與蹄膀，餐點為葷食。每日 06:00 至 12:00 供餐。"
+  }
+}

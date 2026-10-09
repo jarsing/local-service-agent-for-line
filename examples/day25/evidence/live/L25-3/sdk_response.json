@@ -1,0 +1,91 @@
+{
+  "sdkHttpResponse": {
+    "headers": {
+      "x-gemini-service-tier": "standard",
+      "content-type": "application/json; charset=UTF-8",
+      "vary": "Origin, X-Origin, Referer",
+      "content-encoding": "gzip",
+      "date": "Fri, 09 Oct 2026 03:38:21 GMT",
+      "server": "scaffolding on HTTPServer2",
+      "x-xss-protection": "0",
+      "x-frame-options": "SAMEORIGIN",
+      "x-content-type-options": "nosniff",
+      "server-timing": "gfet4t7; dur=2076",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "transfer-encoding": "chunked"
+    },
+    "body": null
+  },
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "mediaResolution": null,
+            "codeExecutionResult": null,
+            "executableCode": null,
+            "fileData": null,
+            "functionCall": null,
+            "functionResponse": null,
+            "inlineData": null,
+            "text": "{\"place_name\":\"測試店丙\",\"specialty_dishes\":[\"爌肉飯\"],\"dietary_tags\":[],\"hours_status\":\"unverified\",\"opening_hours_text\":null,\"accessibility_notes\":null,\"source_quote\":\"測試店丙供應爌肉飯。\"}",
+            "thought": null,
+            "thoughtSignature": "EmkKZwFpFH0T2xicCuRxEAzuwGQv19mCjzewnunAj1D2IblJzeAxZiq_z__vYToPa4f9HMEg2BYkUbdfoKGFrgViDItMoTpB93hGyfsM7Ol9EmVXKIV3KpmcKk44hmo6Kh3y3truvOn9mrY=",
+            "videoMetadata": null,
+            "toolCall": null,
+            "toolResponse": null,
+            "partMetadata": null,
+            "audioTranscription": null,
+            "mediaProcessing": null
+          }
+        ],
+        "role": "model"
+      },
+      "citationMetadata": null,
+      "finishMessage": null,
+      "tokenCount": null,
+      "finishReason": "STOP",
+      "groundingMetadata": null,
+      "avgLogprobs": null,
+      "index": 0,
+      "logprobsResult": null,
+      "safetyRatings": null,
+      "urlContextMetadata": null
+    }
+  ],
+  "createTime": null,
+  "modelVersion": "gemini-3.8-flash",
+  "promptFeedback": null,
+  "responseId": "q2HIavTLH77njuMP1dWk4Qw",
+  "usageMetadata": {
+    "cacheTokensDetails": null,
+    "cachedContentTokenCount": null,
+    "candidatesTokenCount": 59,
+    "candidatesTokensDetails": null,
+    "promptTokenCount": 145,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 145
+      }
+    ],
+    "thoughtsTokenCount": null,
+    "toolUsePromptTokenCount": null,
+    "toolUsePromptTokensDetails": null,
+    "totalTokenCount": 204,
+    "trafficType": null
+  },
+  "modelStatus": null,
+  "automaticFunctionCallingHistory": null,
+  "parsed": {
+    "place_name": "測試店丙",
+    "specialty_dishes": [
+      "爌肉飯"
+    ],
+    "dietary_tags": [],
+    "hours_status": "unverified",
+    "opening_hours_text": null,
+    "accessibility_notes": null,
+    "source_quote": "測試店丙供應爌肉飯。"
+  }
+}

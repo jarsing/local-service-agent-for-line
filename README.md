@@ -17,11 +17,12 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 24, October 8, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–24 examples. The latest example adds **an evaluation wall, Gemini routing capture, and A/B cost auditor (`examples/day24/`) that strictly separates 9 route accuracy cases, 6 A/B cost rows, and 20 local contract regressions, backed by 62 unit tests and dedicated GitHub Actions offline CI**. Reference code: [Day 24 example](examples/day24/).
+**Code index updated through Day 25, October 9, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–25 examples. The latest example adds **a structured extraction pipeline from public prose to a verified local SQLite database (`examples/day25/`), with Pydantic schema constraints, deterministic grounding checks, and fail-closed human review receipts, backed by 47 unit tests and dedicated GitHub Actions offline CI**. Reference code: [Day 25 example](examples/day25/).
 
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
+| Extract unstructured text to local database | [Day 25: Structured extraction](examples/day25/README.md) | Structured outputs with `response_json_schema` (`capture.py`), deterministic quote verifier (`schema.py`), review admission store (`store.py`), live evaluation runner (`run_live.py`), and dedicated CI suite |
 | Three-denominator evaluation wall & A/B cost audit | [Day 24: Evaluation wall](examples/day24/README.md) | Direct SDK routing capture (`capture.py`), evidence auditor (`audit.py`), 20-case contract regression runner (`offline.py`), backend replay (`replay.py`), and dedicated CI suite |
 | Requirements-driven Google AI stack selection | [Day 23: Stack decision matrix](examples/day23/README.md) | Offline design evaluation (`stack_matrix.py`), four declared architectures (AI Studio, Vertex AI, Cloud Run, Firestore), fresh-process import probe, and dedicated CI suite |
 | Least privilege, secrets & circuit breaker | [Day 22: Permissions & stop gates](examples/day22/README.md) | Standalone stop gate (`circuit_breaker.py`), epoch invalidation control, atomic request and outbox commit, target three-tier identity architecture, and dedicated CI suite |
@@ -128,7 +129,7 @@ The articles are written in Traditional Chinese. English topic labels below summ
 | 22 | [Permissions, Secrets, and Stop Gates: Least Privilege and Circuit Breaking](https://ithelp.ithome.com.tw/articles/10421645) | [examples/day22](examples/day22/) | [docs/day22](docs/day22/README.md) |
 | 23 | [Stack decision matrix: Choosing Google AI tools for local service agents](https://ithelp.ithome.com.tw/articles/10421985) | [examples/day23](examples/day23/) | [docs/day23](docs/day23/README.md) |
 | 24 | [Did Changing One Line Break the 20 Cases? Evaluation Wall and A/B Cost Measurement](https://ithelp.ithome.com.tw/articles/10422261) | [examples/day24](examples/day24/) | [docs/day24](docs/day24/README.md) |
-| 25 | [Extracting Local Data with Gemini Structured Outputs: From Public Text to Service Database](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) | [examples/day25](examples/day25/) | [docs/day25](docs/day25/README.md) |
+| 25 | [Extracting Local Data with Gemini Structured Outputs: From Public Text to Service Database](https://ithelp.ithome.com.tw/articles/10422718) | [examples/day25](examples/day25/) | [docs/day25](docs/day25/README.md) |
 
 Find Day 26 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 

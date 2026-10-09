@@ -156,5 +156,103 @@ class IngestionTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             require_review(obj,source,self.receipt.model_copy(update={"approved":False}))
 
+
+class ReviewGuardTests(unittest.TestCase):
+    def setUp(self):
+        import shutil
+        from .run_live import CASES
+        self.CASES = CASES
+        base = Path("out/day25/tests")
+        base.mkdir(parents=True, exist_ok=True)
+        self.temp = tempfile.TemporaryDirectory(dir=base)
+        self.root = Path(self.temp.name)
+        self.evidence_dir = self.root / "live"
+        self.evidence_dir.mkdir(parents=True, exist_ok=True)
+        canonical = Path(__file__).parent / "evidence" / "live"
+        for c in self.CASES:
+            cid = c["id"]
+            shutil.copytree(canonical / cid, self.evidence_dir / cid)
+        self.canonical_decisions = json.loads((canonical / "review_decisions.json").read_text(encoding="utf-8"))
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def write_decisions(self, doc: dict) -> Path:
+        p = self.root / "decisions.json"
+        p.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        return p
+
+    def test_decision_hash_required(self):
+        from .run_live import review_cases
+        doc = copy.deepcopy(self.canonical_decisions)
+        del doc["decisions"][0]["source_sha256"]
+        p = self.write_decisions(doc)
+        with self.assertRaisesRegex(ValueError, "DECISION_HASH_REQUIRED"):
+            review_cases(self.evidence_dir, decisions_file=p, force=True)
+
+    def test_decision_hash_format_invalid(self):
+        from .run_live import review_cases
+        doc = copy.deepcopy(self.canonical_decisions)
+        doc["decisions"][0]["source_sha256"] = "invalid_short_hash"
+        p = self.write_decisions(doc)
+        with self.assertRaisesRegex(ValueError, "INVALID_SOURCE_HASH"):
+            review_cases(self.evidence_dir, decisions_file=p, force=True)
+
+    def test_decision_hash_mismatch(self):
+        from .run_live import review_cases
+        doc = copy.deepcopy(self.canonical_decisions)
+        doc["decisions"][0]["candidate_sha256"] = "0" * 64
+        p = self.write_decisions(doc)
+        with self.assertRaisesRegex(ValueError, "DECISION_CANDIDATE_HASH_MISMATCH"):
+            review_cases(self.evidence_dir, decisions_file=p, force=True)
+
+    def test_decision_contradiction_rejected(self):
+        from .run_live import review_cases
+        doc = copy.deepcopy(self.canonical_decisions)
+        doc["decisions"][2]["approved"] = True  # L25-3 決策為 REJECT 但設為 True
+        p = self.write_decisions(doc)
+        with self.assertRaisesRegex(ValueError, "CONTRADICTORY_DECISION"):
+            review_cases(self.evidence_dir, decisions_file=p, force=True)
+
+    def test_decision_missing_cases_rejected(self):
+        from .run_live import review_cases
+        doc = copy.deepcopy(self.canonical_decisions)
+        doc["decisions"] = doc["decisions"][:4]  # 缺少一題
+        p = self.write_decisions(doc)
+        with self.assertRaisesRegex(ValueError, "INCOMPLETE_DECISIONS"):
+            review_cases(self.evidence_dir, decisions_file=p, force=True)
+
+    def test_decision_duplicate_id_rejected(self):
+        from .run_live import review_cases
+        doc = copy.deepcopy(self.canonical_decisions)
+        doc["decisions"].append(copy.deepcopy(doc["decisions"][0]))
+        p = self.write_decisions(doc)
+        with self.assertRaisesRegex(ValueError, "DUPLICATE_DECISION_ID"):
+            review_cases(self.evidence_dir, decisions_file=p, force=True)
+
+    def test_run_cases_refuses_overwrite_without_force(self):
+        from .run_live import run_cases
+        sum_file = self.evidence_dir / "summary.json"
+        sum_file.write_text("{}", encoding="utf-8")
+        with self.assertRaises(FileExistsError):
+            run_cases(self.evidence_dir, dry_run=False, force=False)
+
+    def test_review_cases_refuses_overwrite_without_force(self):
+        from .run_live import review_cases
+        p = self.write_decisions(self.canonical_decisions)
+        review_cases(self.evidence_dir, decisions_file=p, force=True)
+        with self.assertRaises(FileExistsError):
+            review_cases(self.evidence_dir, decisions_file=p, force=False)
+
+    def test_total_token_mismatch_fails_cross_check(self):
+        from .run_live import run_cases
+        record_file = self.evidence_dir / "L25-1" / "record.json"
+        rec = json.loads(record_file.read_text(encoding="utf-8"))
+        rec["usage_metadata"]["totalTokenCount"] = 99999
+        record_file.write_text(json.dumps(rec), encoding="utf-8")
+        summary = run_cases(self.evidence_dir, dry_run=True, force=True)
+        self.assertFalse(summary["total_tokens_cross_check_equal"])
+
+
 if __name__ == "__main__":
     unittest.main()

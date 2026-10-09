@@ -12,7 +12,7 @@ python3 -m unittest examples.day25.test_ingestion -v
 python3 -m examples.day25.demo --out out/day25/demo-01
 ```
 
-測試含 38 項案例（全數通過）。輸出目錄不可已存在。測試暫存檔案只建立在 `out/day25/tests/`，結束後自動移除。
+測試含 47 項案例（全數通過，涵蓋型別出處核對、決策雜湊防偽與重跑覆寫防護）。輸出目錄不可已存在。測試暫存檔案只建立在 `out/day25/tests/`，結束後自動移除。
 
 ## 單次模型擷取與五題實測
 
@@ -46,6 +46,6 @@ python3 -m examples.day25.capture --source-file source.txt \
 python3 -m examples.day25.run_live --out examples/day25/evidence/live --review
 ```
 
-`ReviewReceipt` 綁定來源雜湊、候選雜湊與已審閱欄位。相同內容雜湊重送只保留一筆；跨來源店家去重、撤回與時段複查效期留待後續擴充。
+`ReviewReceipt` 綁定來源雜湊、候選雜湊與已審閱欄位。相同內容雜湊重送只保留一筆；跨來源店家重複過濾、撤回與時段複查效期留待後續擴充。
 
 `search_reviewed_places` 是本機候選讀取器。指定素別時明確回傳 `unsupported_filter`，不清空使用者條件來找出葷食資料。原 Day 14 的素別規則、活動資訊及固定模板需另做整合驗收。

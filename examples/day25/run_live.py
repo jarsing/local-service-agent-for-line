@@ -84,7 +84,7 @@ def run_cases(out_dir: Path, dry_run: bool = False, force: bool = False) -> dict
             print(f"既有實測摘要 {sum_file} 已存在，DRY-RUN 模式保留既有檔案不覆寫。", file=sys.stderr)
             return json.loads(sum_file.read_text(encoding="utf-8"))
         else:
-            print(f"既有實測摘要 {sum_file} 已存在，若需重新執行請指定 --force 或新目錄。", file=sys.stderr)
+            raise FileExistsError(f"既有實測摘要 {sum_file} 已存在！若需重新執行並覆寫既有產物，請指定 --force 或使用新輸出目錄。")
 
     print(f"=== Day 25 五題 Gemini 3.8 Flash 實測開始 ===")
     print(f"輸出目標目錄: {out_dir}")
@@ -95,7 +95,9 @@ def run_cases(out_dir: Path, dry_run: bool = False, force: bool = False) -> dict
     total_elapsed = 0.0
     total_in_tokens = 0
     total_out_tokens = 0
+    total_api_tokens = 0
     has_missing_usage = False
+    all_api_totals_match = True
 
     for idx, c in enumerate(CASES, start=1):
         cid = c["id"]
@@ -112,18 +114,34 @@ def run_cases(out_dir: Path, dry_run: bool = False, force: bool = False) -> dict
             candidate_file = c_dir / "candidate.json"
             candidate = json.loads(candidate_file.read_text(encoding="utf-8")) if candidate_file.exists() else None
             usage = record.get("usage_metadata")
-            if usage and "promptTokenCount" in usage and "candidatesTokenCount" in usage:
+            if usage and isinstance(usage, dict) and "promptTokenCount" in usage and "candidatesTokenCount" in usage:
                 in_tok = usage["promptTokenCount"]
                 out_tok = usage["candidatesTokenCount"]
-                cost_usd = float(round((Decimal(in_tok) / Decimal(1_000_000) * PRICE_INPUT_PER_M) +
-                                       (Decimal(out_tok) / Decimal(1_000_000) * PRICE_OUTPUT_PER_M), 6))
-                total_in_tokens += in_tok
-                total_out_tokens += out_tok
+                api_total = usage.get("totalTokenCount")
+                if (isinstance(in_tok, int) and in_tok >= 0 and
+                    isinstance(out_tok, int) and out_tok >= 0):
+                    cost_usd = float(round((Decimal(in_tok) / Decimal(1_000_000) * PRICE_INPUT_PER_M) +
+                                           (Decimal(out_tok) / Decimal(1_000_000) * PRICE_OUTPUT_PER_M), 6))
+                    total_in_tokens += in_tok
+                    total_out_tokens += out_tok
+                    if api_total is not None and isinstance(api_total, int):
+                        if api_total != (in_tok + out_tok):
+                            all_api_totals_match = False
+                        total_api_tokens += api_total
+                    else:
+                        all_api_totals_match = False
+                else:
+                    in_tok = None
+                    out_tok = None
+                    cost_usd = None
+                    has_missing_usage = True
+                    all_api_totals_match = False
             else:
                 in_tok = None
                 out_tok = None
                 cost_usd = None
                 has_missing_usage = True
+                all_api_totals_match = False
 
             total_elapsed += record.get("elapsed_ms", 0.0)
             results.append({
@@ -165,18 +183,34 @@ def run_cases(out_dir: Path, dry_run: bool = False, force: bool = False) -> dict
         candidate = json.loads(candidate_file.read_text(encoding="utf-8")) if candidate_file.exists() else None
 
         usage = record.get("usage_metadata")
-        if usage and "promptTokenCount" in usage and "candidatesTokenCount" in usage:
+        if usage and isinstance(usage, dict) and "promptTokenCount" in usage and "candidatesTokenCount" in usage:
             in_tok = usage["promptTokenCount"]
             out_tok = usage["candidatesTokenCount"]
-            cost_usd = float(round((Decimal(in_tok) / Decimal(1_000_000) * PRICE_INPUT_PER_M) +
-                                   (Decimal(out_tok) / Decimal(1_000_000) * PRICE_OUTPUT_PER_M), 6))
-            total_in_tokens += in_tok
-            total_out_tokens += out_tok
+            api_total = usage.get("totalTokenCount")
+            if (isinstance(in_tok, int) and in_tok >= 0 and
+                isinstance(out_tok, int) and out_tok >= 0):
+                cost_usd = float(round((Decimal(in_tok) / Decimal(1_000_000) * PRICE_INPUT_PER_M) +
+                                       (Decimal(out_tok) / Decimal(1_000_000) * PRICE_OUTPUT_PER_M), 6))
+                total_in_tokens += in_tok
+                total_out_tokens += out_tok
+                if api_total is not None and isinstance(api_total, int):
+                    if api_total != (in_tok + out_tok):
+                        all_api_totals_match = False
+                    total_api_tokens += api_total
+                else:
+                    all_api_totals_match = False
+            else:
+                in_tok = None
+                out_tok = None
+                cost_usd = None
+                has_missing_usage = True
+                all_api_totals_match = False
         else:
             in_tok = None
             out_tok = None
             cost_usd = None
             has_missing_usage = True
+            all_api_totals_match = False
 
         total_elapsed += record.get("elapsed_ms", elapsed)
         status = record.get("status", "UNKNOWN")
@@ -204,17 +238,18 @@ def run_cases(out_dir: Path, dry_run: bool = False, force: bool = False) -> dict
         results.append(res_entry)
         time.sleep(1.0)  # 保護間隔
 
-    if has_missing_usage:
+    if has_missing_usage or not all_api_totals_match:
         total_cost_usd = None
         total_cost_twd = None
         total_tokens_cross_check = False
-        summary_in_tok = None
-        summary_out_tok = None
+        summary_in_tok = total_in_tokens if not has_missing_usage else None
+        summary_out_tok = total_out_tokens if not has_missing_usage else None
     else:
         total_cost_decimal = (Decimal(total_in_tokens) / Decimal(1_000_000) * PRICE_INPUT_PER_M) + (Decimal(total_out_tokens) / Decimal(1_000_000) * PRICE_OUTPUT_PER_M)
         total_cost_usd = float(round(total_cost_decimal, 6))
         total_cost_twd = float(round(total_cost_decimal * Decimal("32.5"), 4))
-        total_tokens_cross_check = True
+        # 交叉核對：只有當每一題 api_total == in_tok + out_tok，且加總全部相符時才為 True
+        total_tokens_cross_check = (total_api_tokens == (total_in_tokens + total_out_tokens))
         summary_in_tok = total_in_tokens
         summary_out_tok = total_out_tokens
 
@@ -252,17 +287,29 @@ def review_cases(out_dir: Path, decisions_file: Path | None = None, force: bool 
 
     dec_file = decisions_file or (out_dir / "review_decisions.json")
     if not dec_file.exists():
-        print(f"錯誤：未找到審閱決策檔 {dec_file}！", file=sys.stderr)
-        print("人工審閱必須由操作者審視候選後建立 review_decisions.json，不支援無來源自動核准。", file=sys.stderr)
-        sys.exit(1)
+        raise FileNotFoundError(f"未找到審閱決策檔 {dec_file}！人工審閱必須由操作者審視候選後建立 review_decisions.json，不支援無來源自動核准。")
 
     dec_doc = json.loads(dec_file.read_text(encoding="utf-8"))
     reviewer = dec_doc.get("reviewer", "jarsing")
-    dec_map = {item["id"]: item for item in dec_doc.get("decisions", [])}
+    actual_decisions = dec_doc.get("decisions", [])
+    if not isinstance(actual_decisions, list):
+        raise ValueError("INVALID_DECISIONS_FORMAT: decisions 必須為陣列！")
+
+    expected_ids = {c["id"] for c in CASES}
+    actual_ids = [item.get("id") for item in actual_decisions if isinstance(item, dict) and "id" in item]
+    if len(actual_ids) != len(set(actual_ids)):
+        raise ValueError("DUPLICATE_DECISION_ID: 決策檔中出現重複的案例 ID！")
+    if set(actual_ids) != expected_ids:
+        missing = sorted(list(expected_ids - set(actual_ids)))
+        extra = sorted(list(set(actual_ids) - expected_ids))
+        raise ValueError(f"INCOMPLETE_DECISIONS: 決策檔案例不符合預期五題！缺少: {missing}, 多餘: {extra}")
+
+    dec_map = {item["id"]: item for item in actual_decisions}
 
     db_path = out_dir / "places.sqlite3"
-    if db_path.exists() and not force:
-        print(f"警告：資料庫 {db_path} 已存在，若需重新執行審閱請加上 --force 參數。", file=sys.stderr)
+    receipt_files = list(out_dir.glob("*/receipt.json"))
+    if (db_path.exists() or receipt_files) and not force:
+        raise FileExistsError(f"資料庫 {db_path} 或既有審閱收據已存在！若需重新執行審閱並覆寫，請指定 --force 或使用新輸出目錄。")
 
     db = open_db(db_path)
     review_results = []
@@ -282,8 +329,7 @@ def review_cases(out_dir: Path, decisions_file: Path | None = None, force: bool 
         response_file = c_dir / "response.txt"
 
         if not (source_file.exists() and candidate_file.exists() and response_file.exists()):
-            print(f"[{cid}] 缺少必要檔案，略過審閱。")
-            continue
+            raise FileNotFoundError(f"[{cid}] 缺少必要之來源、候選或回應檔案，無法執行審閱！")
 
         source_dict = json.loads(source_file.read_text(encoding="utf-8"))
         source = SourceDocument(**source_dict)
@@ -293,18 +339,33 @@ def review_cases(out_dir: Path, decisions_file: Path | None = None, force: bool 
 
         rev_spec = dec_map.get(cid)
         if not rev_spec:
-            print(f"[{cid}] 決策檔中未包含此題決策，略過。")
-            continue
+            raise ValueError(f"[{cid}] MISSING_DECISION: 缺少此案例之審閱決策！")
 
-        # 雙向嚴格雜湊驗證：確保決策檔針對的是本次真實產生的來源與候選版本
-        if rev_spec.get("source_sha256") and rev_spec["source_sha256"] != source.sha256:
+        # 決策與核准布林值一致性校驗
+        decision = rev_spec.get("decision")
+        approved = rev_spec.get("approved")
+        if decision == "APPROVE" and approved is not True:
+            raise ValueError(f"[{cid}] CONTRADICTORY_DECISION: decision 為 APPROVE 時 approved 必須為 True！")
+        if decision == "REJECT" and approved is not False:
+            raise ValueError(f"[{cid}] CONTRADICTORY_DECISION: decision 為 REJECT 時 approved 必須為 False！")
+        if decision not in ("APPROVE", "REJECT"):
+            raise ValueError(f"[{cid}] INVALID_DECISION: decision 僅允許 'APPROVE' 或 'REJECT'！")
+
+        # 雙向嚴格雜湊校驗：必填、64 位十六進位、精確匹配
+        src_sha = rev_spec.get("source_sha256")
+        cand_sha = rev_spec.get("candidate_sha256")
+        if not src_sha or not cand_sha:
+            raise ValueError(f"[{cid}] DECISION_HASH_REQUIRED: 決策檔必須包含 source_sha256 與 candidate_sha256 兩項雜湊！")
+        if not isinstance(src_sha, str) or len(src_sha) != 64 or not all(ch in "0123456789abcdefABCDEF" for ch in src_sha):
+            raise ValueError(f"[{cid}] INVALID_SOURCE_HASH: source_sha256 必須為 64 位十六進位字串！")
+        if not isinstance(cand_sha, str) or len(cand_sha) != 64 or not all(ch in "0123456789abcdefABCDEF" for ch in cand_sha):
+            raise ValueError(f"[{cid}] INVALID_CANDIDATE_HASH: candidate_sha256 必須為 64 位十六進位字串！")
+        if src_sha != source.sha256:
             raise ValueError(f"[{cid}] DECISION_SOURCE_HASH_MISMATCH: 決策來源雜湊與實際不符！")
-        if rev_spec.get("candidate_sha256") and rev_spec["candidate_sha256"] != actual_cand_digest:
+        if cand_sha != actual_cand_digest:
             raise ValueError(f"[{cid}] DECISION_CANDIDATE_HASH_MISMATCH: 決策候選雜湊與實際不符！")
 
-        approved = rev_spec["approved"]
-        decision = rev_spec["decision"]
-        note = rev_spec["note"]
+        note = rev_spec.get("note", "")
 
         if approved:
             receipt = ReviewReceipt(
@@ -411,18 +472,22 @@ def main():
     parser.add_argument("--decisions", type=Path, default=None, help="外部審閱決策 JSON 檔案路徑")
     args = parser.parse_args()
 
-    if args.review:
-        review_cases(args.out, decisions_file=args.decisions, force=args.force)
-        return
+    try:
+        if args.review:
+            review_cases(args.out, decisions_file=args.decisions, force=args.force)
+            return
 
-    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
-    if not args.dry_run and not api_key:
-        print("錯誤：未偵測到環境變數 GEMINI_API_KEY 或 GOOGLE_API_KEY！", file=sys.stderr)
-        print("請在終端機先執行 export GEMINI_API_KEY=\"您的金鑰\"（或 GOOGLE_API_KEY）後再執行本腳本。", file=sys.stderr)
-        print("若僅欲測試腳本流程，可加上 --dry-run 參數。", file=sys.stderr)
+        api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+        if not args.dry_run and not api_key:
+            print("錯誤：未偵測到環境變數 GEMINI_API_KEY 或 GOOGLE_API_KEY！", file=sys.stderr)
+            print("請在終端機先執行 export GEMINI_API_KEY=\"您的金鑰\"（或 GOOGLE_API_KEY）後再執行本腳本。", file=sys.stderr)
+            print("若僅欲測試腳本流程，可加上 --dry-run 參數。", file=sys.stderr)
+            sys.exit(1)
+
+        run_cases(args.out, dry_run=args.dry_run, force=args.force)
+    except (FileExistsError, ValueError, FileNotFoundError) as exc:
+        print(f"錯誤：{exc}", file=sys.stderr)
         sys.exit(1)
-
-    run_cases(args.out, dry_run=args.dry_run, force=args.force)
 
 
 if __name__ == "__main__":

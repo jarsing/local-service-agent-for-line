@@ -26,8 +26,10 @@ def save(path: Path, value) -> None:
 
 
 def request_config() -> dict:
-    return {"response_mime_type": "application/json", "response_schema": PlaceExtraction,
+    return {"response_mime_type": "application/json",
+            "response_json_schema": PlaceExtraction.model_json_schema(),
             "system_instruction": PROMPT, "max_output_tokens": 4096,
+            "automatic_function_calling": {"disable": True},
             "thinking_config": {"thinking_level": "low"}}
 
 
@@ -43,11 +45,11 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     source = SourceDocument(source_id=args.source_id, source_ref=args.source_ref,
         text=args.source_file.read_text(encoding="utf-8"), area=args.area)
-    args.out.mkdir(parents=True, exist_ok=False)
+    args.out.mkdir(parents=True, exist_ok=True)
     (args.out / "source.txt").write_text(source.text, encoding="utf-8")
     save(args.out / "source.json", source.model_dump())
     config = request_config()
-    serial = {**config, "response_schema": PlaceExtraction.model_json_schema()}
+    serial = dict(config)
     request = {"model": MODEL, "contents": source.text, "config": serial,
                "scope": "SDK_REQUEST_DESCRIPTION_NOT_WIRE_CAPTURE"}
     save(args.out / "request.json", request)
@@ -55,14 +57,14 @@ def main(argv=None) -> int:
               "started_at_utc": datetime.now(timezone.utc).isoformat(),
               "model": MODEL, "sdk_required": "2.23.0", "database_writes": 0,
               "schema_sha256": hashlib.sha256(json.dumps(
-                  serial["response_schema"], sort_keys=True).encode()).hexdigest()}
+                  serial["response_json_schema"], sort_keys=True).encode()).hexdigest()}
     if not args.capture:
         save(args.out / "record.json", {**record, "status": "PLANNED_NOT_EXECUTED"})
         return 0
     if not args.approve_external:
         save(args.out / "record.json", {**record, "status": "BLOCKED", "reason": "APPROVAL_REQUIRED"})
         return 2
-    key = os.environ.get("GEMINI_API_KEY")
+    key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
     if not key:
         save(args.out / "record.json", {**record, "status": "BLOCKED", "reason": "API_KEY_MISSING"})
         return 2
@@ -98,13 +100,29 @@ def main(argv=None) -> int:
         if getattr(finish, "value", finish) != "STOP" or not response.text:
             raise ValueError("INCOMPLETE_RESPONSE")
         (args.out / "response.txt").write_text(response.text, encoding="utf-8")
-        candidate = validate_candidate(response.text, source)
-        save(args.out / "candidate.json", candidate.model_dump())
-        save(args.out / "record.json", {**record, "status": "PENDING_REVIEW"})
-        return 0
+        try:
+            candidate = validate_candidate(response.text, source)
+            save(args.out / "candidate.json", candidate.model_dump())
+            save(args.out / "record.json", {**record, "status": "PENDING_REVIEW"})
+            return 0
+        except Exception as val_exc:
+            save(args.out / "record.json", {
+                **record,
+                "status": "REJECTED_BY_CODE",
+                "validation_error": str(val_exc)
+            })
+            return 1
     except Exception as exc:
-        # 僅保存類別，避免例外訊息帶出金鑰、標頭或私人來源。
-        save(args.out / "record.json", {**record, "status": "FAILED", "error_type": type(exc).__name__})
+        err_info = {"error_type": type(exc).__name__}
+        if hasattr(exc, "code") and isinstance(getattr(exc, "code"), (int, str)):
+            err_info["error_code"] = getattr(exc, "code")
+        if hasattr(exc, "status") and isinstance(getattr(exc, "status"), str):
+            err_info["error_status"] = getattr(exc, "status")
+        if hasattr(exc, "message") and getattr(exc, "message"):
+            err_info["error_message"] = str(getattr(exc, "message"))[:200]
+        if isinstance(exc, ValueError):
+            err_info["error_detail"] = str(exc)
+        save(args.out / "record.json", {**record, "status": "FAILED", **err_info})
         return 2
 
 if __name__ == "__main__":

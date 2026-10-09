@@ -10,6 +10,10 @@ from .store import open_db, admit, search_reviewed_places
 
 
 def run(out: Path) -> dict:
+    if out.exists():
+        import sys
+        print(f"OUTPUT_DIR_EXISTS: 目錄 {out} 已存在，請指定新路徑（例如 {out}-run2）或清空後重試。", file=sys.stderr)
+        return {"status": "ERROR", "reason": "OUTPUT_DIR_EXISTS", "suggested_dir": f"{out}-run2"}
     out.mkdir(parents=True, exist_ok=False)
     source, item, raw = sample("clear")
     validated = validate_candidate(raw, source)

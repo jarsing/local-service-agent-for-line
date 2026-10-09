@@ -123,9 +123,10 @@ class IngestionTests(unittest.TestCase):
         self.assertEqual(search_reviewed_places(self.db,keyword="' OR 1=1 --")["total"],0)
     def test_gemini_config_uses_response_schema(self):
         cfg=request_config()
-        self.assertIs(cfg["response_schema"],PlaceExtraction)
+        self.assertEqual(cfg["response_json_schema"],PlaceExtraction.model_json_schema())
         self.assertEqual(cfg["response_mime_type"],"application/json")
         self.assertEqual(cfg["thinking_config"],{"thinking_level":"low"})
+        self.assertEqual(cfg["automatic_function_calling"],{"disable":True})
     def test_gemini_config_has_no_legacy_sampling(self):
         self.assertFalse({"temperature","candidate_count","top_p","top_k"}&request_config().keys())
     def test_plan_does_not_call_model(self):

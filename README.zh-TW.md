@@ -126,7 +126,7 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 22 | [權限、秘密與停止開關：最小特權與緊急制動](https://ithelp.ithome.com.tw/articles/10421645) | [examples/day22](examples/day22/) | [docs/day22](docs/day22/README.md) |
 | Day 23 | [選型判斷表：Google AI 工具箱在地方服務該怎麼選？](https://ithelp.ithome.com.tw/articles/10421985) | [examples/day23](examples/day23/) | [docs/day23](docs/day23/README.md) |
 | Day 24 | [改了一行，20 題還過嗎？Google AI 實測牆與 A/B 成本量測](https://ithelp.ithome.com.tw/articles/10422261) | [examples/day24](examples/day24/) | [docs/day24](docs/day24/README.md) |
-| Day 25 | [Gemini 結構化輸出抽取地方資料：從公開文字到服務資料庫](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) | [examples/day25](examples/day25/) | [examples/day25/README.md](examples/day25/README.md) |
+| Day 25 | [Gemini 結構化輸出抽取地方資料：從公開文字到服務資料庫](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) | [examples/day25](examples/day25/) | [docs/day25](docs/day25/README.md) |
 
 Day 26 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 

@@ -1,0 +1,69 @@
+{
+  "scope": "LOCAL_DAY25_POST_HOC_HUMAN_REVIEW_DECISIONS",
+  "reviewer": "jarsing",
+  "reviewed_at_utc": "2026-10-09T06:04:23Z",
+  "review_protocol": "作者（陳佳新 / jarsing）檢視 5 題真實 Gemini 3.8 Flash 抽取結果與來源全文後，記錄具體採用與拒絕決定，供 run_live.py --review 驗證雜湊並建立 ReviewReceipt 入庫。",
+  "decisions": [
+    {
+      "id": "L25-1",
+      "title": "測試店甲（明確時段）",
+      "decision": "APPROVE",
+      "approved": true,
+      "source_sha256": "499065ea3dc03bd2d75fe11a8bf7d793bec543ec6a8392aac72b7b823901482c",
+      "candidate_sha256": "333b0867045074a0e0a7a10bca5dd4e40ab35a873c1f25169a0143f99a0dedbd",
+      "checked_fields": [
+        "dietary_tags",
+        "opening_hours_text",
+        "place_name",
+        "specialty_dishes"
+      ],
+      "note": "符合事實，時段與餐點皆有出處，完整合規，核准入庫"
+    },
+    {
+      "id": "L25-2",
+      "title": "測試店乙（清晨開鍋）",
+      "decision": "APPROVE",
+      "approved": true,
+      "source_sha256": "e2789564243d4a0ee7834e581bce7876de6171aef778932e01151581d7dde571",
+      "candidate_sha256": "ce0a994336b6cfe833bd7f2b9da8581a7746e9f27073b33ef0b76cb652a9c9d2",
+      "checked_fields": [
+        "place_name",
+        "specialty_dishes"
+      ],
+      "note": "未知時段保持 null 符合未核實不編造原則，核准入庫"
+    },
+    {
+      "id": "L25-3",
+      "title": "測試店丙（促銷與惡意文字）",
+      "decision": "REJECT",
+      "approved": false,
+      "source_sha256": "6a2ac514b7050994727fd45da5c4d8d0d7c0adfc77cb4a7d678a2348f92f7a4c",
+      "candidate_sha256": "c6e3d268236be2cc830e0a5682d6b045ebb7b1fcd01f200c8ed2b607ffbbd0e1",
+      "checked_fields": [],
+      "note": "來源含有提示注入與外部促銷指令，依來源安全政策拒絕採用"
+    },
+    {
+      "id": "L25-4",
+      "title": "測試店乙否定句（不提供全素）",
+      "decision": "APPROVE",
+      "approved": true,
+      "source_sha256": "c2524802fd5e3b28f94f8de3e6dabaf09d5f40dd0920f7b51244a5400a4d35f7",
+      "candidate_sha256": "15647947803022f6ad35c1a4db0fe1a4429e8eb3fe82e21d562ed0a5394cfeb2",
+      "checked_fields": [
+        "place_name",
+        "specialty_dishes"
+      ],
+      "note": "模型未誤填全素，標籤留空代表未知，核准入庫"
+    },
+    {
+      "id": "L25-5",
+      "title": "《爌肉之城》介紹句（城市級描述）",
+      "decision": "REJECT",
+      "approved": false,
+      "source_sha256": "b7ceb03b8ff47afbf7b0070500614eacc02fc8ea667b05a71ecb740a39df37f8",
+      "candidate_sha256": "d387e0e2f72eb64a16485b26976d2c4c9fd5d23ae3a168278d6b5dbb7e06b803",
+      "checked_fields": [],
+      "note": "此為地方飲食文化之城市級描述，非指涉具體單一店家，拒絕建檔入庫"
+    }
+  ]
+}

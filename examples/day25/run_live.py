@@ -5,7 +5,7 @@
 2. 需要環境變數 GEMINI_API_KEY。
 3. 產生原始 request.json、sdk_response.json、candidate.json 與 record.json。
 4. 計算 Token、延遲與成本，產出 summary.json 與報表。
-5. 支援 --review 模式：看過實際輸出後產生審閱收據、寫入 SQLite 並查回驗收。
+5. 支援 --review 模式：讀取外部人工審查決策檔（review_decisions.json），驗證雜湊後建立 ReviewReceipt 入庫並查回驗收。
 """
 from __future__ import annotations
 import argparse
@@ -78,6 +78,14 @@ def run_cases(out_dir: Path, dry_run: bool = False, force: bool = False) -> dict
     out_dir.mkdir(parents=True, exist_ok=True)
     results = []
 
+    sum_file = out_dir / "summary.json"
+    if sum_file.exists() and not force:
+        if dry_run:
+            print(f"既有實測摘要 {sum_file} 已存在，DRY-RUN 模式保留既有檔案不覆寫。", file=sys.stderr)
+            return json.loads(sum_file.read_text(encoding="utf-8"))
+        else:
+            print(f"既有實測摘要 {sum_file} 已存在，若需重新執行請指定 --force 或新目錄。", file=sys.stderr)
+
     print(f"=== Day 25 五題 Gemini 3.8 Flash 實測開始 ===")
     print(f"輸出目標目錄: {out_dir}")
     if dry_run:
@@ -87,6 +95,7 @@ def run_cases(out_dir: Path, dry_run: bool = False, force: bool = False) -> dict
     total_elapsed = 0.0
     total_in_tokens = 0
     total_out_tokens = 0
+    has_missing_usage = False
 
     for idx, c in enumerate(CASES, start=1):
         cid = c["id"]
@@ -102,19 +111,27 @@ def run_cases(out_dir: Path, dry_run: bool = False, force: bool = False) -> dict
             record = json.loads(record_file.read_text(encoding="utf-8"))
             candidate_file = c_dir / "candidate.json"
             candidate = json.loads(candidate_file.read_text(encoding="utf-8")) if candidate_file.exists() else None
-            usage = record.get("usage_metadata") or {}
-            in_tok = usage.get("promptTokenCount") or usage.get("prompt_token_count") or 0
-            out_tok = usage.get("candidatesTokenCount") or usage.get("candidates_token_count") or 0
+            usage = record.get("usage_metadata")
+            if usage and "promptTokenCount" in usage and "candidatesTokenCount" in usage:
+                in_tok = usage["promptTokenCount"]
+                out_tok = usage["candidatesTokenCount"]
+                cost_usd = float(round((Decimal(in_tok) / Decimal(1_000_000) * PRICE_INPUT_PER_M) +
+                                       (Decimal(out_tok) / Decimal(1_000_000) * PRICE_OUTPUT_PER_M), 6))
+                total_in_tokens += in_tok
+                total_out_tokens += out_tok
+            else:
+                in_tok = None
+                out_tok = None
+                cost_usd = None
+                has_missing_usage = True
+
             total_elapsed += record.get("elapsed_ms", 0.0)
-            total_in_tokens += in_tok
-            total_out_tokens += out_tok
-            cost_usd = (Decimal(in_tok) / Decimal(1_000_000) * PRICE_INPUT_PER_M) + (Decimal(out_tok) / Decimal(1_000_000) * PRICE_OUTPUT_PER_M)
             results.append({
                 "id": cid, "title": c["title"], "focus": c["focus"],
                 "status": record.get("status", "UNKNOWN"),
                 "return_code": 0, "elapsed_ms": round(record.get("elapsed_ms", 0.0), 1),
                 "input_tokens": in_tok, "output_tokens": out_tok,
-                "cost_usd": float(round(cost_usd, 6)),
+                "cost_usd": cost_usd,
                 "candidate": candidate, "validation_error": record.get("validation_error")
             })
             continue
@@ -147,15 +164,21 @@ def run_cases(out_dir: Path, dry_run: bool = False, force: bool = False) -> dict
         candidate_file = c_dir / "candidate.json"
         candidate = json.loads(candidate_file.read_text(encoding="utf-8")) if candidate_file.exists() else None
 
-        usage = record.get("usage_metadata") or {}
-        in_tok = usage.get("promptTokenCount") or usage.get("prompt_token_count") or 0
-        out_tok = usage.get("candidatesTokenCount") or usage.get("candidates_token_count") or 0
+        usage = record.get("usage_metadata")
+        if usage and "promptTokenCount" in usage and "candidatesTokenCount" in usage:
+            in_tok = usage["promptTokenCount"]
+            out_tok = usage["candidatesTokenCount"]
+            cost_usd = float(round((Decimal(in_tok) / Decimal(1_000_000) * PRICE_INPUT_PER_M) +
+                                   (Decimal(out_tok) / Decimal(1_000_000) * PRICE_OUTPUT_PER_M), 6))
+            total_in_tokens += in_tok
+            total_out_tokens += out_tok
+        else:
+            in_tok = None
+            out_tok = None
+            cost_usd = None
+            has_missing_usage = True
 
         total_elapsed += record.get("elapsed_ms", elapsed)
-        total_in_tokens += in_tok
-        total_out_tokens += out_tok
-
-        cost_usd = (Decimal(in_tok) / Decimal(1_000_000) * PRICE_INPUT_PER_M) + (Decimal(out_tok) / Decimal(1_000_000) * PRICE_OUTPUT_PER_M)
         status = record.get("status", "UNKNOWN")
         val_err = record.get("validation_error")
 
@@ -174,14 +197,27 @@ def run_cases(out_dir: Path, dry_run: bool = False, force: bool = False) -> dict
             "elapsed_ms": round(record.get("elapsed_ms", elapsed), 1),
             "input_tokens": in_tok,
             "output_tokens": out_tok,
-            "cost_usd": float(round(cost_usd, 6)),
+            "cost_usd": cost_usd,
             "candidate": candidate,
             "validation_error": val_err
         }
         results.append(res_entry)
         time.sleep(1.0)  # 保護間隔
 
-    total_cost_usd = (Decimal(total_in_tokens) / Decimal(1_000_000) * PRICE_INPUT_PER_M) + (Decimal(total_out_tokens) / Decimal(1_000_000) * PRICE_OUTPUT_PER_M)
+    if has_missing_usage:
+        total_cost_usd = None
+        total_cost_twd = None
+        total_tokens_cross_check = False
+        summary_in_tok = None
+        summary_out_tok = None
+    else:
+        total_cost_decimal = (Decimal(total_in_tokens) / Decimal(1_000_000) * PRICE_INPUT_PER_M) + (Decimal(total_out_tokens) / Decimal(1_000_000) * PRICE_OUTPUT_PER_M)
+        total_cost_usd = float(round(total_cost_decimal, 6))
+        total_cost_twd = float(round(total_cost_decimal * Decimal("32.5"), 4))
+        total_tokens_cross_check = True
+        summary_in_tok = total_in_tokens
+        summary_out_tok = total_out_tokens
+
     summary = {
         "benchmark": "LOCAL-Day25-Live-5Cases",
         "timestamp_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -189,70 +225,52 @@ def run_cases(out_dir: Path, dry_run: bool = False, force: bool = False) -> dict
         "dry_run": dry_run,
         "total_cases": len(CASES),
         "total_elapsed_ms": round(total_elapsed, 1),
-        "total_input_tokens": total_in_tokens,
-        "total_output_tokens": total_out_tokens,
-        "total_tokens_cross_check_equal": True,
-        "total_cost_usd": float(round(total_cost_usd, 6)),
-        "total_cost_twd_approx": float(round(total_cost_usd * Decimal("32.5"), 4)),
+        "total_input_tokens": summary_in_tok,
+        "total_output_tokens": summary_out_tok,
+        "total_tokens_cross_check_equal": total_tokens_cross_check,
+        "total_cost_usd": total_cost_usd,
+        "total_cost_twd_approx": total_cost_twd,
         "cases": results
     }
 
-    sum_file = out_dir / "summary.json"
     sum_file.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("-" * 60)
     print(f"=== 實測完成 ===")
     print(f"總耗時: {round(total_elapsed / 1000, 2)} 秒 | 總 Token: {total_in_tokens + total_out_tokens} (輸入 {total_in_tokens}, 輸出 {total_out_tokens})")
-    print(f"總費用: 約 ${round(total_cost_usd, 5)} 美元 (約新台幣 {round(total_cost_usd * Decimal('32.5'), 3)} 元)")
+    if total_cost_usd is not None:
+        print(f"總費用: 約 ${round(total_cost_usd, 5)} 美元 (約新台幣 {round(total_cost_usd * 32.5, 3)} 元)")
     print(f"摘要檔已存至: {sum_file}")
 
     return summary
 
 
-def review_cases(out_dir: Path, reviewer: str = "jarsing") -> dict:
-    """由審閱者逐題檢視實際輸出後，產出審閱收據、寫入 SQLite 並驗證查回。"""
+def review_cases(out_dir: Path, decisions_file: Path | None = None, force: bool = False) -> dict:
+    """由審閱者依據外部審閱決策檔（review_decisions.json）驗證雜湊、產出收據、寫入 SQLite 並查回驗收。"""
     from .schema import (SourceDocument, ReviewReceipt, validate_candidate,
-                         required_review_fields, candidate_digest)
+                         candidate_digest)
     from .store import open_db, admit, search_reviewed_places
 
-    # 審閱者看過 5 題真實輸出後的正式採用決定與理由
-    REVIEWS = {
-        "L25-1": {
-            "decision": "APPROVE",
-            "approved": True,
-            "note": "符合事實，時段與餐點皆有出處，完整合規，核准入庫"
-        },
-        "L25-2": {
-            "decision": "APPROVE",
-            "approved": True,
-            "note": "未知時段保持 null 符合未核實不編造原則，核准入庫"
-        },
-        "L25-3": {
-            "decision": "REJECT",
-            "approved": False,
-            "note": "來源含有提示注入與外部促銷指令，依來源安全政策拒絕採用"
-        },
-        "L25-4": {
-            "decision": "APPROVE",
-            "approved": True,
-            "note": "模型未誤填全素，標籤留空代表未知，核准入庫"
-        },
-        "L25-5": {
-            "decision": "REJECT",
-            "approved": False,
-            "note": "此為地方飲食文化之城市級描述，非指涉具體單一店家，拒絕建檔入庫"
-        }
-    }
+    dec_file = decisions_file or (out_dir / "review_decisions.json")
+    if not dec_file.exists():
+        print(f"錯誤：未找到審閱決策檔 {dec_file}！", file=sys.stderr)
+        print("人工審閱必須由操作者審視候選後建立 review_decisions.json，不支援無來源自動核准。", file=sys.stderr)
+        sys.exit(1)
+
+    dec_doc = json.loads(dec_file.read_text(encoding="utf-8"))
+    reviewer = dec_doc.get("reviewer", "jarsing")
+    dec_map = {item["id"]: item for item in dec_doc.get("decisions", [])}
 
     db_path = out_dir / "places.sqlite3"
-    if db_path.exists():
-        db_path.unlink()
-    db = open_db(db_path)
+    if db_path.exists() and not force:
+        print(f"警告：資料庫 {db_path} 已存在，若需重新執行審閱請加上 --force 參數。", file=sys.stderr)
 
+    db = open_db(db_path)
     review_results = []
     admitted_digests = []
 
     print("=== Day 25 候選人工審閱與 SQLite 入庫 ===")
-    print(f"審閱者: {reviewer}")
+    print(f"決策依據檔案: {dec_file}")
+    print(f"審閱者識別: {reviewer}")
     print(f"資料庫位置: {db_path}")
     print("-" * 60)
 
@@ -271,8 +289,19 @@ def review_cases(out_dir: Path, reviewer: str = "jarsing") -> dict:
         source = SourceDocument(**source_dict)
         raw_text = response_file.read_text(encoding="utf-8")
         candidate_obj = validate_candidate(raw_text, source)
+        actual_cand_digest = candidate_digest(candidate_obj, source)
 
-        rev_spec = REVIEWS[cid]
+        rev_spec = dec_map.get(cid)
+        if not rev_spec:
+            print(f"[{cid}] 決策檔中未包含此題決策，略過。")
+            continue
+
+        # 雙向嚴格雜湊驗證：確保決策檔針對的是本次真實產生的來源與候選版本
+        if rev_spec.get("source_sha256") and rev_spec["source_sha256"] != source.sha256:
+            raise ValueError(f"[{cid}] DECISION_SOURCE_HASH_MISMATCH: 決策來源雜湊與實際不符！")
+        if rev_spec.get("candidate_sha256") and rev_spec["candidate_sha256"] != actual_cand_digest:
+            raise ValueError(f"[{cid}] DECISION_CANDIDATE_HASH_MISMATCH: 決策候選雜湊與實際不符！")
+
         approved = rev_spec["approved"]
         decision = rev_spec["decision"]
         note = rev_spec["note"]
@@ -280,10 +309,10 @@ def review_cases(out_dir: Path, reviewer: str = "jarsing") -> dict:
         if approved:
             receipt = ReviewReceipt(
                 source_sha256=source.sha256,
-                candidate_sha256=candidate_digest(candidate_obj, source),
+                candidate_sha256=actual_cand_digest,
                 reviewer=reviewer,
                 approved=True,
-                checked_fields=sorted(required_review_fields(candidate_obj))
+                checked_fields=sorted(rev_spec.get("checked_fields", []))
             )
             digest = admit(db, raw_text, source, receipt)
             admitted_digests.append(digest)
@@ -298,7 +327,7 @@ def review_cases(out_dir: Path, reviewer: str = "jarsing") -> dict:
         else:
             rejected_receipt = ReviewReceipt(
                 source_sha256=source.sha256,
-                candidate_sha256=candidate_digest(candidate_obj, source),
+                candidate_sha256=actual_cand_digest,
                 reviewer=reviewer,
                 approved=False,
                 checked_fields=[]
@@ -347,7 +376,8 @@ def review_cases(out_dir: Path, reviewer: str = "jarsing") -> dict:
         summary = json.loads(sum_file.read_text(encoding="utf-8"))
         summary["review_summary"] = {
             "reviewer": reviewer,
-            "reviewed_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "decisions_source_file": str(dec_file.name),
+            "reviewed_at_utc": dec_doc.get("reviewed_at_utc", time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())),
             "total_reviewed": len(review_results),
             "approved_count": len(admitted_digests),
             "rejected_count": len(review_results) - len(admitted_digests),
@@ -376,13 +406,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path, default=REPO_ROOT / "out/day25/live")
     parser.add_argument("--dry-run", action="store_true", help="僅生成規劃，不呼叫外部模型")
-    parser.add_argument("--force", action="store_true", help="強制重新擷取既有目錄")
-    parser.add_argument("--review", action="store_true", help="依實際輸出執行人工審閱與 SQLite 入庫查回")
-    parser.add_argument("--reviewer", default="jarsing", help="審閱者簽名標識")
+    parser.add_argument("--force", action="store_true", help="強制重新擷取或覆寫既有資料")
+    parser.add_argument("--review", action="store_true", help="依外部審閱決策檔執行人工審閱與 SQLite 入庫查回")
+    parser.add_argument("--decisions", type=Path, default=None, help="外部審閱決策 JSON 檔案路徑")
     args = parser.parse_args()
 
     if args.review:
-        review_cases(args.out, reviewer=args.reviewer)
+        review_cases(args.out, decisions_file=args.decisions, force=args.force)
         return
 
     api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")

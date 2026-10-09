@@ -181,6 +181,7 @@
   ],
   "review_summary": {
     "reviewer": "jarsing",
+    "decisions_source_file": "review_decisions.json",
     "reviewed_at_utc": "2026-10-09T06:04:23Z",
     "total_reviewed": 5,
     "approved_count": 3,

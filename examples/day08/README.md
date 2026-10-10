@@ -64,3 +64,7 @@ $PY examples/day08/run.py --live --model gemini-3.8-flash
 實測會依序執行：
 1. **情境 1**：正常流程，Gemini 整理詢問並呼叫 `prepare_handoff_draft`，ADK 暫停發出確認，確認後寫入收據。
 2. **情境 2**：等待中換版，出示 v1 後切換至 v2，確認時回傳 `version_changed`，由模型提示新時段。
+
+## 5. 更新紀錄
+
+- **2026-10-10**：移除 `run.py` 內部指向專案外部私有路徑的備援讀取與輸出位置，改由標準環境變數 `GEMINI_API_KEY` 讀取，預設產物統一寫入 `out/day08/`，符合無本機相依之乾淨環境重現原則。

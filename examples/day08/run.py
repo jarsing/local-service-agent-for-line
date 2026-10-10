@@ -36,8 +36,8 @@ def load_env_if_needed() -> None:
     if os.getenv("GEMINI_API_KEY", "").strip():
         return
     candidates = [
-        Path(__file__).resolve().parents[4] / "LOCAL-Day03/editorial/private/.env",
-        Path.home() / "Documents/Agy_Works/2026ironman/LOCAL-Day03/editorial/private/.env",
+        Path.cwd() / ".env",
+        Path(__file__).parent / ".env",
     ]
     for p in candidates:
         if p.is_file():
@@ -213,11 +213,7 @@ async def main_async(args: argparse.Namespace) -> int:
     if args.output_dir:
         output_dir = Path(args.output_dir)
     else:
-        repo_evidence_dir = Path(__file__).resolve().parents[4] / "LOCAL-Day08/editorial/evidence"
-        if repo_evidence_dir.is_dir():
-            output_dir = repo_evidence_dir / f"run-{timestamp_str}"
-        else:
-            output_dir = Path(__file__).parent / "evidence_day08"
+        output_dir = Path("out/day08") / f"run-{timestamp_str}"
 
     output_dir.mkdir(parents=True, exist_ok=True)
     local_mirror_dir = Path(__file__).parent / "evidence_day08"

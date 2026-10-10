@@ -1,7 +1,7 @@
 """Run real offline tests and produce a local HTML report (no network/AI APIs).
 
 Run from repository root:
-    python3 examples/day02/verify.py --output ../editorial/evidence/day02
+    python3 examples/day02/verify.py --output out/day02/evidence
 The output argument is a PRIVATE evidence directory; each run gets a new folder.
 This script never invokes Git, publishes files, installs packages, or deploys.
 """

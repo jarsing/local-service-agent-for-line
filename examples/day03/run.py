@@ -205,7 +205,7 @@ def main(argv=None) -> int:
     parser.add_argument("--live", action="store_true", help="明確允許本次真實 API 呼叫，可能產生費用")
     parser.add_argument("--env-file", type=Path, help="Repo 外的私人 .env；禁止貼金鑰到參數")
     parser.add_argument("--model", default=DEFAULT_MODEL)
-    parser.add_argument("--output", type=Path, required=True, help="建議設為 Repo 外 editorial/evidence/day03")
+    parser.add_argument("--output", type=Path, required=True, help="建議設為 out/day03/evidence")
     args = parser.parse_args(argv)
     if not re.fullmatch(r"gemini-[a-z0-9.-]+", args.model):
         parser.error("模型識別格式不符；請使用官方模型頁或 AI Studio 的完整識別。")

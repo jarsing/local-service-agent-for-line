@@ -60,7 +60,7 @@ $PY examples/day09/run.py --live --approve-live
 要將結果存回每日資料夾，從 Repo 根目錄加：
 
 ```bash
---origin author_local --out ../../LOCAL-Day09/editorial/evidence
+--origin author_local --out out/day09/evidence
 ```
 
 這兩個參數適用於 `verify.py`、`demo.py`、`run.py`；新讀者可維持預設 `reader_local`。`origin` 是執行者標記，原始紀錄的真假仍須靠實際檔案與執行過程核對。

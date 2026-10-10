@@ -14,7 +14,7 @@ Windows 使用實際安裝的 Python 3.10+ 直譯器執行相同腳本，例如 
 要產生本次實際測試的 HTML 與 JSON 報告：
 
 ```sh
-python3 examples/day02/verify.py --output ../editorial/evidence/day02
+python3 examples/day02/verify.py --output out/day02/evidence
 ```
 
 最後一個路徑是範例：改成自己的**私人證據資料夾**。每次執行新建 run-* 子資料夾，不覆寫舊結果。先審閱紀錄再分享；失敗 stack trace 可能含本機路徑。報告不是公開網站，也不需要啟動伺服器，直接用瀏覽器開 REPORT.html。

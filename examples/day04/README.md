@@ -9,7 +9,7 @@
 ```bash
 python3 -m venv examples/day04/.venv
 examples/day04/.venv/bin/python -m pip install -r examples/day04/requirements.txt
-examples/day04/.venv/bin/python examples/day04/verify.py --output ../../LOCAL-Day04/editorial/evidence
+examples/day04/.venv/bin/python examples/day04/verify.py --output out/day04/evidence
 ```
 
 Windows 使用 `.venv/Scripts/python.exe`。若既有環境已經相容，可沿用；搬過位置的虛擬環境可能需要重建，但不要刪除其他日次的環境。
@@ -32,9 +32,9 @@ LINE_TEST_USER_ID=YOUR_USER_ID_UNDER_THIS_PROVIDER
 
 ```bash
 examples/day04/.venv/bin/python examples/day04/app.py --live \
-  --line-env ../../LOCAL-Day04/editorial/private/line.env \
-  --gemini-env ../../LOCAL-Day03/editorial/private/.env \
-  --output ../../LOCAL-Day04/editorial/evidence
+  --line-env line.env \
+  --gemini-env .env \
+  --output out/day04/evidence
 ```
 
 此步驟允許後續固定指令觸發真實 Google 與 LINE 回覆 API；可能消耗額度。啟動本身不發訊息、不建立通道、不調整 LINE 設定。

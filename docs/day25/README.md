@@ -6,4 +6,4 @@
 
 實測涵蓋 5 題情境（明確時段、非標準時段、提示詞注入防禦、否定句語意陷阱、城市級介紹文本）。
 
-前篇：[Day 24](https://ithelp.ithome.com.tw/articles/10422261)。下一步是 Day 26 雙 LINE 視窗整合驗收。
+前篇：[Day 24](https://ithelp.ithome.com.tw/articles/10422261)。下一步：[Day 26｜走出自己房間之前：乾淨環境與雙 LINE 視窗的驗收規格](https://ithelp.ithome.com.tw/articles/10423179)。

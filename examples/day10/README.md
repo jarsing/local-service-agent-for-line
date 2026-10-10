@@ -109,7 +109,7 @@ $PY examples/day10/run.py --live --approve-live \
 作者要把結果另存每日 evidence 時，在命令後加：
 
 ```text
---origin author_local --out ../../LOCAL-Day10/editorial/evidence
+--origin author_local --out out/day10/evidence
 ```
 
 這是從 Repo 根目錄執行的相對路徑，僅用於作者核准的工作區。所有新 run 使用新資料夾；歷史來源與結果保持原樣。

@@ -20,8 +20,8 @@ Windows 改用 `examples/day03/.venv/Scripts/python.exe`。離線測試本身不
 
 ```bash
 examples/day03/.venv/bin/python examples/day03/run.py --live \
-  --env-file ../editorial/private/.env \
-  --output ../editorial/evidence/day03
+  --env-file .env \
+  --output out/day03/evidence
 ```
 
 相對路徑只是範例，須符合你自己的資料夾位置。程式優先讀 `GEMINI_API_KEY` 環境變數；未設定才讀 `--env-file`。不要把金鑰本身放在命令參數。

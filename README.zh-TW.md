@@ -22,6 +22,7 @@
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
+| 乾淨容器環境重現與雙視窗驗收規格 | [Day 26：乾淨環境與雙視窗規格](examples/day26/README.md) | 乾淨容器重現腳本（`cleanroom.sh`）、Google Cloud Shell 專用 Dockerfile、155 項全量測試離線驗證、雙 LINE 視窗生命週期時序規格，以及 SQLite CAS 原子認領 |
 | 公開文字結構化抽取與審閱採用資料庫 | [Day 25：結構化資料抽取](examples/day25/README.md) | Gemini 結構化輸出入口（`capture.py`）、確定性原文核對契約（`schema.py`）、審閱採用儲存庫（`store.py`）、五題實測與審閱執行器（`run_live.py`）、專用 CI 測試套件 |
 | 三組分母實測評測牆與 A/B 成本量測 | [Day 24：實測評測牆](examples/day24/README.md) | 直接 SDK 路由擷取（`capture.py`）、證據核對器（`audit.py`）、20 題地方契約回歸執行器（`offline.py`）、離線重播驗證（`replay.py`）、專用 CI 測試套件 |
 | 需求導向的 Google AI 技術選型決策 | [Day 23：選型判斷表](examples/day23/README.md) | 離線選型決策篩選器（`stack_matrix.py`）、四套架構設計宣告（AI Studio、Vertex AI、Cloud Run、Firestore）、本機行程探針、專用 CI 測試套件 |

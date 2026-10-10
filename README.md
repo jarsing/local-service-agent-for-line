@@ -22,6 +22,7 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
+| Clean-room container & dual-window specs | [Day 26: Clean-room specs](examples/day26/README.md) | Clean-room reproducibility script (`cleanroom.sh`), Dockerfile for Google Cloud Shell, 155-test verification suite, dual LINE window lifecycle specification, and SQLite CAS atomic claim |
 | Extract unstructured text to local database | [Day 25: Structured extraction](examples/day25/README.md) | Structured outputs with `response_json_schema` (`capture.py`), deterministic quote verifier (`schema.py`), review admission store (`store.py`), live evaluation runner (`run_live.py`), and dedicated CI suite |
 | Three-denominator evaluation wall & A/B cost audit | [Day 24: Evaluation wall](examples/day24/README.md) | Direct SDK routing capture (`capture.py`), evidence auditor (`audit.py`), 20-case contract regression runner (`offline.py`), backend replay (`replay.py`), and dedicated CI suite |
 | Requirements-driven Google AI stack selection | [Day 23: Stack decision matrix](examples/day23/README.md) | Offline design evaluation (`stack_matrix.py`), four declared architectures (AI Studio, Vertex AI, Cloud Run, Firestore), fresh-process import probe, and dedicated CI suite |

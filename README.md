@@ -17,11 +17,12 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 27, October 11, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–27 examples. Day 27 delivers a version-pinned demo runbook, 180-second storyboard, Google Cloud Shell clean-room entry point, and local SQLite fallback replay. Reference documentation: [Day 27 documentation](docs/day27/README.md).
+**Code index updated through Day 28, October 12, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–28 examples. Day 28 delivers the developer-facing product card, one-line Quickstart offline verification, Cloud Run 404 routing investigation example, Firestore volunteer claim contract, and open-source delivery specifications (MIT / CONTRIBUTING). Reference documentation: [Day 28 documentation](docs/day28/README.md).
 
 
 | Start with a goal | Entry point | What to explore |
 |---|---|---|
+| Product card, one-line Quickstart & open-source delivery | [Day 28: Product card & delivery](examples/day28/README.md) | Bilingual product card, 3-minute Quickstart one-liner, Cloud Run 404 routing investigation example, Firestore CAS claim contract, MIT license, and CONTRIBUTING guide |
 | Demo runbook freeze & local fallback replay | [Day 27: Demo runbook](examples/day27/README.md) | Version-pinned 3-minute storyboard runbook (`DEMO.md`), Google Cloud Shell clean-room script (`cleanroom.sh`), local SQLite fallback replay (`replay_day27.py`), and 5 independent unit tests |
 | Clean-room container & dual-window specs | [Day 26: Clean-room specs](examples/day26/README.md) | Clean-room reproducibility script (`cleanroom.sh`), Dockerfile for Google Cloud Shell, 155-test verification suite, dual LINE window lifecycle specification, and SQLite CAS atomic claim |
 | Extract unstructured text to local database | [Day 25: Structured extraction](examples/day25/README.md) | Structured outputs with `response_json_schema` (`capture.py`), deterministic quote verifier (`schema.py`), review admission store (`store.py`), live evaluation runner (`run_live.py`), and dedicated CI suite |

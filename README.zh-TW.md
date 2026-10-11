@@ -17,11 +17,12 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 27（2026/10/11）。** Day 1 驗收規格與 Day 2～27 範例已在 Repo；Day 27 交付展示版本凍結（Demo Freeze）手冊規格、Google Cloud Shell 驗收入口與本機 SQLite 離線重放備援程式。本次導覽依據：[Day 27 說明文件](docs/day27/README.md)。
+**程式導覽更新至 Day 28（2026/10/12）。** Day 1 驗收規格與 Day 2～28 範例已在 Repo；Day 28 交付首頁產品卡、三分鐘 Quickstart 離線驗證、Cloud Run 404 路由排查範例、Firestore 志工認領契約與開源交付規格（MIT / CONTRIBUTING）。本次導覽依據：[Day 28 說明文件](docs/day28/README.md)。
 
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
+| 開源產品卡、一行 Quickstart 與開源交付規格 | [Day 28：開源產品卡與交付規格](examples/day28/README.md) | 中英文首頁產品卡、三分鐘 Quickstart 一行離線驗證、Cloud Run 404 路由排查範例、Firestore CAS 認領契約、MIT 授權與 CONTRIBUTING 指南 |
 | 展示版本凍結手冊與本機備援重放 | [Day 27：Demo 版本與備援重放](examples/day27/README.md) | 三分鐘展示手冊（`DEMO.md`）、Google Cloud Shell 乾淨容器驗收腳本（`cleanroom.sh`）、本機 SQLite 離線重放示範（`replay_day27.py`），以及 5 項獨立單元測試 |
 | 乾淨容器環境重現與雙視窗驗收規格 | [Day 26：乾淨環境與雙視窗規格](examples/day26/README.md) | 乾淨容器重現腳本（`cleanroom.sh`）、Google Cloud Shell 專用 Dockerfile、155 項全量測試離線驗證、雙 LINE 視窗生命週期時序規格，以及 SQLite CAS 原子認領 |
 | 公開文字結構化抽取與審閱採用資料庫 | [Day 25：結構化資料抽取](examples/day25/README.md) | Gemini 結構化輸出入口（`capture.py`）、確定性原文核對契約（`schema.py`）、審閱採用儲存庫（`store.py`）、五題實測與審閱執行器（`run_live.py`）、專用 CI 測試套件 |

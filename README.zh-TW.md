@@ -17,11 +17,12 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 26（2026/10/10）。** Day 1 驗收規格與 Day 2～26 範例已在 Repo；Day 26 交付乾淨環境無干預重現（Clean-room Reproducibility，D48）與雙 LINE 視窗生命週期驗收規格（D68），提供本機 SQLite CAS 原子認領驗證與在地服務防呆矩陣。本次導覽依據：[Day 26 說明文件](docs/day26/README.md)。
+**程式導覽更新至 Day 27（2026/10/11）。** Day 1 驗收規格與 Day 2～27 範例已在 Repo；Day 27 交付展示版本凍結（Demo Freeze）手冊規格、Google Cloud Shell 驗收入口與本機 SQLite 離線重放備援程式。本次導覽依據：[Day 27 說明文件](docs/day27/DEMO.md)。
 
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
 |---|---|---|
+| 展示版本凍結手冊與本機備援重放 | [Day 27：Demo 版本與備援重放](examples/day27/README.md) | 三分鐘展示手冊（`DEMO.md`）、Google Cloud Shell 乾淨容器驗收腳本（`cleanroom.sh`）、本機 SQLite 離線重放示範（`replay_day27.py`），以及 5 項獨立單元測試 |
 | 乾淨容器環境重現與雙視窗驗收規格 | [Day 26：乾淨環境與雙視窗規格](examples/day26/README.md) | 乾淨容器重現腳本（`cleanroom.sh`）、Google Cloud Shell 專用 Dockerfile、155 項全量測試離線驗證、雙 LINE 視窗生命週期時序規格，以及 SQLite CAS 原子認領 |
 | 公開文字結構化抽取與審閱採用資料庫 | [Day 25：結構化資料抽取](examples/day25/README.md) | Gemini 結構化輸出入口（`capture.py`）、確定性原文核對契約（`schema.py`）、審閱採用儲存庫（`store.py`）、五題實測與審閱執行器（`run_live.py`）、專用 CI 測試套件 |
 | 三組分母實測評測牆與 A/B 成本量測 | [Day 24：實測評測牆](examples/day24/README.md) | 直接 SDK 路由擷取（`capture.py`）、證據核對器（`audit.py`）、20 題地方契約回歸執行器（`offline.py`）、離線重播驗證（`replay.py`）、專用 CI 測試套件 |
@@ -29,7 +30,7 @@
 | 身分分工、秘密管理與受控停止開關 | [Day 22：權限、秘密與停止開關](examples/day22/README.md) | 獨立停止閘門（`circuit_breaker.py`）、epoch 准入失效控制、原子建單與 outbox 意圖、三權分立目標架構規劃、專用 CI 測試套件 |
 | 沿著 Trace 定位工具呼叫與後端缺陷 | [Day 21：一條 Trace 找到問題](examples/day21/README.md) | 結構化追蹤核對器（`trace_audit.py`）、Cloud Logging 結構化日誌映射、多層缺陷診斷體系與 PII 邊界防護 |
 | 模型設定、延遲與每項任務成本帳本 | [Day 20：成本帳本計算器](examples/day20/README.md) | 來源明確的成本帳本（`cost_ledger.py`）、Decimal 牌價算術、思考 Token 獨立計價與 2 秒回應門檻隔離 |
-| 志工收件匣契約與 CAS 樂觀鎖 | [Day 19：志工收件匣閉查](examples/day19/README.md) | 志工收件匣契約、CAS 樂觀鎖原子認領、收件匣閉環與逾時查回對帳（雙視窗驗收規格見 Day 26） |
+| 志工收件匣契約與 CAS 樂觀鎖 | [Day 19：志工收件匣契約](examples/day19/README.md) | 志工收件匣契約、CAS 樂觀鎖原子認領、收件匣完整歷程與逾時查回對帳（雙視窗驗收規格見 Day 26） |
 | 20 題地方契約評測與三層驗收 | [Day 18：20 題地方契約評測](examples/day18/README.md) | 20 題地方契約基準（`eval/local20.json`）、三層確定性判分器、雙軌隔離評測、請求節奏閘門與 28 項反例攔截 |
 | 查無資料分流與服務降級 | [Day 17：三種查不到與服務降級](examples/day17/README.md) | 有型別的結果（no_data／query_unavailable／unsupported）、非固定說法意圖分流、固定文案與按鈕引導，以及離線故障注入驗證 |
 | 不可信文件防禦與唯讀權限白名單 | [Day 16：不可信文件與最小權限](examples/day16/README.md) | 唯讀工具白名單、ADK before_tool_callback 攔截、後端執行核對與離線四個零驗證 |
@@ -129,11 +130,12 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 23 | [選型判斷表：Google AI 工具箱在地方服務該怎麼選？](https://ithelp.ithome.com.tw/articles/10421985) | [examples/day23](examples/day23/) | [docs/day23](docs/day23/README.md) |
 | Day 24 | [改了一行，20 題還過嗎？Google AI 實測牆與 A/B 成本量測](https://ithelp.ithome.com.tw/articles/10422261) | [examples/day24](examples/day24/) | [docs/day24](docs/day24/README.md) |
 | Day 25 | [Gemini 結構化輸出抽取地方資料：從公開文字到服務資料庫](https://ithelp.ithome.com.tw/articles/10422718) | [examples/day25](examples/day25/) | [docs/day25](docs/day25/README.md) |
-| Day 26 | [走出自己房間之前：乾淨環境與雙 LINE 視窗的驗收規格](https://ithelp.ithome.com.tw/articles/10423179) | [examples/day22](examples/day22/) | [docs/day26](docs/day26/README.md) |
+| Day 26 | [走出自己房間之前：乾淨環境與雙 LINE 視窗的驗收規格](https://ithelp.ithome.com.tw/articles/10423179) | [examples/day26](examples/day26/) | [docs/day26](docs/day26/README.md) |
+| Day 27 | [上台前要鎖住什麼？Demo 版本與備援錄影](https://ithelp.ithome.com.tw/articles/10423179) | [examples/day27](examples/day27/) | [docs/day27](docs/day27/DEMO.md) |
 
-Day 27 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
+Day 28 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 
-這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收、志工收件匣契約與 CAS 樂觀鎖（真人端驗收移至 Day 26）、模型設定／延遲／成本帳本與比較條件核對，以及結構化追蹤核對與 Cloud Logging 結構化日誌映射已收錄至 Day 21；Day 22 落地受控停止閘門（circuit breaker / stop gate）、epoch 准入失效控制與最小特權身分分工；Day 23 建立架構決策矩陣，權衡開發協作、執行編排、模型存取路徑與資料庫特性；Day 24 建立三組分母評測牆、Gemini 路由擷取與 A/B 成本量測；Day 25 建立公開文字到候選資料庫之結構化抽取管線、Pydantic 防偽契約與 SQLite 採用收據；Day 26 建立乾淨環境無干預重現與雙 LINE 視窗生命週期驗收規格，以及在地服務防呆矩陣；後續會探討完整驗收。新範例公開後，會持續更新這份導覽。
+這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收、志工收件匣契約與 CAS 樂觀鎖（真人端驗收移至 Day 26）、模型設定／延遲／成本帳本與比較條件核對，以及結構化追蹤核對與 Cloud Logging 結構化日誌映射已收錄至 Day 21；Day 22 落地受控停止閘門（circuit breaker / stop gate）、epoch 准入失效控制與最小特權身分分工；Day 23 建立架構決策矩陣，權衡開發協作、執行編排、模型存取路徑與資料庫特性；Day 24 建立三組分母評測牆、Gemini 路由擷取與 A/B 成本量測；Day 25 建立公開文字到候選資料庫之結構化抽取管線、Pydantic 防偽契約與 SQLite 採用收據；Day 26 建立乾淨環境無干預重現與雙 LINE 視窗生命週期驗收規格，以及在地服務防呆矩陣；Day 27 建立展示版本凍結（Demo Freeze）規約、三分鐘展示手冊與本機離線 SQLite 重放備援；後續會探討完整驗收。新範例公開後，會持續更新這份導覽。
 
 
 ## LINE、Gemini 與 ADK 各做什麼？

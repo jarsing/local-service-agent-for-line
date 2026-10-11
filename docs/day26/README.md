@@ -10,4 +10,4 @@
 - SQLite CAS 原子認領機制與控制世代（epoch）准入保護
 - 在地服務營運痛點防呆矩陣（連按送出、翻看舊卡片與查無店家）
 
-前篇：[Day 25](https://ithelp.ithome.com.tw/articles/10422718)。下一步：Day 27 Demo 版本與備援錄影。
+前篇：[Day 25](https://ithelp.ithome.com.tw/articles/10422718)。下一步：[Day 27 成果展示要鎖住什麼？Demo 版本凍結、三分鐘劇本與離線備援](https://ithelp.ithome.com.tw/articles/10423364)。

@@ -17,7 +17,7 @@
 
 ## 現在可以從哪裡開始？
 
-**程式導覽更新至 Day 27（2026/10/11）。** Day 1 驗收規格與 Day 2～27 範例已在 Repo；Day 27 交付展示版本凍結（Demo Freeze）手冊規格、Google Cloud Shell 驗收入口與本機 SQLite 離線重放備援程式。本次導覽依據：[Day 27 說明文件](docs/day27/DEMO.md)。
+**程式導覽更新至 Day 27（2026/10/11）。** Day 1 驗收規格與 Day 2～27 範例已在 Repo；Day 27 交付展示版本凍結（Demo Freeze）手冊規格、Google Cloud Shell 驗收入口與本機 SQLite 離線重放備援程式。本次導覽依據：[Day 27 說明文件](docs/day27/README.md)。
 
 
 | 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
@@ -131,7 +131,7 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 24 | [改了一行，20 題還過嗎？Google AI 實測牆與 A/B 成本量測](https://ithelp.ithome.com.tw/articles/10422261) | [examples/day24](examples/day24/) | [docs/day24](docs/day24/README.md) |
 | Day 25 | [Gemini 結構化輸出抽取地方資料：從公開文字到服務資料庫](https://ithelp.ithome.com.tw/articles/10422718) | [examples/day25](examples/day25/) | [docs/day25](docs/day25/README.md) |
 | Day 26 | [走出自己房間之前：乾淨環境與雙 LINE 視窗的驗收規格](https://ithelp.ithome.com.tw/articles/10423179) | [examples/day26](examples/day26/) | [docs/day26](docs/day26/README.md) |
-| Day 27 | [上台前要鎖住什麼？Demo 版本與備援錄影](https://ithelp.ithome.com.tw/articles/10423179) | [examples/day27](examples/day27/) | [docs/day27](docs/day27/DEMO.md) |
+| Day 27 | [成果展示要鎖住什麼？Demo 版本凍結、三分鐘劇本與離線備援](https://ithelp.ithome.com.tw/articles/10423364) | [examples/day27](examples/day27/) | [docs/day27](docs/day27/README.md) |
 
 Day 28 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 

@@ -17,7 +17,7 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 
 ## What can I try today?
 
-**Code index updated through Day 27, October 11, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–27 examples. Day 27 delivers a version-pinned demo runbook, 180-second storyboard, Google Cloud Shell clean-room entry point, and local SQLite fallback replay. Reference documentation: [Day 27 documentation](docs/day27/DEMO.md).
+**Code index updated through Day 27, October 11, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–27 examples. Day 27 delivers a version-pinned demo runbook, 180-second storyboard, Google Cloud Shell clean-room entry point, and local SQLite fallback replay. Reference documentation: [Day 27 documentation](docs/day27/README.md).
 
 
 | Start with a goal | Entry point | What to explore |
@@ -133,7 +133,7 @@ The articles are written in Traditional Chinese. English topic labels below summ
 | 24 | [Did Changing One Line Break the 20 Cases? Evaluation Wall and A/B Cost Measurement](https://ithelp.ithome.com.tw/articles/10422261) | [examples/day24](examples/day24/) | [docs/day24](docs/day24/README.md) |
 | 25 | [Extracting Local Data with Gemini Structured Outputs: From Public Text to Service Database](https://ithelp.ithome.com.tw/articles/10422718) | [examples/day25](examples/day25/) | [docs/day25](docs/day25/README.md) |
 | 26 | [Acceptance Specification for Clean Environments and Dual LINE Windows](https://ithelp.ithome.com.tw/articles/10423179) | [examples/day26](examples/day26/) | [docs/day26](docs/day26/README.md) |
-| 27 | [What to freeze before presenting: Demo runbook and backup video](https://ithelp.ithome.com.tw/articles/10423179) | [examples/day27](examples/day27/) | [docs/day27](docs/day27/DEMO.md) |
+| 27 | [What to freeze for product demo: Demo version freeze, 3-minute storyboard, and offline fallback](https://ithelp.ithome.com.tw/articles/10423364) | [examples/day27](examples/day27/) | [docs/day27](docs/day27/README.md) |
 
 Find Day 28 and later articles through the [series page](https://ithelp.ithome.com.tw/users/20120682/ironman/9872). Day 1 delivers a design specification, so executable examples begin at `examples/day02/`.
 

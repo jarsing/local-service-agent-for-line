@@ -1,6 +1,6 @@
 # LOCAL Day 27｜三分鐘展示手冊
 
-狀態：展示手冊更新於 `docs/day27/DEMO.md`（Commit `e2ab88c`，`ci.yml` Run `38120465601` 通過；程式公開於 Commit `f9b7630`）；實體手機 LINE Bot 已完成單號保存與同號查回，預錄備援素材依各節規格納管，不拿未驗收素材充數。
+狀態：展示手冊更新於 `docs/day27/DEMO.md`（Commit `b415a87`，`ci.yml` Run `38142468642` 通過；程式公開於 Commit `f9b7630`）；實體手機 LINE Bot 已完成單號保存與同號查回，預錄備援素材依各節規格納管，不拿未驗收素材充數。
 
 ## 1. 展示目標
 
@@ -13,18 +13,18 @@
 | 對象 | 固定來源或記錄方式 |
 |---|---|
 | 公開來源版本（受測基線） | `f8267a84fc7456783b2229e42b580d705164fd8d` |
-| 本日程式與手冊版本 | 程式公開於 `f9b7630d79e42ba3ade23ac29a097b0cee275d44`；手冊更新於 `e2ab88cea80894e11206aec9f5e1c22210f6b18e` |
+| 本日程式與手冊版本 | 程式公開於 `f9b7630d79e42ba3ade23ac29a097b0cee275d44`；手冊更新於 `b415a8729dee0cde2f1187a48ba45e1019f100ee` |
 | 既有容器入口 | `examples/day26/cleanroom.sh` |
 | 既有本機範例 | `examples/day26/stop_gate_example.py` |
 | 本日備援候選 | `replay_day27.py`，收錄於 `examples/day27/` 與根目錄 |
 | 本日 Cloud Shell 入口 | `day27_cleanroom.sh`，使用完整 REV 覆蓋既有短碼預設 |
 | 本機核心 SHA-256 | `f0ff3a99d082a7777fe1f019936087404844e46fb19d433b4501ee589a8548f1` |
 | 雲端與模型設定 | 模型 `gemini-3.8-flash`、Cloud Run 部署服務（Day 12 起修訂版，依實際流量核對） |
-| 本日 Commit／CI | Commit `f9b7630`（程式）與 Commit `e2ab88c`（手冊），`ci.yml` Run `38120465601`（Success） |
+| 本日 Commit／CI | Commit `f9b7630`（程式）與 Commit `b415a87`（手冊），`ci.yml` Run `38142468642`（Success） |
 | 真機部署 revision／權威 request_id | `local-day12-agent-00013-bw5`（100% 流量）／`req-20261011-dcd85c8b18175111`（已完成建單與同號查回） |
 | 預錄備援素材規格 | 依第 7 節規格納管，不拿未驗收素材充數 |
 
-容器受測來源固定於 `f8267a8`；本日備援程式自 `f9b7630` 公開，展示手冊更新於 `e2ab88c`。交付檔案的實際清單與雜湊以 `evidence/MANIFEST.json` 為準。
+容器受測來源固定於 `f8267a8`；本日備援程式自 `f9b7630` 公開，展示手冊更新於 `b415a87`。交付檔案的實際清單與雜湊以 `evidence/MANIFEST.json` 為準。
 
 ## 3. 開場前檢查
 

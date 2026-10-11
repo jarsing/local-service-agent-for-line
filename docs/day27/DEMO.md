@@ -1,6 +1,6 @@
 # LOCAL Day 27｜三分鐘展示手冊
 
-狀態：展示手冊公開於 `docs/day27/DEMO.md`（Commit `f9b7630`，`ci.yml` Run `38105243591` 通過）；真機雙手機驗收與錄影依各節規格排定於 Day 28。
+狀態：展示手冊更新於 `docs/day27/DEMO.md`（Commit `adb9514`，`ci.yml` Run `38108001748` 通過；程式公開於 Commit `f9b7630`）；真機雙手機驗收與錄影依各節規格排定於 Day 28。
 
 ## 1. 展示目標
 
@@ -13,18 +13,18 @@
 | 對象 | 固定來源或記錄方式 |
 |---|---|
 | 公開來源版本（受測基線） | `f8267a84fc7456783b2229e42b580d705164fd8d` |
-| 本日程式與手冊版本 | `f9b7630d79e42ba3ade23ac29a097b0cee275d44` |
+| 本日程式與手冊版本 | 程式公開於 `f9b7630d79e42ba3ade23ac29a097b0cee275d44`；手冊更新於 `adb9514a55d4fd889f56ac3f552e3f92052a91e3` |
 | 既有容器入口 | `examples/day26/cleanroom.sh` |
 | 既有本機範例 | `examples/day26/stop_gate_example.py` |
 | 本日備援候選 | 隨稿 `replay_day27.py`，放在上述 Repo 根目錄與 `examples/day27/` |
 | 本日 Cloud Shell 入口 | `day27_cleanroom.sh`，使用完整 REV 覆蓋既有短碼預設 |
 | 本機核心 SHA-256 | `f0ff3a99d082a7777fe1f019936087404844e46fb19d433b4501ee589a8548f1` |
 | 雲端與模型設定 | 模型 `gemini-3.8-flash`、Cloud Run 部署服務（Day 12 起修訂版，依實際流量核對） |
-| 本日 Commit／CI | Commit `f9b7630`，`ci.yml` Run `38105243591`（Success） |
+| 本日 Commit／CI | Commit `f9b7630`（程式）與 Commit `adb9514`（手冊），`ci.yml` Run `38108001748`（Success） |
 | 真機部署 revision／權威 request_id | 依實機接線記錄填入，排定於 Day 28 |
 | 備援影片與 YouTube 入口 | 依第 7 節規格錄製與驗收，排定於 Day 28 |
 
-交付檔案的實際雜湊以 `evidence/check_result.json` 為準。Commit 只識別公開來源，本日新增候選尚未包含在該 Commit 中。
+容器受測來源固定於 `f8267a8`；本日備援程式自 `f9b7630` 公開，展示手冊更新於 `adb9514`。交付檔案的實際清單與雜湊以 `evidence/MANIFEST.json` 為準。
 
 ## 3. 開場前檢查
 
@@ -57,11 +57,11 @@ bash day27_cleanroom.sh
 | `day19_day22.log` | 46 項執行、無失敗／跳過 |
 | `demo.json` | `origin=MOCK_INPUT_REAL_LOCAL_SQLITE`、`inserted_rows=1`、`same_id_on_repeat=true` |
 | `worktree.txt` | 依 `.gitignore` 規則無未忽略的異動；不是宣稱完全沒有產物 |
-| `run.log`／`exit-code.txt` | 完整 runner 日誌及退出碼，非零時停止認定成功 |
+| `run.log`／`exit-code.txt` | 完整 runner 日誌及結束碼，非零時停止認定成功 |
 
 上述驗收已於 Google Cloud Shell 乾淨容器（`--network none`）執行完畢，基底為 `python:3.13-slim`，155 項測試全綠通過，結束碼 0，原始日誌保存在 `out/day27/cleanroom-01/`。雙手機真機接線與錄影則分開維持待驗收。
 
-若失敗：保留新目錄，先讀 `run.log` 和退出碼；修正後使用新候選及新目錄。不要覆寫當次證據，也不要在同一場展示臨時換模型。
+若失敗：保留新目錄，先讀 `run.log` 和結束碼；修正後使用新候選及新目錄。不要覆寫當次證據，也不要在同一場展示臨時換模型。
 
 ## 5. 雙手機 0～180 秒劇本
 
@@ -70,7 +70,7 @@ bash day27_cleanroom.sh
 | 時間 | 講者台詞 | 操作 | 實機合格證據 |
 |---|---|---|---|
 | 0～30 秒 | 先看版本，再看今天要交給誰。 | 指出固定版本與當次執行報告。 | Commit、測試範圍、部署與素材版本可對照。 |
-| 30～75 秒 | 提問是意圖，按確認才是同意。 | A 問「我想帶吃全素的長輩吃爌肉飯，可以幫我詢問店家嗎？」；查看回覆，核對並確認詢問；B 看推播卡片。 | 查詢不得把無全素冒充有全素；確認後才建立權威 request_id；B 卡片同號。 |
+| 30～75 秒 | 提問是意圖，按確認才是同意。 | A 問「我想帶吃全素的長輩吃爌肉飯，可以幫我詢問店家嗎？」；查看回覆，核對並確認詢問；B 看推播卡片。 | 系統依核對範圍說明，未確認時保留未知；確認後才建立權威 request_id；B 卡片同號。 |
 | 75～120 秒 | 已存在的單要留著，新認領先停下。 | 管理者 PAUSED；B 點「我來處理」被拒；SERVING 後再認領。 | 單據暫停前後不變；成功認領後版本增加；呼叫者為授權志工。 |
 | 120～180 秒 | 他看到的進度，要是同一張單的現在。 | A 查回 human_claimed，再點原確認卡。 | 本人授權查回、同號、無第二張單；受理不代表店家供餐承諾。 |
 
@@ -109,7 +109,7 @@ bash day27_cleanroom.sh
 
 ## 8. 本機 SQLite 路徑
 
-將隨稿 `replay_day27.py` 放在固定 Repo 根目錄，在 Python 3.10+ 的本機環境執行。此路徑只使用標準函式庫及 Day 22 核心，與執行全套 155 項測試所需的 Pydantic 環境不同。
+完整可執行檔 `replay_day27.py` 已收錄於 Repo 根目錄與 `examples/day27/`，在 Python 3.10+ 的本機環境執行。此路徑只使用標準函式庫及 Day 22 核心，與執行全套 155 項測試所需的 Pydantic 環境不同。
 
 ```bash
 python3 replay_day27.py --out out/day27/replay-normal
@@ -118,9 +118,9 @@ python3 -O replay_day27.py --out out/day27/replay-optimized
 
 輸出目錄必須不存在。預期各次輸出：`status=PASS`、`request_count=1`、`final_state=human_claimed`、認領版本 1→2、第二次認領 false、原操作查回同號。兩次執行各有自己的單號。
 
-程式在執行前核對固定 Day 22 核心檔案 SHA-256；不符即拒絕。成功與失敗各自留 `report.json`；既有資料夾或版本不符則在建立新資料前拒絕。本次已在 macOS Python 3.14.2 與 Linux Python 3.13.5 雙環境執行上述兩種模式，5 項單元測試全數通過（Ran 5 tests in 0.050s，OK），日誌保存於 `unittest.log`；沒有套用 OS 斷網隔離，也沒有呼叫外部服務。
+程式在執行前核對固定 Day 22 核心檔案 SHA-256；不符即拒絕。成功與失敗各自留 `report.json`；既有資料夾或版本不符則在建立新資料前拒絕。本次已在 macOS Python 3.14.2 環境執行上述兩種模式（並於 Linux 乾淨容器比對相同核心雜湊），5 項單元測試全數通過（Ran 5 tests in 0.050s，OK），日誌保存於 `unittest.log`；沒有套用 OS 斷網隔離，也沒有呼叫外部服務。
 
-將隨稿 `test_day27_replay.py` 也放到同一個 Repo 根目錄，即可重跑上述 5 項獨立檢查。測試只建立 `out/day27/replay-tests/` 內的暫存資料，結束後清除該次暫存子目錄，不操作正式資料。
+單元測試 `test_day27_replay.py` 亦收錄於 Repo 根目錄與 `examples/day27/`，即可重跑上述 5 項獨立檢查。測試只建立 `out/day27/replay-tests/` 內的暫存資料，結束後清除該次暫存子目錄，不操作正式資料。
 
 ```bash
 python3 -m unittest test_day27_replay -v

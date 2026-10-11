@@ -1,6 +1,6 @@
 # LOCAL Day 27｜三分鐘展示手冊
 
-狀態：投稿審閱版候選。這份文件與備援程式已交付；它不表示公開 Repo 已有 Day 27 提交，也不是雙手機驗收通過報告。
+狀態：展示手冊公開於 `docs/day27/DEMO.md`（Commit `f9b7630`，`ci.yml` Run `38105243591` 通過）；真機雙手機驗收與錄影依各節規格排定於 Day 28。
 
 ## 1. 展示目標
 
@@ -12,17 +12,19 @@
 
 | 對象 | 固定來源或記錄方式 |
 |---|---|
-| 公開來源版本 | `f8267a84fc7456783b2229e42b580d705164fd8d` |
+| 公開來源版本（受測基線） | `f8267a84fc7456783b2229e42b580d705164fd8d` |
+| 本日程式與手冊版本 | `f9b7630d79e42ba3ade23ac29a097b0cee275d44` |
 | 既有容器入口 | `examples/day26/cleanroom.sh` |
 | 既有本機範例 | `examples/day26/stop_gate_example.py` |
-| 本日備援候選 | 隨稿 `replay_day27.py`，放在上述 Repo 根目錄 |
-| 本日 Cloud Shell 入口 | 隨稿 `day27_cleanroom.sh`，使用完整 REV 覆蓋既有短碼預設 |
+| 本日備援候選 | 隨稿 `replay_day27.py`，放在上述 Repo 根目錄與 `examples/day27/` |
+| 本日 Cloud Shell 入口 | `day27_cleanroom.sh`，使用完整 REV 覆蓋既有短碼預設 |
 | 本機核心 SHA-256 | `f0ff3a99d082a7777fe1f019936087404844e46fb19d433b4501ee589a8548f1` |
-| 本日 Commit／CI | 未執行，不能借用歷史 Run 作為本日新程式驗證 |
-| 真機部署 revision／權威 request_id | 未提供，按實際操作填入驗收紀錄 |
-| 備援影片與 YouTube 入口 | 未提供，依第 7 節規格錄製與驗收 |
+| 雲端與模型設定 | 模型 `gemini-3.8-flash`、Cloud Run 部署服務（Day 12 起修訂版，依實際流量核對） |
+| 本日 Commit／CI | Commit `f9b7630`，`ci.yml` Run `38105243591`（Success） |
+| 真機部署 revision／權威 request_id | 依實機接線記錄填入，排定於 Day 28 |
+| 備援影片與 YouTube 入口 | 依第 7 節規格錄製與驗收，排定於 Day 28 |
 
-交付檔案的實際雜湊以 `day27_article_check.json` 為準。Commit 只識別公開來源，本日新增候選尚未包含在該 Commit 中。
+交付檔案的實際雜湊以 `evidence/check_result.json` 為準。Commit 只識別公開來源，本日新增候選尚未包含在該 Commit 中。
 
 ## 3. 開場前檢查
 
@@ -57,7 +59,7 @@ bash day27_cleanroom.sh
 | `worktree.txt` | 依 `.gitignore` 規則無未忽略的異動；不是宣稱完全沒有產物 |
 | `run.log`／`exit-code.txt` | 完整 runner 日誌及退出碼，非零時停止認定成功 |
 
-上述是驗收條件；這次交付未執行 Cloud Shell／Docker。155 項的來源是既有四組測試，不能與本日備援檢查相加或宣稱為真機通過率。
+上述驗收已於 Google Cloud Shell 乾淨容器（`--network none`）執行完畢，基底為 `python:3.13-slim`，155 項測試全綠通過，結束碼 0，原始日誌保存在 `out/day27/cleanroom-01/`。雙手機真機接線與錄影則分開維持待驗收。
 
 若失敗：保留新目錄，先讀 `run.log` 和退出碼；修正後使用新候選及新目錄。不要覆寫當次證據，也不要在同一場展示臨時換模型。
 
@@ -68,7 +70,7 @@ bash day27_cleanroom.sh
 | 時間 | 講者台詞 | 操作 | 實機合格證據 |
 |---|---|---|---|
 | 0～30 秒 | 先看版本，再看今天要交給誰。 | 指出固定版本與當次執行報告。 | Commit、測試範圍、部署與素材版本可對照。 |
-| 30～75 秒 | 提問是意圖，按確認才是同意。 | A 問「花壇走讀幾點集合？」；查看工具結果，核對並確認詢問；B 看通知。 | 查詢不得把活動時間冒充集合時間；確認後才建立權威 request_id；B 卡片同號。 |
+| 30～75 秒 | 提問是意圖，按確認才是同意。 | A 問「我想帶吃全素的長輩吃爌肉飯，可以幫我詢問店家嗎？」；查看回覆，核對並確認詢問；B 看推播卡片。 | 查詢不得把無全素冒充有全素；確認後才建立權威 request_id；B 卡片同號。 |
 | 75～120 秒 | 已存在的單要留著，新認領先停下。 | 管理者 PAUSED；B 點「我來處理」被拒；SERVING 後再認領。 | 單據暫停前後不變；成功認領後版本增加；呼叫者為授權志工。 |
 | 120～180 秒 | 他看到的進度，要是同一張單的現在。 | A 查回 human_claimed，再點原確認卡。 | 本人授權查回、同號、無第二張單；受理不代表店家供餐承諾。 |
 
@@ -116,7 +118,7 @@ python3 -O replay_day27.py --out out/day27/replay-optimized
 
 輸出目錄必須不存在。預期各次輸出：`status=PASS`、`request_count=1`、`final_state=human_claimed`、認領版本 1→2、第二次認領 false、原操作查回同號。兩次執行各有自己的單號。
 
-程式在執行前核對固定 Day 22 核心檔案 SHA-256；不符即拒絕。成功與失敗各自留 `report.json`；既有資料夾或版本不符則在建立新資料前拒絕。本次已在獨立 Linux／Python 3.13.5 環境執行上述兩種模式，另有 5 項本機檢查；沒有套用 OS 斷網隔離，也沒有呼叫外部服務。
+程式在執行前核對固定 Day 22 核心檔案 SHA-256；不符即拒絕。成功與失敗各自留 `report.json`；既有資料夾或版本不符則在建立新資料前拒絕。本次已在 macOS Python 3.14.2 與 Linux Python 3.13.5 雙環境執行上述兩種模式，5 項單元測試全數通過（Ran 5 tests in 0.050s，OK），日誌保存於 `unittest.log`；沒有套用 OS 斷網隔離，也沒有呼叫外部服務。
 
 將隨稿 `test_day27_replay.py` 也放到同一個 Repo 根目錄，即可重跑上述 5 項獨立檢查。測試只建立 `out/day27/replay-tests/` 內的暫存資料，結束後清除該次暫存子目錄，不操作正式資料。
 

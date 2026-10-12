@@ -1,0 +1,39 @@
+# Candidate only: not pushed or executed by this delivery.
+name: LOCAL Day 29 fixture and grader checks
+on:
+  push:
+    paths: ["eval/local100.json", "examples/day29/**", ".github/workflows/day29.yml"]
+  pull_request:
+    paths: ["eval/local100.json", "examples/day29/**", ".github/workflows/day29.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  grader:
+    name: Candidate grader tests, not 100 service executions
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.13.5"
+      - name: Verify grader behavior in normal and optimized modes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ci-output/day29
+          python -m unittest discover -s examples/day29 -p test_acceptance.py -v 2>&1 | tee ci-output/day29/normal.log
+          python -O -m unittest discover -s examples/day29 -p test_acceptance.py -v 2>&1 | tee ci-output/day29/optimized.log
+          python examples/day29/acceptance.py --plan --out ci-output/day29/specification-plan
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        if: always()
+        with:
+          name: day29-grader-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ci-output/day29/
+          retention-days: 14
+          if-no-files-found: error

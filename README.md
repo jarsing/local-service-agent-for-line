@@ -15,6 +15,18 @@ Before joining a community walking tour, people ask practical questions: What ti
 
 This project is for developers with Web, HTTP API, or LINE Bot experience who want to build with Google AI. Each example combines something to try with a design choice to understand.
 
+## Product Card
+
+> Understand local-service questions; keep decisions auditable.
+
+- **Start here (3-Minute Quickstart):** Run the offline SQLite example with Python 3.10+. No API key is needed; no LINE message is sent.
+  ```bash
+  python3 -m unittest test_day27_replay -v && python3 replay_day27.py --out out/day28/quickstart-01
+  ```
+- **Observe:** One request, a blocked claim while paused, and one accepted claim (`out/day28/quickstart-01/report.json`).
+- **Then explore:** Gemini + ADK lookup, consent, persistence, and UI recovery. Cloud integration has separate credentials, costs, and acceptance checks.
+- **License & Governance:** MIT License (`LICENSE`). Contribution guide: [`CONTRIBUTING.md`](CONTRIBUTING.md). Release checklist: [`docs/day28/RELEASE_CHECKLIST.md`](docs/day28/RELEASE_CHECKLIST.md).
+
 ## What can I try today?
 
 **Code index updated through Day 28, October 12, 2026.** The repository contains the Day 1 acceptance specification and the Day 2–28 examples. Day 28 delivers the developer-facing product card, one-line Quickstart offline verification, Cloud Run 404 routing investigation example, Firestore volunteer claim contract, and open-source delivery specifications (MIT / CONTRIBUTING). Reference documentation: [Day 28 documentation](docs/day28/README.md).

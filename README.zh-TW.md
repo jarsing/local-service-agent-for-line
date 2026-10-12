@@ -15,6 +15,18 @@
 
 這份教材寫給已有 Web、HTTP API 或 LINE Bot 基礎，想開始使用 Google AI 的開發者。每個範例都有可以動手做的操作，以及值得一起拆解的設計選擇。
 
+## 開源首頁產品卡（Product Card）
+
+> 為地方長輩與志工設計，把 LINE 詢問、Google AI 理解與可查核的服務狀態串在一起。
+
+- **三分鐘 Quickstart 一行指令：** 使用 Python 3.10+ 執行純本機離線範例。第一步完全不需 API 金鑰，不發送任何 LINE 訊息。
+  ```bash
+  python3 -m unittest test_day27_replay -v && python3 replay_day27.py --out out/day28/quickstart-01
+  ```
+- **觀察重點：** 單號唯一不重複、暫停狀態熔斷拒絕認領、恢復後由一位志工成功接手（`out/day28/quickstart-01/report.json`）。
+- **進階探索：** Gemini 與 ADK 意圖分析、長輩飲食偏好授權記憶、Cloud Run 部署與 Firestore 持久化。雲端整合具備獨立憑證、費用與驗收關卡。
+- **開源授權與治理：** MIT 開源授權（`LICENSE`）。貢獻指南：[`CONTRIBUTING.md`](CONTRIBUTING.md)。發布核對清單：[`docs/day28/RELEASE_CHECKLIST.md`](docs/day28/RELEASE_CHECKLIST.md)。
+
 ## 現在可以從哪裡開始？
 
 **程式導覽更新至 Day 28（2026/10/12）。** Day 1 驗收規格與 Day 2～28 範例已在 Repo；Day 28 交付首頁產品卡、三分鐘 Quickstart 離線驗證、Cloud Run 404 路由排查範例、Firestore 志工認領契約與開源交付規格（MIT / CONTRIBUTING）。本次導覽依據：[Day 28 說明文件](docs/day28/README.md)。
@@ -24,7 +36,7 @@
 |---|---|---|
 | 開源產品卡、一行 Quickstart 與開源交付規格 | [Day 28：開源產品卡與交付規格](examples/day28/README.md) | 中英文首頁產品卡、三分鐘 Quickstart 一行離線驗證、Cloud Run 404 路由排查範例、Firestore CAS 認領契約、MIT 授權與 CONTRIBUTING 指南 |
 | 展示版本凍結手冊與本機備援重放 | [Day 27：Demo 版本與備援重放](examples/day27/README.md) | 三分鐘展示手冊（`DEMO.md`）、Google Cloud Shell 乾淨容器驗收腳本（`cleanroom.sh`）、本機 SQLite 離線重放示範（`replay_day27.py`），以及 5 項獨立單元測試 |
-| 乾淨容器環境重現與雙視窗驗收規格 | [Day 26：乾淨環境與雙視窗規格](examples/day26/README.md) | 乾淨容器重現腳本（`cleanroom.sh`）、Google Cloud Shell 專用 Dockerfile、155 項全量測試離線驗證、雙 LINE 視窗生命週期時序規格，以及 SQLite CAS 原子認領 |
+| 乾淨容器環境重現與雙視窗驗收規格 | [Day 26：乾淨環境與雙視窗規格](examples/day26/README.md) | 乾淨容器重現腳本（`cleanroom.sh`）、Google Cloud Shell 專用 Dockerfile、155 項完整測試離線驗證、雙 LINE 視窗生命週期時序規格，以及 SQLite CAS 原子認領 |
 | 公開文字結構化抽取與審閱採用資料庫 | [Day 25：結構化資料抽取](examples/day25/README.md) | Gemini 結構化輸出入口（`capture.py`）、確定性原文核對契約（`schema.py`）、審閱採用儲存庫（`store.py`）、五題實測與審閱執行器（`run_live.py`）、專用 CI 測試套件 |
 | 三組分母實測評測牆與 A/B 成本量測 | [Day 24：實測評測牆](examples/day24/README.md) | 直接 SDK 路由擷取（`capture.py`）、證據核對器（`audit.py`）、20 題地方契約回歸執行器（`offline.py`）、離線重播驗證（`replay.py`）、專用 CI 測試套件 |
 | 需求導向的 Google AI 技術選型決策 | [Day 23：選型判斷表](examples/day23/README.md) | 離線選型決策篩選器（`stack_matrix.py`）、四套架構設計宣告（AI Studio、Vertex AI、Cloud Run、Firestore）、本機行程探針、專用 CI 測試套件 |

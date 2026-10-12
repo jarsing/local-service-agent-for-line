@@ -145,8 +145,9 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 | Day 25 | [Gemini 結構化輸出抽取地方資料：從公開文字到服務資料庫](https://ithelp.ithome.com.tw/articles/10422718) | [examples/day25](examples/day25/) | [docs/day25](docs/day25/README.md) |
 | Day 26 | [走出自己房間之前：乾淨環境與雙 LINE 視窗的驗收規格](https://ithelp.ithome.com.tw/articles/10423179) | [examples/day26](examples/day26/) | [docs/day26](docs/day26/README.md) |
 | Day 27 | [成果展示要鎖住什麼？Demo 版本凍結、三分鐘劇本與離線備援](https://ithelp.ithome.com.tw/articles/10423364) | [examples/day27](examples/day27/) | [docs/day27](docs/day27/README.md) |
+| Day 28 | [把 LOCAL 交給開發者：產品卡、Quickstart 與開源交付規格](https://ithelp.ithome.com.tw/articles/10423648) | [examples/day28](examples/day28/) | [docs/day28](docs/day28/README.md) |
 
-Day 28 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
+Day 29 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
 
 這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收、志工收件匣契約與 CAS 樂觀鎖（真人端驗收移至 Day 26）、模型設定／延遲／成本帳本與比較條件核對，以及結構化追蹤核對與 Cloud Logging 結構化日誌映射已收錄至 Day 21；Day 22 落地受控停止閘門（circuit breaker / stop gate）、epoch 准入失效控制與最小特權身分分工；Day 23 建立架構決策矩陣，權衡開發協作、執行編排、模型存取路徑與資料庫特性；Day 24 建立三組分母評測牆、Gemini 路由擷取與 A/B 成本量測；Day 25 建立公開文字到候選資料庫之結構化抽取管線、Pydantic 防偽契約與 SQLite 採用收據；Day 26 建立乾淨環境無干預重現與雙 LINE 視窗生命週期驗收規格，以及在地服務防呆矩陣；Day 27 建立展示版本凍結（Demo Freeze）規約、三分鐘展示手冊與本機離線 SQLite 重放備援；後續會探討完整驗收。新範例公開後，會持續更新這份導覽。
 

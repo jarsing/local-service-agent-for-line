@@ -11,4 +11,4 @@
 - Firestore 原單識別與志工認領 CAS 樂觀鎖合約
 - 開源交付規格（MIT 授權、`CONTRIBUTING.md`、發布核對清單）
 
-前篇：[Day 27](https://ithelp.ithome.com.tw/articles/10423364)。下一步：Day 29 全系列總驗收。
+[Day 28 文章](https://ithelp.ithome.com.tw/articles/10423648)｜前篇：[Day 27](https://ithelp.ithome.com.tw/articles/10423364)。下一步：Day 29 全系列總驗收。

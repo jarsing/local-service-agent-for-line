@@ -9,12 +9,12 @@ Solid arrows describe responsibility relationships found in existing designs or 
 | Area | Source / module family | Current evidence category |
 |---|---|---|
 | Entry, confirmation, original request | Days 11–13 | Existing implementation and earlier single-phone observations; not rerun here |
-| Query, consented memory, untrusted content | Days 14–17, 25 | Existing code/design and case lineage; current100 collector not supplied |
-| Evaluation | Day18 reference / Day29 candidate | Original20 retained;100 new specifications and42 grader/config tests |
-| Stop control and claim | Days19,22,28 | Offline contracts; Firestore/phone integration not established by those contracts |
+| Query, consented memory, untrusted content | Days 14–17, 25 | Existing code/design and case lineage; current 100 collector not supplied |
+| Evaluation | Day 18 reference / Day 29 candidate | Original 20 retained; 100 new specifications and 42 grader/config tests |
+| Stop control and claim | Days 19, 22, 28 | Offline contracts; Firestore/phone integration not established by those contracts |
 | Model access | Google Gen AI SDK | Configuration-factory tests only, no new model request |
 | Monitoring | Day21 / Cloud Run | Structured-event mapping; no claim of Cloud Trace export |
-| Day29 CI | Candidate YAML | Not pushed, not executed; no Run ID |
+| Day29 CI | .github/workflows/day29.yml | Initial release in ff789ba, CI Run 38324486513 (Success); current candidate separately verified |
 
 ## Inquiry lifecycle
 
@@ -83,9 +83,9 @@ The same request contract does not imply equal model outputs, quotas, regions, t
 | Specifications / service observations | 100 specified / 0 observed; pass rate unknown |
 | Complete two-phone workflow | NOT_RUN |
 | Replay/idempotency subset | 16 specified / 0 observed; not additional cases |
-| Day29 CI | candidate workflow only; no commit/run |
+| Day29 CI | Initial ff789ba / Run 38324486513 succeeded; current updates verified locally |
 
-The 42 grader/config tests belong in a separate implementation-check box, not the100-service score. Performance radar, model latency and cost stay absent until evidence is supplied.
+The 42 grader/config tests belong in a separate implementation-check box, not the 100-service score. Performance radar, model latency and cost stay absent until evidence is supplied.
 
 ## Source references
 

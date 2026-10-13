@@ -13,6 +13,7 @@ import json
 import math
 from pathlib import Path
 import re
+import statistics
 import sys
 from typing import Any
 
@@ -36,9 +37,23 @@ def no_duplicates(pairs):
 def reject_constant(value):
     raise EvidenceError('NONFINITE_JSON:' + value)
 
+def finite_float(text: str) -> float:
+    value = float(text)
+    if not math.isfinite(value):
+        raise EvidenceError('NONFINITE_JSON_NUMBER')
+    return value
+
+def bounded_int(text: str) -> int:
+    try:
+        return int(text)
+    except ValueError as exc:
+        raise EvidenceError('JSON_INTEGER_LIMIT') from exc
+
 def decode(text: str) -> Any:
     return json.loads(text, object_pairs_hook=no_duplicates,
-                      parse_constant=reject_constant)
+                      parse_constant=reject_constant,
+                      parse_float=finite_float,
+                      parse_int=bounded_int)
 
 def canonical(value: Any) -> bytes:
     return json.dumps(value, ensure_ascii=False, sort_keys=True,
@@ -111,9 +126,16 @@ def validate_fixture(fixture: dict) -> dict:
             raise EvidenceError('INPUT_REQUIRED')
         if case.get('origin') != 'synthetic_development_fixture':
             raise EvidenceError('FIXTURE_ORIGIN_REQUIRED')
+        tags = case.get('tags')
+        if (not isinstance(tags, list) or not tags
+                or any(not isinstance(t, str) or not t.strip() for t in tags)
+                or len(tags) != len(set(tags))):
+            raise EvidenceError('CASE_TAGS_REQUIRED')
         source = case.get('source')
         if (not isinstance(source, dict) or not isinstance(source.get('legacy_case_ids'), list)
-                or not source['legacy_case_ids'] or not isinstance(source.get('reference_sha256'), str)
+                or not source['legacy_case_ids']
+                or any(not isinstance(cid, str) or not cid.strip() for cid in source['legacy_case_ids'])
+                or not isinstance(source.get('reference_sha256'), str)
                 or not SHA256.fullmatch(source['reference_sha256'])):
             raise EvidenceError('SOURCE_LINEAGE_REQUIRED')
         if not isinstance(case.get('setup'), dict) or not isinstance(case.get('steps'), list) or not case['steps']:
@@ -126,8 +148,13 @@ def validate_fixture(fixture: dict) -> dict:
         for rule in rules:
             if not isinstance(rule, dict) or set(rule) != {'path','op','value'}:
                 raise EvidenceError('ASSERTION_SCHEMA')
-            if not isinstance(rule['path'], str) or not rule['path'].startswith('/') or rule['op'] not in OPS:
+            if not isinstance(rule.get('path'), str) or not rule['path'].startswith('/'):
                 raise EvidenceError('ASSERTION_OPERATOR_OR_POINTER')
+            if not isinstance(rule.get('op'), str) or rule['op'] not in OPS:
+                raise EvidenceError('ASSERTION_OPERATOR_OR_POINTER')
+            for token in rule['path'][1:].split('/'):
+                if re.search(r'~(?![01])', token):
+                    raise EvidenceError('INVALID_POINTER_ESCAPE')
             if rule['op'] == 'one_of' and (not isinstance(rule['value'], list) or not rule['value']):
                 raise EvidenceError('ONE_OF_VALUES_REQUIRED')
             if rule['op'] in ('contains','not_contains') and (not isinstance(rule['value'],str) or not rule['value']):
@@ -200,13 +227,16 @@ def grade_case(case: dict, record: dict | None, *, fixture_hash: str,
             if not check(actual, rule):
                 errors.append({'path':rule['path'],'op':rule['op'],
                                'expected':rule['value'],'actual':actual})
-        ms=raw.get('elapsed_ms')
-        if ms is not None and (type(ms) not in (int,float) or not math.isfinite(ms) or ms<0):
+        try:
+            ms=raw.get('elapsed_ms')
+            if ms is not None and (type(ms) not in (int,float) or not math.isfinite(ms) or ms<0):
+                raise EvidenceError('INVALID_ELAPSED_MS')
+        except OverflowError:
             raise EvidenceError('INVALID_ELAPSED_MS')
         return {**result,'status':'FAIL' if errors else 'PASS','issues':errors,
                 'collector_sha256':raw['collector_sha256'],
                 'config_sha256':raw['config_sha256'],'elapsed_ms':ms}
-    except (EvidenceError,UnicodeError,json.JSONDecodeError) as exc:
+    except (EvidenceError,UnicodeError,json.JSONDecodeError,OverflowError,ValueError) as exc:
         return {**result,'status':'BLOCKED','issues':[str(exc)]}
 
 def ratio(passed: int, tested: int) -> float | None:
@@ -252,6 +282,14 @@ def aggregate(fixture: dict, results: list[dict], *, mode: str) -> dict:
         return {'planned':len(rows),'tested':done,'passed':passed,
                 'pass_rate':ratio(passed,done) if same_configuration else None}
     timings=[r['elapsed_ms'] for r in results if r['status'] in ('PASS','FAIL') and r.get('elapsed_ms') is not None]
+    timing_mean = None
+    if timings and same_configuration:
+        try:
+            val = statistics.fmean(timings)
+            if math.isfinite(val):
+                timing_mean = val
+        except (OverflowError, ValueError):
+            timing_mean = None
     return {'schema_version':1,'scope':'EVIDENCE_GRADING_NOT_SERVICE_EXECUTION',
             'mode':mode,'status':status,'planned':len(results),'tested':tested,
             'counts':{k:counts[k] for k in ('PASS','FAIL','BLOCKED','NOT_RUN')},
@@ -262,7 +300,7 @@ def aggregate(fixture: dict, results: list[dict], *, mode: str) -> dict:
             'adversarial_subset':subset(adverse),
             'metrics':{'model_accuracy':None,'model_latency_ms':None,'model_cost_usd':None,
                        'metric_reason':'This contract grader does not infer model metrics from backend results.',
-                       'recorded_operation_elapsed_ms':{'n':len(timings),'mean':sum(timings)/len(timings) if timings and same_configuration else None}},
+                       'recorded_operation_elapsed_ms':{'n':len(timings),'mean':timing_mean}},
             'device_acceptance':'NOT_EVALUATED','grading_external_calls':0,
             'provenance_limit':'Integrity and version binding do not authenticate the source of an observation.',
             'results':results}
@@ -283,8 +321,9 @@ def load_records(path: Path | None, ids: set[str]) -> dict:
     return records
 
 def write_new_json(path: Path, value: dict) -> None:
-    with path.open('x',encoding='utf-8') as f:
-        f.write(json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False)+'\n')
+    payload = json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + '\n'
+    with path.open('x', encoding='utf-8') as f:
+        f.write(payload)
 
 def main() -> int:
     parser=argparse.ArgumentParser(description=__doc__)
@@ -321,8 +360,11 @@ def main() -> int:
         write_new_json(args.out/'report.json',report)
         print(json.dumps({k:report[k] for k in ('status','planned','tested','counts','pass_rate_observed')},ensure_ascii=False))
         return 0 if args.plan or report['status']=='PASS' else 3
-    except (EvidenceError,FileExistsError,OSError,ValueError) as exc:
-        print(type(exc).__name__+': '+str(exc),file=sys.stderr)
+    except FileExistsError:
+        print(f"Error: Output directory already exists: '{args.out}'. Choose a fresh output directory to preserve prior batches.", file=sys.stderr)
+        return 2
+    except (EvidenceError, OSError, ValueError) as exc:
+        print(type(exc).__name__ + ': ' + str(exc), file=sys.stderr)
         return 2
 
 if __name__=='__main__':

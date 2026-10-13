@@ -6,7 +6,7 @@ This package contains 100 newly authored **synthetic development specifications*
 
 ## First execution
 
-Use Python 3.10+ (verified here on Python 3.13.5). No additional packages or API keys are required. Open a terminal in this package's `public-files/` directory. After the maintainer merges the candidate, use the repository root instead.
+Use Python 3.10+ (verified here on Python 3.13.5). No additional packages or API keys are required. Open a terminal in the directory containing `eval/` and `examples/`—the extracted review-package root or the integrated repository root.
 
 ```bash
 python3 -m unittest discover -s examples/day29 -p test_acceptance.py -v
@@ -53,7 +53,7 @@ Exit codes: 0 = successful plan or complete pass; 2 = invalid input/output confl
 - `model_route.py`: injected client-factory configuration checks. No SDK/endpoint call occurs in its tests.
 - `test_acceptance.py`: 42 tests for the grader and client boundary.
 - `../../eval/local100.json`: 100 case specifications.
-- `../../eval/eval_local20.json`: unchanged handoff reference, not copied historical PASS results.
+- `../../eval/local20.json`: unchanged handoff reference, not copied historical PASS results.
 - `../../docs/day29/DATASET.md`: case inventory and definition changes.
 - `../../docs/day29/OBSERVATIONS.md`: raw/record contract and collection requirements.
 - `../../ARCHITECTURE.md`: architecture source and completion-state legend.

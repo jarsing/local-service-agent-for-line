@@ -45,6 +45,10 @@ class GraderTests(unittest.TestCase):
     def test_boolean_schema_rejected(self):
         f=deepcopy(FIXTURE);f['schema_version']=True
         with self.assertRaisesRegex(EvidenceError,'FIXTURE_SCHEMA'):validate_fixture(f)
+        f=deepcopy(FIXTURE);f['cases'][0]['tags']=[]
+        with self.assertRaisesRegex(EvidenceError,'CASE_TAGS_REQUIRED'):validate_fixture(f)
+        f=deepcopy(FIXTURE);f['cases'][0]['tags']=['t1','t1']
+        with self.assertRaisesRegex(EvidenceError,'CASE_TAGS_REQUIRED'):validate_fixture(f)
     def test_partial_results_keep_100_denominator(self):
         r=aggregate(FIXTURE,[self.grade()],mode='offline_contract')
         self.assertEqual(r['planned'],100);self.assertEqual(r['tested'],1)
@@ -77,6 +81,9 @@ class GraderTests(unittest.TestCase):
         with self.assertRaises(EvidenceError):decode('{"x":0,"x":1}')
     def test_nonfinite_json_rejected(self):
         with self.assertRaises(EvidenceError):decode('{"x":NaN}')
+        with self.assertRaises(EvidenceError):decode('{"x":Infinity}')
+        with self.assertRaises(EvidenceError):decode('{"x":1e309}')
+        with self.assertRaises(EvidenceError):decode('{"x":' + '9'*4302 + '}')
     def test_no_observation_is_not_run(self):
         r=grade_case(self.case,None,fixture_hash=FH,source_commit=COMMIT,mode='offline_contract',evidence_root=self.root)
         self.assertEqual(r['status'],'NOT_RUN')
@@ -129,6 +136,13 @@ class GraderTests(unittest.TestCase):
     def test_invalid_elapsed_not_silently_zeroed(self):
         self.raw['elapsed_ms']=-1
         self.assertEqual(self.grade()['status'],'BLOCKED')
+        self.raw['elapsed_ms']=10**400
+        self.assertEqual(self.grade()['status'],'BLOCKED')
+        r1=self.grade()
+        r1['elapsed_ms']=1e308
+        r2=deepcopy(r1); r2['id']='L29-002'
+        rep=aggregate(FIXTURE,[r1,r2],mode='offline_contract')
+        self.assertIsNone(rep['metrics']['recorded_operation_elapsed_ms']['mean'])
     def test_duplicate_observation_rejected(self):
         r=self.record();p=self.root/'records.json';p.write_text(json.dumps({'records':[r,r]}))
         with self.assertRaisesRegex(EvidenceError,'DUPLICATE_OBSERVATION_ID'):load_records(p,{self.case['id']})
@@ -143,6 +157,11 @@ class GraderTests(unittest.TestCase):
         self.assertEqual(set(stimulus_for(self.case)),{'id','input','setup','steps'})
     def test_pointer_escapes(self):
         self.assertEqual(pointer({'a/b':{'x~y':[7]}},'/a~1b/x~0y/0'),7)
+        f=deepcopy(FIXTURE)
+        f['cases'][0]['assertions']=[{'path':'/a~2b','op':'eq','value':0}]
+        with self.assertRaisesRegex(EvidenceError,'INVALID_POINTER_ESCAPE'):validate_fixture(f)
+        f['cases'][0]['assertions']=[{'path':'/valid','op':[],'value':0}]
+        with self.assertRaisesRegex(EvidenceError,'ASSERTION_OPERATOR_OR_POINTER'):validate_fixture(f)
     def test_one_of_is_type_aware(self):
         self.assertFalse(check(False,{'op':'one_of','value':[0,1]}))
     def test_retained_input_file_is_not_overwritten(self):
@@ -150,6 +169,9 @@ class GraderTests(unittest.TestCase):
         p=self.root/'report.json';write_new_json(p,{'original':True});before=p.read_bytes()
         with self.assertRaises(FileExistsError):write_new_json(p,{'original':False})
         self.assertEqual(p.read_bytes(),before)
+        p2=self.root/'bad.json'
+        with self.assertRaises(ValueError):write_new_json(p2,{'nan':float('nan')})
+        self.assertFalse(p2.exists())
 
 class RouteTests(unittest.TestCase):
     def test_developer_route(self):

@@ -1,4 +1,3 @@
-# Candidate only: not pushed or executed by this delivery.
 name: LOCAL Day 29 fixture and grader checks
 on:
   push:
@@ -10,7 +9,7 @@ permissions:
   contents: read
 jobs:
   grader:
-    name: Candidate grader tests, not 100 service executions
+    name: Day 29 grader tests, not 100 service executions
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:

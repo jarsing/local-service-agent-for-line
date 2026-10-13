@@ -14,17 +14,17 @@ class ModelRoute:
     location: str | None = None
 
 
-def make_client(route: ModelRoute, factory: Callable[...,Any], *,
+def make_client(route: ModelRoute, factory: Callable[..., Any], *,
                 api_key: str | None = None, credentials: Any = None) -> Any:
-    if not route.model:
+    if not route.model or not route.model.strip():
         raise ValueError('MODEL_REQUIRED')
     if route.backend == 'developer':
-        if not api_key or route.project or route.location or credentials is not None:
+        if not api_key or not api_key.strip() or route.project or route.location or credentials is not None:
             raise ValueError('DEVELOPER_CONFIG_CONFLICT')
-        return factory(api_key=api_key, vertexai=False)
+        return factory(api_key=api_key.strip(), vertexai=False)
     if route.backend == 'vertex':
-        if not route.project or not route.location or api_key or credentials is None:
+        if not route.project or not route.project.strip() or not route.location or not route.location.strip() or api_key or credentials is None:
             raise ValueError('VERTEX_CREDENTIALS_PROJECT_LOCATION_REQUIRED')
-        return factory(vertexai=True, project=route.project,
-                       location=route.location, credentials=credentials)
+        return factory(vertexai=True, project=route.project.strip(),
+                       location=route.location.strip(), credentials=credentials)
     raise ValueError('UNSUPPORTED_BACKEND')

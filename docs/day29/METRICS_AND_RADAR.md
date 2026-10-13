@@ -13,6 +13,6 @@ The five potential axes are the observed contract pass rates for events/access, 
 | Adversarial rejection | Appropriate refusals plus no unauthorized side effects, over designated adversarial cases | null; coverage 0/26 |
 | Replay/idempotency | Observed required state/count/identity invariants over designated cases | null; coverage 0/16 |
 | Device script | Completed declared script over declared total | NOT_EVALUATED |
-| CI | Tested source, workflow, Run ID, attempt and preserved outputs | Day29 NOT_RUN |
+| CI | Tested source, workflow, Run ID, attempt and preserved outputs | Initial ff789ba / Run 38324486513 (Success) |
 
 A chart may later be created from verified data, but a figure in a writing package is not itself verification. Preserve failures and missing cases; do not retune case membership after seeing results.

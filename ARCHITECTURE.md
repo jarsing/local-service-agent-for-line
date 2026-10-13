@@ -14,7 +14,7 @@ Solid arrows describe responsibility relationships found in existing designs or 
 | Stop control and claim | Days 19, 22, 28 | Offline contracts; Firestore/phone integration not established by those contracts |
 | Model access | Google Gen AI SDK | Configuration-factory tests only, no new model request |
 | Monitoring | Day21 / Cloud Run | Structured-event mapping; no claim of Cloud Trace export |
-| Day29 CI | .github/workflows/day29.yml | Initial release in ff789ba, CI Run 38324486513 (Success); current candidate separately verified |
+| Day29 CI | .github/workflows/day29.yml | ff789ba (Run 38324486513) then 013b9f0 (Run 38334828824), both Success |
 
 ## Inquiry lifecycle
 
@@ -83,7 +83,7 @@ The same request contract does not imply equal model outputs, quotas, regions, t
 | Specifications / service observations | 100 specified / 0 observed; pass rate unknown |
 | Complete two-phone workflow | NOT_RUN |
 | Replay/idempotency subset | 16 specified / 0 observed; not additional cases |
-| Day29 CI | Initial ff789ba / Run 38324486513 succeeded; current updates verified locally |
+| Day29 CI | 013b9f0 / Run 38334828824 succeeded |
 
 The 42 grader/config tests belong in a separate implementation-check box, not the 100-service score. Performance radar, model latency and cost stay absent until evidence is supplied.
 

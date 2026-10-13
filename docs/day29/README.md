@@ -1,4 +1,4 @@
-# Day 29: 100 筆地方契約評測大驗收與完整流程架構總覽
+# 100 筆地方契約評測大驗收與完整流程架構總覽
 
 Published article: [Day 29 on iThome](https://ithelp.ithome.com.tw/articles/10423875)
 

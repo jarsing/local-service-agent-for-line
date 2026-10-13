@@ -1,6 +1,6 @@
-# Day 29: candidate fixture and evidence grader
+# Day 29: fixture and evidence grader
 
-**Status: new local candidate, not integrated into the deployed service.**
+**Status: integrated into repository; offline acceptance specifications and grader.**
 
 This package contains 100 newly authored **synthetic development specifications**, a standard-library evidence grader and a model-client configuration boundary. It does not execute LOCAL scenarios. In particular, a successful `--plan` is not `100/100 PASS`.
 

@@ -26,10 +26,11 @@ This project is for developers with Web, HTTP API, or LINE Bot experience who wa
 - **Observe:** One request, a blocked claim while paused, and one accepted claim (`out/day28/quickstart-01/report.json`).
 - **Then explore:** Gemini + ADK lookup, consent, persistence, and UI recovery. Cloud integration has separate credentials, costs, and acceptance checks.
 - **License & Governance:** MIT License (`LICENSE`). Contribution guide: [`CONTRIBUTING.md`](CONTRIBUTING.md). Release checklist: [`docs/day28/RELEASE_CHECKLIST.md`](docs/day28/RELEASE_CHECKLIST.md).
+- **Series Final Snapshot:** [`ironman-2026-final`](https://github.com/jarsing/local-service-agent-for-line/tree/ironman-2026-final) (`0d939fd`) — 30-day series code and contract snapshot; `v1.0.0-demo` remains reserved for post-series full dual-phone and 100-case live service acceptance.
 
 ## Where should I start? (30-Day Complete Guide)
 
-**30-day iThome Ironman series completed (October 14, 2026 · Series snapshot tag: [`ironman-2026-final`](https://github.com/jarsing/local-service-agent-for-line/releases/tag/ironman-2026-final)).** If you are visiting LOCAL for the first time, we recommend starting from **[Day 1: First Acceptance Specification](docs/day01/handoff-timeout-001.json)** and **[Day 2: SQLite & Timeout Reconciliation](examples/day02/README.md)**, then following the four progressive engineering phases below—or jumping to the full chronological [Day 1–30 Articles and Code Map](#articles-and-code-map).
+**30-day iThome Ironman series completed (October 14, 2026 · Series snapshot tag: [`ironman-2026-final`](https://github.com/jarsing/local-service-agent-for-line/tree/ironman-2026-final)).** If you are visiting LOCAL for the first time, we recommend starting from **[Day 1: First Acceptance Specification](docs/day01/handoff-timeout-001.json)** and **[Day 2: SQLite & Timeout Reconciliation](examples/day02/README.md)**, then following the four progressive engineering phases below—or jumping to the full chronological [Day 1–30 Articles and Code Map](#articles-and-code-map).
 
 | Learning phase | Recommended starting points | What you will build & verify |
 |---|---|---|

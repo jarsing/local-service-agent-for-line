@@ -26,10 +26,11 @@
 - **觀察重點：** 單號唯一不重複、暫停狀態熔斷拒絕認領、恢復後由一位志工成功接手（`out/day28/quickstart-01/report.json`）。
 - **進階探索：** Gemini 與 ADK 意圖分析、長輩飲食偏好授權記憶、Cloud Run 部署與 Firestore 持久化。雲端整合具備獨立憑證、費用與驗收關卡。
 - **開源授權與治理：** MIT 開源授權（`LICENSE`）。貢獻指南：[`CONTRIBUTING.md`](CONTRIBUTING.md)。發布核對清單：[`docs/day28/RELEASE_CHECKLIST.md`](docs/day28/RELEASE_CHECKLIST.md)。
+- **完賽快照：** [`ironman-2026-final`](https://github.com/jarsing/local-service-agent-for-line/tree/ironman-2026-final)（`0d939fd`）——30 天連載完賽之程式與契約快照；`v1.0.0-demo` 正式展示版待雙手機與 100 題服務實測齊備後另發。
 
 ## 完賽導覽：我該從哪裡開始？
 
-**30 天 iThome 鐵人賽連載已全數完賽（2026/10/14 · 完賽書籤標籤：[`ironman-2026-final`](https://github.com/jarsing/local-service-agent-for-line/releases/tag/ironman-2026-final)）。** 如果你是第一次來到這個專案，建議從 **[Day 1：第一條工程驗收規格](docs/day01/handoff-timeout-001.json)** 與 **[Day 2：純 Python 逾時與冪等實驗](examples/day02/README.md)** 出發，順著下方四個學習階段循序推進；或直接跳至下方的 [Day 1～30 連載與程式地圖](#連載與程式地圖)。
+**30 天 iThome 鐵人賽連載已全數完賽（2026/10/14 · 完賽書籤標籤：[`ironman-2026-final`](https://github.com/jarsing/local-service-agent-for-line/tree/ironman-2026-final)）。** 如果你是第一次來到這個專案，建議從 **[Day 1：第一條工程驗收規格](docs/day01/handoff-timeout-001.json)** 與 **[Day 2：純 Python 逾時與冪等實驗](examples/day02/README.md)** 出發，順著下方四個學習階段循序推進；或直接跳至下方的 [Day 1～30 連載與程式地圖](#連載與程式地圖)。
 
 | 學習階段與定位 | 推薦起點（從第 1 天循序推進） | 核心體驗與學習重點 |
 |---|---|---|

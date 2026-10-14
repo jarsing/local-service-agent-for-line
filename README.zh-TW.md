@@ -27,43 +27,18 @@
 - **進階探索：** Gemini 與 ADK 意圖分析、長輩飲食偏好授權記憶、Cloud Run 部署與 Firestore 持久化。雲端整合具備獨立憑證、費用與驗收關卡。
 - **開源授權與治理：** MIT 開源授權（`LICENSE`）。貢獻指南：[`CONTRIBUTING.md`](CONTRIBUTING.md)。發布核對清單：[`docs/day28/RELEASE_CHECKLIST.md`](docs/day28/RELEASE_CHECKLIST.md)。
 
-## 現在可以從哪裡開始？
+## 完賽導覽：我該從哪裡開始？
 
-**程式導覽更新至 Day 29（2026/10/13）。** Day 1 驗收規格與 Day 2～29 範例已在 Repo；Day 29 交付 100 筆地方服務契約評測基準、四態離線評分器、完整流程因果架構總覽與模型抽象閘道雙軌設計。本次導覽依據：[Day 29 說明文件](docs/day29/README.md)。正式發表文章：[Day 29 鐵人賽刊登](https://ithelp.ithome.com.tw/articles/10423875)。
+**30 天 iThome 鐵人賽連載已全數完賽（2026/10/14 · 完賽書籤標籤：[`ironman-2026-final`](https://github.com/jarsing/local-service-agent-for-line/releases/tag/ironman-2026-final)）。** 如果你是第一次來到這個專案，建議從 **[Day 1：第一條工程驗收規格](docs/day01/handoff-timeout-001.json)** 與 **[Day 2：純 Python 逾時與冪等實驗](examples/day02/README.md)** 出發，順著下方四個學習階段循序推進；或直接跳至下方的 [Day 1～30 連載與程式地圖](#連載與程式地圖)。
 
-
-| 想先做什麼？ | 從這裡開始 | 會看到什麼？ |
+| 學習階段與定位 | 推薦起點（從第 1 天循序推進） | 核心體驗與學習重點 |
 |---|---|---|
-| 100 筆地方契約評測大驗收與架構總覽 | [Day 29：100 筆契約與架構總覽](examples/day29/README.md) | 100 筆五大場景契約規格、四態離線評分器（42 項測試全過）、一則地方詢問的一生完整流程架構總覽、模型抽象閘道雙軌設計 |
-| 開源產品卡、一行 Quickstart 與開源交付規格 | [Day 28：開源產品卡與交付規格](examples/day28/README.md) | 中英文首頁產品卡、三分鐘 Quickstart 一行離線驗證、Cloud Run 404 路由排查範例、Firestore CAS 認領契約、MIT 授權與 CONTRIBUTING 指南 |
-| 展示版本凍結手冊與本機備援重放 | [Day 27：Demo 版本與備援重放](examples/day27/README.md) | 三分鐘展示手冊（`DEMO.md`）、Google Cloud Shell 乾淨容器驗收腳本（`cleanroom.sh`）、本機 SQLite 離線重放示範（`replay_day27.py`），以及 5 項獨立單元測試 |
-| 乾淨容器環境重現與雙視窗驗收規格 | [Day 26：乾淨環境與雙視窗規格](examples/day26/README.md) | 乾淨容器重現腳本（`cleanroom.sh`）、Google Cloud Shell 專用 Dockerfile、155 項完整測試離線驗證、雙 LINE 視窗生命週期時序規格，以及 SQLite CAS 原子認領 |
-| 公開文字結構化抽取與審閱採用資料庫 | [Day 25：結構化資料抽取](examples/day25/README.md) | Gemini 結構化輸出入口（`capture.py`）、確定性原文核對契約（`schema.py`）、審閱採用儲存庫（`store.py`）、五題實測與審閱執行器（`run_live.py`）、專用 CI 測試套件 |
-| 三組分母實測評測牆與 A/B 成本量測 | [Day 24：實測評測牆](examples/day24/README.md) | 直接 SDK 路由擷取（`capture.py`）、證據核對器（`audit.py`）、20 題地方契約回歸執行器（`offline.py`）、離線重播驗證（`replay.py`）、專用 CI 測試套件 |
-| 需求導向的 Google AI 技術選型決策 | [Day 23：選型判斷表](examples/day23/README.md) | 離線選型決策篩選器（`stack_matrix.py`）、四套架構設計宣告（AI Studio、Vertex AI、Cloud Run、Firestore）、本機行程探針、專用 CI 測試套件 |
-| 身分分工、秘密管理與受控停止開關 | [Day 22：權限、秘密與停止開關](examples/day22/README.md) | 獨立停止閘門（`circuit_breaker.py`）、epoch 准入失效控制、原子建單與 outbox 意圖、三權分立目標架構規劃、專用 CI 測試套件 |
-| 沿著 Trace 定位工具呼叫與後端缺陷 | [Day 21：一條 Trace 找到問題](examples/day21/README.md) | 結構化追蹤核對器（`trace_audit.py`）、Cloud Logging 結構化日誌映射、多層缺陷診斷體系與 PII 邊界防護 |
-| 模型設定、延遲與每項任務成本帳本 | [Day 20：成本帳本計算器](examples/day20/README.md) | 來源明確的成本帳本（`cost_ledger.py`）、Decimal 牌價算術、思考 Token 獨立計價與 2 秒回應門檻隔離 |
-| 志工收件匣契約與 CAS 樂觀鎖 | [Day 19：志工收件匣契約](examples/day19/README.md) | 志工收件匣契約、CAS 樂觀鎖原子認領、收件匣完整歷程與逾時查回對帳（雙視窗驗收規格見 Day 26） |
-| 20 題地方契約評測與三層驗收 | [Day 18：20 題地方契約評測](examples/day18/README.md) | 20 題地方契約基準（`eval/local20.json`）、三層確定性判分器、雙軌隔離評測、請求節奏閘門與 28 項反例攔截 |
-| 查無資料分流與服務降級 | [Day 17：三種查不到與服務降級](examples/day17/README.md) | 有型別的結果（no_data／query_unavailable／unsupported）、非固定說法意圖分流、固定文案與按鈕引導，以及離線故障注入驗證 |
-| 不可信文件防禦與唯讀權限白名單 | [Day 16：不可信文件與最小權限](examples/day16/README.md) | 唯讀工具白名單、ADK before_tool_callback 攔截、後端執行核對與離線四個零驗證 |
-| 上下文預算工程與滑動視窗修剪 | [Day 15：上下文預算](examples/day15/README.md) | 五層上下文架構、滑動視窗修剪、結構化話題摘要、偏好撤回脈絡失效與 countTokens 預算閘門 |
-| 經同意偏好記憶與蔬食店家查詢 | [Day 14：經同意的記憶](examples/day14/README.md) | 第三項工具 `search_local_places`、彰化蔬食節店家資料、經同意偏好記憶生命週期與 Gemini 意圖分流 |
-| LINE Flex 卡片與狀態安全 | [Day 13：LINE Flex 卡片](examples/day13/README.md) | 固定 Flex 氣泡模板、Postback 動作綁定、舊卡取消防呆，以及純文字無障礙備援 |
-| 雲端部署與跨修訂版接續 | [Day 12：Cloud Run 部署](examples/day12/README.md) | FastAPI Webhook 入口、Postback 二階段確認、Secret Manager 保險箱整合，以及跨修訂版讀回實測 |
-| 任務持久化與重啟接續 | [Day 11：Firestore 持久化](examples/day11/README.md) | 雙後端儲存配接器（SQLite／Firestore 模擬器實測）、跨行程重啟恢復、租約式工作協調，以及離線測試套件 |
-| 逾時查回對帳與離線 CI | [Day 10：查回對帳與離線 CI](examples/day10/README.md) | 唯讀 SQLite 查回對帳、合成傳輸故障注入、受控復原控制器，以及 GitHub Actions 離線 CI 工作流程 |
-| 受控建單與防重複 | [Day 9：受控建單與冪等](examples/day09/README.md) | Google ADK `create_handoff_request`、SQLite 交易查重、同鍵同內容取原單與同鍵異內容衝突 |
-| 人機協同確認與版本防線 | [Day 8：確認綁定具體操作](examples/day08/README.md) | Google ADK Tool Confirmation、操作指紋核對、等待中換版阻斷與確認收據 |
-| 處理海報異動與欄位複核 | [Day 7：海報更新與複核](examples/day07/README.md) | 跨版本活動配對、欄位三元組差分、人工複核與三階段查詢介接 |
-| 從海報整理活動資料 | [Day 6：海報資料管線](examples/day06/README.md) | 結構化欄位、原圖原文核對、人工審閱目錄匯出，並接回 Day 5 搜尋工具 |
-| 看 Agent 怎麼查活動 | [Day 5：ADK 活動搜尋](examples/day05/README.md) | 四筆活動、四個問題、兩組回答，以及工具的執行軌跡 |
-| 把 Gemini 回答接進 LINE | [Day 4：LINE Webhook](examples/day04/README.md) | 先用 `LOCAL ping` 確認往返，再用 `LOCAL 測試` 取得模型說明 |
-| 先完成一次 Gemini 呼叫 | [Day 3：模型實驗](examples/day03/README.md) | 固定輸入、模型原文、設定與用量 |
-| 先做一個只需要 Python 的實驗 | [Day 2：SQLite 與逾時](examples/day02/README.md) | 同樣遇到逾時，後端卻可能已保存資料；重送時如何查回同一筆 |
+| **階段一：從第 1 天開始（Day 1–7）**<br>問題定義、規格與海報結構化 | **[Day 1：第一條驗收規格](docs/day01/handoff-timeout-001.json)**<br>**[Day 2：SQLite 與逾時重試](examples/day02/README.md)**<br>**[Day 5：ADK 活動搜尋](examples/day05/README.md)** | 為什麼「AI 說完成不等於完成」？從純 Python 逾時查回、Gemini API 初體驗、LINE Webhook 驗簽，到 ADK 工具呼叫、海報欄位抽取與人工複核。 |
+| **階段二：確認、原單與記憶（Day 8–15）**<br>綁定操作、雲端部署與偏好記憶 | **[Day 8：操作指紋確認](examples/day08/README.md)**<br>**[Day 12：Cloud Run 部署](examples/day12/README.md)**<br>**[Day 14：經同意的記憶](examples/day14/README.md)** | 把「好」綁定具體 `operation_id`、SQLite／Firestore 冪等原單、離線 CI、Cloud Run 跨修訂版恢復、LINE Flex 舊卡防呆、長輩飲食偏好記憶與五層上下文預算。 |
+| **階段三：防禦、評測與取捨（Day 16–23）**<br>最小特權、服務降級與成本帳本 | **[Day 16：不可信文件防禦](examples/day16/README.md)**<br>**[Day 18：20 題契約評測](examples/day18/README.md)**<br>**[Day 22：緊急停止開關](examples/day22/README.md)** | 防範傳單暗藏指令（唯讀白名單）、三種查不到與降級、20 題三層確定性評測、志工收件匣 CAS 認領、Decimal 成本帳本、Trace 缺陷定位、獨立停止閘門與 Google AI 選型矩陣。 |
+| **階段四：觀測、重現與交接（Day 24–30）**<br>實測評測牆、乾淨容器與完賽對帳 | **[Day 24：三組分母評測牆](examples/day24/README.md)**<br>**[Day 27：Demo 與離線重放](examples/day27/README.md)**<br>**[Day 29：100 筆契約與架構總覽](examples/day29/README.md)**<br>**[Day 30：完賽回顧與總對帳](docs/day30/README.md)** | 真實模型路由與 A/B 成本核對、公開文字結構化採用、乾淨容器 155 項重現、三分鐘展示與 SQLite 離線重放、開源產品卡、100 筆規格評分器與 Day 30 完賽交接總對帳。 |
 
-程式是否已公開、文章是否已發表，分別由這份導覽與 [iThome 系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 查看。Day 2～5 的指定案例採合成資料；Day 6 以操作者提供並註明來源的海報進行實驗。真實服務呼叫與執行結果會在各篇文章中交代。
+這份導覽完整收錄 30 天系列的規格與程式碼；完整文章請由 [iThome 系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 閱讀。Day 2～5 的指定案例採合成資料；Day 6 以操作者提供並註明來源的海報進行實驗。真實服務呼叫與執行結果皆在各篇文章中如實交代。
 
 ## 快速開始：先讓 Agent 查到集合資訊
 
@@ -117,42 +92,44 @@ examples/day05/.venv/bin/python examples/day05/run.py --live
 
 ## 連載與程式地圖
 
-| 日次 | 文章／主題 | 程式或規格 | 重現說明 |
-|---|---|---|---|
-| Day 1 | [LOCAL：把地方服務需求變成 LINE × Google AI 的工程規格](https://ithelp.ithome.com.tw/articles/10411219) | [第一條驗收規格](docs/day01/handoff-timeout-001.json) | 以設計與驗收 JSON 為起點 |
-| Day 2 | [AI 說「完成」真的完成了嗎？把 LOCAL 的第一條驗收規格跑起來](https://ithelp.ithome.com.tw/articles/10412065) | [examples/day02](examples/day02/) | [docs/day02](docs/day02/README.md) |
-| Day 3 | [從 AI Studio 到 Gemini API：建立 LOCAL 的第一個可重現模型實驗](https://ithelp.ithome.com.tw/articles/10412603) | [examples/day03](examples/day03/) | [docs/day03](docs/day03/README.md) |
-| Day 4 | [讓 Gemini 走進 LINE：先驗簽，再回覆，不把收到當完成](https://ithelp.ithome.com.tw/articles/10413146) | [examples/day04](examples/day04/) | [docs/day04](docs/day04/README.md) |
-| Day 5 | [ADK＋受控查詢：第一個 Agent 與 Orchestration](https://ithelp.ithome.com.tw/articles/10413779) | [examples/day05](examples/day05/) | [docs/day05](docs/day05/README.md) |
-| Day 6 | [從活動海報到服務資料](https://ithelp.ithome.com.tw/articles/10414133) | [examples/day06](examples/day06/) | [docs/day06](docs/day06/README.md) |
-| Day 7 | [看懂不等於可信：來源、版本與不知道](https://ithelp.ithome.com.tw/articles/10414804) | [examples/day07](examples/day07/) | [docs/day07](docs/day07/README.md) |
-| Day 8 | [一句「好」不夠：確認綁定具體操作](https://ithelp.ithome.com.tw/articles/10415219) | [examples/day08](examples/day08/) | [docs/day08](docs/day08/README.md) |
-| Day 9 | [按兩次送出，會不會多一筆？受控建單與冪等](https://ithelp.ithome.com.tw/articles/10415923) | [examples/day09](examples/day09/) | [docs/day09](docs/day09/README.md) |
-| Day 10 | [逾時後到底有沒有送出？](https://ithelp.ithome.com.tw/articles/10416095) | [examples/day10](examples/day10/) | [docs/day10](docs/day10/README.md) |
-| Day 11 | [服務重啟了，剛才交代的事還在嗎？重送、背景工作與重啟恢復](https://ithelp.ithome.com.tw/articles/10416397) | [examples/day11](examples/day11/) | [docs/day11](docs/day11/README.md) |
-| Day 12 | [換了雲端容器，剛才交代的事還在嗎？第一個 Cloud Run 版本](https://ithelp.ithome.com.tw/articles/10417489) | [examples/day12](examples/day12/) | [docs/day12](docs/day12/README.md) |
-| Day 13 | [按鈕還在，就代表還能按嗎？LINE Flex 的狀態與安全操作](https://ithelp.ithome.com.tw/articles/10417809) | [examples/day13](examples/day13/) | [docs/day13](docs/day13/README.md) |
-| Day 14 | [「今天想吃素」不等於以後都要！經同意的記憶與地方店家查詢](https://ithelp.ithome.com.tw/articles/10418240) | [examples/day14](examples/day14/) | [docs/day14](docs/day14/README.md) |
-| Day 15 | [對話越來越長之後：Session、摘要與上下文預算](https://ithelp.ithome.com.tw/articles/10418768) | [examples/day15](examples/day15/) | [docs/day15](docs/day15/README.md) |
-| Day 16 | [傳單裡偷藏指令，系統真的會照做嗎？不可信文件與最小權限](https://ithelp.ithome.com.tw/articles/10419112) | [examples/day16](examples/day16/) | [docs/day16](docs/day16/README.md) |
-| Day 17 | [查不到，是真的沒有，還是系統當下查不了？三種查不到與服務降級](https://ithelp.ithome.com.tw/articles/10419526) | [examples/day17](examples/day17/) | [docs/day17](docs/day17/README.md) |
-| Day 18 | [20 題地方契約評測：從問句、工具到回覆，連失敗一起留下](https://ithelp.ithome.com.tw/articles/10419979) | [examples/day18](examples/day18/) | [eval/local20.json](eval/local20.json) |
-| Day 19 | [志工真的接到單了嗎？最小真人通知與收件匣閉環](https://ithelp.ithome.com.tw/articles/10420229) | [examples/day19](examples/day19/) | [docs/day19](docs/day19/README.md) |
-| Day 20 | [模型設定、延遲與每項任務成本：品質先過關，再談快與省](https://ithelp.ithome.com.tw/articles/10420729) | [examples/day20](examples/day20/) | [docs/day20](docs/day20/README.md) |
-| Day 21 | [一條 Trace 找到問題：從模型工具呼叫一路追到後端結果](https://ithelp.ithome.com.tw/articles/10421328) | [examples/day21](examples/day21/) | [docs/day21](docs/day21/README.md) |
-| Day 22 | [權限、秘密與停止開關：最小特權與緊急制動](https://ithelp.ithome.com.tw/articles/10421645) | [examples/day22](examples/day22/) | [docs/day22](docs/day22/README.md) |
-| Day 23 | [選型判斷表：Google AI 工具箱在地方服務該怎麼選？](https://ithelp.ithome.com.tw/articles/10421985) | [examples/day23](examples/day23/) | [docs/day23](docs/day23/README.md) |
-| Day 24 | [改了一行，20 題還過嗎？Google AI 實測牆與 A/B 成本量測](https://ithelp.ithome.com.tw/articles/10422261) | [examples/day24](examples/day24/) | [docs/day24](docs/day24/README.md) |
-| Day 25 | [Gemini 結構化輸出抽取地方資料：從公開文字到服務資料庫](https://ithelp.ithome.com.tw/articles/10422718) | [examples/day25](examples/day25/) | [docs/day25](docs/day25/README.md) |
-| Day 26 | [走出自己房間之前：乾淨環境與雙 LINE 視窗的驗收規格](https://ithelp.ithome.com.tw/articles/10423179) | [examples/day26](examples/day26/) | [docs/day26](docs/day26/README.md) |
-| Day 27 | [成果展示要鎖住什麼？Demo 版本凍結、三分鐘劇本與離線備援](https://ithelp.ithome.com.tw/articles/10423364) | [examples/day27](examples/day27/) | [docs/day27](docs/day27/README.md) |
-| Day 28 | [把 LOCAL 交給開發者：產品卡、Quickstart 與開源交付規格](https://ithelp.ithome.com.tw/articles/10423648) | [examples/day28](examples/day28/) | [docs/day28](docs/day28/README.md) |
-| Day 29 | [100 筆地方契約評測大驗收與完整流程架構總覽](https://ithelp.ithome.com.tw/articles/10423875) | [examples/day29](examples/day29/) | [docs/day29](docs/day29/README.md) |
+以下按 Day 1 至 Day 30 的學習順序，完整列出全系列 30 篇已發表文章、對應程式或規格位置，以及每一章的核心實作重點：
 
-Day 30 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/20120682/ironman/9872) 進入。Day 1 交付的是設計規格，因此程式範例從 `examples/day02/` 開始。
+| 日次 | 文章／主題 | 程式或規格 | 重現說明 | 核心實作與驗收重點 |
+|---|---|---|---|---|
+| Day 1 | [LOCAL：把地方服務需求變成 LINE × Google AI 的工程規格](https://ithelp.ithome.com.tw/articles/10411219) | [第一條驗收規格](docs/day01/handoff-timeout-001.json) | 以設計與驗收 JSON 為起點 | 地方服務問題定義、LOCAL 五大設計面向與 `handoff-timeout-001` 驗收契約 |
+| Day 2 | [AI 說「完成」真的完成了嗎？把 LOCAL 的第一條驗收規格跑起來](https://ithelp.ithome.com.tw/articles/10412065) | [examples/day02](examples/day02/) | [docs/day02](docs/day02/README.md) | 同樣遇到逾時，後端卻可能已保存資料；重送時如何查回同一筆 |
+| Day 3 | [從 AI Studio 到 Gemini API：建立 LOCAL 的第一個可重現模型實驗](https://ithelp.ithome.com.tw/articles/10412603) | [examples/day03](examples/day03/) | [docs/day03](docs/day03/README.md) | 固定輸入、模型原文、設定與用量 |
+| Day 4 | [讓 Gemini 走進 LINE：先驗簽，再回覆，不把收到當完成](https://ithelp.ithome.com.tw/articles/10413146) | [examples/day04](examples/day04/) | [docs/day04](docs/day04/README.md) | 先用 `LOCAL ping` 確認往返，再用 `LOCAL 測試` 取得模型說明 |
+| Day 5 | [ADK＋受控查詢：第一個 Agent 與 Orchestration](https://ithelp.ithome.com.tw/articles/10413779) | [examples/day05](examples/day05/) | [docs/day05](docs/day05/README.md) | 四筆活動、四個問題、兩組回答，以及工具的執行軌跡 |
+| Day 6 | [從活動海報到服務資料](https://ithelp.ithome.com.tw/articles/10414133) | [examples/day06](examples/day06/) | [docs/day06](docs/day06/README.md) | 結構化欄位、原圖原文核對、人工審閱目錄匯出，並接回 Day 5 搜尋工具 |
+| Day 7 | [看懂不等於可信：來源、版本與不知道](https://ithelp.ithome.com.tw/articles/10414804) | [examples/day07](examples/day07/) | [docs/day07](docs/day07/README.md) | 跨版本活動配對、欄位三元組差分、人工複核與三階段查詢介接 |
+| Day 8 | [一句「好」不夠：確認綁定具體操作](https://ithelp.ithome.com.tw/articles/10415219) | [examples/day08](examples/day08/) | [docs/day08](docs/day08/README.md) | Google ADK Tool Confirmation、操作指紋核對、等待中換版阻斷與確認收據 |
+| Day 9 | [按兩次送出，會不會多一筆？受控建單與冪等](https://ithelp.ithome.com.tw/articles/10415923) | [examples/day09](examples/day09/) | [docs/day09](docs/day09/README.md) | Google ADK `create_handoff_request`、SQLite 交易查重、同鍵同內容取原單與同鍵異內容衝突 |
+| Day 10 | [逾時後到底有沒有送出？](https://ithelp.ithome.com.tw/articles/10416095) | [examples/day10](examples/day10/) | [docs/day10](docs/day10/README.md) | 唯讀 SQLite 查回對帳、合成傳輸故障注入、受控復原控制器，以及 GitHub Actions 離線 CI 工作流程 |
+| Day 11 | [服務重啟了，剛才交代的事還在嗎？重送、背景工作與重啟恢復](https://ithelp.ithome.com.tw/articles/10416397) | [examples/day11](examples/day11/) | [docs/day11](docs/day11/README.md) | 雙後端儲存配接器（SQLite／Firestore 模擬器實測）、跨行程重啟恢復、租約式工作協調，以及離線測試套件 |
+| Day 12 | [換了雲端容器，剛才交代的事還在嗎？第一個 Cloud Run 版本](https://ithelp.ithome.com.tw/articles/10417489) | [examples/day12](examples/day12/) | [docs/day12](docs/day12/README.md) | FastAPI Webhook 入口、Postback 二階段確認、Secret Manager 保險箱整合，以及跨修訂版讀回實測 |
+| Day 13 | [按鈕還在，就代表還能按嗎？LINE Flex 的狀態與安全操作](https://ithelp.ithome.com.tw/articles/10417809) | [examples/day13](examples/day13/) | [docs/day13](docs/day13/README.md) | 固定 Flex 氣泡模板、Postback 動作綁定、舊卡取消防呆，以及純文字無障礙備援 |
+| Day 14 | [「今天想吃素」不等於以後都要！經同意的記憶與地方店家查詢](https://ithelp.ithome.com.tw/articles/10418240) | [examples/day14](examples/day14/) | [docs/day14](docs/day14/README.md) | 第三項工具 `search_local_places`、彰化蔬食節店家資料、經同意偏好記憶生命週期與 Gemini 意圖分流 |
+| Day 15 | [對話越來越長之後：Session、摘要與上下文預算](https://ithelp.ithome.com.tw/articles/10418768) | [examples/day15](examples/day15/) | [docs/day15](docs/day15/README.md) | 五層上下文架構、滑動視窗修剪、結構化話題摘要、偏好撤回脈絡失效與 `countTokens` 預算閘門 |
+| Day 16 | [傳單裡偷藏指令，系統真的會照做嗎？不可信文件與最小權限](https://ithelp.ithome.com.tw/articles/10419112) | [examples/day16](examples/day16/) | [docs/day16](docs/day16/README.md) | 唯讀工具白名單、ADK `before_tool_callback` 攔截、後端執行核對與離線四個零驗證 |
+| Day 17 | [查不到，是真的沒有，還是系統當下查不了？三種查不到與服務降級](https://ithelp.ithome.com.tw/articles/10419526) | [examples/day17](examples/day17/) | [docs/day17](docs/day17/README.md) | 有型別的結果（`no_data`／`query_unavailable`／`unsupported`）、非固定說法意圖分流、固定文案與按鈕引導，以及離線故障注入驗證 |
+| Day 18 | [20 題地方契約評測：從問句、工具到回覆，連失敗一起留下](https://ithelp.ithome.com.tw/articles/10419979) | [examples/day18](examples/day18/) | [eval/local20.json](eval/local20.json) | 20 題地方契約基準（`eval/local20.json`）、三層確定性判分器、雙軌隔離評測、請求節奏閘門與 28 項反例攔截 |
+| Day 19 | [志工真的接到單了嗎？最小真人通知與收件匣閉環](https://ithelp.ithome.com.tw/articles/10420229) | [examples/day19](examples/day19/) | [docs/day19](docs/day19/README.md) | 志工收件匣契約、CAS 樂觀鎖原子認領、收件匣完整歷程與逾時查回對帳（雙視窗驗收規格見 Day 26） |
+| Day 20 | [模型設定、延遲與每項任務成本：品質先過關，再談快與省](https://ithelp.ithome.com.tw/articles/10420729) | [examples/day20](examples/day20/) | [docs/day20](docs/day20/README.md) | 來源明確的成本帳本（`cost_ledger.py`）、Decimal 牌價算術、思考 Token 獨立計價與 2 秒回應門檻隔離 |
+| Day 21 | [一條 Trace 找到問題：從模型工具呼叫一路追到後端結果](https://ithelp.ithome.com.tw/articles/10421328) | [examples/day21](examples/day21/) | [docs/day21](docs/day21/README.md) | 結構化追蹤核對器（`trace_audit.py`）、Cloud Logging 結構化日誌映射、多層缺陷診斷體系與 PII 邊界防護 |
+| Day 22 | [權限、秘密與停止開關：最小特權與緊急制動](https://ithelp.ithome.com.tw/articles/10421645) | [examples/day22](examples/day22/) | [docs/day22](docs/day22/README.md) | 獨立停止閘門（`circuit_breaker.py`）、epoch 准入失效控制、原子建單與 outbox 意圖、三權分立目標架構規劃、專用 CI 測試套件 |
+| Day 23 | [選型判斷表：Google AI 工具箱在地方服務該怎麼選？](https://ithelp.ithome.com.tw/articles/10421985) | [examples/day23](examples/day23/) | [docs/day23](docs/day23/README.md) | 離線選型決策篩選器（`stack_matrix.py`）、四套架構設計宣告（AI Studio、Vertex AI、Cloud Run、Firestore）、本機行程探針、專用 CI 測試套件 |
+| Day 24 | [改了一行，20 題還過嗎？Google AI 實測牆與 A/B 成本量測](https://ithelp.ithome.com.tw/articles/10422261) | [examples/day24](examples/day24/) | [docs/day24](docs/day24/README.md) | 直接 SDK 路由擷取（`capture.py`）、證據核對器（`audit.py`）、20 題地方契約回歸執行器（`offline.py`）、離線重播驗證（`replay.py`）、專用 CI 測試套件 |
+| Day 25 | [Gemini 結構化輸出抽取地方資料：從公開文字到服務資料庫](https://ithelp.ithome.com.tw/articles/10422718) | [examples/day25](examples/day25/) | [docs/day25](docs/day25/README.md) | Gemini 結構化輸出入口（`capture.py`）、確定性原文核對契約（`schema.py`）、審閱採用儲存庫（`store.py`）、五題實測與審閱執行器（`run_live.py`）、專用 CI 測試套件 |
+| Day 26 | [走出自己房間之前：乾淨環境與雙 LINE 視窗的驗收規格](https://ithelp.ithome.com.tw/articles/10423179) | [examples/day26](examples/day26/) | [docs/day26](docs/day26/README.md) | 乾淨容器重現腳本（`cleanroom.sh`）、Google Cloud Shell 專用 Dockerfile、155 項完整測試離線驗證、雙 LINE 視窗生命週期時序規格，以及 SQLite CAS 原子認領 |
+| Day 27 | [成果展示要鎖住什麼？Demo 版本凍結、三分鐘劇本與離線備援](https://ithelp.ithome.com.tw/articles/10423364) | [examples/day27](examples/day27/) | [docs/day27](docs/day27/README.md) | 三分鐘展示手冊（`DEMO.md`）、Google Cloud Shell 乾淨容器驗收腳本（`cleanroom.sh`）、本機 SQLite 離線重放示範（`replay_day27.py`），以及 5 項獨立單元測試 |
+| Day 28 | [把 LOCAL 交給開發者：產品卡、Quickstart 與開源交付規格](https://ithelp.ithome.com.tw/articles/10423648) | [examples/day28](examples/day28/) | [docs/day28](docs/day28/README.md) | 中英文首頁產品卡、三分鐘 Quickstart 一行離線驗證、Cloud Run 404 路由排查範例、Firestore CAS 認領契約、MIT 授權與 CONTRIBUTING 指南 |
+| Day 29 | [100 筆地方契約評測大驗收與完整流程架構總覽](https://ithelp.ithome.com.tw/articles/10423875) | [examples/day29](examples/day29/) | [docs/day29](docs/day29/README.md) | 100 筆五大場景契約規格、四態離線評分器（42 項測試全過）、一則地方詢問的一生完整流程架構總覽、模型抽象閘道雙軌設計 |
+| Day 30 | [從規格到可交接的 LOCAL：30 天回顧、工程取捨與下一步](https://ithelp.ithome.com.tw/articles/10424210) | [eval/local100.json](eval/local100.json) · [ARCHITECTURE.md](ARCHITECTURE.md) | [docs/day30](docs/day30/README.md) | 30 天四大架構階層演進總整理、全系列承諾對帳、三組分母實測盤點、企業級 Sub-Agent 擴充藍圖與 [`ironman-2026-final`](https://github.com/jarsing/local-service-agent-for-line/releases/tag/ironman-2026-final) 完賽交接 |
 
-這是一個持續成長的 LOCAL 專案，各日資料夾保留當時的教學重點。地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、首個部署至 Cloud Run 搭配 Firestore 的雲端可用版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收、志工收件匣契約與 CAS 樂觀鎖（真人端驗收移至 Day 26）、模型設定／延遲／成本帳本與比較條件核對，以及結構化追蹤核對與 Cloud Logging 結構化日誌映射已收錄至 Day 21；Day 22 落地受控停止閘門（circuit breaker / stop gate）、epoch 准入失效控制與最小特權身分分工；Day 23 建立架構決策矩陣，權衡開發協作、執行編排、模型存取路徑與資料庫特性；Day 24 建立三組分母評測牆、Gemini 路由擷取與 A/B 成本量測；Day 25 建立公開文字到候選資料庫之結構化抽取管線、Pydantic 防偽契約與 SQLite 採用收據；Day 26 建立乾淨環境無干預重現與雙 LINE 視窗生命週期驗收規格，以及在地服務防呆矩陣；Day 27 建立展示版本凍結（Demo Freeze）規約、三分鐘展示手冊與本機離線 SQLite 重放備援；後續會探討完整驗收。新範例公開後，會持續更新這份導覽。
+Day 1 交付的是初始設計與驗收規格，因此可執行程式範例從 `examples/day02/` 開始。
 
+這是一個循序演進 30 天的完整 LOCAL 專案，各日資料夾保留當章的教學重點：地方服務請求、冪等重試、逾時查回對帳、任務狀態持久化／跨行程重啟恢復、部署至 Cloud Run 搭配 Firestore 的雲端版本、LINE Flex 氣泡卡片防禦、經同意的飲食偏好記憶與地方店家查詢、五層上下文工程與 Session 預算管理、不可信文件防禦與唯讀權限白名單、有型別的結果與服務降級、20 題地方契約評測基準與三層確定性驗收、志工收件匣契約與 CAS 樂觀鎖、模型設定／延遲／成本帳本與比較條件核對、結構化追蹤核對與 Cloud Logging 映射、受控停止閘門與最小特權身分分工、架構決策矩陣、三組分母評測牆與 A/B 成本量測、公開文字結構化抽取管線與 SQLite 採用收據、乾淨容器環境重現與雙 LINE 視窗生命週期驗收規格、展示版本凍結手冊與本機離線 SQLite 重放備援、開源產品卡與交付規格、100 筆合成契約規格與四態離線評分器，以及 Day 30 的全系列回顧、承諾對帳與交接手冊。
 
 ## LINE、Gemini 與 ADK 各做什麼？
 
@@ -162,7 +139,7 @@ Day 30 及後續文章請由 [系列頁](https://ithelp.ithome.com.tw/users/2012
 
 LINE 提供訊息入口；Gemini 理解問題並提出工具呼叫；ADK 串起模型、工具與事件。Python 工具負責實際讀取活動資料。Google AI Studio 是 Gemini API 金鑰的取得與管理入口；Google Antigravity 則用在本專案的開發協作。
 
-Day 12 已加入 Cloud Run 的 LINE 教學服務；Day 14 落地經同意的偏好記憶與店家查詢；Day 17 落地有型別的結果與服務降級；Day 18 建立 20 題地方契約評測與三層確定性驗收；Day 19 建立志工收件匣契約（真人端驗收移至 Day 26）；Day 20 實現成本帳本計算；Day 21 落地結構化追蹤核對與 Cloud Logging 映射；Day 22 交付受控停止閘門與最小特權分工；Day 23 建立架構決策矩陣；Day 24 交付三組分母實測評測牆與核對器；Day 25 交付公開文字結構化抽取與 SQLite 審閱採用儲存；Day 26 交付乾淨環境重現與雙 LINE 視窗驗收規格。目前的入口、資料庫實驗與活動查詢各有對應範例，完整能力隨系列逐步整合。
+回顧全系列 30 天的整合脈絡：Day 12 加入 Cloud Run 的 LINE 教學服務；Day 14 落地經同意的偏好記憶與店家查詢；Day 17 落地有型別的結果與服務降級；Day 18 建立 20 題地方契約評測與三層確定性驗收；Day 19 建立志工收件匣契約；Day 20 實現成本帳本計算；Day 21 落地結構化追蹤核對與 Cloud Logging 映射；Day 22 交付受控停止閘門與最小特權分工；Day 23 建立架構決策矩陣；Day 24 交付三組分母實測評測牆與核對器；Day 25 交付公開文字結構化抽取與 SQLite 審閱採用儲存；Day 26～27 交付乾淨環境重現、雙 LINE 視窗驗收規格與離線重放備援；Day 28～30 則完成開源產品卡、100 筆契約評分器、完整架構總覽與最終完賽交接對帳。
 
 ## LOCAL 的五個設計面向
 
